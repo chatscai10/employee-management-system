@@ -82,6 +82,35 @@ app.post('/api/login', (req, res) => {
     }
 });
 
+// API 健康檢查端點
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'healthy', 
+        version: '3.0.0', 
+        timestamp: new Date().toISOString(),
+        service: 'Google Cloud Run',
+        message: '企業管理系統運行正常'
+    });
+});
+
+// 庫存管理 API
+app.get('/api/inventory', (req, res) => {
+    const inventory = [
+        { id: 1, item: '筆記本電腦', warehouse: '台北倉庫', stock: 50, reserved: 5 },
+        { id: 2, item: '辦公椅', warehouse: '台中倉庫', stock: 20, reserved: 2 },
+        { id: 3, item: '印表機', warehouse: '高雄倉庫', stock: 15, reserved: 0 },
+        { id: 4, item: '投影機', warehouse: '台北倉庫', stock: 8, reserved: 1 }
+    ];
+    
+    res.json({ 
+        success: true, 
+        data: inventory, 
+        count: inventory.length,
+        totalStock: inventory.reduce((sum, item) => sum + item.stock, 0),
+        totalReserved: inventory.reduce((sum, item) => sum + item.reserved, 0)
+    });
+});
+
 app.get('/api/login', (req, res) => {
     res.send(`<!DOCTYPE html>
 <html lang="zh-TW">
