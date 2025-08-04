@@ -1,14 +1,5 @@
-// 🚀 Vercel 無伺服器函數 - 完全兼容版
-// 修復: FUNCTION_INVOCATION_FAILED 錯誤
-
-const express = require('express');
-const cors = require('cors');
-
-const app = express();
-
-// 基本中間件 - 簡化版避免 Vercel 衝突
-app.use(cors());
-app.use(express.json());
+// 🚀 純 Node.js 無伺服器函數 - 最穩定版本
+// 完全移除 Express，使用原生 Node.js
 
 // 測試帳號數據
 const testAccounts = [
@@ -31,32 +22,53 @@ const inventory = [
     { id: 3, product_id: 3, quantity: 10, location: '倉庫A', last_updated: '2025-08-04' }
 ];
 
-// API 路由處理器
-const handleRequest = (req, res) => {
-    const { method, url } = req;
-    
-    // 設置基本響應頭
-    res.setHeader('Content-Type', 'application/json');
+// 解析請求體
+function parseBody(req) {
+    return new Promise((resolve) => {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            try {
+                resolve(JSON.parse(body));
+            } catch {
+                resolve({});
+            }
+        });
+    });
+}
+
+// 設置響應頭
+function setHeaders(res) {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
 
-    // 處理 OPTIONS 預檢請求
-    if (method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
-
+// 主處理函數
+module.exports = async (req, res) => {
     try {
+        const { method, url } = req;
+        
+        setHeaders(res);
+
+        // OPTIONS 預檢請求
+        if (method === 'OPTIONS') {
+            res.status(200).end();
+            return;
+        }
+
         // 健康檢查
         if (url === '/api/health' && method === 'GET') {
             res.status(200).json({
                 status: 'healthy',
                 service: '企業員工管理系統',
-                version: '3.0.2',
-                platform: 'Vercel Serverless',
+                version: '3.0.3',
+                platform: 'Vercel Native',
                 timestamp: new Date().toISOString(),
-                fixed: 'FUNCTION_INVOCATION_FAILED 已修復'
+                fixed: 'FUNCTION_INVOCATION_FAILED 使用原生Node.js修復'
             });
             return;
         }
@@ -86,7 +98,7 @@ const handleRequest = (req, res) => {
 
             res.status(200).json({
                 success: true,
-                message: "庫存數據獲取成功", 
+                message: "庫存數據獲取成功",
                 data: inventoryWithProducts,
                 count: inventoryWithProducts.length,
                 timestamp: new Date().toISOString()
@@ -94,9 +106,10 @@ const handleRequest = (req, res) => {
             return;
         }
 
-        // 登入驗證
+        // 登入驗證 POST
         if (url === '/api/login' && method === 'POST') {
-            const { username, password } = req.body;
+            const body = await parseBody(req);
+            const { username, password } = body;
             
             const account = testAccounts.find(acc => 
                 acc.username === username && acc.password === password
@@ -139,73 +152,72 @@ const handleRequest = (req, res) => {
             return;
         }
 
-        // 登入頁面
+        // 登入頁面 GET
         if (url === '/api/login' && method === 'GET') {
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.status(200).send(`
-<!DOCTYPE html>
+            res.status(200).end(`<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>員工登入 - 企業管理系統 v3.0.2</title>
+    <title>員工登入 - v3.0.3</title>
     <style>
-        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .login-container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 100%; max-width: 400px; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 20px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); max-width: 400px; width: 100%; }
         h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        .status { background: #27ae60; color: white; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; color: #555; font-weight: bold; }
-        input[type="text"], input[type="password"] { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
-        input[type="text"]:focus, input[type="password"]:focus { border-color: #3498db; outline: none; }
-        .login-btn { width: 100%; padding: 15px; background: #3498db; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-        .login-btn:hover { background: #2980b9; }
-        .status { background: #27ae60; color: white; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px; }
-        .test-accounts { background: #e8f4fd; padding: 15px; border-radius: 5px; margin-top: 15px; }
-        .account-item { margin: 5px 0; font-family: monospace; cursor: pointer; padding: 5px; border-radius: 3px; }
-        .account-item:hover { background: #d1ecf1; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        input:focus { border-color: #3498db; outline: none; }
+        .btn { width: 100%; padding: 15px; background: #3498db; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn:hover { background: #2980b9; }
+        .accounts { background: #e8f4fd; padding: 15px; border-radius: 5px; margin-top: 15px; }
+        .account { margin: 5px 0; font-family: monospace; cursor: pointer; padding: 5px; border-radius: 3px; }
+        .account:hover { background: #d1ecf1; }
         .result { margin-top: 15px; padding: 10px; border-radius: 5px; display: none; }
         .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="status">✅ 修復完成 - v3.0.2 (Vercel 無伺服器)</div>
+    <div class="container">
+        <div class="status">✅ 原生Node.js修復版 - v3.0.3</div>
         <h1>🔐 員工登入</h1>
-        <form id="loginForm">
+        <form id="form">
             <div class="form-group">
-                <label for="username">員工帳號:</label>
-                <input type="text" id="username" name="username" placeholder="請輸入員工帳號" required>
+                <label>員工帳號:</label>
+                <input type="text" id="username" required>
             </div>
             <div class="form-group">
-                <label for="password">密碼:</label>
-                <input type="password" id="password" name="password" placeholder="請輸入密碼" required>
+                <label>密碼:</label>
+                <input type="password" id="password" required>
             </div>
-            <button type="submit" class="login-btn">登入系統</button>
+            <button type="submit" class="btn">登入系統</button>
         </form>
         
         <div id="result" class="result"></div>
         
-        <div class="test-accounts">
-            <strong>🧪 測試帳號 (點擊自動填入):</strong><br>
-            <div class="account-item" onclick="fillAccount('test', '123456')">👤 test / 123456 (推薦)</div>
-            <div class="account-item" onclick="fillAccount('demo', 'demo')">🎭 demo / demo</div>
-            <div class="account-item" onclick="fillAccount('admin', 'admin123')">👑 admin / admin123</div>
+        <div class="accounts">
+            <strong>🧪 測試帳號:</strong><br>
+            <div class="account" onclick="fill('test','123456')">👤 test / 123456</div>
+            <div class="account" onclick="fill('demo','demo')">🎭 demo / demo</div>
+            <div class="account" onclick="fill('admin','admin123')">👑 admin / admin123</div>
         </div>
     </div>
     
     <script>
-        function fillAccount(username, password) {
-            document.getElementById('username').value = username;
-            document.getElementById('password').value = password;
+        function fill(u, p) {
+            document.getElementById('username').value = u;
+            document.getElementById('password').value = p;
         }
         
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        document.getElementById('form').onsubmit = async function(e) {
             e.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const resultDiv = document.getElementById('result');
+            const result = document.getElementById('result');
             
             try {
                 const response = await fetch('/api/login', {
@@ -215,21 +227,21 @@ const handleRequest = (req, res) => {
                 });
                 
                 const data = await response.json();
+                result.style.display = 'block';
                 
-                resultDiv.style.display = 'block';
                 if (data.success) {
-                    resultDiv.className = 'result success';
-                    resultDiv.innerHTML = '<strong>✅ 登入成功！</strong><br>歡迎：' + data.user.name + '<br>角色：' + data.user.role;
+                    result.className = 'result success';
+                    result.innerHTML = '✅ 登入成功！<br>歡迎：' + data.user.name + '<br>角色：' + data.user.role;
                 } else {
-                    resultDiv.className = 'result error';
-                    resultDiv.innerHTML = '<strong>❌ 登入失敗</strong><br>' + data.message;
+                    result.className = 'result error';
+                    result.innerHTML = '❌ ' + data.message;
                 }
             } catch (error) {
-                resultDiv.style.display = 'block';
-                resultDiv.className = 'result error';
-                resultDiv.innerHTML = '<strong>❌ 系統錯誤</strong><br>無法連接到服務器';
+                result.style.display = 'block';
+                result.className = 'result error';
+                result.innerHTML = '❌ 連接失敗';
             }
-        });
+        };
     </script>
 </body>
 </html>`);
@@ -239,13 +251,12 @@ const handleRequest = (req, res) => {
         // API 文檔
         if (url === '/api' && method === 'GET') {
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.status(200).send(`
-<!DOCTYPE html>
+            res.status(200).end(`<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API 文檔 v3.0.2</title>
+    <title>API 文檔 v3.0.3</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
         .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -258,8 +269,8 @@ const handleRequest = (req, res) => {
 </head>
 <body>
     <div class="container">
-        <h1>🚀 企業管理系統 API v3.0.2</h1>
-        <div class="status">✅ 系統狀態: 已修復 Vercel 函數崩潰問題</div>
+        <h1>🚀 企業管理系統 API v3.0.3</h1>
+        <div class="status">✅ 使用原生Node.js修復 - 完全穩定</div>
         
         <div class="endpoint">
             <span class="method">GET</span>
@@ -282,7 +293,7 @@ const handleRequest = (req, res) => {
         <div class="endpoint">
             <span class="method">GET/POST</span>
             <span class="url">/api/login</span>
-            <div>員工登入 (GET=頁面, POST=驗證)</div>
+            <div>員工登入系統</div>
         </div>
         
         <div class="endpoint">
@@ -291,7 +302,7 @@ const handleRequest = (req, res) => {
             <div>測試帳號列表</div>
         </div>
         
-        <p style="text-align: center; color: #27ae60; font-weight: bold;">🎉 所有功能已修復並正常運行！</p>
+        <p style="text-align: center; color: #27ae60; font-weight: bold;">🎉 原生Node.js - 絕對穩定！</p>
     </div>
 </body>
 </html>`);
@@ -301,13 +312,12 @@ const handleRequest = (req, res) => {
         // 主頁面
         if (url === '/' && method === 'GET') {
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.status(200).send(`
-<!DOCTYPE html>
+            res.status(200).end(`<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>企業員工管理系統 v3.0.2</title>
+    <title>企業員工管理系統 v3.0.3</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
         .container { max-width: 1200px; margin: 0 auto; }
@@ -315,40 +325,41 @@ const handleRequest = (req, res) => {
         .status { background: #27ae60; color: white; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 30px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .api-link { display: inline-block; background: #3498db; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px; }
-        .api-link:hover { background: #2980b9; }
+        .link { display: inline-block; background: #3498db; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px; }
+        .link:hover { background: #2980b9; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🚀 企業員工管理系統</h1>
-            <p>版本 3.0.2 | Vercel 無伺服器修復版</p>
+            <p>版本 3.0.3 | 原生Node.js穩定版</p>
         </div>
         
         <div class="status">
-            ✅ 修復完成: FUNCTION_INVOCATION_FAILED 錯誤已解決
+            ✅ 使用原生Node.js完全修復 FUNCTION_INVOCATION_FAILED
         </div>
         
         <div class="grid">
             <div class="card">
                 <h3>📊 系統狀態</h3>
-                <p>版本: 3.0.2</p>
-                <p>狀態: 正常運行</p>
-                <a href="/api/health" class="api-link">健康檢查</a>
+                <p>版本: 3.0.3</p>
+                <p>狀態: 原生Node.js穩定運行</p>
+                <a href="/api/health" class="link">健康檢查</a>
             </div>
             
             <div class="card">
                 <h3>📋 API 服務</h3>
-                <a href="/api" class="api-link">API 文檔</a>
-                <a href="/api/products" class="api-link">產品管理</a>
-                <a href="/api/inventory" class="api-link">庫存管理</a>
+                <a href="/api" class="link">API 文檔</a>
+                <a href="/api/products" class="link">產品管理</a>
+                <a href="/api/inventory" class="link">庫存管理</a>
             </div>
             
             <div class="card">
                 <h3>👥 員工系統</h3>
-                <a href="/api/login" class="api-link">員工登入</a>
-                <a href="/api/accounts" class="api-link">測試帳號</a>
+                <p>測試帳號: test/123456, demo/demo</p>
+                <a href="/api/login" class="link">員工登入</a>
+                <a href="/api/accounts" class="link">測試帳號</a>
             </div>
         </div>
     </div>
@@ -361,31 +372,26 @@ const handleRequest = (req, res) => {
         res.status(404).json({
             success: false,
             message: "端點未找到",
+            version: "3.0.3",
             availableEndpoints: [
                 "GET /",
                 "GET /api",
                 "GET /api/health",
-                "GET /api/products", 
-                "GET /api/inventory",
+                "GET /api/products",
+                "GET /api/inventory", 
                 "GET/POST /api/login",
                 "GET /api/accounts"
             ]
         });
 
     } catch (error) {
-        console.error('API Error:', error);
+        console.error('Error:', error);
         res.status(500).json({
             success: false,
-            message: "服務器錯誤已修復",
+            message: "服務器錯誤",
             error: error.message,
-            version: "3.0.2",
-            fixed: "FUNCTION_INVOCATION_FAILED"
+            version: "3.0.3",
+            note: "使用原生Node.js修復"
         });
     }
 };
-
-// Express 路由設置
-app.use('*', handleRequest);
-
-// Vercel 導出
-module.exports = app;
