@@ -769,7 +769,7 @@ app.get('/api/promotion-votes', authenticateUser, (req, res) => {
 
 // 管理主控台路由
 app.get('/dashboard', (req, res) => {
-    res.send(`<!DOCTYPE html>
+    const dashboardHtml = `<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -1088,12 +1088,11 @@ app.get('/dashboard', (req, res) => {
             if (result.success) {
                 let html = '';
                 result.data.forEach(emp => {
-                    html += `
-                        <div style="padding: 0.5rem; border-bottom: 1px solid #eee;">
-                            <strong>${emp.name}</strong> - ${emp.position}
-                            <br><small>${emp.department} | ${emp.email}</small>
-                        </div>
-                    `;
+                    html += 
+                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                            '<strong>' + emp.name + '</strong> - ' + emp.position +
+                            '<br><small>' + emp.department + ' | ' + emp.email + '</small>' +
+                        '</div>';
                 });
                 employeeList.innerHTML = html;
             } else {
@@ -1113,12 +1112,11 @@ app.get('/dashboard', (req, res) => {
             if (result.success) {
                 let html = '';
                 result.data.forEach(att => {
-                    html += `
-                        <div style="padding: 0.5rem; border-bottom: 1px solid #eee;">
-                            <strong>${att.employeeName}</strong> - ${att.date}
-                            <br><small>簽到: ${att.checkIn} | 簽退: ${att.checkOut || '未簽退'}</small>
-                        </div>
-                    `;
+                    html += 
+                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                            '<strong>' + att.employeeName + '</strong> - ' + att.date +
+                            '<br><small>簽到: ' + att.checkIn + ' | 簽退: ' + (att.checkOut || '未簽退') + '</small>' +
+                        '</div>';
                 });
                 attendanceList.innerHTML = html;
             } else {
@@ -1147,14 +1145,13 @@ app.get('/dashboard', (req, res) => {
             if (result.success) {
                 let html = '';
                 result.data.forEach(item => {
-                    html += `
-                        <div style="padding: 0.5rem; border-bottom: 1px solid #eee;">
-                            <strong>${item.name}</strong> - 數量: ${item.quantity}
-                            <br><small>單價: NT$ ${item.price.toLocaleString()} | 供應商: ${item.supplier}</small>
-                        </div>
-                    `;
+                    html += 
+                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                            '<strong>' + item.name + '</strong> - 數量: ' + item.quantity +
+                            '<br><small>單價: NT$ ' + item.price.toLocaleString() + ' | 供應商: ' + item.supplier + '</small>' +
+                        '</div>';
                 });
-                inventoryList.innerHTML = html + `<div style="padding: 1rem; font-weight: bold;">總價值: NT$ ${result.totalValue.toLocaleString()}</div>`;
+                inventoryList.innerHTML = html + '<div style="padding: 1rem; font-weight: bold;">總價值: NT$ ' + result.totalValue.toLocaleString() + '</div>';
             } else {
                 inventoryList.innerHTML = '<div class="loading">❌ ' + result.message + '</div>';
             }
@@ -1173,12 +1170,11 @@ app.get('/dashboard', (req, res) => {
                 let html = '';
                 result.data.forEach(req => {
                     const priorityColor = req.priority === 'high' ? '#dc3545' : req.priority === 'medium' ? '#ffc107' : '#28a745';
-                    html += `
-                        <div style="padding: 0.5rem; border-bottom: 1px solid #eee;">
-                            <strong>${req.equipment}</strong> - <span style="color: ${priorityColor};">${req.priority}</span>
-                            <br><small>${req.issue} | 狀態: ${req.status}</small>
-                        </div>
-                    `;
+                    html += 
+                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                            '<strong>' + req.equipment + '</strong> - <span style="color: ' + priorityColor + ';">' + req.priority + '</span>' +
+                            '<br><small>' + req.issue + ' | 狀態: ' + req.status + '</small>' +
+                        '</div>';
                 });
                 maintenanceList.innerHTML = html;
             } else {
@@ -1196,20 +1192,19 @@ app.get('/dashboard', (req, res) => {
             
             const result = await apiRequest('/api/system/status');
             if (result.success) {
-                let html = `
-                    <div style="padding: 0.5rem;">
-                        <strong>系統版本:</strong> ${result.system.version}<br>
-                        <strong>運行狀態:</strong> ${result.system.status}<br>
-                        <strong>運行時間:</strong> ${Math.floor(result.system.uptime / 60)} 分鐘<br>
-                        <strong>最後更新:</strong> ${new Date(result.system.timestamp).toLocaleString()}
-                    </div>
-                    <div style="padding: 0.5rem; border-top: 1px solid #eee;">
-                        <strong>模組狀態:</strong><br>
-                `;
+                let html = 
+                    '<div style="padding: 0.5rem;">' +
+                        '<strong>系統版本:</strong> ' + result.system.version + '<br>' +
+                        '<strong>運行狀態:</strong> ' + result.system.status + '<br>' +
+                        '<strong>運行時間:</strong> ' + Math.floor(result.system.uptime / 60) + ' 分鐘<br>' +
+                        '<strong>最後更新:</strong> ' + new Date(result.system.timestamp).toLocaleString() +
+                    '</div>' +
+                    '<div style="padding: 0.5rem; border-top: 1px solid #eee;">' +
+                        '<strong>模組狀態:</strong><br>';
                 
                 Object.entries(result.system.modules).forEach(([module, status]) => {
                     const statusColor = status === 'active' ? '#28a745' : '#dc3545';
-                    html += `<span style="color: ${statusColor};">● ${module}: ${status}</span><br>`;
+                    html += '<span style="color: ' + statusColor + ';">● ' + module + ': ' + status + '</span><br>';
                 });
                 
                 html += '</div>';
@@ -1238,9 +1233,9 @@ app.get('/dashboard', (req, res) => {
                         headers: { 'Authorization': 'Bearer ' + getUserToken() }
                     });
                     const time = Date.now() - start;
-                    results += `✅ ${endpoint}: ${response.status} (${time}ms)\n`;
+                    results += '✅ ' + endpoint + ': ' + response.status + ' (' + time + 'ms)\n';
                 } catch (error) {
-                    results += `❌ ${endpoint}: 失敗\n`;
+                    results += '❌ ' + endpoint + ': 失敗\n';
                 }
             }
             
@@ -1257,7 +1252,8 @@ app.get('/dashboard', (req, res) => {
         function showRevenueChart() { alert('圖表分析功能開發中...'); }
     </script>
 </body>
-</html>`);
+</html>`;
+    res.send(dashboardHtml);
 });
 
 // API 文檔路由
