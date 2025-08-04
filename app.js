@@ -141,7 +141,13 @@ app.get('/api/login', (req, res) => {
                 if (data.success) {
                     result.style.background = '#d4edda';
                     result.style.color = '#155724';
-                    result.innerHTML = '✅ ' + data.message;
+                    result.innerHTML = '✅ ' + data.message + ' 正在跳轉到管理主控台...';
+                    
+                    // 儲存用戶資訊並跳轉到主控台
+                    sessionStorage.setItem('user', JSON.stringify(data.user));
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1500);
                 } else {
                     result.style.background = '#f8d7da';
                     result.style.color = '#721c24';
@@ -154,6 +160,218 @@ app.get('/api/login', (req, res) => {
                 result.innerHTML = '❌ 連接失敗';
             }
         };
+    </script>
+</body>
+</html>`);
+});
+
+// 管理主控台頁面
+app.get('/dashboard', (req, res) => {
+    res.send(`<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>企業管理主控台</title>
+    <style>
+        body { font-family: system-ui; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .header { background: rgba(255,255,255,0.95); padding: 15px 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header h1 { margin: 0; color: #2c3e50; display: inline-block; }
+        .user-info { float: right; color: #666; }
+        .logout-btn { background: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; margin-left: 15px; }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .card h3 { color: #2c3e50; margin-top: 0; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .btn { display: inline-block; background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; margin: 8px 5px; border: none; cursor: pointer; }
+        .btn:hover { background: #2980b9; }
+        .btn-success { background: #28a745; }
+        .btn-warning { background: #ffc107; color: #333; }
+        .btn-info { background: #17a2b8; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-number { font-size: 24px; font-weight: bold; color: #3498db; }
+        .features-list { list-style: none; padding: 0; }
+        .features-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .features-list li:before { content: "✅ "; color: #28a745; font-weight: bold; }
+        .quick-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 企業管理系統 v3.0.0</h1>
+        <div class="user-info">
+            歡迎回來，<span id="username">管理員</span>
+            <button class="logout-btn" onclick="logout()">登出</button>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-grid">
+            
+            <!-- 系統狀態卡片 -->
+            <div class="card">
+                <h3>📊 系統狀態總覽</h3>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div>系統健康度</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">v3.0.0</div>
+                        <div>目前版本</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div>服務時間</div>
+                    </div>
+                </div>
+                <button class="btn btn-info" onclick="checkHealth()">健康檢查</button>
+                <div id="health-result" style="margin-top: 10px; padding: 10px; border-radius: 6px; display: none;"></div>
+            </div>
+
+            <!-- 員工管理卡片 -->
+            <div class="card">
+                <h3>👥 員工管理</h3>
+                <ul class="features-list">
+                    <li>員工帳號管理</li>
+                    <li>權限控制系統</li>
+                    <li>登入記錄查詢</li>
+                    <li>員工資料維護</li>
+                </ul>
+                <div class="quick-actions">
+                    <button class="btn">查看員工列表</button>
+                    <button class="btn btn-success">新增員工</button>
+                </div>
+            </div>
+
+            <!-- 產品管理卡片 -->
+            <div class="card">
+                <h3>📦 產品管理</h3>
+                <p>管理企業產品庫存、價格和供應商資訊</p>
+                <div class="quick-actions">
+                    <button class="btn" onclick="loadProducts()">產品列表</button>
+                    <button class="btn btn-success">新增產品</button>
+                    <button class="btn btn-warning">庫存管理</button>
+                </div>
+                <div id="products-preview" style="margin-top: 15px; max-height: 200px; overflow-y: auto;"></div>
+            </div>
+
+            <!-- 系統工具卡片 -->
+            <div class="card">
+                <h3>🔧 系統工具</h3>
+                <ul class="features-list">
+                    <li>資料備份與還原</li>
+                    <li>系統日誌查看</li>
+                    <li>API 端點測試</li>
+                    <li>效能監控</li>
+                </ul>
+                <div class="quick-actions">
+                    <button class="btn btn-info" onclick="testApi()">測試 API</button>
+                    <button class="btn">查看日誌</button>
+                </div>
+            </div>
+
+            <!-- 快速操作卡片 -->
+            <div class="card">
+                <h3>⚡ 快速操作</h3>
+                <div class="quick-actions">
+                    <a href="/api/products" class="btn" target="_blank">產品 API</a>
+                    <a href="/health" class="btn" target="_blank">系統健康</a>
+                    <a href="/" class="btn">回到首頁</a>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                    <strong>🎉 全新部署成功！</strong><br>
+                    <small>v3.0.0 版本已完全正常運行</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 載入用戶資訊
+        window.onload = function() {
+            const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+            if (user.name) {
+                document.getElementById('username').textContent = user.name;
+            }
+        };
+
+        // 登出功能
+        function logout() {
+            sessionStorage.removeItem('user');
+            alert('登出成功');
+            window.location.href = '/api/login';
+        }
+
+        // 健康檢查
+        async function checkHealth() {
+            const result = document.getElementById('health-result');
+            result.style.display = 'block';
+            result.innerHTML = '檢查中...';
+            
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                result.style.background = '#d4edda';
+                result.style.color = '#155724';
+                result.innerHTML = \`✅ 系統狀態: \${data.status} | 版本: \${data.version}\`;
+            } catch (error) {
+                result.style.background = '#f8d7da';  
+                result.style.color = '#721c24';
+                result.innerHTML = '❌ 健康檢查失敗';
+            }
+        }
+
+        // 載入產品資料
+        async function loadProducts() {
+            const preview = document.getElementById('products-preview');
+            preview.innerHTML = '載入中...';
+            
+            try {
+                const response = await fetch('/api/products');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    let html = '<div style="background: #f8f9fa; padding: 10px; border-radius: 6px;">';
+                    html += \`<strong>產品總數: \${data.count}</strong><br><br>\`;
+                    
+                    data.data.forEach(product => {
+                        html += \`<div style="margin: 5px 0; padding: 8px; background: white; border-radius: 4px;">
+                            <strong>\${product.name}</strong> - NT$ \${product.price.toLocaleString()} 
+                            <span style="color: #666;">(庫存: \${product.stock})</span>
+                        </div>\`;
+                    });
+                    
+                    html += '</div>';
+                    preview.innerHTML = html;
+                } else {
+                    preview.innerHTML = '無法載入產品資料';
+                }
+            } catch (error) {
+                preview.innerHTML = '載入失敗: ' + error.message;
+            }
+        }
+
+        // API 測試
+        async function testApi() {
+            const endpoints = ['/health', '/api/products', '/api/login'];
+            let results = '🔍 API 測試結果:\\n\\n';
+            
+            for (let endpoint of endpoints) {
+                try {
+                    const start = Date.now();
+                    const response = await fetch(endpoint);
+                    const time = Date.now() - start;
+                    results += \`✅ \${endpoint}: \${response.status} (\${time}ms)\\n\`;
+                } catch (error) {
+                    results += \`❌ \${endpoint}: 失敗\\n\`;
+                }
+            }
+            
+            alert(results);
+        }
     </script>
 </body>
 </html>`);
