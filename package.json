@@ -13,7 +13,8 @@
     "docker:run": "docker run -p 8080:8080 inventory-management",
     "gcloud:setup": "chmod +x gcloud-deployment-setup.sh && ./gcloud-deployment-setup.sh",
     "gcloud:deploy": "chmod +x gcloud-container-deploy.sh && ./gcloud-container-deploy.sh",
-    "db:migrate": "node -e \"const fs = require('fs'); console.log('Database migration ready');\""
+    "db:migrate": "node -e \"const fs = require('fs'); console.log('Database migration ready');\"",
+    "vercel": "node server-production.js"
   },
   "dependencies": {
     "@google-cloud/logging": "^11.0.0",
@@ -51,8 +52,7 @@
     "supertest": "^6.3.3"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": "18.x"
   },
   "keywords": [
     "inventory",
