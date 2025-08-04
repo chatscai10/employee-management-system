@@ -15,9 +15,7 @@ RUN npm cache clean --force && \
     npm ci --only=production
 
 # 複製應用程式檔案
-COPY complete-enterprise-server.js ./
-# 設定主應用程式檔案
-COPY complete-enterprise-server.js ./app.js
+COPY app.js ./
 
 # 建立非 root 用戶
 RUN addgroup -g 1001 -S nodejs && \
