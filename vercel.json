@@ -1,16 +1,15 @@
 {
   "name": "employee-management-system",
   "version": 2,
-  "builds": [
-    {
-      "src": "server-vercel-fixed.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/index.js": {
+      "runtime": "@vercel/node@2"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/server-vercel-fixed.js"
+      "dest": "/api/index.js"
     }
   ],
   "env": {
