@@ -2,11 +2,11 @@
   "name": "google-cloud-inventory-management",
   "version": "3.0.1",
   "description": "Google Cloud 企業級庫存管理系統 - 強制重新部署 2025-08-04T02:44:09.435Z",
-  "main": "server-production.js",
+  "main": "server-vercel-fixed.js",
   "scripts": {
-    "start": "node server-production.js",
-    "dev": "nodemon server-production.js",
-    "production": "node server-production.js",
+    "start": "node server-vercel-fixed.js",
+    "dev": "nodemon server-vercel-fixed.js",
+    "production": "node server-vercel-fixed.js",
     "test": "jest",
     "lint": "eslint .",
     "docker:build": "docker build -t inventory-management .",
@@ -14,7 +14,7 @@
     "gcloud:setup": "chmod +x gcloud-deployment-setup.sh && ./gcloud-deployment-setup.sh",
     "gcloud:deploy": "chmod +x gcloud-container-deploy.sh && ./gcloud-container-deploy.sh",
     "db:migrate": "node -e \"const fs = require('fs'); console.log('Database migration ready');\"",
-    "vercel": "node server-production.js"
+    "vercel": "node server-vercel-fixed.js"
   },
   "dependencies": {
     "@google-cloud/logging": "^11.0.0",
