@@ -1204,7 +1204,7 @@ app.get('/dashboard', (req, res) => {
                 
                 Object.entries(result.system.modules).forEach(([module, status]) => {
                     const statusColor = status === 'active' ? '#28a745' : '#dc3545';
-                    html += '<span style="color: ' + statusColor + ';">● ' + module + ': ' + status + '</span><br>';
+                    html += '<span style="color: ' + statusColor + ';">' + module + ': ' + status + '</span><br>';
                 });
                 
                 html += '</div>';
