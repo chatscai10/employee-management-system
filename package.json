@@ -1,15 +1,25 @@
 {
   "name": "employee-management-system",
-  "version": "1.0.0",
-  "description": "企業管理系統",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "企業員工管理系統 - 確定性部署版",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "engines": {
-    "node": "18"
+    "node": "18.x",
+    "npm": ">=8.0.0"
   },
   "dependencies": {
-    "express": "4.18.2"
-  }
+    "express": "4.18.2",
+    "cors": "2.8.5"
+  },
+  "keywords": [
+    "google-cloud",
+    "enterprise",
+    "management"
+  ],
+  "author": "Enterprise System",
+  "license": "MIT"
 }
