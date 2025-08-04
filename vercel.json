@@ -4,14 +4,15 @@
   "functions": {
     "api/index.js": {
       "runtime": "nodejs18.x",
-      "memory": 512,
-      "maxDuration": 10,
-      "environment": {
-        "NODE_ENV": "production"
-      }
+      "memory": 1024,
+      "maxDuration": 30
     }
   },
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
     {
       "src": "/(.*)",
       "dest": "/api/index.js"
