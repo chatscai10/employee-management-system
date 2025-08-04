@@ -1,7 +1,7 @@
 {
   "name": "google-cloud-inventory-management",
-  "version": "3.0.0",
-  "description": "Google Cloud 企業級庫存管理系統",
+  "version": "3.0.1",
+  "description": "Google Cloud 企業級庫存管理系統 - 強制重新部署 2025-08-04T02:44:09.435Z",
   "main": "server-production.js",
   "scripts": {
     "start": "node server-production.js",

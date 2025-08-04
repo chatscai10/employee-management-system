@@ -1,3 +1,7 @@
+// 🚀 部署觸發器 - 2025-08-04T02:44:09.434Z
+// 版本: 3.0 - 強制重新部署
+// 修復: API 端點 404 問題
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
