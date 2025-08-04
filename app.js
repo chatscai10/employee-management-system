@@ -727,7 +727,7 @@ app.get('/api/revenue', authenticateUser, (req, res) => {
         return;
     }
     
-    const totalRevenue = database.revenue.reduce((sum, rev) => sum + rev.revenue, 0);
+    const totalRevenue = database.revenue.reduce((sum, rev) => sum + rev.amount, 0);
     const monthlyRevenue = database.revenue.filter(rev => {
         const revDate = new Date(rev.date);
         const currentMonth = new Date().getMonth();
@@ -1264,7 +1264,7 @@ app.get('/api/docs', (req, res) => {
         description: '完整的企業管理功能 API',
         endpoints: {
             authentication: {
-                'POST /api/auth/login': '用戶登入',
+                'POST /api/auth/login': '用戶登入'
             },
             system: {
                 'GET /api/system/status': '系統狀態查詢'
@@ -1332,6 +1332,19 @@ app.use('*', (req, res) => {
             'GET /api/docs'
         ]
     });
+});
+
+
+// 版本檢查端點
+app.get('/api/version', (req, res) => {
+    const buildInfo = {
+        version: '2025-08-04T11:56:52.173Z',
+        commit: process.env.GIT_COMMIT || 'unknown',
+        buildTime: new Date().toISOString(),
+        nodeVersion: process.version,
+        environment: process.env.NODE_ENV || 'development'
+    };
+    res.json(buildInfo);
 });
 
 // 啟動伺服器
