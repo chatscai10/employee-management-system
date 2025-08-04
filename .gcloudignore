@@ -1,11 +1,45 @@
+# Google Cloud 部署忽略文件
 node_modules/
 *.log
 .git/
+.env
+.env.*
 *.md
-*.json
+*.txt
 *.sh
 *.bat
+
+# 開發檔案
 *-old*
 *-backup*
-*-definitive*
-*-clean*
+*-test*
+*-debug*
+
+# 舊版本檔案
+app.js
+server.js
+server-*.js
+
+# 報告檔案
+*-report*
+*-analysis*
+*-verification*
+
+# 測試檔案
+test/
+tests/
+__tests__/
+coverage/
+
+# IDE 檔案
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# Google Cloud SDK
+google-cloud-sdk/
