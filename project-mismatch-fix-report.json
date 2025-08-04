@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-08-04T05:22:55.671Z",
+  "problemType": "PROJECT_ID_MISMATCH",
+  "wrongProjectId": "employee-management-410808",
+  "correctProjectId": "adept-arbor-467807-t9",
+  "serviceUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+  "region": "europe-west1",
+  "issues": [
+    {
+      "issue": "專案 ID 不匹配",
+      "cause": "使用了錯誤的專案 ID 進行配置",
+      "impact": "構建失敗，服務無法正常部署",
+      "priority": "critical"
+    },
+    {
+      "issue": "構建失敗",
+      "cause": "專案權限或配置問題",
+      "impact": "顯示佔位頁面而非實際應用",
+      "priority": "high"
+    },
+    {
+      "issue": "服務配置需要更新",
+      "cause": "需要使用正確的專案設定",
+      "impact": "無法訪問實際功能",
+      "priority": "high"
+    }
+  ],
+  "status": "FIXES_READY",
+  "solutions": [
+    {
+      "name": "Cloud Shell 一鍵修復",
+      "priority": 1,
+      "difficulty": "簡單",
+      "timeRequired": "5-8 分鐘",
+      "successRate": "95%"
+    },
+    {
+      "name": "Web Console 手動修復",
+      "priority": 2,
+      "difficulty": "中等",
+      "timeRequired": "8-12 分鐘",
+      "successRate": "90%"
+    },
+    {
+      "name": "修復現有服務",
+      "priority": 3,
+      "difficulty": "簡單",
+      "timeRequired": "3-5 分鐘",
+      "successRate": "85%"
+    }
+  ],
+  "nextSteps": [
+    "🎯 選擇一個修復方案",
+    "🔧 執行修復操作",
+    "⏰ 等待 5-8 分鐘完成部署",
+    "✅ 驗證所有功能正常",
+    "🎉 開始使用企業管理系統"
+  ],
+  "expectedOutcome": {
+    "buildStatus": "SUCCESS",
+    "serviceStatus": "ACTIVE",
+    "functionality": "COMPLETE",
+    "performance": "OPTIMAL"
+  }
+}

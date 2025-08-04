@@ -1,0 +1,22 @@
+{
+  "project_id": "inventory-management-sys",
+  "region": "asia-east1",
+  "db_instance": "inventory-database",
+  "db_name": "employee_management",
+  "db_user": "inventory_admin",
+  "service_url": "https://inventory-api-asia-east1-inventory-management-sys.a.run.app",
+  "hosting_url": "https://inventory-management-sys.web.app",
+  "admin_url": "https://inventory-management-sys.web.app/admin-system.html",
+  "employee_url": "https://inventory-management-sys.web.app/employee-system.html",
+  "deployment_type": "mock_simulation",
+  "created_at": "2025-08-03T02:40:44.194Z",
+  "status": "simulation_ready",
+  "features": {
+    "api_endpoints": 8,
+    "frontend_pages": 2,
+    "database_tables": 8,
+    "security_enabled": true,
+    "monitoring_enabled": true,
+    "backup_enabled": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "timestamp": "2025-08-04T04:59:47.462Z",
+  "platform": "Google Cloud Run",
+  "projectId": "employee-management-410808",
+  "serviceName": "employee-management-system",
+  "region": "asia-east1",
+  "status": "READY_FOR_DEPLOYMENT",
+  "completedSteps": [
+    "手動執行: gcloud auth login",
+    "Docker 配置檔案已創建",
+    "生產環境伺服器已準備",
+    "package.json 已優化",
+    "Google Cloud 部署命令已生成"
+  ],
+  "errors": [
+    "診斷失敗: Command failed: gcloud version\n/usr/bin/bash: line 1: gcloud: command not found\n",
+    "設定專案 ID: Command failed: gcloud config set project employee-management-410808\n/usr/bin/bash: line 1: gcloud: command not found\n",
+    "啟用 Cloud Run API: Command failed: gcloud services enable run.googleapis.com\n/usr/bin/bash: line 1: gcloud: command not found\n",
+    "啟用 Cloud Build API: Command failed: gcloud services enable cloudbuild.googleapis.com\n/usr/bin/bash: line 1: gcloud: command not found\n",
+    "啟用 Container Registry API: Command failed: gcloud services enable containerregistry.googleapis.com\n/usr/bin/bash: line 1: gcloud: command not found\n"
+  ],
+  "nextActions": [
+    "🔐 執行 gcloud auth login 重新登入",
+    "🚀 運行 gcloud-deploy-commands.sh 部署腳本",
+    "⏰ 等待 5-8 分鐘完成部署",
+    "✅ 測試生產網址所有功能",
+    "📊 確認企業管理系統完全正常"
+  ],
+  "expectedResult": {
+    "url": "https://employee-management-system-[hash]-asiaeast1-run.googleapis.com",
+    "features": [
+      "完整的企業管理功能",
+      "測試帳號: test/123456, demo/demo, admin/admin123",
+      "產品管理和庫存管理",
+      "Google Cloud 企業級穩定性",
+      "自動擴展和全球CDN"
+    ]
+  }
+}

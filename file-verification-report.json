@@ -1,0 +1,22 @@
+{
+  "server-production.js": {
+    "exists": true,
+    "size": 15619,
+    "modified": "2025-08-04T02:44:09.435Z"
+  },
+  "package.json": {
+    "exists": true,
+    "size": 735,
+    "modified": "2025-08-04T04:59:47.460Z"
+  },
+  "Dockerfile": {
+    "exists": true,
+    "size": 506,
+    "modified": "2025-08-04T04:59:47.457Z"
+  },
+  ".dockerignore": {
+    "exists": true,
+    "size": 236,
+    "modified": "2025-08-04T04:59:47.459Z"
+  }
+}

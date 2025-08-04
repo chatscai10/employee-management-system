@@ -1,0 +1,64 @@
+# Prometheus 監控配置
+# 企業員工管理系統監控方案
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+# 規則檔案
+rule_files:
+  - "alert_rules.yml"
+
+# 警告管理配置
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# 監控目標配置
+scrape_configs:
+  # Prometheus 自身監控
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Node.js 應用監控 (如果使用 Cloud Run)
+  - job_name: 'employee-management-app'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['employee-management:8080']
+    scrape_interval: 30s
+
+  # Google Apps Script 監控 (通過自訂端點)
+  - job_name: 'gas-backend'
+    metrics_path: '/api/metrics'
+    static_configs:
+      - targets: ['script.google.com']
+    scrape_interval: 60s
+
+  # Telegram Bot 監控
+  - job_name: 'telegram-bot'
+    metrics_path: '/api/bot-metrics'
+    static_configs:
+      - targets: ['api.telegram.org']
+    scrape_interval: 60s
+
+  # 資料庫連接監控 (Google Sheets)
+  - job_name: 'database-health'
+    metrics_path: '/api/db-health'
+    static_configs:
+      - targets: ['sheets.googleapis.com']
+    scrape_interval: 120s
+
+# 遠端寫入配置 (可選 - 用於 Google Cloud Monitoring)
+remote_write:
+  - url: "https://monitoring.googleapis.com/v1/projects/YOUR_PROJECT_ID/location/global/prometheus/api/v1/write"
+    queue_config:
+      capacity: 2500
+      max_shards: 200
+      min_shards: 1
+      max_samples_per_send: 500
+      batch_send_deadline: 5s
+      min_backoff: 30ms
+      max_backoff: 100ms

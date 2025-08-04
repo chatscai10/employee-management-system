@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業員工管理系統</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 載入畫面 -->
+        <div id="loading" class="loading-screen">
+            <div class="loading-spinner"></div>
+            <p>系統載入中...</p>
+        </div>
+
+        <!-- 登入畫面 -->
+        <div id="login-screen" class="screen" style="display: none;">
+            <div class="container">
+                <div class="login-box">
+                    <h1>企業員工管理系統</h1>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-method">登入方式：</label>
+                            <select id="login-method" required>
+                                <option value="employeeId">員工編號</option>
+                                <option value="idNumber">身分證號碼</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-input">請輸入：</label>
+                            <input type="text" id="login-input" required placeholder="請輸入員工編號或身分證號">
+                        </div>
+                        <button type="submit" class="btn btn-primary">登入</button>
+                    </form>
+                    <p class="register-link">
+                        還沒有帳號？<a href="#" id="show-register">點此註冊</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 註冊畫面 -->
+        <div id="register-screen" class="screen" style="display: none;">
+            <div class="container">
+                <div class="register-box">
+                    <h1>員工註冊</h1>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="name">姓名：</label>
+                            <input type="text" id="name" required placeholder="請輸入姓名">
+                        </div>
+                        <div class="form-group">
+                            <label for="id-number">身分證號碼：</label>
+                            <input type="text" id="id-number" required placeholder="請輸入身分證號碼" maxlength="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="birth-date">出生日期：</label>
+                            <input type="date" id="birth-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">性別：</label>
+                            <select id="gender" required>
+                                <option value="">請選擇</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="driving-license">駕照類別：</label>
+                            <select id="driving-license" multiple>
+                                <option value="汽車">汽車</option>
+                                <option value="機車">機車</option>
+                                <option value="普通重機">普通重機</option>
+                                <option value="大型重機">大型重機</option>
+                            </select>
+                            <small>可多選，按住Ctrl點擊</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">聯絡電話：</label>
+                            <input type="tel" id="phone" required placeholder="09xxxxxxxx" pattern="09[0-9]{8}">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">居住地址：</label>
+                            <textarea id="address" required placeholder="請輸入完整地址"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="position">應徵職位：</label>
+                            <select id="position" required>
+                                <option value="">請選擇</option>
+                                <option value="店員">店員</option>
+                                <option value="資深店員">資深店員</option>
+                                <option value="副店長">副店長</option>
+                                <option value="店長">店長</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="store">希望分店：</label>
+                            <select id="store" required>
+                                <option value="">請選擇</option>
+                                <option value="內壢店">內壢店</option>
+                                <option value="桃園店">桃園店</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">備註：</label>
+                            <textarea id="notes" placeholder="其他備註事項"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="back-to-login">返回登入</button>
+                            <button type="submit" class="btn btn-primary">註冊</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主畫面 -->
+        <div id="main-screen" class="screen" style="display: none;">
+            <header class="main-header">
+                <div class="header-content">
+                    <h1>員工管理系統</h1>
+                    <div class="user-info">
+                        <span id="user-name">未登入</span>
+                        <button id="logout-btn" class="btn btn-small">登出</button>
+                    </div>
+                </div>
+            </header>
+
+            <nav class="main-nav">
+                <button class="nav-btn active" data-module="attendance">打卡</button>
+                <button class="nav-btn" data-module="revenue">營收</button>
+                <button class="nav-btn" data-module="ordering">叫貨</button>
+                <button class="nav-btn" data-module="schedule">排班</button>
+                <button class="nav-btn" data-module="promotion">升遷</button>
+                <button class="nav-btn" data-module="maintenance">維修</button>
+            </nav>
+
+            <main class="main-content">
+                <!-- 打卡模組 -->
+                <div id="attendance-module" class="module active">
+                    <h2>員工打卡</h2>
+                    <div class="attendance-status">
+                        <div class="status-card">
+                            <h3>今日狀態</h3>
+                            <p id="today-status">尚未打卡</p>
+                        </div>
+                        <div class="status-card">
+                            <h3>當前時間</h3>
+                            <p id="current-time">--:--:--</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attendance-actions">
+                        <div class="form-group">
+                            <label for="attendance-store">選擇分店：</label>
+                            <select id="attendance-store" required>
+                                <option value="內壢店">內壢店</option>
+                                <option value="桃園店">桃園店</option>
+                            </select>
+                        </div>
+                        <div class="clock-buttons">
+                            <button id="clock-in-btn" class="btn btn-success btn-large">上班打卡</button>
+                            <button id="clock-out-btn" class="btn btn-danger btn-large">下班打卡</button>
+                        </div>
+                    </div>
+
+                    <div class="attendance-history">
+                        <h3>打卡記錄</h3>
+                        <div id="attendance-records">
+                            <p>載入中...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 營收模組 -->
+                <div id="revenue-module" class="module">
+                    <h2>營收記錄</h2>
+                    <form id="revenue-form">
+                        <div class="form-group">
+                            <label for="business-date">營業日期：</label>
+                            <input type="date" id="business-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue-store">分店：</label>
+                            <select id="revenue-store" required>
+                                <option value="內壢店">內壢店</option>
+                                <option value="桃園店">桃園店</option>
+                            </select>
+                        </div>
+                        
+                        <fieldset>
+                            <legend>收入明細</legend>
+                            <div class="form-group">
+                                <label for="order-count">現場訂單數：</label>
+                                <input type="number" id="order-count" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="field-revenue">現場訂單收入：</label>
+                                <input type="number" id="field-revenue" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery-revenue">外送訂單收入：</label>
+                                <input type="number" id="delivery-revenue" min="0" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="other-revenue">其他收入：</label>
+                                <input type="number" id="other-revenue" min="0" value="0">
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>支出明細</legend>
+                            <div class="form-group">
+                                <label for="material-cost">材料成本：</label>
+                                <input type="number" id="material-cost" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="other-expense">其他支出：</label>
+                                <input type="number" id="other-expense" min="0" value="0">
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label for="bonus-type">獎金類別：</label>
+                            <select id="bonus-type" required>
+                                <option value="">請選擇</option>
+                                <option value="平日獎金">平日獎金</option>
+                                <option value="假日獎金">假日獎金</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="revenue-notes">備註：</label>
+                            <textarea id="revenue-notes" placeholder="營收備註"></textarea>
+                        </div>
+
+                        <div class="revenue-summary">
+                            <h3>計算結果</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <label>收入總額：</label>
+                                    <span id="total-revenue">$0</span>
+                                </div>
+                                <div class="summary-item">
+                                    <label>支出總額：</label>
+                                    <span id="total-expense">$0</span>
+                                </div>
+                                <div class="summary-item">
+                                    <label>淨收入：</label>
+                                    <span id="net-income">$0</span>
+                                </div>
+                                <div class="summary-item">
+                                    <label>預估獎金：</label>
+                                    <span id="estimated-bonus">$0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">提交營收記錄</button>
+                    </form>
+                </div>
+
+                <!-- 叫貨系統模組 -->
+                <div id="ordering-module" class="module">
+                    <h2>叫貨系統</h2>
+                    <div class="module-actions">
+                        <button id="add-order-btn" class="btn btn-primary">新增叫貨</button>
+                        <button id="view-order-history-btn" class="btn btn-info">查看歷史</button>
+                        <button id="check-stock-btn" class="btn btn-warning">庫存警告</button>
+                    </div>
+                    
+                    <div id="order-list-container" class="data-container">
+                        <p>載入中...</p>
+                    </div>
+                </div>
+
+                <!-- 排班系統模組 -->
+                <div id="schedule-module" class="module">
+                    <h2>排班系統</h2>
+                    <div class="module-actions">
+                        <button id="add-schedule-btn" class="btn btn-primary">新增排班</button>
+                        <button id="view-schedule-stats-btn" class="btn btn-info">查看統計</button>
+                        <div class="view-controls">
+                            <select id="schedule-view-toggle">
+                                <option value="week">週視圖</option>
+                                <option value="month">月視圖</option>
+                            </select>
+                            <button id="schedule-prev-btn" class="btn btn-small">◀</button>
+                            <span id="current-date-display"></span>
+                            <button id="schedule-next-btn" class="btn btn-small">▶</button>
+                        </div>
+                    </div>
+                    
+                    <div id="schedule-calendar-container" class="calendar-container">
+                        <p>載入中...</p>
+                    </div>
+                </div>
+
+                <!-- 升遷投票模組 -->
+                <div id="promotion-module" class="module">
+                    <h2>升遷投票</h2>
+                    <div class="module-actions">
+                        <button id="initiate-promotion-vote-btn" class="btn btn-primary">發起升遷投票</button>
+                        <button id="view-vote-history-btn" class="btn btn-info">查看投票歷史</button>
+                    </div>
+                    
+                    <div class="promotion-sections">
+                        <div class="section">
+                            <h3>進行中的投票</h3>
+                            <div id="active-votes-container" class="votes-container">
+                                <p>載入中...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 維修系統模組 -->
+                <div id="maintenance-module" class="module">
+                    <h2>維修系統</h2>
+                    <div class="module-actions">
+                        <button id="add-maintenance-request-btn" class="btn btn-primary">新增維修申請</button>
+                        <button id="view-maintenance-stats-btn" class="btn btn-info">查看統計</button>
+                        <div class="filter-controls">
+                            <select id="maintenance-status-filter">
+                                <option value="all">全部狀態</option>
+                                <option value="待受理">待受理</option>
+                                <option value="處理中">處理中</option>
+                                <option value="已完成">已完成</option>
+                                <option value="已取消">已取消</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="maintenance-list-container" class="data-container">
+                        <p>載入中...</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- 訊息提示 -->
+        <div id="message-container" class="message-container"></div>
+
+        <!-- 叫貨系統模態視窗 -->
+        <div id="order-form-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>新增叫貨申請</h3>
+                    <span class="close" onclick="orderingModule.hideOrderForm()">&times;</span>
+                </div>
+                <form id="order-form">
+                    <div class="form-group">
+                        <label for="order-date">叫貨日期：</label>
+                        <input type="date" id="order-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-store">分店：</label>
+                        <select id="order-store" required>
+                            <option value="">請選擇分店</option>
+                            <option value="內壢店">內壢店</option>
+                            <option value="桃園店">桃園店</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-supplier">供應商：</label>
+                        <select id="order-supplier" required>
+                            <option value="">請選擇供應商</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-items">品項清單：</label>
+                        <textarea id="order-items" required placeholder="請輸入品項和數量"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-amount">預估金額：</label>
+                        <input type="number" id="order-amount" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expected-delivery">預計到貨日：</label>
+                        <input type="date" id="expected-delivery" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-notes">備註：</label>
+                        <textarea id="order-notes" placeholder="特殊需求或備註"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="orderingModule.hideOrderForm()">取消</button>
+                        <button type="button" id="submit-order-btn" class="btn btn-primary">提交申請</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 排班系統模態視窗 -->
+        <div id="schedule-form-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>新增排班</h3>
+                    <span class="close" onclick="scheduleModule.hideScheduleForm()">&times;</span>
+                </div>
+                <form id="schedule-form">
+                    <div class="form-group">
+                        <label for="schedule-date">排班日期：</label>
+                        <input type="date" id="schedule-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule-shift-type">班別：</label>
+                        <select id="schedule-shift-type" required>
+                            <option value="">請選擇班別</option>
+                            <option value="早班">早班</option>
+                            <option value="中班">中班</option>
+                            <option value="晚班">晚班</option>
+                            <option value="全天">全天</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule-start-time">開始時間：</label>
+                        <input type="time" id="schedule-start-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule-end-time">結束時間：</label>
+                        <input type="time" id="schedule-end-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule-position">職位：</label>
+                        <select id="schedule-position">
+                            <option value="">使用預設職位</option>
+                            <option value="店員">店員</option>
+                            <option value="資深店員">資深店員</option>
+                            <option value="組長">組長</option>
+                            <option value="副店長">副店長</option>
+                            <option value="店長">店長</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="schedule-is-holiday">
+                            假日班次
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div id="work-hours-display">工作時數: 0 小時</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="schedule-notes">備註：</label>
+                        <textarea id="schedule-notes" placeholder="排班備註"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="scheduleModule.hideScheduleForm()">取消</button>
+                        <button type="button" id="submit-schedule-btn" class="btn btn-primary">提交排班</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 升遷投票模態視窗 -->
+        <div id="promotion-form-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>發起升遷投票</h3>
+                    <span class="close" onclick="promotionModule.hidePromotionForm()">&times;</span>
+                </div>
+                <form id="promotion-form">
+                    <div class="form-group">
+                        <label for="promotion-current-position">當前職位：</label>
+                        <select id="promotion-current-position" required>
+                            <option value="">請選擇當前職位</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotion-target-position">目標職位：</label>
+                        <select id="promotion-target-position" required>
+                            <option value="">請選擇目標職位</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotion-store">分店：</label>
+                        <select id="promotion-store" required>
+                            <option value="">請選擇分店</option>
+                            <option value="內壢店">內壢店</option>
+                            <option value="桃園店">桃園店</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotion-reason">升遷理由：</label>
+                        <textarea id="promotion-reason" required placeholder="請詳細說明升遷理由（至少10個字元）"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="promotion-vote-duration">投票期限（天）：</label>
+                        <input type="number" id="promotion-vote-duration" min="1" max="30" value="7" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="promotionModule.hidePromotionForm()">取消</button>
+                        <button type="button" id="submit-promotion-btn" class="btn btn-primary">提交申請</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 投票詳情模態視窗 -->
+        <div id="vote-detail-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>投票詳情</h3>
+                    <span class="close" onclick="promotionModule.hideVoteDetail()">&times;</span>
+                </div>
+                <div id="vote-detail-content">
+                    <p>載入中...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 投票確認模態視窗 -->
+        <div id="vote-confirm-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>確認投票</h3>
+                    <span class="close" onclick="promotionModule.hideVoteConfirm()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>您確定要投 <strong id="vote-choice-display"></strong> 票嗎？</p>
+                    <div class="form-group">
+                        <label for="vote-comment">投票意見（選填）：</label>
+                        <textarea id="vote-comment" placeholder="請輸入您的投票意見"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="promotionModule.hideVoteConfirm()">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="promotionModule.submitVote()">確認投票</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 維修申請模態視窗 -->
+        <div id="maintenance-form-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>新增維修申請</h3>
+                    <span class="close" onclick="maintenanceModule.hideMaintenanceForm()">&times;</span>
+                </div>
+                <form id="maintenance-form">
+                    <div class="form-group">
+                        <label for="maintenance-request-date">申請日期：</label>
+                        <input type="date" id="maintenance-request-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-store">分店：</label>
+                        <select id="maintenance-store" required>
+                            <option value="">請選擇分店</option>
+                            <option value="內壢店">內壢店</option>
+                            <option value="桃園店">桃園店</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-equipment-type">設備類型：</label>
+                        <select id="maintenance-equipment-type" required>
+                            <option value="">請選擇設備類型</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-equipment-name">設備名稱：</label>
+                        <input type="text" id="maintenance-equipment-name" required placeholder="請輸入設備名稱">
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-location">設備位置：</label>
+                        <select id="maintenance-location" required>
+                            <option value="">請選擇位置</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-description">故障描述：</label>
+                        <textarea id="maintenance-description" required placeholder="請詳細描述故障情況（至少10個字元）"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-urgency">緊急程度：</label>
+                        <select id="maintenance-urgency" required>
+                            <option value="">請選擇緊急程度</option>
+                            <option value="緊急">緊急（2小時內）</option>
+                            <option value="高">高（4小時內）</option>
+                            <option value="中">中（12小時內）</option>
+                            <option value="低">低（48小時內）</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-expected-time">預期完成時間：</label>
+                        <input type="datetime-local" id="maintenance-expected-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-reporter">報修人：</label>
+                        <input type="text" id="maintenance-reporter" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-phone">聯絡電話：</label>
+                        <input type="tel" id="maintenance-phone" required placeholder="聯絡電話">
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-photo">相關照片：</label>
+                        <input type="file" id="maintenance-photo" accept="image/*">
+                        <div id="photo-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="maintenance-notes">備註：</label>
+                        <textarea id="maintenance-notes" placeholder="其他相關資訊"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="maintenanceModule.hideMaintenanceForm()">取消</button>
+                        <button type="button" id="submit-maintenance-request-btn" class="btn btn-primary">提交申請</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 維修詳情模態視窗 -->
+        <div id="maintenance-detail-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>維修申請詳情</h3>
+                    <span class="close" onclick="maintenanceModule.hideMaintenanceDetail()">&times;</span>
+                </div>
+                <div id="maintenance-detail-content">
+                    <p>載入中...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 統計模態視窗 -->
+        <div id="schedule-stats-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>排班統計</h3>
+                    <span class="close" onclick="document.getElementById('schedule-stats-modal').style.display='none'">&times;</span>
+                </div>
+                <div id="schedule-stats-content">
+                    <p>載入中...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="vote-history-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>投票歷史</h3>
+                    <span class="close" onclick="document.getElementById('vote-history-modal').style.display='none'">&times;</span>
+                </div>
+                <div id="vote-history-content">
+                    <p>載入中...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="maintenance-stats-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>維修統計</h3>
+                    <span class="close" onclick="document.getElementById('maintenance-stats-modal').style.display='none'">&times;</span>
+                </div>
+                <div id="maintenance-stats-content">
+                    <p>載入中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils/api.js"></script>
+    <script src="js/utils/location.js"></script>
+    <script src="js/utils/device.js"></script>
+    <script src="js/utils/validation.js"></script>
+    <script src="js/modules/auth.js"></script>
+    <script src="js/modules/attendance.js"></script>
+    <script src="js/modules/revenue.js"></script>
+    <script src="js/modules/ordering.js"></script>
+    <script src="js/modules/schedule.js"></script>
+    <script src="js/modules/promotion.js"></script>
+    <script src="js/modules/maintenance.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

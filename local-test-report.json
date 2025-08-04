@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-03T02:34:54.296Z",
+  "totalTests": 8,
+  "passedTests": 7,
+  "successRate": 87.5,
+  "details": {
+    "filesCheck": true,
+    "nodeModules": true,
+    "dockerfileValid": false,
+    "packageJsonValid": true,
+    "apiEndpointsValid": true,
+    "htmlFilesValid": true,
+    "firebaseConfigValid": true,
+    "telegramNotification": true
+  },
+  "recommendations": [
+    "檢查並修正 Dockerfile 配置"
+  ]
+}

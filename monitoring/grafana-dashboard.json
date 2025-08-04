@@ -1,0 +1,171 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "企業員工管理系統監控儀表板",
+    "tags": ["employee-management", "business", "monitoring"],
+    "style": "dark",
+    "timezone": "Asia/Taipei",
+    "refresh": "30s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "系統總覽",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "up{job=\"employee-management-app\"}",
+            "legendFormat": "系統狀態"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "green", "value": 1}
+              ]
+            },
+            "mappings": [
+              {"type": "value", "value": "0", "text": "離線"},
+              {"type": "value", "value": "1", "text": "在線"}
+            ]
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "請求數量 (每分鐘)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[1m])",
+            "legendFormat": "{{method}} {{endpoint}}"
+          }
+        ],
+        "yAxes": [
+          {"label": "請求/分鐘", "min": 0}
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "回應時間分布",
+        "type": "heatmap",
+        "targets": [
+          {
+            "expr": "rate(http_request_duration_seconds_bucket[5m])",
+            "legendFormat": "{{le}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8}
+      },
+      {
+        "id": 4,
+        "title": "錯誤率",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status=~\"4..\"}[5m])",
+            "legendFormat": "4xx 錯誤"
+          },
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m])",
+            "legendFormat": "5xx 錯誤"
+          }
+        ],
+        "yAxes": [
+          {"label": "錯誤率", "min": 0}
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16}
+      },
+      {
+        "id": 5,
+        "title": "活躍用戶數",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "active_users_total",
+            "legendFormat": "活躍用戶"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16}
+      },
+      {
+        "id": 6,
+        "title": "業務指標",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "daily_attendance_count",
+            "legendFormat": "今日打卡次數"
+          },
+          {
+            "expr": "daily_revenue_amount",
+            "legendFormat": "今日營收"
+          },
+          {
+            "expr": "pending_orders_count",
+            "legendFormat": "待處理訂單"
+          },
+          {
+            "expr": "active_maintenance_requests",
+            "legendFormat": "待修設備"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24}
+      },
+      {
+        "id": 7,
+        "title": "系統資源使用",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "process_resident_memory_bytes / 1024 / 1024",
+            "legendFormat": "記憶體使用 (MB)"
+          },
+          {
+            "expr": "rate(process_cpu_seconds_total[5m]) * 100",
+            "legendFormat": "CPU使用率 (%)"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 24}
+      },
+      {
+        "id": 8,
+        "title": "Telegram 通知狀態",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "telegram_notifications_sent_total",
+            "legendFormat": "已發送通知"
+          },
+          {
+            "expr": "telegram_notifications_failed_total",
+            "legendFormat": "發送失敗"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 32}
+      },
+      {
+        "id": 9,
+        "title": "Google Sheets 操作",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(sheets_operations_total[5m])",
+            "legendFormat": "{{operation}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 32}
+      }
+    ]
+  }
+}

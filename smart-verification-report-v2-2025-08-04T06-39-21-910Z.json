@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "totalTests": 8,
+    "successfulTests": 6,
+    "failedTests": 2,
+    "averageResponseTime": 377,
+    "v2SystemDetected": false,
+    "placeholderDetected": true,
+    "hasExpectedContent": 6,
+    "systemStatus": {
+      "status": "BUILD_IN_PROGRESS",
+      "message": "🔄 構建仍在進行中，顯示佔位頁面",
+      "confidence": "low"
+    },
+    "successRate": 75
+  },
+  "details": {
+    "basic": [
+      {
+        "name": "主頁載入",
+        "path": "/",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 957,
+        "contentLength": 1731,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:10.790Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "<!DOCTYPE html> <html lang=\"zh-TW\"> <head> <meta charset=\"UTF-8\"> <title>企業管理系統 v3.0.0</title> <style> body { font-family: system-ui; margin: 40px; background: linear-gradient(135d"
+      },
+      {
+        "name": "系統健康檢查",
+        "path": "/health",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 295,
+        "contentLength": 77,
+        "contentType": "application/json; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:12.092Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "{\"status\":\"healthy\",\"version\":\"3.0.0\",\"timestamp\":\"2025-08-04T06:39:13.132Z\"}"
+      },
+      {
+        "name": "API健康檢查",
+        "path": "/api/health",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 404,
+        "success": false,
+        "responseTime": 290,
+        "contentLength": 35,
+        "contentType": "application/json; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:13.382Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": false,
+        "responsePreview": "{\"success\":false,\"message\":\"端點未找到\"}"
+      }
+    ],
+    "api": [
+      {
+        "name": "產品管理API",
+        "path": "/api/products",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 300,
+        "contentLength": 130,
+        "contentType": "application/json; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:14.690Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "{\"success\":true,\"data\":[{\"id\":1,\"name\":\"筆記本電腦\",\"price\":25000,\"stock\":50},{\"id\":2,\"name\":\"辦公椅\",\"price\":3500,\"stock\":20}],\"count\":2}"
+      },
+      {
+        "name": "庫存管理API",
+        "path": "/api/inventory",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 404,
+        "success": false,
+        "responseTime": 294,
+        "contentLength": 35,
+        "contentType": "application/json; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:15.997Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "{\"success\":false,\"message\":\"端點未找到\"}"
+      },
+      {
+        "name": "登入頁面",
+        "path": "/api/login",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 299,
+        "contentLength": 3466,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:17.303Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "<!DOCTYPE html> <html lang=\"zh-TW\"> <head> <meta charset=\"UTF-8\"> <title>員工登入</title> <style> body { font-family: system-ui; margin: 40px; background: linear-gradient(135deg, #667e"
+      }
+    ],
+    "advanced": [
+      {
+        "name": "員工登入功能",
+        "path": "/api/login",
+        "method": "POST",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 294,
+        "contentLength": 98,
+        "contentType": "application/json; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:18.598Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "{\"success\":true,\"message\":\"歡迎 測試員工！\",\"user\":{\"username\":\"test\",\"password\":\"123456\",\"name\":\"測試員工\"}}"
+      },
+      {
+        "name": "錯誤登入測試",
+        "path": "/api/login",
+        "method": "POST",
+        "expectedStatus": 401,
+        "actualStatus": 401,
+        "success": true,
+        "responseTime": 288,
+        "contentLength": 37,
+        "contentType": "application/json; charset=utf-8",
+        "timestamp": "2025-08-04T06:39:20.397Z",
+        "isPlaceholder": false,
+        "isV2System": false,
+        "hasExpectedContent": false,
+        "responsePreview": "{\"success\":false,\"message\":\"帳號或密碼錯誤\"}"
+      }
+    ],
+    "summary": {
+      "totalTests": 8,
+      "successfulTests": 6,
+      "failedTests": 2,
+      "averageResponseTime": 377,
+      "v2SystemDetected": false,
+      "placeholderDetected": true,
+      "hasExpectedContent": 6,
+      "systemStatus": {
+        "status": "BUILD_IN_PROGRESS",
+        "message": "🔄 構建仍在進行中，顯示佔位頁面",
+        "confidence": "low"
+      },
+      "successRate": 75
+    }
+  },
+  "timestamp": "2025-08-04T06:39:21.910Z"
+}

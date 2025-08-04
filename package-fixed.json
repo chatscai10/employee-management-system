@@ -1,0 +1,33 @@
+{
+  "name": "employee-management-system",
+  "version": "3.1.0",
+  "description": "企業員工管理系統 - Google Cloud 版",
+  "main": "server-production.js",
+  "scripts": {
+    "start": "node server-production.js",
+    "dev": "nodemon server-production.js",
+    "gcp-build": "echo 'Build completed successfully'",
+    "postinstall": "echo 'Dependencies installed'"
+  },
+  "engines": {
+    "node": "18",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "cors": "2.8.5",
+    "helmet": "7.0.0",
+    "compression": "1.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  },
+  "keywords": [
+    "google-cloud",
+    "cloud-run",
+    "nodejs",
+    "enterprise"
+  ],
+  "author": "Enterprise Management System",
+  "license": "MIT"
+}

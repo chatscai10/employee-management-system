@@ -1,0 +1,30 @@
+修復 Cloud Run 部署問題 - 指令清單
+==========================================
+
+請按順序複製以下指令到 Cloud Shell：
+
+1. 刪除舊的 package.json
+rm package.json
+
+2. 創建新的 package.json
+echo '{"name":"employee-management-system","version":"1.0.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"4.18.2"},"engines":{"node":"18"}}' > package.json
+
+3. 刪除舊的 server.js
+rm server.js
+
+4. 創建新的 server.js
+echo 'const express = require("express"); const app = express(); const PORT = process.env.PORT || 8080; app.get("/", (req, res) => res.send("Employee Management System is running!")); app.get("/api/health", (req, res) => res.json({status: "healthy", timestamp: new Date().toISOString()})); app.listen(PORT, "0.0.0.0", () => console.log("Server running on port " + PORT));' > server.js
+
+5. 重新部署到 Cloud Run
+gcloud run deploy employee-management-system --source . --region asia-east1 --allow-unauthenticated
+
+6. 當詢問是否繼續時輸入：
+Y
+
+==========================================
+使用說明：
+- 逐行複製貼上到 Cloud Shell
+- 每個指令執行完成後再執行下一個
+- 最後一步輸入 Y 確認部署
+- 部署成功後會顯示服務 URL
+==========================================

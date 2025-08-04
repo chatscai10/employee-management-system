@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理員系統 - 企業員工管理</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💼</text></svg>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Microsoft YaHei', Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        /* 手機端優先設計 */
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        /* 頂部導航 */
+        .admin-header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .admin-header h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.8em;
+        }
+        
+        .admin-header p {
+            color: #7f8c8d;
+            font-size: 1em;
+        }
+        
+        /* 功能選單 */
+        .admin-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .menu-item {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: none;
+            font-size: 14px;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .menu-item i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+            color: #3498db;
+        }
+        
+        .menu-item.active i {
+            color: white;
+        }
+        
+        /* 內容區域 */
+        .admin-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 400px;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            font-size: 1.3em;
+        }
+        
+        /* 表單樣式 */
+        .form-grid {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        /* 按鈕樣式 */
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            min-height: 48px; /* 手機端友好的最小觸控區域 */
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* 卡片樣式 */
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .card-header {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        /* 表格樣式 */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .mobile-table th,
+        .mobile-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mobile-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 狀態標籤 */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 通知樣式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            max-width: 300px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success { background: #27ae60; }
+        .notification.error { background: #e74c3c; }
+        .notification.info { background: #3498db; }
+        
+        /* 載入動畫 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 照片管理樣式 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .photo-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .photo-thumbnail {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .photo-info {
+            font-size: 14px;
+        }
+        
+        .photo-type {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        
+        .photo-type.revenue {
+            background: #27ae60;
+        }
+        
+        .photo-type.maintenance {
+            background: #e67e22;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stat-label {
+            display: block;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            display: block;
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pagination-buttons button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .pagination-buttons button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .card-actions {
+            float: right;
+        }
+        
+        .card-actions .btn {
+            margin-left: 10px;
+        }
+        
+        /* 響應式設計 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 1200px;
+                padding: 20px;
+            }
+            
+            .admin-menu {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .form-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-header h1 {
+                font-size: 1.5em;
+            }
+            
+            .admin-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .menu-item {
+                padding: 15px 10px;
+            }
+            
+            .menu-item i {
+                font-size: 1.5em;
+            }
+        }
+        
+        /* 隱藏元素 */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* 分店設定特殊樣式 */
+        .store-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .store-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        .store-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        
+        .store-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        /* 員工管理樣式 */
+        .employee-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .employee-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .employee-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .employee-actions .btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            min-height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 管理員標題 -->
+        <div class="admin-header">
+            <h1><i class="fas fa-user-shield"></i> 管理員系統</h1>
+            <p>企業員工管理系統 - 完整功能版</p>
+        </div>
+        
+        <!-- 功能選單 -->
+        <div class="admin-menu">
+            <button class="menu-item active" onclick="showSection('dashboard')">
+                <i class="fas fa-tachometer-alt"></i>
+                系統總覽
+            </button>
+            <button class="menu-item" onclick="showSection('stores')">
+                <i class="fas fa-store"></i>
+                分店設定
+            </button>
+            <button class="menu-item" onclick="showSection('employees')">
+                <i class="fas fa-users"></i>
+                員工管理
+            </button>
+            <button class="menu-item" onclick="showSection('ordering')">
+                <i class="fas fa-shopping-cart"></i>
+                叫貨品項
+            </button>
+            <button class="menu-item" onclick="showSection('schedule')">
+                <i class="fas fa-calendar-alt"></i>
+                排班設定
+            </button>
+            <button class="menu-item" onclick="showSection('voting')">
+                <i class="fas fa-vote-yea"></i>
+                投票設定
+            </button>
+            <button class="menu-item" onclick="showSection('revenue')">
+                <i class="fas fa-dollar-sign"></i>
+                營收設定
+            </button>
+            <button class="menu-item" onclick="showSection('photos')">
+                <i class="fas fa-images"></i>
+                照片管理
+            </button>
+            <button class="menu-item" onclick="showSection('system')">
+                <i class="fas fa-cogs"></i>
+                系統設定
+            </button>
+        </div>
+        
+        <!-- 內容區域 -->
+        <div class="admin-content">
+            <!-- 系統總覽 -->
+            <div id="dashboard" class="content-section active">
+                <h2 class="section-title">
+                    <i class="fas fa-tachometer-alt"></i> 系統總覽
+                </h2>
+                
+                <div class="form-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-users"></i> 員工統計
+                        </div>
+                        <div id="employee-stats">載入中...</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-store"></i> 分店統計
+                        </div>
+                        <div id="store-stats">載入中...</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i> 今日數據
+                        </div>
+                        <div id="daily-stats">載入中...</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-bell"></i> 系統狀態
+                        </div>
+                        <div id="system-status">載入中...</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="testAllAPIs()">
+                    <i class="fas fa-flask"></i> 測試所有API
+                </button>
+            </div>
+            
+            <!-- 分店設定 -->
+            <div id="stores" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-store"></i> 分店管理設定
+                </h2>
+                
+                <div class="store-grid" id="stores-container">
+                    <!-- 分店卡片將由JavaScript動態生成 -->
+                </div>
+                
+                <button class="btn btn-success" onclick="showAddStoreForm()">
+                    <i class="fas fa-plus"></i> 新增分店
+                </button>
+            </div>
+            
+            <!-- 員工管理 -->
+            <div id="employees" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-users"></i> 員工資料管理
+                </h2>
+                
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="loadEmployees()">
+                        <i class="fas fa-sync"></i> 重新載入員工列表
+                    </button>
+                </div>
+                
+                <div id="employees-container">
+                    <!-- 員工列表將由JavaScript動態生成 -->
+                </div>
+            </div>
+            
+            <!-- 叫貨品項 -->
+            <div id="ordering" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-shopping-cart"></i> 叫貨品項清單設定
+                </h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="item-supplier">供應商</label>
+                        <input type="text" id="item-supplier" placeholder="例：聯華食品">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-brand">品牌</label>
+                        <input type="text" id="item-brand" placeholder="例：飛飛">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-product">品項</label>
+                        <input type="text" id="item-product" placeholder="例：雞胸肉">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-unit">單位</label>
+                        <input type="text" id="item-unit" placeholder="例：份">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-price">單價</label>
+                        <input type="number" id="item-price" placeholder="150">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-category">類別</label>
+                        <select id="item-category">
+                            <option value="">請選擇類別</option>
+                            <option value="肉類">肉類</option>
+                            <option value="配菜">配菜</option>
+                            <option value="原料">原料</option>
+                            <option value="調料">調料</option>
+                            <option value="主食">主食</option>
+                            <option value="飲料">飲料</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="addOrderingItem()">
+                    <i class="fas fa-plus"></i> 新增品項
+                </button>
+                
+                <div id="ordering-items-container">
+                    <!-- 品項列表將由JavaScript動態生成 -->
+                </div>
+            </div>
+            
+            <!-- 排班設定 -->
+            <div id="schedule" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-alt"></i> 排班系統參數設定
+                </h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="max-vacation-days">每人休假上限天數</label>
+                        <input type="number" id="max-vacation-days" value="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="max-daily-vacation">每日休假總上限人數</label>
+                        <input type="number" id="max-daily-vacation" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="max-weekend-vacation">週末休假上限天數</label>
+                        <input type="number" id="max-weekend-vacation" value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="operation-time">排班操作時間(分鐘)</label>
+                        <input type="number" id="operation-time" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="open-day">排班開啟日期</label>
+                        <input type="number" id="open-day" value="16" min="1" max="31">
+                    </div>
+                    <div class="form-group">
+                        <label for="close-day">排班關閉日期</label>
+                        <input type="number" id="close-day" value="21" min="1" max="31">
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="saveScheduleSettings()">
+                    <i class="fas fa-save"></i> 儲存排班設定
+                </button>
+            </div>
+            
+            <!-- 投票設定 -->
+            <div id="voting" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-vote-yea"></i> 投票階級參數設定
+                </h2>
+                
+                <div id="voting-positions-container">
+                    <!-- 職位設定將由JavaScript動態生成 -->
+                </div>
+                
+                <button class="btn btn-success" onclick="showAddPositionForm()">
+                    <i class="fas fa-plus"></i> 新增職位
+                </button>
+            </div>
+            
+            <!-- 營收設定 -->
+            <div id="revenue" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-dollar-sign"></i> 營收獎金公式設定
+                </h2>
+                
+                <div class="card">
+                    <div class="card-header">平日獎金公式</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="weekday-threshold">獎金門檻</label>
+                            <input type="number" id="weekday-threshold" value="13000">
+                        </div>
+                        <div class="form-group">
+                            <label for="weekday-rate">獎金比例(%)</label>
+                            <input type="number" id="weekday-rate" value="30" step="0.1">
+                        </div>
+                    </div>
+                    <p>公式：現場金額 + 熊貓金額(扣除35%服務費) + UBER金額(扣除35%服務費) > <span id="weekday-display">13000</span> 則取 <span id="weekday-rate-display">30%</span> 作為獎金</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">假日獎金公式</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="holiday-threshold">獎金門檻</label>
+                            <input type="number" id="holiday-threshold" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="holiday-rate">獎金比例(%)</label>
+                            <input type="number" id="holiday-rate" value="38" step="0.1">
+                        </div>
+                    </div>
+                    <p>公式：總金額 >= <span id="holiday-display">0</span> 則取 <span id="holiday-rate-display">38%</span> 作為獎金</p>
+                </div>
+                
+                <button class="btn btn-success" onclick="saveRevenueSettings()">
+                    <i class="fas fa-save"></i> 儲存營收設定
+                </button>
+            </div>
+            
+            <!-- 照片管理 -->
+            <div id="photos" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-images"></i> 照片管理
+                </h2>
+                
+                <!-- 照片統計 -->
+                <div class="card">
+                    <div class="card-header">照片統計</div>
+                    <div id="photo-stats" class="form-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">總照片數</span>
+                            <span class="stat-value" id="total-photos">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">營收照片</span>
+                            <span class="stat-value" id="revenue-photos">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">維修照片</span>
+                            <span class="stat-value" id="maintenance-photos">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 照片篩選 -->
+                <div class="card">
+                    <div class="card-header">照片查詢篩選</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="photo-type">照片類型</label>
+                            <select id="photo-type">
+                                <option value="">全部</option>
+                                <option value="revenue">營收照片</option>
+                                <option value="maintenance">維修照片</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo-store">分店</label>
+                            <select id="photo-store">
+                                <option value="">全部分店</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo-start-date">開始日期</label>
+                            <input type="date" id="photo-start-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="photo-end-date">結束日期</label>
+                            <input type="date" id="photo-end-date">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="searchPhotos()">
+                        <i class="fas fa-search"></i> 搜尋照片
+                    </button>
+                </div>
+                
+                <!-- 照片列表 -->
+                <div class="card">
+                    <div class="card-header">
+                        照片列表
+                        <div class="card-actions">
+                            <button class="btn btn-secondary" onclick="refreshPhotos()">
+                                <i class="fas fa-sync"></i> 重新整理
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 分頁控制 -->
+                    <div class="pagination-controls">
+                        <span id="photo-pagination-info">第 1 頁，共 0 筆</span>
+                        <div class="pagination-buttons">
+                            <button id="photo-prev-page" onclick="changePhotoPage(-1)" disabled>
+                                <i class="fas fa-chevron-left"></i> 上一頁
+                            </button>
+                            <button id="photo-next-page" onclick="changePhotoPage(1)" disabled>
+                                <i class="fas fa-chevron-right"></i> 下一頁
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 照片網格 -->
+                    <div id="photo-grid" class="photo-grid">
+                        <div class="loading">載入中...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 系統設定 -->
+            <div id="system" class="content-section">
+                <h2 class="section-title">
+                    <i class="fas fa-cogs"></i> 系統設定
+                </h2>
+                
+                <div class="card">
+                    <div class="card-header">作廢功能開關</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="void-attendance" checked> 考勤記錄可作廢
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="void-revenue" checked> 營收記錄可作廢
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="void-ordering" checked> 叫貨記錄可作廢
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="void-maintenance" checked> 維修記錄可作廢
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Telegram通知設定</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="bot-token">Bot Token</label>
+                            <input type="text" id="bot-token" value="7659930552:AAF_jF1rAXFnjFO176-9X5fKfBwbrko8BNc">
+                        </div>
+                        <div class="form-group">
+                            <label for="boss-group">老闆群組ID</label>
+                            <input type="text" id="boss-group" value="-1002658082392">
+                        </div>
+                        <div class="form-group">
+                            <label for="employee-group">員工群組ID</label>
+                            <input type="text" id="employee-group" value="-1002658082392">
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="saveSystemSettings()">
+                    <i class="fas fa-save"></i> 儲存系統設定
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全域變數
+        let currentSection = 'dashboard';
+        let systemData = {};
+        
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSystemData();
+            loadDashboard();
+        });
+        
+        // 顯示指定區塊
+        function showSection(sectionName) {
+            // 隱藏所有區塊
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 移除所有選單項目的active狀態
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 顯示指定區塊
+            document.getElementById(sectionName).classList.add('active');
+            
+            // 設定對應選單項目為active
+            event.target.classList.add('active');
+            
+            currentSection = sectionName;
+            
+            // 載入對應數據
+            switch(sectionName) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'stores':
+                    loadStores();
+                    break;
+                case 'employees':
+                    loadEmployees();
+                    break;
+                case 'ordering':
+                    loadOrderingItems();
+                    break;
+                case 'schedule':
+                    loadScheduleSettings();
+                    break;
+                case 'voting':
+                    loadVotingPositions();
+                    break;
+                case 'revenue':
+                    loadRevenueSettings();
+                    break;
+                case 'photos':
+                    loadPhotoManagement();
+                    break;
+                case 'system':
+                    loadSystemSettings();
+                    break;
+            }
+        }
+        
+        // 載入系統數據
+        async function loadSystemData() {
+            try {
+                const response = await fetch('/api/health');
+                systemData = await response.json();
+            } catch (error) {
+                console.error('載入系統數據失敗:', error);
+            }
+        }
+        
+        // 載入系統總覽
+        async function loadDashboard() {
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+                
+                // 更新員工統計
+                document.getElementById('employee-stats').innerHTML = `
+                    <p><strong>總員工數:</strong> ${data.statistics.totalEmployees} 人</p>
+                    <p><strong>分店數:</strong> ${data.statistics.totalStores} 間</p>
+                `;
+                
+                // 更新分店統計
+                document.getElementById('store-stats').innerHTML = `
+                    <p><strong>內壢忠孝店:</strong> 營運中</p>
+                    <p><strong>桃園龍安店:</strong> 營運中</p>
+                    <p><strong>中壢龍崗店:</strong> 營運中</p>
+                `;
+                
+                // 更新今日數據
+                document.getElementById('daily-stats').innerHTML = `
+                    <p><strong>考勤記錄:</strong> ${data.statistics.attendanceRecords} 筆</p>
+                    <p><strong>營收記錄:</strong> ${data.statistics.revenueRecords} 筆</p>
+                    <p><strong>叫貨記錄:</strong> ${data.statistics.orderingRecords} 筆</p>
+                    <p><strong>維修記錄:</strong> ${data.statistics.maintenanceRecords} 筆</p>
+                `;
+                
+                // 更新系統狀態
+                document.getElementById('system-status').innerHTML = `
+                    <p><strong>系統版本:</strong> ${data.version}</p>
+                    <p><strong>服務狀態:</strong> <span class="status-badge status-active">正常運行</span></p>
+                    <p><strong>上次更新:</strong> ${new Date().toLocaleString('zh-TW')}</p>
+                `;
+                
+            } catch (error) {
+                showNotification('載入系統總覽失敗', 'error');
+            }
+        }
+        
+        // 測試所有API
+        async function testAllAPIs() {
+            const testButton = event.target;
+            testButton.disabled = true;
+            testButton.innerHTML = '<div class="loading"></div> 測試中...';
+            
+            const apis = [
+                '/api/health',
+                '/api/admin/employees', 
+                '/api/attendance',
+                '/api/revenue',
+                '/api/ordering',
+                '/api/maintenance'
+            ];
+            
+            let results = [];
+            
+            for (let api of apis) {
+                try {
+                    const response = await fetch(api);
+                    const status = response.ok ? '✅' : '❌';
+                    results.push(`${status} ${api}: ${response.ok ? '正常' : '錯誤'} (${response.status})`);
+                } catch (error) {
+                    results.push(`❌ ${api}: 連線失敗`);
+                }
+            }
+            
+            alert(`API測試結果:\n\n${results.join('\n')}`);
+            
+            testButton.disabled = false;
+            testButton.innerHTML = '<i class="fas fa-flask"></i> 測試所有API';
+        }
+        
+        // 載入分店設定
+        async function loadStores() {
+            try {
+                const response = await fetch('/api/admin/stores');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const container = document.getElementById('stores-container');
+                    container.innerHTML = '';
+                    
+                    data.data.forEach(store => {
+                        const storeCard = document.createElement('div');
+                        storeCard.className = 'store-card';
+                        storeCard.innerHTML = `
+                            <h3>${store.name}</h3>
+                            <p><strong>地址:</strong> ${store.address}</p>
+                            <p><strong>營業時間:</strong> ${store.open}</p>
+                            <p><strong>最少人數:</strong> ${store.people} 人</p>
+                            <p><strong>打卡範圍:</strong> ${store.radius} 公尺</p>
+                            <p><strong>座標:</strong> ${store.latitude}, ${store.longitude}</p>
+                            <button class="btn btn-primary" onclick="editStore('${store.storeId}')">
+                                <i class="fas fa-edit"></i> 編輯
+                            </button>
+                        `;
+                        container.appendChild(storeCard);
+                    });
+                }
+            } catch (error) {
+                showNotification('載入分店資料失敗', 'error');
+            }
+        }
+        
+        // 載入員工列表
+        async function loadEmployees() {
+            try {
+                const response = await fetch('/api/admin/employees');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const container = document.getElementById('employees-container');
+                    container.innerHTML = '';
+                    
+                    data.data.forEach(employee => {
+                        const employeeCard = document.createElement('div');
+                        employeeCard.className = 'employee-card';
+                        
+                        const statusClass = employee.isActive ? 'status-active' : 
+                                           employee.status === '審核中' ? 'status-pending' : 'status-inactive';
+                        
+                        employeeCard.innerHTML = `
+                            <div class="employee-info">
+                                <h4>${employee.name}</h4>
+                                <p><strong>編號:</strong> ${employee.employeeId}</p>
+                                <p><strong>職位:</strong> ${employee.position}</p>
+                                <p><strong>分店:</strong> ${employee.store}</p>
+                                <p><strong>狀態:</strong> <span class="status-badge ${statusClass}">${employee.status}</span></p>
+                            </div>
+                            <div class="employee-actions">
+                                <button class="btn btn-primary" onclick="editEmployee('${employee.employeeId}')">
+                                    <i class="fas fa-edit"></i> 編輯
+                                </button>
+                                ${!employee.isActive ? 
+                                    `<button class="btn btn-success" onclick="approveEmployee('${employee.employeeId}')">
+                                        <i class="fas fa-check"></i> 審核通過
+                                    </button>` : ''
+                                }
+                            </div>
+                        `;
+                        container.appendChild(employeeCard);
+                    });
+                }
+            } catch (error) {
+                showNotification('載入員工資料失敗', 'error');
+            }
+        }
+        
+        // 審核通過員工
+        async function approveEmployee(employeeId) {
+            if (!confirm('確定要審核通過此員工嗎？')) return;
+            
+            try {
+                const response = await fetch(`/api/admin/employees/${employeeId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        isActive: true,
+                        status: '在職'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('員工審核通過', 'success');
+                    loadEmployees();
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            } catch (error) {
+                showNotification('審核失敗', 'error');
+            }
+        }
+        
+        // 載入叫貨品項
+        async function loadOrderingItems() {
+            try {
+                const response = await fetch('/api/admin/ordering-items');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const container = document.getElementById('ordering-items-container');
+                    container.innerHTML = '<h3>目前品項清單</h3>';
+                    
+                    // 按供應商分組
+                    const groupedItems = {};
+                    data.data.forEach(item => {
+                        if (!groupedItems[item.supplier]) {
+                            groupedItems[item.supplier] = [];
+                        }
+                        groupedItems[item.supplier].push(item);
+                    });
+                    
+                    Object.keys(groupedItems).forEach(supplier => {
+                        const supplierDiv = document.createElement('div');
+                        supplierDiv.className = 'card';
+                        supplierDiv.innerHTML = `
+                            <div class="card-header">🏭 ${supplier}</div>
+                            ${groupedItems[supplier].map(item => `
+                                <p>• ${item.brand} ${item.product} - $${item.unitPrice}/${item.unit}</p>
+                            `).join('')}
+                        `;
+                        container.appendChild(supplierDiv);
+                    });
+                }
+            } catch (error) {
+                showNotification('載入品項清單失敗', 'error');
+            }
+        }
+        
+        // 新增叫貨品項
+        async function addOrderingItem() {
+            const formData = {
+                supplier: document.getElementById('item-supplier').value,
+                brand: document.getElementById('item-brand').value,
+                product: document.getElementById('item-product').value,
+                unit: document.getElementById('item-unit').value,
+                unitPrice: parseFloat(document.getElementById('item-price').value),
+                category: document.getElementById('item-category').value
+            };
+            
+            // 驗證表單
+            if (!formData.supplier || !formData.brand || !formData.product || !formData.unit || !formData.unitPrice || !formData.category) {
+                showNotification('請填寫所有欄位', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/admin/ordering-items', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('品項新增成功', 'success');
+                    // 清空表單
+                    document.querySelectorAll('#ordering input, #ordering select').forEach(input => {
+                        input.value = '';
+                    });
+                    loadOrderingItems();
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            } catch (error) {
+                showNotification('新增品項失敗', 'error');
+            }
+        }
+        
+        // 載入排班設定
+        async function loadScheduleSettings() {
+            try {
+                const response = await fetch('/api/admin/settings');
+                const data = await response.json();
+                
+                if (data.success && data.data.scheduling) {
+                    const settings = data.data.scheduling;
+                    document.getElementById('max-vacation-days').value = settings.maxVacationDays;
+                    document.getElementById('max-daily-vacation').value = settings.maxDailyVacationTotal;
+                    document.getElementById('max-weekend-vacation').value = settings.maxWeekendVacationDays;
+                    document.getElementById('operation-time').value = settings.operationTimeMinutes;
+                    document.getElementById('open-day').value = settings.openDay;
+                    document.getElementById('close-day').value = settings.closeDay;
+                }
+            } catch (error) {
+                showNotification('載入排班設定失敗', 'error');
+            }
+        }
+        
+        // 儲存排班設定
+        async function saveScheduleSettings() {
+            const settings = {
+                maxVacationDays: parseInt(document.getElementById('max-vacation-days').value),
+                maxDailyVacationTotal: parseInt(document.getElementById('max-daily-vacation').value),
+                maxWeekendVacationDays: parseInt(document.getElementById('max-weekend-vacation').value),
+                operationTimeMinutes: parseInt(document.getElementById('operation-time').value),
+                openDay: parseInt(document.getElementById('open-day').value),
+                closeDay: parseInt(document.getElementById('close-day').value)
+            };
+            
+            try {
+                const response = await fetch('/api/admin/settings', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        category: 'scheduling',
+                        settings: settings
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('排班設定儲存成功', 'success');
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            } catch (error) {
+                showNotification('儲存排班設定失敗', 'error');
+            }
+        }
+        
+        // 載入投票職位設定
+        async function loadVotingPositions() {
+            try {
+                const response = await fetch('/api/admin/settings');
+                const data = await response.json();
+                
+                if (data.success && data.data.voting && data.data.voting.positions) {
+                    const container = document.getElementById('voting-positions-container');
+                    container.innerHTML = '';
+                    
+                    data.data.voting.positions.forEach(position => {
+                        const positionCard = document.createElement('div');
+                        positionCard.className = 'card';
+                        positionCard.innerHTML = `
+                            <div class="card-header">階級 ${position.level} - ${position.name}</div>
+                            <p><strong>薪資:</strong> $${position.salary.toLocaleString()}</p>
+                            <p><strong>獎金比例:</strong> ${(position.bonusRate * 100)}%</p>
+                            <p><strong>名額:</strong> ${position.quota} 人</p>
+                            <p><strong>任職需滿:</strong> ${position.requiredDays} 天</p>
+                            <p><strong>同意比例:</strong> ${(position.approvalRate * 100)}%</p>
+                            <p><strong>投票期間:</strong> ${position.votingPeriodDays} 天</p>
+                            <p><strong>遲到限制:</strong> 每月不超過 ${position.maxLateMinutesPerMonth} 分鐘</p>
+                            <p><strong>備註:</strong> ${position.notes}</p>
+                        `;
+                        container.appendChild(positionCard);
+                    });
+                }
+            } catch (error) {
+                showNotification('載入投票設定失敗', 'error');
+            }
+        }
+        
+        // 載入營收設定
+        async function loadRevenueSettings() {
+            try {
+                const response = await fetch('/api/admin/settings');
+                const data = await response.json();
+                
+                if (data.success && data.data.revenue) {
+                    const revenue = data.data.revenue;
+                    
+                    document.getElementById('weekday-threshold').value = revenue.weekdayFormula.threshold;
+                    document.getElementById('weekday-rate').value = revenue.weekdayFormula.rate * 100;
+                    document.getElementById('holiday-threshold').value = revenue.holidayFormula.threshold;
+                    document.getElementById('holiday-rate').value = revenue.holidayFormula.rate * 100;
+                    
+                    updateRevenueDisplay();
+                }
+            } catch (error) {
+                showNotification('載入營收設定失敗', 'error');
+            }
+        }
+        
+        // 更新營收顯示
+        function updateRevenueDisplay() {
+            document.getElementById('weekday-display').textContent = document.getElementById('weekday-threshold').value;
+            document.getElementById('weekday-rate-display').textContent = document.getElementById('weekday-rate').value + '%';
+            document.getElementById('holiday-display').textContent = document.getElementById('holiday-threshold').value;
+            document.getElementById('holiday-rate-display').textContent = document.getElementById('holiday-rate').value + '%';
+        }
+        
+        // 儲存營收設定
+        async function saveRevenueSettings() {
+            const settings = {
+                weekdayFormula: {
+                    threshold: parseFloat(document.getElementById('weekday-threshold').value),
+                    rate: parseFloat(document.getElementById('weekday-rate').value) / 100
+                },
+                holidayFormula: {
+                    threshold: parseFloat(document.getElementById('holiday-threshold').value),
+                    rate: parseFloat(document.getElementById('holiday-rate').value) / 100
+                }
+            };
+            
+            try {
+                const response = await fetch('/api/admin/settings', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        category: 'revenue',
+                        settings: settings
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('營收設定儲存成功', 'success');
+                    updateRevenueDisplay();
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            } catch (error) {
+                showNotification('儲存營收設定失敗', 'error');
+            }
+        }
+        
+        // 載入系統設定
+        async function loadSystemSettings() {
+            try {
+                const response = await fetch('/api/admin/settings');
+                const data = await response.json();
+                
+                if (data.success) {
+                    // 載入作廢設定
+                    if (data.data.voidSettings) {
+                        document.getElementById('void-attendance').checked = data.data.voidSettings.attendance;
+                        document.getElementById('void-revenue').checked = data.data.voidSettings.revenue;
+                        document.getElementById('void-ordering').checked = data.data.voidSettings.ordering;
+                        document.getElementById('void-maintenance').checked = data.data.voidSettings.maintenance;
+                    }
+                    
+                    // 載入Telegram設定
+                    if (data.data.telegram) {
+                        document.getElementById('bot-token').value = data.data.telegram.botToken;
+                        document.getElementById('boss-group').value = data.data.telegram.bossGroupId;
+                        document.getElementById('employee-group').value = data.data.telegram.employeeGroupId;
+                    }
+                }
+            } catch (error) {
+                showNotification('載入系統設定失敗', 'error');
+            }
+        }
+        
+        // 儲存系統設定
+        async function saveSystemSettings() {
+            const settings = {
+                voidSettings: {
+                    attendance: document.getElementById('void-attendance').checked,
+                    revenue: document.getElementById('void-revenue').checked,
+                    ordering: document.getElementById('void-ordering').checked,
+                    maintenance: document.getElementById('void-maintenance').checked
+                },
+                telegram: {
+                    botToken: document.getElementById('bot-token').value,
+                    bossGroupId: document.getElementById('boss-group').value,
+                    employeeGroupId: document.getElementById('employee-group').value
+                }
+            };
+            
+            try {
+                // 分別儲存兩個設定類別
+                const voidResponse = await fetch('/api/admin/settings', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        category: 'voidSettings',
+                        settings: settings.voidSettings
+                    })
+                });
+                
+                const telegramResponse = await fetch('/api/admin/settings', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        category: 'telegram',
+                        settings: settings.telegram
+                    })
+                });
+                
+                const voidData = await voidResponse.json();
+                const telegramData = await telegramResponse.json();
+                
+                if (voidData.success && telegramData.success) {
+                    showNotification('系統設定儲存成功', 'success');
+                } else {
+                    showNotification('部分設定儲存失敗', 'error');
+                }
+            } catch (error) {
+                showNotification('儲存系統設定失敗', 'error');
+            }
+        }
+        
+        // 顯示通知
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // 監聽營收設定輸入變化
+        document.addEventListener('input', function(e) {
+            if (e.target.id.includes('weekday') || e.target.id.includes('holiday')) {
+                updateRevenueDisplay();
+            }
+        });
+        
+        // ==================== 照片管理功能 ====================
+        
+        let currentPhotoPage = 1;
+        let photoPageSize = 20;
+        let totalPhotoPages = 1;
+        
+        // 載入照片管理
+        async function loadPhotoManagement() {
+            await loadPhotoStats();
+            await loadPhotoStores();
+            await loadPhotos();
+        }
+        
+        // 載入照片統計
+        async function loadPhotoStats() {
+            try {
+                const response = await fetch('/api/admin/photos/stats');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const stats = result.data;
+                    document.getElementById('total-photos').textContent = stats.totalPhotos;
+                    document.getElementById('revenue-photos').textContent = stats.revenuePhotos;
+                    document.getElementById('maintenance-photos').textContent = stats.maintenancePhotos;
+                }
+            } catch (error) {
+                console.error('載入照片統計失敗:', error);
+            }
+        }
+        
+        // 載入分店選項
+        async function loadPhotoStores() {
+            try {
+                const response = await fetch('/api/admin/stores');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const storeSelect = document.getElementById('photo-store');
+                    storeSelect.innerHTML = '<option value="">全部分店</option>';
+                    
+                    result.data.forEach(store => {
+                        const option = document.createElement('option');
+                        option.value = store.storeId;
+                        option.textContent = store.name;
+                        storeSelect.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('載入分店列表失敗:', error);
+            }
+        }
+        
+        // 載入照片列表
+        async function loadPhotos() {
+            try {
+                const type = document.getElementById('photo-type').value;
+                const storeId = document.getElementById('photo-store').value;
+                const startDate = document.getElementById('photo-start-date').value;
+                const endDate = document.getElementById('photo-end-date').value;
+                
+                const params = new URLSearchParams({
+                    page: currentPhotoPage,
+                    limit: photoPageSize
+                });
+                
+                if (type) params.append('type', type);
+                if (storeId) params.append('storeId', storeId);
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                
+                const response = await fetch(`/api/admin/photos?${params}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayPhotos(result.data.photos);
+                    updatePhotoPagination(result.data.pagination);
+                } else {
+                    document.getElementById('photo-grid').innerHTML = `<div class="loading">載入失敗: ${result.message}</div>`;
+                }
+            } catch (error) {
+                console.error('載入照片失敗:', error);
+                document.getElementById('photo-grid').innerHTML = '<div class="loading">載入失敗</div>';
+            }
+        }
+        
+        // 顯示照片
+        function displayPhotos(photos) {
+            const photoGrid = document.getElementById('photo-grid');
+            
+            if (photos.length === 0) {
+                photoGrid.innerHTML = '<div class="loading">暫無照片</div>';
+                return;
+            }
+            
+            const photosHtml = photos.map(photo => `
+                <div class="photo-item">
+                    <img src="/uploads/${photo.filename}" 
+                         alt="${photo.recordTypeName}照片" 
+                         class="photo-thumbnail"
+                         onclick="viewPhoto('${photo.filename}', '${photo.recordTypeName}')">
+                    <div class="photo-info">
+                        <span class="photo-type ${photo.recordType}">${photo.recordTypeName}</span>
+                        <div><strong>員工:</strong> ${photo.employeeName}</div>
+                        <div><strong>分店:</strong> ${photo.storeName}</div>
+                        <div><strong>日期:</strong> ${new Date(photo.date).toLocaleDateString('zh-TW')}</div>
+                        ${photo.category ? `<div><strong>類別:</strong> ${photo.category}</div>` : ''}
+                        ${photo.equipment ? `<div><strong>設備:</strong> ${photo.equipment}</div>` : ''}
+                        <div><strong>上傳時間:</strong> ${new Date(photo.uploadTime).toLocaleString('zh-TW')}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            photoGrid.innerHTML = photosHtml;
+        }
+        
+        // 更新分頁控制
+        function updatePhotoPagination(pagination) {
+            totalPhotoPages = pagination.totalPages;
+            
+            document.getElementById('photo-pagination-info').textContent = 
+                `第 ${pagination.currentPage} 頁，共 ${pagination.totalItems} 筆`;
+            
+            document.getElementById('photo-prev-page').disabled = pagination.currentPage <= 1;
+            document.getElementById('photo-next-page').disabled = pagination.currentPage >= pagination.totalPages;
+        }
+        
+        // 搜尋照片
+        function searchPhotos() {
+            currentPhotoPage = 1;
+            loadPhotos();
+        }
+        
+        // 重新整理照片
+        function refreshPhotos() {
+            loadPhotoStats();
+            loadPhotos();
+        }
+        
+        // 更改照片頁面
+        function changePhotoPage(direction) {
+            const newPage = currentPhotoPage + direction;
+            if (newPage >= 1 && newPage <= totalPhotoPages) {
+                currentPhotoPage = newPage;
+                loadPhotos();
+            }
+        }
+        
+        // 查看照片
+        function viewPhoto(filename, type) {
+            // 創建模態框來顯示大圖
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            `;
+            
+            const img = document.createElement('img');
+            img.src = `/uploads/${filename}`;
+            img.style.cssText = `
+                max-width: 90%;
+                max-height: 90%;
+                border-radius: 10px;
+            `;
+            
+            modal.appendChild(img);
+            modal.onclick = () => document.body.removeChild(modal);
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+</html>

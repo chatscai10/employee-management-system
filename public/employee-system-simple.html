@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>員工系統 - 企業管理</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="mock-data.js"></script>
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        /* 登入界面 */
+        .login-screen {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 50px auto;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: var(--success-color);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #059669;
+        }
+
+        .test-accounts {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        /* 頂部導航 */
+        .header {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logout-btn {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* 導航選單 */
+        .nav-menu {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 15px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #f3f4f6;
+        }
+
+        .nav-item:last-child {
+            border-bottom: none;
+        }
+
+        .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 內容區域 */
+        .content-section {
+            display: none;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* 按鈕樣式 */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn-primary { background: var(--primary-color); color: white; }
+        .btn-success { background: var(--success-color); color: white; }
+        .btn-warning { background: var(--warning-color); color: white; }
+        .btn-danger { background: var(--danger-color); color: white; }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 卡片樣式 */
+        .card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-card {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* 通知樣式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .notification.success { background: var(--success-color); }
+        .notification.error { background: var(--danger-color); }
+        .notification.info { background: var(--primary-color); }
+
+        /* 響應式設計 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 登入界面 -->
+        <div id="login-screen" class="login-screen">
+            <h1 style="color: var(--primary-color); margin-bottom: 30px;">
+                <i class="fas fa-building"></i> 員工管理系統
+            </h1>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-name">姓名</label>
+                    <input type="text" id="login-name" required placeholder="請輸入您的姓名">
+                </div>
+                <div class="form-group">
+                    <label for="login-id-number">身分證號</label>
+                    <input type="text" id="login-id-number" required placeholder="請輸入身分證號">
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> 登入系統
+                </button>
+            </form>
+            
+            <div class="test-accounts">
+                <h4 style="color: var(--primary-color); margin-bottom: 10px;">🧪 測試帳號</h4>
+                <p><strong>測試員工</strong> / A123456789</p>
+                <p><strong>王小明</strong> / B987654321</p>
+                <p><strong>李小華</strong> / C246813579</p>
+            </div>
+        </div>
+
+        <!-- 主系統界面 -->
+        <div id="main-system" class="hidden">
+            <!-- 頂部導航 -->
+            <div class="header">
+                <div>
+                    <h2><i class="fas fa-user"></i> <span id="user-name">員工系統</span></h2>
+                    <small id="user-details" style="color: var(--text-secondary);"></small>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> 登出
+                </button>
+            </div>
+
+            <!-- 導航選單 -->
+            <div class="nav-menu">
+                <a href="#" class="nav-item active" onclick="showSection('dashboard')">
+                    <i class="fas fa-home"></i> 首頁總覽
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('attendance')">
+                    <i class="fas fa-clock"></i> 考勤管理
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('revenue')">
+                    <i class="fas fa-chart-line"></i> 營收管理
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('ordering')">
+                    <i class="fas fa-truck"></i> 叫貨管理
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('maintenance')">
+                    <i class="fas fa-tools"></i> 維修回報
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('schedule')">
+                    <i class="fas fa-calendar"></i> 排班管理
+                </a>
+            </div>
+
+            <!-- 首頁總覽 -->
+            <div id="dashboard" class="content-section active">
+                <h2 class="section-title"><i class="fas fa-home"></i> 首頁總覽</h2>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="work-days">22</div>
+                    <div class="stat-label">本月工作天數</div>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> 個人資訊</h3>
+                    <div id="personal-info">
+                        <p><strong>員工編號：</strong><span id="emp-id">-</span></p>
+                        <p><strong>部門：</strong><span id="department">-</span></p>
+                        <p><strong>職位：</strong><span id="position">-</span></p>
+                        <p><strong>分店：</strong><span id="store">-</span></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-chart-bar"></i> 今日統計</h3>
+                    <p>✅ 系統狀態：正常運行</p>
+                    <p>📊 考勤記錄：已完成</p>
+                    <p>💰 營收記錄：<span id="revenue-count">2</span> 筆</p>
+                    <p>📦 叫貨記錄：<span id="order-count">2</span> 筆</p>
+                </div>
+            </div>
+
+            <!-- 考勤管理 -->
+            <div id="attendance" class="content-section">
+                <h2 class="section-title"><i class="fas fa-clock"></i> 考勤管理</h2>
+                
+                <div class="card">
+                    <h3>今日打卡</h3>
+                    <button class="btn btn-success" onclick="clockIn()">
+                        <i class="fas fa-sign-in-alt"></i> 上班打卡
+                    </button>
+                    <button class="btn btn-warning" onclick="clockOut()">
+                        <i class="fas fa-sign-out-alt"></i> 下班打卡
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>考勤記錄</h3>
+                    <div id="attendance-records">
+                        <p>📅 2025-08-03 09:00 上班 ✅</p>
+                        <p>📅 2025-08-02 09:15 上班 ⚠️ (遲到15分鐘)</p>
+                        <p>📅 2025-08-02 18:00 下班 ✅</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 營收管理 -->
+            <div id="revenue" class="content-section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> 營收管理</h2>
+                
+                <div class="card">
+                    <h3>新增營收</h3>
+                    <button class="btn btn-primary" onclick="addRevenue()">
+                        <i class="fas fa-plus"></i> 記錄營收
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>營收記錄</h3>
+                    <div id="revenue-records">
+                        <p>💰 2025-08-03 產品銷售 NT$25,000</p>
+                        <p>💰 2025-08-02 服務收入 NT$15,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 叫貨管理 -->
+            <div id="ordering" class="content-section">
+                <h2 class="section-title"><i class="fas fa-truck"></i> 叫貨管理</h2>
+                
+                <div class="card">
+                    <h3>新增訂單</h3>
+                    <button class="btn btn-primary" onclick="newOrder()">
+                        <i class="fas fa-plus"></i> 建立訂單
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>訂單記錄</h3>
+                    <div id="order-records">
+                        <p>📦 2025-08-03 雞排、珍奶 NT$150 ✅ 已送達</p>
+                        <p>📦 2025-08-02 便當、飲料 NT$120 🚚 配送中</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 維修回報 -->
+            <div id="maintenance" class="content-section">
+                <h2 class="section-title"><i class="fas fa-tools"></i> 維修回報</h2>
+                
+                <div class="card">
+                    <h3>回報問題</h3>
+                    <button class="btn btn-danger" onclick="reportIssue()">
+                        <i class="fas fa-exclamation-triangle"></i> 回報故障
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>維修記錄</h3>
+                    <div id="maintenance-records">
+                        <p>🔧 2025-08-03 收銀機螢幕閃爍 ✅ 已修復</p>
+                        <p>🔧 2025-08-02 冰箱溫度異常 🚧 處理中</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 排班管理 -->
+            <div id="schedule" class="content-section">
+                <h2 class="section-title"><i class="fas fa-calendar"></i> 排班管理</h2>
+                
+                <div class="card">
+                    <h3>請假申請</h3>
+                    <button class="btn btn-warning" onclick="requestLeave()">
+                        <i class="fas fa-calendar-times"></i> 申請請假
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>排班記錄</h3>
+                    <div id="schedule-records">
+                        <p>📅 2025-08月 請假：8/10, 8/15 ✅ 已核准</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全域變數
+        let currentUser = null;
+        let isLoggedIn = false;
+
+        // 處理登入
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('login-name').value;
+            const idNumber = document.getElementById('login-id-number').value;
+            
+            const result = MockAPI.login(name, idNumber);
+            
+            if (result.success) {
+                currentUser = result.data;
+                isLoggedIn = true;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showMainSystem();
+                loadUserData();
+                showNotification('✅ 登入成功！歡迎使用員工管理系統', 'success');
+            } else {
+                showNotification('❌ ' + result.message, 'error');
+            }
+        }
+
+        // 顯示主系統
+        function showMainSystem() {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('main-system').classList.remove('hidden');
+        }
+
+        // 載入用戶資料
+        function loadUserData() {
+            if (currentUser) {
+                document.getElementById('user-name').textContent = currentUser.name;
+                document.getElementById('user-details').textContent = `${currentUser.employeeId} - ${currentUser.department}`;
+                document.getElementById('emp-id').textContent = currentUser.employeeId;
+                document.getElementById('department').textContent = currentUser.department;
+                document.getElementById('position').textContent = currentUser.position;
+                document.getElementById('store').textContent = currentUser.store;
+            }
+        }
+
+        // 登出
+        function logout() {
+            currentUser = null;
+            isLoggedIn = false;
+            localStorage.removeItem('currentUser');
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('main-system').classList.add('hidden');
+            showNotification('✅ 已成功登出', 'info');
+        }
+
+        // 切換內容區域
+        function showSection(sectionId) {
+            // 隱藏所有內容區域
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // 移除所有導航項目的active狀態
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // 顯示選中的內容區域
+            document.getElementById(sectionId).classList.add('active');
+            
+            // 設定對應導航項目為active
+            event.target.classList.add('active');
+        }
+
+        // 功能實現
+        function clockIn() {
+            const time = new Date().toLocaleTimeString('zh-TW', {hour12: false});
+            const result = MockAPI.submitData('打卡上班', { 
+                employeeId: currentUser.employeeId, 
+                time: time 
+            });
+            showNotification(`⏰ ${time} 上班打卡成功`, 'success');
+        }
+
+        function clockOut() {
+            const time = new Date().toLocaleTimeString('zh-TW', {hour12: false});
+            const result = MockAPI.submitData('打卡下班', { 
+                employeeId: currentUser.employeeId, 
+                time: time 
+            });
+            showNotification(`⏰ ${time} 下班打卡成功`, 'success');
+        }
+
+        function addRevenue() {
+            const amount = prompt('請輸入營收金額:');
+            if (amount && !isNaN(amount)) {
+                const result = MockAPI.submitData('新增營收', { 
+                    employeeId: currentUser.employeeId, 
+                    amount: parseInt(amount) 
+                });
+                showNotification(`💰 營收 NT$${amount} 記錄成功`, 'success');
+            }
+        }
+
+        function newOrder() {
+            const items = prompt('請輸入訂購商品（用逗號分隔）:');
+            if (items) {
+                const result = MockAPI.submitData('新增訂單', { 
+                    employeeId: currentUser.employeeId, 
+                    items: items.split(',').map(item => item.trim())
+                });
+                showNotification(`📦 訂單「${items}」建立成功`, 'success');
+            }
+        }
+
+        function reportIssue() {
+            const equipment = prompt('請輸入故障設備:');
+            const description = prompt('請描述故障問題:');
+            if (equipment && description) {
+                const result = MockAPI.submitData('設備維修', { 
+                    employeeId: currentUser.employeeId, 
+                    equipment: equipment,
+                    description: description
+                });
+                showNotification(`🔧 ${equipment} 故障回報已提交`, 'success');
+            }
+        }
+
+        function requestLeave() {
+            const dates = prompt('請輸入請假日期（格式: YYYY-MM-DD，多個日期用逗號分隔）:');
+            if (dates) {
+                const result = MockAPI.submitData('請假申請', { 
+                    employeeId: currentUser.employeeId, 
+                    dates: dates.split(',').map(date => date.trim())
+                });
+                showNotification(`📅 請假申請「${dates}」已提交`, 'success');
+            }
+        }
+
+        // 通知系統
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // 頁面載入完成
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                isLoggedIn = true;
+                showMainSystem();
+                loadUserData();
+                showNotification('✅ 歡迎回來！', 'success');
+            }
+        });
+    </script>
+</body>
+</html>

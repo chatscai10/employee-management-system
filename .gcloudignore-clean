@@ -1,0 +1,11 @@
+node_modules/
+*.log
+.git/
+*.md
+*.json
+*.sh
+*.bat
+*-old*
+*-backup*
+*-definitive*
+*-clean*

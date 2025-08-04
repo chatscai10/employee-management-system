@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業員工管理系統 - 重定向中...</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+    <script>
+        // 重定向到專業登入頁面
+        window.location.replace('./login.html');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Microsoft YaHei', Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh; 
+            color: #333;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* 登入界面 */
+        .auth-screen { 
+            background: rgba(255,255,255,0.95); 
+            padding: 40px; 
+            border-radius: 15px; 
+            max-width: 450px; 
+            margin: 50px auto; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+        }
+        .auth-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-weight: bold; color: #2c3e50; }
+        .form-group input { 
+            padding: 12px; 
+            border: 2px solid #ddd; 
+            border-radius: 8px; 
+            font-size: 16px; 
+        }
+        .form-group input:focus { border-color: #3498db; outline: none; }
+        .submit-btn { 
+            background: #27ae60; 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+        }
+        .submit-btn:hover { background: #229954; }
+
+        /* 主要系統界面 */
+        .main-screen { display: none; }
+        .hidden { display: none !important; }
+        .header { 
+            background: rgba(255,255,255,0.95); 
+            padding: 20px 30px; 
+            border-radius: 15px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { display: flex; align-items: center; gap: 15px; }
+        .logo h1 { color: #2c3e50; margin: 0; }
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .logout-btn { 
+            background: #e74c3c; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+        }
+
+        /* 功能模組 */
+        .modules { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 30px; 
+        }
+        .module { 
+            background: rgba(255,255,255,0.95); 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            transition: all 0.3s ease; 
+        }
+        .module:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25); 
+        }
+        .module-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+        .module-icon { font-size: 2.5em; color: #3498db; }
+        .module h3 { color: #2c3e50; margin: 0; }
+        .module-content { margin-bottom: 20px; color: #7f8c8d; }
+        .module-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn { 
+            padding: 10px 15px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            transition: all 0.3s ease; 
+        }
+        .btn-primary { background: #3498db; color: white; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-warning { background: #f39c12; color: white; }
+        .btn-info { background: #8e44ad; color: white; }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+        }
+
+        /* 通知樣式 */
+        .notification { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            padding: 15px 25px; 
+            border-radius: 10px; 
+            color: white; 
+            font-weight: bold; 
+            z-index: 1000; 
+            transition: all 0.3s ease; 
+        }
+        .notification.success { background: #27ae60; }
+        .notification.error { background: #e74c3c; }
+        .notification.info { background: #3498db; }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .modules { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 登入界面 -->
+        <div id="auth-screen" class="auth-screen">
+            <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+                <i class="fas fa-building" style="font-size: 3em; color: #3498db;"></i>
+                <h1>企業管理系統</h1>
+            </div>
+
+            <div id="login-form">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">員工登入</h3>
+                <form class="auth-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-name">姓名</label>
+                        <input type="text" id="login-name" required placeholder="請輸入您的姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-id-number">身分證號</label>
+                        <input type="text" id="login-id-number" required placeholder="請輸入身分證號 (例如: A123456789)">
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> 登入系統
+                    </button>
+                </form>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <h4 style="color: #2c3e50; margin-bottom: 10px;">🧪 測試帳號</h4>
+                    <p><strong>測試員工</strong> / A123456789</p>
+                    <p><strong>王小明</strong> / B987654321</p>
+                    <p><strong>李小華</strong> / C246813579</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要系統界面 -->
+        <div id="main-screen" class="main-screen">
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    <h1>企業管理系統</h1>
+                </div>
+                <div class="user-info">
+                    <span id="user-name">歡迎使用</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> 登出
+                    </button>
+                </div>
+            </div>
+
+            <div class="modules">
+                <!-- 基本資訊模組 -->
+                <div class="module">
+                    <div class="module-header">
+                        <i class="fas fa-user module-icon"></i>
+                        <h3>個人資訊</h3>
+                    </div>
+                    <div class="module-content">
+                        <div id="user-details">
+                            <p><strong>員工編號：</strong><span id="employee-id">-</span></p>
+                            <p><strong>部門：</strong><span id="department">-</span></p>
+                            <p><strong>職位：</strong><span id="position">-</span></p>
+                            <p><strong>分店：</strong><span id="store">-</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 考勤模組 -->
+                <div class="module">
+                    <div class="module-header">
+                        <i class="fas fa-clock module-icon"></i>
+                        <h3>考勤管理</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>今日考勤狀態和歷史記錄</p>
+                        <div id="attendance-status">
+                            <p>📊 本月工作天數: <span id="work-days">22</span></p>
+                            <p>⏰ 遲到分鐘數: <span id="late-minutes">15</span></p>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <button class="btn btn-success" onclick="clockIn()">
+                            <i class="fas fa-sign-in-alt"></i> 打卡上班
+                        </button>
+                        <button class="btn btn-warning" onclick="clockOut()">
+                            <i class="fas fa-sign-out-alt"></i> 打卡下班
+                        </button>
+                        <button class="btn btn-info" onclick="viewAttendance()">
+                            <i class="fas fa-calendar"></i> 查看記錄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 營收管理模組 -->
+                <div class="module">
+                    <div class="module-header">
+                        <i class="fas fa-chart-line module-icon"></i>
+                        <h3>營收管理</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>記錄和管理營業收入數據</p>
+                        <div id="revenue-summary">
+                            <p>💰 本月營收: <span style="color: #27ae60; font-weight: bold;">NT$40,000</span></p>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <button class="btn btn-primary" onclick="addRevenue()">
+                            <i class="fas fa-plus"></i> 新增營收
+                        </button>
+                        <button class="btn btn-info" onclick="viewRevenue()">
+                            <i class="fas fa-list"></i> 查看記錄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 叫貨管理模組 -->
+                <div class="module">
+                    <div class="module-header">
+                        <i class="fas fa-truck module-icon"></i>
+                        <h3>叫貨管理</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>管理商品叫貨和配送狀態</p>
+                        <div id="ordering-summary">
+                            <p>📦 待處理訂單: <span style="color: #f39c12; font-weight: bold;">1筆</span></p>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <button class="btn btn-primary" onclick="newOrder()">
+                            <i class="fas fa-plus"></i> 新增訂單
+                        </button>
+                        <button class="btn btn-info" onclick="viewOrders()">
+                            <i class="fas fa-list"></i> 查看記錄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 維修回報模組 -->
+                <div class="module">
+                    <div class="module-header">
+                        <i class="fas fa-tools module-icon"></i>
+                        <h3>維修回報</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>設備故障回報和維修進度追蹤</p>
+                        <div id="maintenance-summary">
+                            <p>🔧 進行中維修: <span style="color: #e74c3c; font-weight: bold;">1項</span></p>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <button class="btn btn-primary" onclick="reportIssue()">
+                            <i class="fas fa-exclamation-triangle"></i> 回報問題
+                        </button>
+                        <button class="btn btn-info" onclick="viewMaintenance()">
+                            <i class="fas fa-list"></i> 查看記錄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 系統狀態模組 -->
+                <div class="module">
+                    <div class="module-header">
+                        <i class="fas fa-server module-icon"></i>
+                        <h3>系統狀態</h3>
+                    </div>
+                    <div class="module-content">
+                        <p>系統健康狀態和運行資訊</p>
+                        <div id="system-status">
+                            <p>✅ 系統狀態: <span style="color: #27ae60; font-weight: bold;">正常運行</span></p>
+                            <p>🌐 運行模式: <span style="color: #3498db; font-weight: bold;">本地測試</span></p>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <button class="btn btn-info" onclick="testSystem()">
+                            <i class="fas fa-check-circle"></i> 系統檢測
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全域變數
+        let currentUser = null;
+        let isLoggedIn = false;
+
+        // 處理登入
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('login-name').value;
+            const idNumber = document.getElementById('login-id-number').value;
+            
+            const result = MockAPI.login(name, idNumber);
+            
+            if (result.success) {
+                currentUser = result.data;
+                isLoggedIn = true;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showMainScreen();
+                showNotification('✅ 登入成功！歡迎使用企業員工管理系統', 'success');
+                loadUserData();
+            } else {
+                showNotification('❌ ' + result.message, 'error');
+            }
+        }
+
+        // 顯示主畫面
+        function showMainScreen() {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-screen').style.display = 'block';
+        }
+
+        // 載入用戶資料
+        function loadUserData() {
+            if (currentUser) {
+                document.getElementById('user-name').textContent = `歡迎，${currentUser.name}`;
+                document.getElementById('employee-id').textContent = currentUser.employeeId;
+                document.getElementById('department').textContent = currentUser.department;
+                document.getElementById('position').textContent = currentUser.position;
+                document.getElementById('store').textContent = currentUser.store;
+            }
+        }
+
+        // 登出
+        function logout() {
+            currentUser = null;
+            isLoggedIn = false;
+            localStorage.removeItem('currentUser');
+            document.getElementById('auth-screen').style.display = 'block';
+            document.getElementById('main-screen').style.display = 'none';
+            showNotification('✅ 已成功登出', 'info');
+        }
+
+        // 功能按鈕處理
+        function clockIn() {
+            const result = MockAPI.submitData('打卡上班', { 
+                employeeId: currentUser.employeeId, 
+                time: new Date().toLocaleTimeString() 
+            });
+            showNotification(result.message, result.success ? 'success' : 'error');
+        }
+
+        function clockOut() {
+            const result = MockAPI.submitData('打卡下班', { 
+                employeeId: currentUser.employeeId, 
+                time: new Date().toLocaleTimeString() 
+            });
+            showNotification(result.message, result.success ? 'success' : 'error');
+        }
+
+        function viewAttendance() {
+            const result = MockAPI.getTodayAttendance(currentUser.employeeId);
+            showNotification(`📊 考勤記錄: 共${result.data.records.length}筆記錄`, 'info');
+        }
+
+        function addRevenue() {
+            const amount = prompt('請輸入營收金額:');
+            if (amount) {
+                const result = MockAPI.submitData('新增營收', { 
+                    employeeId: currentUser.employeeId, 
+                    amount: amount 
+                });
+                showNotification(result.message, result.success ? 'success' : 'error');
+            }
+        }
+
+        function viewRevenue() {
+            const result = MockAPI.getRevenueList(currentUser.employeeId);
+            showNotification(`💰 營收記錄: 共${result.data.records.length}筆記錄`, 'info');
+        }
+
+        function newOrder() {
+            const items = prompt('請輸入訂購商品:');
+            if (items) {
+                const result = MockAPI.submitData('新增訂單', { 
+                    employeeId: currentUser.employeeId, 
+                    items: items 
+                });
+                showNotification(result.message, result.success ? 'success' : 'error');
+            }
+        }
+
+        function viewOrders() {
+            const result = MockAPI.getOrderingList(currentUser.employeeId);
+            showNotification(`📦 叫貨記錄: 共${result.data.records.length}筆記錄`, 'info');
+        }
+
+        function reportIssue() {
+            const issue = prompt('請描述設備問題:');
+            if (issue) {
+                const result = MockAPI.submitData('設備維修', { 
+                    employeeId: currentUser.employeeId, 
+                    issue: issue 
+                });
+                showNotification(result.message, result.success ? 'success' : 'error');
+            }
+        }
+
+        function viewMaintenance() {
+            const result = MockAPI.getMaintenanceList(currentUser.employeeId);
+            showNotification(`🔧 維修記錄: 共${result.data.records.length}筆記錄`, 'info');
+        }
+
+        function testSystem() {
+            const result = MockAPI.health();
+            showNotification(`✅ 系統檢測: ${result.data.status}`, 'success');
+        }
+
+        // 通知系統
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // 頁面載入完成後檢查登入狀態
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                isLoggedIn = true;
+                showMainScreen();
+                loadUserData();
+                showNotification('✅ 歡迎回來！', 'success');
+            }
+        });
+    </script>
+</body>
+</html>

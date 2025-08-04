@@ -1,0 +1,377 @@
+name: Deploy Employee Management System
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PROJECT_ID: employee-management-system
+  GKE_CLUSTER: employee-management-cluster
+  GKE_ZONE: asia-east1-a
+  REGISTRY_HOST: gcr.io
+
+jobs:
+  # 代碼品質檢查
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm ci
+        else
+          echo "No package.json found, skipping npm install"
+        fi
+        
+    - name: Run ESLint (if available)
+      run: |
+        if [ -f package.json ] && npm ls eslint > /dev/null 2>&1; then
+          npm run lint
+        else
+          echo "ESLint not configured, skipping"
+        fi
+        
+    - name: Validate JavaScript syntax
+      run: |
+        find . -name "*.js" -not -path "./node_modules/*" -exec node -c {} \;
+        echo "JavaScript syntax validation completed"
+
+  # 安全性掃描
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run security audit
+      run: |
+        if [ -f package.json ]; then
+          npm audit --audit-level=high
+        else
+          echo "No package.json found, skipping npm audit"
+        fi
+        
+    - name: Scan for secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+
+  # 建置和測試
+  build-and-test:
+    runs-on: ubuntu-latest
+    needs: [code-quality, security-scan]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Validate Google Apps Script files
+      run: |
+        echo "Validating Google Apps Script project structure..."
+        
+        # 檢查必要檔案存在
+        if [ ! -f "backend/gas-main.js" ]; then
+          echo "❌ Missing backend/gas-main.js"
+          exit 1
+        fi
+        
+        if [ ! -f "frontend/index.html" ]; then
+          echo "❌ Missing frontend/index.html"
+          exit 1
+        fi
+        
+        if [ ! -f "database/sheets-schema.md" ]; then
+          echo "❌ Missing database/sheets-schema.md"
+          exit 1
+        fi
+        
+        echo "✅ Project structure validation passed"
+        
+    - name: Test JavaScript modules
+      run: |
+        echo "Testing JavaScript module syntax..."
+        
+        # 測試後端模組
+        for file in backend/modules/*.js; do
+          if [ -f "$file" ]; then
+            node -c "$file"
+            echo "✅ $file syntax OK"
+          fi
+        done
+        
+        # 測試前端模組
+        for file in frontend/js/**/*.js; do
+          if [ -f "$file" ]; then
+            node -c "$file"
+            echo "✅ $file syntax OK"
+          fi
+        done
+        
+    - name: Create deployment package
+      run: |
+        echo "Creating deployment package..."
+        mkdir -p dist/
+        
+        # 複製前端檔案
+        cp -r frontend/* dist/
+        
+        # 複製後端檔案到適當位置
+        mkdir -p dist/backend
+        cp -r backend/* dist/backend/
+        
+        # 複製部署文檔
+        cp -r deployment dist/
+        
+        echo "✅ Deployment package created"
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: deployment-package
+        path: dist/
+        retention-days: 30
+
+  # Google Apps Script 部署 (僅在 main 分支)
+  deploy-gas:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: deployment-package
+        path: dist/
+        
+    - name: Setup clasp (Google Apps Script CLI)
+      run: |
+        npm install -g @google/clasp
+        
+    - name: Authenticate with Google Apps Script
+      run: |
+        echo '${{ secrets.CLASP_CREDENTIALS }}' > ~/.clasprc.json
+        
+    - name: Deploy to Google Apps Script
+      run: |
+        # 設定專案ID
+        echo '{"scriptId":"${{ secrets.GAS_SCRIPT_ID }}","rootDir":"./backend"}' > .clasp.json
+        
+        # 推送代碼
+        clasp push --force
+        
+        # 部署新版本
+        clasp deploy --description "Automated deployment from GitHub Actions - $(date)"
+        
+        echo "✅ Google Apps Script deployment completed"
+
+  # Cloud Run 部署 (進階方案)
+  deploy-cloud-run:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: cloud-production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        
+    - name: Configure Docker
+      run: gcloud --quiet auth configure-docker
+      
+    - name: Build Docker image
+      run: |
+        docker build -t ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }} .
+        
+    - name: Run security scan on image
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }}
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: Push Docker image
+      run: |
+        docker push ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }}
+        
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy employee-management \
+          --image ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }} \
+          --region asia-east1 \
+          --platform managed \
+          --allow-unauthenticated \
+          --set-env-vars="NODE_ENV=production" \
+          --set-env-vars="TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" \
+          --memory=512Mi \
+          --cpu=1 \
+          --max-instances=10 \
+          --timeout=300
+          
+        echo "✅ Cloud Run deployment completed"
+
+  # Kubernetes 部署 (企業方案)
+  deploy-kubernetes:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: k8s-production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        
+    - name: Get GKE credentials
+      run: |
+        gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
+        
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+        
+    - name: Build and push Docker image
+      run: |
+        gcloud --quiet auth configure-docker
+        docker build -t ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }} .
+        docker push ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }}
+        
+    - name: Deploy to Kubernetes
+      run: |
+        # 更新 deployment 映像
+        kubectl set image deployment/employee-management \
+          employee-management=${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management:${{ github.sha }}
+          
+        # 等待 rollout 完成
+        kubectl rollout status deployment/employee-management --timeout=300s
+        
+        echo "✅ Kubernetes deployment completed"
+
+  # 部署測試
+  deployment-test:
+    runs-on: ubuntu-latest
+    needs: [deploy-gas]
+    if: always() && (needs.deploy-gas.result == 'success' || needs.deploy-cloud-run.result == 'success' || needs.deploy-kubernetes.result == 'success')
+    
+    steps:
+    - name: Test deployment endpoints
+      run: |
+        echo "Testing deployment endpoints..."
+        
+        # 如果有部署 URL，測試可用性
+        if [ -n "${{ secrets.DEPLOYMENT_URL }}" ]; then
+          response=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.DEPLOYMENT_URL }}")
+          if [ $response -eq 200 ]; then
+            echo "✅ Deployment endpoint is responding"
+          else
+            echo "❌ Deployment endpoint returned HTTP $response"
+            exit 1
+          fi
+        else
+          echo "ℹ️  No deployment URL configured for testing"
+        fi
+
+  # 通知部署結果
+  notify-deployment:
+    runs-on: ubuntu-latest
+    needs: [deploy-gas, deploy-cloud-run, deploy-kubernetes, deployment-test]
+    if: always()
+    
+    steps:
+    - name: Send Telegram notification
+      if: github.ref == 'refs/heads/main'
+      run: |
+        # 確定部署狀態
+        if [ "${{ needs.deploy-gas.result }}" == "success" ] || \
+           [ "${{ needs.deploy-cloud-run.result }}" == "success" ] || \
+           [ "${{ needs.deploy-kubernetes.result }}" == "success" ]; then
+          STATUS="✅ 成功"
+          MESSAGE="🚀 企業員工管理系統部署成功！
+
+📋 部署詳情:
+• 提交: ${{ github.sha }}
+• 分支: ${{ github.ref_name }}
+• 提交者: ${{ github.actor }}
+• 時間: $(date '+%Y-%m-%d %H:%M:%S')
+
+🔗 部署環境:
+${{ needs.deploy-gas.result == 'success' && '• Google Apps Script: 已部署' || '' }}
+${{ needs.deploy-cloud-run.result == 'success' && '• Cloud Run: 已部署' || '' }}
+${{ needs.deploy-kubernetes.result == 'success' && '• Kubernetes: 已部署' || '' }}
+
+✅ 系統已上線並可供使用"
+        else
+          STATUS="❌ 失敗"
+          MESSAGE="🚨 企業員工管理系統部署失敗！
+
+📋 失敗詳情:
+• 提交: ${{ github.sha }}
+• 分支: ${{ github.ref_name }}
+• 錯誤時間: $(date '+%Y-%m-%d %H:%M:%S')
+
+請檢查 GitHub Actions 日誌以了解詳細錯誤資訊。"
+        fi
+        
+        # 發送 Telegram 通知
+        if [ -n "${{ secrets.TELEGRAM_BOT_TOKEN }}" ] && [ -n "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d "text=${MESSAGE}" \
+            -d "parse_mode=HTML"
+          echo "📱 Telegram notification sent: $STATUS"
+        else
+          echo "ℹ️  Telegram credentials not configured"
+        fi
+
+  # 清理舊版本 (可選)
+  cleanup:
+    runs-on: ubuntu-latest
+    needs: [notify-deployment]
+    if: github.ref == 'refs/heads/main' && success()
+    
+    steps:
+    - name: Cleanup old container images
+      run: |
+        echo "Cleaning up old container images..."
+        
+        # 保留最近 10 個版本
+        gcloud container images list-tags ${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management \
+          --limit=999999 --sort-by=TIMESTAMP \
+          --format="get(digest)" | tail -n +11 | while read digest; do
+          gcloud container images delete "${{ env.REGISTRY_HOST }}/${{ env.PROJECT_ID }}/employee-management@${digest}" --force-delete-tags --quiet
+        done
+        
+        echo "✅ Cleanup completed"

@@ -1,0 +1,221 @@
+{
+  "employees": [
+    {
+      "employeeId": "EMP001",
+      "name": "王小明",
+      "idNumber": "A123456789",
+      "birthDate": "1990-01-01",
+      "gender": "男",
+      "drivingLicense": "普通重機,汽車",
+      "phone": "0912345678",
+      "address": "桃園市中壢區中正路100號",
+      "hireDate": "2025-01-01",
+      "position": "店員",
+      "store": "內壢店",
+      "salary": 30000,
+      "status": "在職",
+      "permission": "員工",
+      "submitTime": "2025-08-02T10:30:00Z",
+      "lastUpdate": "2025-08-02T15:20:00Z",
+      "notes": "表現優良"
+    },
+    {
+      "employeeId": "EMP002",
+      "name": "李小華",
+      "idNumber": "B987654321",
+      "birthDate": "1985-05-15",
+      "gender": "女",
+      "drivingLicense": "汽車",
+      "phone": "0923456789",
+      "address": "桃園市桃園區民生路200號",
+      "hireDate": "2024-06-01",
+      "position": "副店長",
+      "store": "桃園店",
+      "salary": 45000,
+      "status": "在職",
+      "permission": "主管",
+      "submitTime": "2024-06-01T09:00:00Z",
+      "lastUpdate": "2025-07-15T14:30:00Z",
+      "notes": "管理能力佳"
+    }
+  ],
+  "attendanceLog": [
+    {
+      "recordId": "ATT202508020001",
+      "employeeId": "EMP001",
+      "employeeName": "王小明",
+      "attendanceTime": "2025-08-02T09:00:15Z",
+      "type": "上班",
+      "storeName": "內壢店",
+      "gpsCoordinates": "24.9748412,121.2556713",
+      "distanceToStore": 5.2,
+      "deviceFingerprint": "eyJ1c2VyQWdlbnQiOiJNb3ppbGxhLzUuMC4uLiJ9",
+      "ipAddress": "192.168.1.100",
+      "status": "正常",
+      "lateMinutes": 0,
+      "anomalyReason": "",
+      "photoPath": "https://drive.google.com/file/d/1234567890/view",
+      "submitTime": "2025-08-02T09:00:16Z",
+      "notes": "正常上班"
+    }
+  ],
+  "revenueLog": [
+    {
+      "recordId": "REV202508020001",
+      "employeeId": "EMP001",
+      "employeeName": "王小明",
+      "businessDate": "2025-08-02",
+      "storeName": "內壢店",
+      "orderCount": 25,
+      "fieldOrderRevenue": 12500,
+      "deliveryRevenue": 3500,
+      "otherRevenue": 500,
+      "totalRevenue": 16500,
+      "materialCost": 5000,
+      "otherExpense": 200,
+      "totalExpense": 5200,
+      "netIncome": 11300,
+      "bonusType": "平日獎金",
+      "calculatedBonus": 1050,
+      "averageOrderValue": 500,
+      "submitTime": "2025-08-02T22:30:00Z",
+      "notes": "生意不錯"
+    }
+  ],
+  "systemSettings": {
+    "stores": [
+      {
+        "id": "STORE001",
+        "name": "內壢店",
+        "address": "桃園市中壢區中正路50號",
+        "latitude": 24.9748412,
+        "longitude": 121.2556713,
+        "radius": 100,
+        "phone": "03-4567890",
+        "manager": "EMP002"
+      },
+      {
+        "id": "STORE002", 
+        "name": "桃園店",
+        "address": "桃園市桃園區民生路150號",
+        "latitude": 24.9880023,
+        "longitude": 121.2812737,
+        "radius": 100,
+        "phone": "03-3334455",
+        "manager": "EMP003"
+      }
+    ],
+    "bonusSettings": {
+      "weekdayThreshold": 13000,
+      "weekdayRate": 0.30,
+      "holidayThreshold": 0,
+      "holidayRate": 0.38
+    },
+    "attendanceSettings": {
+      "allowedRadius": 100,
+      "lateThreshold": 10,
+      "workingHours": {
+        "morning": "09:00",
+        "evening": "21:00"
+      }
+    },
+    "telegram": {
+      "botToken": "7659930552:AAF_jF1rAXFnjFO176-9X5fKfBwbrko8BNc",
+      "bossGroupId": "-1002658082392",
+      "employeeGroupId": "-1002658082392"
+    }
+  },
+  "positions": [
+    {
+      "positionId": "POS001",
+      "positionName": "店員",
+      "level": 1,
+      "salary": 30000,
+      "bonusMultiplier": 1.0,
+      "totalQuota": 20,
+      "requiredDays": 0,
+      "failureCooldown": 30,
+      "approvalRatio": 0.5,
+      "votingDays": 7,
+      "penalties": {"demote_days": 0},
+      "notes": "基層員工"
+    },
+    {
+      "positionId": "POS002",
+      "positionName": "資深店員",
+      "level": 2,
+      "salary": 35000,
+      "bonusMultiplier": 1.1,
+      "totalQuota": 10,
+      "requiredDays": 90,
+      "failureCooldown": 60,
+      "approvalRatio": 0.6,
+      "votingDays": 7,
+      "penalties": {"demote_days": 30},
+      "notes": "經驗豐富的店員"
+    },
+    {
+      "positionId": "POS003",
+      "positionName": "副店長",
+      "level": 3,
+      "salary": 45000,
+      "bonusMultiplier": 1.2,
+      "totalQuota": 5,
+      "requiredDays": 180,
+      "failureCooldown": 90,
+      "approvalRatio": 0.7,
+      "votingDays": 7,
+      "penalties": {"demote_days": 60},
+      "notes": "分店副主管"
+    },
+    {
+      "positionId": "POS004",
+      "positionName": "店長",
+      "level": 4,
+      "salary": 60000,
+      "bonusMultiplier": 1.5,
+      "totalQuota": 2,
+      "requiredDays": 365,
+      "failureCooldown": 180,
+      "approvalRatio": 0.8,
+      "votingDays": 14,
+      "penalties": {"demote_days": 90},
+      "notes": "分店主管"
+    }
+  ],
+  "products": [
+    {
+      "id": "PROD001",
+      "name": "雞腿",
+      "category": "主料",
+      "unit": "支",
+      "costPrice": 35,
+      "sellPrice": 80,
+      "supplier": "ABC食材行",
+      "alertDays": 7,
+      "minStock": 50
+    },
+    {
+      "id": "PROD002",
+      "name": "薯條",
+      "category": "配菜",
+      "unit": "包",
+      "costPrice": 15,
+      "sellPrice": 40,
+      "supplier": "XYZ冷凍食品",
+      "alertDays": 10,
+      "minStock": 100
+    },
+    {
+      "id": "PROD003",
+      "name": "可樂",
+      "category": "飲料",
+      "unit": "瓶",
+      "costPrice": 8,
+      "sellPrice": 25,
+      "supplier": "飲料批發商",
+      "alertDays": 14,
+      "minStock": 200
+    }
+  ]
+}

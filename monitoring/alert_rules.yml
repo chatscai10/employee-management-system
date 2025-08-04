@@ -1,0 +1,139 @@
+# Prometheus 警告規則配置
+# 企業員工管理系統監控警告
+
+groups:
+  - name: employee_management_alerts
+    rules:
+      # 應用程式可用性警告
+      - alert: ApplicationDown
+        expr: up{job="employee-management-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "企業員工管理系統無法訪問"
+          description: "應用程式已停止回應超過1分鐘"
+
+      # 高錯誤率警告
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "錯誤率過高"
+          description: "5xx錯誤率超過10%，持續2分鐘"
+
+      # 回應時間過長警告
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "回應時間過長"
+          description: "95%的請求回應時間超過2秒"
+
+      # 記憶體使用過高警告
+      - alert: HighMemoryUsage
+        expr: (process_resident_memory_bytes / 1024 / 1024) > 256
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "記憶體使用過高"
+          description: "記憶體使用超過256MB"
+
+      # CPU 使用過高警告
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[5m]) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU使用過高"
+          description: "CPU使用率超過80%"
+
+      # Google Apps Script 配額警告
+      - alert: GASQuotaExceeded
+        expr: gas_quota_usage_percent > 90
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Google Apps Script 配額即將耗盡"
+          description: "GAS 每日配額使用超過90%"
+
+      # Telegram Bot 連接失敗警告
+      - alert: TelegramBotDown
+        expr: telegram_bot_status != 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Telegram Bot 連接失敗"
+          description: "Telegram Bot 無法正常發送通知"
+
+      # 資料庫連接失敗警告
+      - alert: DatabaseConnectionFailed
+        expr: database_connection_status != 1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "資料庫連接失敗"
+          description: "Google Sheets 資料庫連接失敗"
+
+  - name: business_logic_alerts
+    rules:
+      # 員工打卡異常警告
+      - alert: AbnormalAttendancePattern
+        expr: attendance_anomaly_score > 0.8
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "打卡行為異常"
+          description: "檢測到可能的異常打卡行為"
+
+      # 營收數據異常警告
+      - alert: RevenueAnomalyDetected
+        expr: abs(daily_revenue - avg_over_time(daily_revenue[7d])) / avg_over_time(daily_revenue[7d]) > 0.5
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "營收數據異常"
+          description: "今日營收與7日平均相差超過50%"
+
+      # 大量員工同時登入警告
+      - alert: MassiveLoginDetected
+        expr: rate(login_attempts_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "檢測到大量登入行為"
+          description: "5分鐘內登入嘗試超過10次"
+
+  - name: infrastructure_alerts
+    rules:
+      # 磁碟空間不足警告
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 < 10
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "磁碟空間不足"
+          description: "可用磁碟空間低於10%"
+
+      # 網路連接問題警告
+      - alert: NetworkLatencyHigh
+        expr: probe_duration_seconds > 5
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "網路延遲過高"
+          description: "網路回應時間超過5秒"

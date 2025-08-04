@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-08-04T05:13:47.834Z",
+  "serviceUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+  "region": "europe-west1",
+  "status": "BUILD_FAILED_FIXES_READY",
+  "commonErrors": [
+    {
+      "error": "Package.json 缺失或格式錯誤",
+      "solution": "確保 package.json 格式正確且包含必要依賴",
+      "priority": "high"
+    },
+    {
+      "error": "Node.js 版本不匹配",
+      "solution": "在 package.json 中指定正確的 Node.js 版本",
+      "priority": "high"
+    },
+    {
+      "error": "Dependencies 安裝失敗",
+      "solution": "檢查依賴是否存在且版本正確",
+      "priority": "medium"
+    },
+    {
+      "error": "Dockerfile 配置問題",
+      "solution": "修復 Dockerfile 語法和路徑",
+      "priority": "medium"
+    },
+    {
+      "error": "啟動腳本錯誤",
+      "solution": "確保啟動命令正確",
+      "priority": "high"
+    }
+  ],
+  "fixesCreated": [
+    "package-fixed.json - 修復版依賴配置",
+    "Dockerfile-fixed - 修復版容器配置",
+    "fix-cloud-build.sh - 自動修復腳本",
+    "CLOUD-BUILD-FIX-GUIDE.md - 詳細修復指南"
+  ],
+  "nextSteps": [
+    "🔧 應用修復檔案 (cp package-fixed.json package.json)",
+    "📤 推送到 GitHub (git add, commit, push)",
+    "🚀 觸發重新構建 (Cloud Console 或 Cloud Shell)",
+    "✅ 驗證部署結果 (測試 API 端點)",
+    "🎉 確認系統完全正常運行"
+  ],
+  "expectedResult": {
+    "buildStatus": "SUCCESS",
+    "serviceStatus": "ACTIVE",
+    "allEndpointsWorking": true,
+    "performanceOptimal": true
+  }
+}

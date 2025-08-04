@@ -1,0 +1,18 @@
+{
+  "projectId": "adept-arbor-467807-t9",
+  "serviceName": "employee-management-system",
+  "region": "europe-west1",
+  "settings": {
+    "memory": "1Gi",
+    "cpu": "1",
+    "timeout": "300s",
+    "concurrency": 80,
+    "minInstances": 0,
+    "maxInstances": 10,
+    "allowUnauthenticated": true
+  },
+  "environment": {
+    "NODE_ENV": "production",
+    "PORT": "8080"
+  }
+}

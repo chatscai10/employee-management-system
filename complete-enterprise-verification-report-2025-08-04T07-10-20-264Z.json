@@ -1,0 +1,133 @@
+{
+  "timestamp": "2025-08-04T07:10:20.264Z",
+  "systemStatus": "SYSTEM_DEPLOYMENT_FAILED",
+  "statusMessage": "❌ 系統部署失敗或功能嚴重缺失",
+  "successRate": 11,
+  "confidence": "VERY_LOW",
+  "v4SystemDetected": false,
+  "enterpriseFeaturesFound": false,
+  "detailedResults": {
+    "authentication": [
+      {
+        "account": "admin",
+        "role": "admin",
+        "success": false,
+        "message": "登入失敗 - HTTP 404",
+        "token": null,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T07:10:19.657Z"
+      },
+      {
+        "account": "manager",
+        "role": "manager",
+        "success": false,
+        "message": "登入失敗 - HTTP 404",
+        "token": null,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T07:10:19.957Z"
+      },
+      {
+        "account": "john.doe",
+        "role": "employee",
+        "success": false,
+        "message": "登入失敗 - HTTP 404",
+        "token": null,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T07:10:20.263Z"
+      }
+    ],
+    "employees": [],
+    "attendance": [],
+    "inventory": [],
+    "maintenance": [],
+    "system": [
+      {
+        "endpoint": "企業主頁",
+        "path": "/",
+        "method": "GET",
+        "success": false,
+        "statusCode": 200,
+        "contentCheck": false,
+        "isV4System": false,
+        "analysis": "⚠️ 內容驗證失敗",
+        "responseSize": 1731,
+        "timestamp": "2025-08-04T07:10:17.807Z"
+      },
+      {
+        "endpoint": "系統健康檢查",
+        "path": "/health",
+        "method": "GET",
+        "success": true,
+        "statusCode": 200,
+        "contentCheck": true,
+        "isV4System": false,
+        "analysis": "✅ 內容驗證通過",
+        "responseSize": 77,
+        "timestamp": "2025-08-04T07:10:18.116Z"
+      },
+      {
+        "endpoint": "登入頁面",
+        "path": "/login",
+        "method": "GET",
+        "success": false,
+        "statusCode": 404,
+        "contentCheck": false,
+        "isV4System": false,
+        "analysis": "❌ HTTP 404",
+        "responseSize": 35,
+        "timestamp": "2025-08-04T07:10:18.413Z"
+      },
+      {
+        "endpoint": "管理主控台",
+        "path": "/dashboard",
+        "method": "GET",
+        "success": false,
+        "statusCode": 200,
+        "contentCheck": false,
+        "isV4System": false,
+        "analysis": "⚠️ 內容驗證失敗",
+        "responseSize": 8719,
+        "timestamp": "2025-08-04T07:10:18.775Z"
+      },
+      {
+        "endpoint": "系統狀態API",
+        "path": "/api/system/status",
+        "method": "GET",
+        "success": false,
+        "statusCode": 404,
+        "contentCheck": false,
+        "isV4System": false,
+        "analysis": "❌ HTTP 404",
+        "responseSize": 35,
+        "timestamp": "2025-08-04T07:10:19.064Z"
+      },
+      {
+        "endpoint": "API文檔",
+        "path": "/api/docs",
+        "method": "GET",
+        "success": false,
+        "statusCode": 404,
+        "contentCheck": false,
+        "isV4System": false,
+        "analysis": "❌ HTTP 404",
+        "responseSize": 35,
+        "timestamp": "2025-08-04T07:10:19.367Z"
+      }
+    ],
+    "frontend": []
+  },
+  "summary": {
+    "authentication": {
+      "success": 0,
+      "total": 3
+    },
+    "systemEndpoints": {
+      "success": 1,
+      "total": 6
+    },
+    "enterpriseFeatures": {
+      "success": 0,
+      "total": 0
+    }
+  }
+}

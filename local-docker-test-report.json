@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-08-03T02:53:50.921Z",
+  "test_type": "local_docker_deployment",
+  "results": {
+    "dockerAvailable": true,
+    "imageBuilt": false,
+    "containerRun": false,
+    "healthCheck": false,
+    "apiTest": false
+  },
+  "summary": {
+    "total_tests": 5,
+    "passed_tests": 1,
+    "success_rate": 20
+  },
+  "recommendations": [
+    "檢查 Dockerfile 配置和依賴",
+    "檢查容器啟動配置和端口設定",
+    "檢查應用程式健康檢查端點",
+    "檢查 API 端點配置和路由"
+  ]
+}

@@ -1,0 +1,149 @@
+# AlertManager 配置
+# 企業員工管理系統警告通知設定
+
+global:
+  # SMTP 配置 (郵件通知)
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'alerts@yourcompany.com'
+  smtp_auth_username: 'alerts@yourcompany.com'
+  smtp_auth_password: 'your-app-password'
+
+# 模板配置
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# 路由配置
+route:
+  group_by: ['alertname', 'severity']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'web.hook'
+  routes:
+    # 緊急警告 - 立即通知
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 0s
+      repeat_interval: 5m
+
+    # 一般警告 - 批次通知
+    - match:
+        severity: warning
+      receiver: 'warning-alerts'
+      group_interval: 5m
+      repeat_interval: 30m
+
+# 通知接收器配置
+receivers:
+  # 預設接收器
+  - name: 'web.hook'
+    webhook_configs:
+      - url: 'http://localhost:8080/api/webhook/alerts'
+        send_resolved: true
+
+  # 緊急警告接收器
+  - name: 'critical-alerts'
+    # Telegram 通知
+    webhook_configs:
+      - url: 'https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage'
+        send_resolved: true
+        http_config:
+          method: POST
+        title: '🚨 緊急警告'
+        text: |
+          🚨 **緊急警告**
+          
+          **警告名稱**: {{ .GroupLabels.alertname }}
+          **嚴重程度**: {{ .GroupLabels.severity }}
+          **觸發時間**: {{ .CommonAnnotations.timestamp }}
+          
+          **詳細說明**:
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          - {{ .Annotations.description }}
+          {{ end }}
+          
+          **需要立即處理！**
+
+    # 郵件通知
+    email_configs:
+      - to: 'admin@yourcompany.com'
+        subject: '🚨 企業員工管理系統緊急警告'
+        body: |
+          緊急警告通知
+          
+          警告名稱: {{ .GroupLabels.alertname }}
+          嚴重程度: {{ .GroupLabels.severity }}
+          觸發時間: {{ .CommonAnnotations.timestamp }}
+          
+          詳細資訊:
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          - {{ .Annotations.description }}
+          {{ end }}
+          
+          請立即檢查系統狀態並進行處理。
+
+    # SMS 通知 (透過第三方服務)
+    webhook_configs:
+      - url: 'https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID/Messages.json'
+        send_resolved: false
+        http_config:
+          method: POST
+          basic_auth:
+            username: 'YOUR_ACCOUNT_SID'
+            password: 'YOUR_AUTH_TOKEN'
+        title: '緊急警告'
+        text: |
+          企業員工管理系統緊急警告: {{ .GroupLabels.alertname }}
+
+  # 一般警告接收器
+  - name: 'warning-alerts'
+    # Telegram 通知
+    webhook_configs:
+      - url: 'https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage'
+        send_resolved: true
+        title: '⚠️ 系統警告'
+        text: |
+          ⚠️ **系統警告**
+          
+          **警告名稱**: {{ .GroupLabels.alertname }}
+          **嚴重程度**: {{ .GroupLabels.severity }}
+          **觸發時間**: {{ .CommonAnnotations.timestamp }}
+          
+          **詳細說明**:
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          {{ end }}
+
+    # 郵件通知
+    email_configs:
+      - to: 'team@yourcompany.com'
+        subject: '⚠️ 企業員工管理系統警告'
+        body: |
+          系統警告通知
+          
+          警告名稱: {{ .GroupLabels.alertname }}
+          嚴重程度: {{ .GroupLabels.severity }}
+          觸發時間: {{ .CommonAnnotations.timestamp }}
+          
+          請關注系統狀態。
+
+# 抑制規則 (避免重複警告)
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']
+
+# 靜音配置
+silences:
+  # 維護期間靜音 (範例)
+  - matcher:
+      name: "alertname"
+      value: ".*"
+    startsAt: "2024-01-01T02:00:00Z"
+    endsAt: "2024-01-01T04:00:00Z"
+    comment: "定期維護期間"

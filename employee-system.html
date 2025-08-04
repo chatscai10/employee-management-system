@@ -1,0 +1,4452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>員工系統 - 企業管理</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
+            min-height: 100vh;
+        }
+
+        /* 頂部導航 */
+        .header {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-details h2 {
+            color: var(--text-color);
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .user-details p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* 功能卡片網格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* 內容區域 */
+        .content-section {
+            display: none;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .section-content {
+            padding: 20px;
+        }
+
+        /* 表單樣式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* 按鈕樣式 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-height: 48px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .btn-full {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* GPS和狀態指示 */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .status-success {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .status-warning {
+            background: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .status-error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* 照片上傳區域 */
+        .photo-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .photo-upload-area:hover {
+            border-color: var(--primary-color);
+            background: #f8fafc;
+        }
+
+        .photo-upload-area.dragover {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .photo-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* 數據統計卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* 記錄列表 */
+        .record-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* 叫貨明細確認樣式 */
+        .ordering-summary {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .summary-placeholder {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .summary-item {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-item-info {
+            flex: 1;
+        }
+
+        .summary-item-name {
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 2px;
+        }
+
+        .summary-item-details {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .summary-item-quantity {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* 品項異常回報樣式 */
+        .issue-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .issue-modal-content {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .issue-modal-header {
+            background: linear-gradient(90deg, var(--warning-color), #f97316);
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            position: relative;
+        }
+
+        .issue-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .issue-modal-body {
+            padding: 20px;
+        }
+
+        .issue-type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .issue-type-card {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .issue-type-card.selected {
+            border-color: var(--warning-color);
+            background: #fefce8;
+        }
+
+        .issue-type-card:hover {
+            border-color: var(--warning-color);
+        }
+
+        .issue-type-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--warning-color);
+        }
+
+        .issue-items-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .issue-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .issue-item:hover {
+            background: var(--background-color);
+        }
+
+        .issue-item.selected {
+            background: #fef3e2;
+            border: 1px solid var(--warning-color);
+        }
+
+        .summary-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .summary-actions .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .record-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .record-item:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .record-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .record-title {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .record-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .record-details {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            /* 品項異常回報響應式調整 */
+            .issue-modal {
+                padding: 10px;
+            }
+
+            .issue-modal-content {
+                max-height: 95vh;
+                margin: 0;
+            }
+
+            .issue-type-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .issue-type-card {
+                padding: 12px;
+            }
+
+            .issue-type-icon {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+
+            .summary-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .summary-actions .btn {
+                min-width: unset;
+                width: 100%;
+            }
+
+            /* 叫貨記錄按鈕響應式 */
+            .record-item > div:last-child {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .record-item > div:last-child .btn {
+                flex: none !important;
+                min-width: unset !important;
+                width: 100% !important;
+            }
+        }
+
+        /* 隱藏class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 載入動畫 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 主頁面顯示 */
+        .main-page {
+            display: block;
+        }
+
+        .main-page.hidden {
+            display: none;
+        }
+
+        /* ==================== 智能排班系統專用樣式 ==================== */
+        
+        /* 排班狀態面板 */
+        .scheduling-status-panel {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .time-counter {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-info small {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* 規則徽章 */
+        .rule-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .rule-badge.weekend {
+            background: #f59e0b;
+        }
+
+        /* 智能月曆容器 */
+        .smart-calendar-container {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        /* 月曆標題與導航 */
+        .calendar-header {
+            background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+            color: white;
+            padding: 20px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .calendar-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* 月曆圖例 */
+        .calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .legend-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        .legend-item.available::before { background: #10b981; }
+        .legend-item.selected::before { background: #3b82f6; }
+        .legend-item.weekend::before { background: #f59e0b; }
+        .legend-item.restricted::before { background: #ef4444; }
+        .legend-item.holiday::before { background: #8b5cf6; }
+        .legend-item.occupied::before { background: #6b7280; }
+
+        /* 智能月曆 */
+        .smart-calendar {
+            background: white;
+        }
+
+        .weekday-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .weekday {
+            padding: 15px 5px;
+            text-align: center;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .weekday.weekend {
+            color: #f59e0b;
+            background: #fef3c7;
+        }
+
+        /* 日期網格 */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+        }
+
+        .calendar-day {
+            background: white;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calendar-day:hover:not(.disabled) {
+            background: #f0f9ff;
+            transform: scale(1.05);
+        }
+
+        /* 日期狀態樣式 */
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day.weekend {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .calendar-day.weekend.selected {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+            color: white;
+        }
+
+        .calendar-day.restricted {
+            background: #fef2f2;
+            color: #ef4444;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.holiday {
+            background: #f3f4f6;
+            color: #8b5cf6;
+            position: relative;
+        }
+
+        .calendar-day.holiday::after {
+            content: '公';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 8px;
+            background: #8b5cf6;
+            color: white;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        .calendar-day.occupied {
+            background: #f9fafb;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.disabled {
+            background: #f9fafb;
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        /* 統計面板增強 */
+        .scheduling-stats-panel {
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .stat-card.primary {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-card.weekend {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .stat-card.info {
+            border-left: 4px solid #06b6d4;
+        }
+
+        .stat-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            opacity: 0.7;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .stat-limit {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        /* 規則驗證面板 */
+        .rule-validation-panel {
+            background: linear-gradient(135deg, #fef7ff, #f3e8ff);
+            border: 1px solid #d8b4fe;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .validation-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .validation-header i {
+            margin-right: 8px;
+        }
+
+        .validation-results {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .validation-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .validation-item.success {
+            background: #f0fdf4;
+            color: #166534;
+            border-left: 4px solid #22c55e;
+        }
+
+        .validation-item.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border-left: 4px solid #ef4444;
+        }
+
+        .validation-item.warning {
+            background: #fffbeb;
+            color: #d97706;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .validation-item i {
+            margin-right: 8px;
+        }
+
+        /* 提交按鈕增強 */
+        .schedule-submit {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-submit:disabled {
+            background: #d1d5db;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .btn-hint {
+            display: block;
+            font-size: 11px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        /* 記錄管理增強 */
+        .record-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .enhanced-record-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .record-item.loading {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+        }
+
+        /* 手機端優化 */
+        @media (max-width: 768px) {
+            .calendar-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .calendar-legend {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .calendar-day {
+                min-height: 45px;
+                padding: 8px 3px;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-icon {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+            
+            .stat-number {
+                font-size: 24px;
+            }
+            
+            .record-controls {
+                flex-direction: column;
+            }
+        }
+        
+        /* 記錄管理樣式 */
+        .record-type-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .filter-btn {
+            background: var(--background-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .filter-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .record-details {
+            background: var(--background-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .record-details h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+        
+        .record-details p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .record-item {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .record-item.can-edit {
+            border-left-color: var(--success-color);
+        }
+        
+        .record-item.edited {
+            border-left-color: var(--warning-color);
+        }
+        
+        .record-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .time-remaining {
+            font-size: 12px;
+            color: var(--warning-color);
+            font-weight: bold;
+        }
+        
+        .record-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn.edit {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .action-btn.void {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .action-btn:disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 主頁面 -->
+        <div id="mainPage" class="main-page">
+            <!-- 用戶資訊頭部 -->
+            <div class="header">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">員</div>
+                    <div class="user-details">
+                        <h2 id="userName">載入中...</h2>
+                        <p id="userStore">載入中...</p>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> 登出
+                    </button>
+                </div>
+            </div>
+
+            <!-- 功能卡片網格 -->
+            <div class="features-grid">
+                <div class="feature-card" onclick="showSection('attendance')">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="feature-title">考勤打卡</div>
+                    <div class="feature-desc">GPS定位打卡<br>考勤記錄查詢</div>
+                </div>
+
+                <div class="feature-card" onclick="showSection('revenue')">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="feature-title">營收管理</div>
+                    <div class="feature-desc">每日營收記錄<br>獎金計算查詢</div>
+                </div>
+
+                <div class="feature-card" onclick="showSection('ordering')">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="feature-title">叫貨系統</div>
+                    <div class="feature-desc">品項選擇下單<br>叫貨記錄查詢</div>
+                </div>
+
+                <div class="feature-card" onclick="showSection('maintenance')">
+                    <div class="feature-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <div class="feature-title">維修申請</div>
+                    <div class="feature-desc">設備問題回報<br>維修狀態查詢</div>
+                </div>
+
+                <div class="feature-card" onclick="showSection('scheduling')">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="feature-title">排班系統</div>
+                    <div class="feature-desc">月曆式排班<br>休假申請</div>
+                </div>
+
+                <div class="feature-card" onclick="showSection('voting')">
+                    <div class="feature-icon">
+                        <i class="fas fa-vote-yea"></i>
+                    </div>
+                    <div class="feature-title">升遷投票</div>
+                    <div class="feature-desc">投票發起參與<br>投票結果查詢</div>
+                </div>
+
+                <div class="feature-card" onclick="showSection('record-management')">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="feature-title">記錄管理</div>
+                    <div class="feature-desc">記錄編輯作廢<br>操作歷史查詢</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 考勤打卡頁面 -->
+        <div id="attendance" class="content-section">
+            <div class="section-header">
+                <div class="section-title">考勤打卡</div>
+                <div class="section-subtitle">GPS定位打卡系統</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <div id="locationStatus" class="status-indicator status-warning">
+                    <i class="fas fa-location-dot"></i>
+                    <span>正在獲取位置資訊...</span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="workDays">0</div>
+                        <div class="stat-label">本月出勤天數</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="lateMinutes">0</div>
+                        <div class="stat-label">本月遲到分鐘</div>
+                    </div>
+                </div>
+
+                <button id="clockBtn" class="btn btn-primary btn-full" onclick="clockInOut()" disabled>
+                    <i class="fas fa-clock"></i>
+                    <span id="clockBtnText">獲取位置中...</span>
+                </button>
+
+                <div class="form-group">
+                    <label class="form-label">今日考勤記錄</label>
+                    <div id="todayAttendance" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 營收管理頁面 -->
+        <div id="revenue" class="content-section">
+            <div class="section-header">
+                <div class="section-title">營收管理</div>
+                <div class="section-subtitle">每日營收記錄與獎金計算</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <form id="revenueForm">
+                    <div class="form-group">
+                        <label class="form-label">選擇分店</label>
+                        <select id="storeSelector" class="form-select" required onchange="loadRevenueCategories()">
+                            <option value="">請選擇分店</option>
+                            <!-- 動態載入分店選項 -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">獎金類別</label>
+                        <select id="bonusType" class="form-select" required>
+                            <option value="">請選擇獎金類別</option>
+                            <option value="平日獎金">平日獎金</option>
+                            <option value="假日獎金">假日獎金</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">訂單數量</label>
+                        <input type="number" id="orderCount" class="form-input" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">收入項目 (預設項目)</label>
+                        <div id="defaultIncomeItems">
+                            <!-- 動態載入預設收入項目 -->
+                        </div>
+                        <div style="margin-top: 10px; color: var(--text-secondary); font-size: 12px;">
+                            <i class="fas fa-info-circle"></i> 請為每個收入項目輸入對應金額
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">支出項目</label>
+                        <div id="expenseItems">
+                            <div class="expense-item" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <input type="text" name="expenseCategory" class="form-input" placeholder="支出類別" style="flex: 1;">
+                                <input type="number" name="expenseAmount" class="form-input" placeholder="金額" min="0" style="flex: 1;">
+                                <button type="button" class="btn btn-danger" onclick="removeExpenseItem(this)" style="width: auto; padding: 8px;">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-full" onclick="addExpenseItem()">
+                            <i class="fas fa-plus"></i> 新增支出項目
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">收據照片</label>
+                        <div class="photo-upload-area" onclick="document.getElementById('revenuePhotos').click()">
+                            <i class="fas fa-camera" style="font-size: 32px; color: var(--text-secondary); margin-bottom: 10px;"></i>
+                            <div>點擊上傳收據照片</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">支援 JPG, PNG 格式</div>
+                        </div>
+                        <input type="file" id="revenuePhotos" accept="image/*" multiple hidden onchange="handlePhotoUpload(this, 'revenuePreview')">
+                        <div id="revenuePreview" class="photo-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">備註</label>
+                        <textarea id="revenueNotes" class="form-textarea" placeholder="營收相關備註..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-save"></i> 提交營收記錄
+                    </button>
+                </form>
+
+                <div class="form-group">
+                    <label class="form-label">營收記錄</label>
+                    <div id="revenueRecords" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 叫貨系統頁面 -->
+        <div id="ordering" class="content-section">
+            <div class="section-header">
+                <div class="section-title">叫貨系統</div>
+                <div class="section-subtitle">品項選擇與叫貨管理</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <form id="orderingForm">
+                    <div class="form-group">
+                        <label class="form-label">選擇分店</label>
+                        <select id="orderingStoreSelector" class="form-select" required onchange="loadOrderingItems()">
+                            <option value="">請選擇分店</option>
+                            <!-- 動態載入分店選項 -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">送貨日期</label>
+                        <input type="date" id="deliveryDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">品項分類篩選</label>
+                        <select id="categoryFilter" class="form-select" onchange="filterItemsByCategory()">
+                            <option value="">全部品項</option>
+                            <!-- 動態載入分類選項 -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">叫貨品項</label>
+                        <div id="orderingItems">
+                            <!-- 動態載入品項 -->
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number" id="totalItems">0</div>
+                                <div class="stat-label">總品項數</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="totalAmount">$0</div>
+                                <div class="stat-label">總金額</div>
+                            </div>
+                        </div>
+
+                        <!-- 叫貨明細確認區域 -->
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label class="form-label">
+                                <i class="fas fa-list-check"></i> 叫貨明細確認
+                            </label>
+                            <div id="orderingSummary" class="ordering-summary">
+                                <div class="summary-placeholder">
+                                    <i class="fas fa-info-circle"></i>
+                                    請選擇要叫貨的品項，明細將顯示在此處
+                                </div>
+                            </div>
+                            
+                            <!-- 明細操作按鈕 -->
+                            <div id="summaryActions" class="summary-actions" style="display: none; margin-top: 15px;">
+                                <button type="button" class="btn btn-success btn-full" onclick="addItemNote()">
+                                    <i class="fas fa-sticky-note"></i> 添加整體備註
+                                </button>
+                                <button type="button" class="btn btn-primary btn-full" onclick="clearAllItems()">
+                                    <i class="fas fa-broom"></i> 清空所有品項
+                                </button>
+                                <button type="button" class="btn btn-warning btn-full" onclick="exportSummaryText()">
+                                    <i class="fas fa-file-export"></i> 匯出明細文字
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">備註</label>
+                        <textarea id="orderingNotes" class="form-textarea" placeholder="叫貨相關備註..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-shopping-cart"></i> 提交叫貨單
+                    </button>
+                </form>
+
+                <div class="form-group">
+                    <label class="form-label">叫貨記錄</label>
+                    <div id="orderingRecords" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 維修申請頁面 -->
+        <div id="maintenance" class="content-section">
+            <div class="section-header">
+                <div class="section-title">維修申請</div>
+                <div class="section-subtitle">設備問題回報與維修追蹤</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <form id="maintenanceForm">
+                    <div class="form-group">
+                        <label class="form-label">設備名稱</label>
+                        <select id="equipment" class="form-select" required>
+                            <option value="">請選擇設備</option>
+                            <option value="冰箱">冰箱</option>
+                            <option value="冷凍庫">冷凍庫</option>
+                            <option value="油炸機">油炸機</option>
+                            <option value="烤箱">烤箱</option>
+                            <option value="電腦">電腦</option>
+                            <option value="收銀機">收銀機</option>
+                            <option value="監視器">監視器</option>
+                            <option value="空調">空調</option>
+                            <option value="照明設備">照明設備</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">問題類型</label>
+                        <select id="issueType" class="form-select" required>
+                            <option value="">請選擇問題類型</option>
+                            <option value="維修">維修</option>
+                            <option value="保養">保養</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">優先級</label>
+                        <select id="priority" class="form-select" required>
+                            <option value="">請選擇優先級</option>
+                            <option value="緊急">緊急 (影響營業)</option>
+                            <option value="一般">一般 (需要處理)</option>
+                            <option value="低">低 (可延後)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">問題描述</label>
+                        <textarea id="description" class="form-textarea" placeholder="請詳細描述設備問題..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">設備照片</label>
+                        <div class="photo-upload-area" onclick="document.getElementById('maintenancePhotos').click()">
+                            <i class="fas fa-camera" style="font-size: 32px; color: var(--text-secondary); margin-bottom: 10px;"></i>
+                            <div>點擊上傳設備照片</div>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">支援 JPG, PNG 格式</div>
+                        </div>
+                        <input type="file" id="maintenancePhotos" accept="image/*" multiple hidden onchange="handlePhotoUpload(this, 'maintenancePreview')">
+                        <div id="maintenancePreview" class="photo-preview"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-wrench"></i> 提交維修申請
+                    </button>
+                </form>
+
+                <div class="form-group">
+                    <label class="form-label">維修申請記錄</label>
+                    <div id="maintenanceRecords" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 排班系統頁面 - 完整重新設計 -->
+        <div id="scheduling" class="content-section">
+            <div class="section-header">
+                <div class="section-title">智能排班系統</div>
+                <div class="section-subtitle">完整規則驗證 | 月曆式排班 | 即時狀態更新</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <!-- 系統狀態與時間控制 -->
+                <div id="schedulingSystemStatus" class="scheduling-status-panel">
+                    <div class="status-row">
+                        <div id="schedulingStatus" class="status-indicator status-warning">
+                            <i class="fas fa-clock"></i>
+                            <span>排班系統目前關閉中</span>
+                        </div>
+                        <div id="timeRemaining" class="time-counter" style="display: none;">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span id="timeLeft">5:00</span>
+                        </div>
+                    </div>
+                    <div class="status-info">
+                        <small>開放時間: 每月16號02:00 ~ 21號02:00 | 每次操作限時5分鐘</small>
+                    </div>
+                </div>
+
+                <!-- 排班月份選擇 -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-calendar"></i> 排班月份 (自動預設下個月)
+                    </label>
+                    <input type="month" id="scheduleMonth" class="form-input" readonly>
+                    <small class="form-hint">系統自動設定為下個月，無法修改</small>
+                </div>
+
+                <!-- 進階月曆界面 -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-calendar-alt"></i> 休假日期選擇 
+                        <span class="rule-badge">最多8天</span>
+                        <span class="rule-badge weekend">週末最多3天</span>
+                    </label>
+                    
+                    <!-- 月曆容器 -->
+                    <div id="smartCalendarContainer" class="smart-calendar-container">
+                        <!-- 月曆標題與導航 -->
+                        <div class="calendar-header">
+                            <div class="calendar-nav">
+                                <button id="prevMonth" class="nav-btn" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div id="calendarTitle" class="calendar-title">2025年9月</div>
+                                <button id="nextMonth" class="nav-btn" disabled>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="calendar-legend">
+                                <span class="legend-item available">可選擇</span>
+                                <span class="legend-item selected">已選擇</span>
+                                <span class="legend-item weekend">週末</span>
+                                <span class="legend-item restricted">禁休</span>
+                                <span class="legend-item holiday">公休</span>
+                                <span class="legend-item occupied">已滿</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 主月曆 -->
+                        <div id="smartCalendar" class="smart-calendar">
+                            <!-- 星期標題 -->
+                            <div class="weekday-header">
+                                <div class="weekday">日</div>
+                                <div class="weekday">一</div>
+                                <div class="weekday">二</div>
+                                <div class="weekday">三</div>
+                                <div class="weekday">四</div>
+                                <div class="weekday weekend">五</div>
+                                <div class="weekday weekend">六</div>
+                            </div>
+                            <!-- 日期網格 -->
+                            <div id="calendarGrid" class="calendar-grid">
+                                <!-- 動態生成日期 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 即時統計與規則檢查 -->
+                <div class="scheduling-stats-panel">
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="selectedDays">0</div>
+                                <div class="stat-label">已選天數</div>
+                                <div class="stat-limit">/ 8天</div>
+                            </div>
+                        </div>
+                        <div class="stat-card weekend">
+                            <div class="stat-icon"><i class="fas fa-calendar-week"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="weekendDays">0</div>
+                                <div class="stat-label">週末天數</div>
+                                <div class="stat-limit">/ 3天</div>
+                            </div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="ruleViolations">0</div>
+                                <div class="stat-label">規則衝突</div>
+                                <div class="stat-limit">必須為0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 即時規則驗證結果 -->
+                <div id="ruleValidationPanel" class="rule-validation-panel" style="display: none;">
+                    <div class="validation-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>規則驗證結果</span>
+                    </div>
+                    <div id="validationResults" class="validation-results">
+                        <!-- 動態顯示驗證結果 -->
+                    </div>
+                </div>
+
+                <!-- 提交按鈕 -->
+                <button id="submitSchedule" class="btn btn-primary btn-full schedule-submit" onclick="submitSchedule()" disabled>
+                    <i class="fas fa-calendar-check"></i> 提交排班申請
+                    <span class="btn-hint">需通過所有規則驗證</span>
+                </button>
+
+                <!-- 排班記錄管理 -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-history"></i> 排班記錄管理
+                    </label>
+                    <div class="record-controls">
+                        <button class="btn btn-secondary" onclick="loadScheduleRecords()">
+                            <i class="fas fa-sync-alt"></i> 重新載入
+                        </button>
+                        <button class="btn btn-info" onclick="exportScheduleData()">
+                            <i class="fas fa-download"></i> 匯出數據
+                        </button>
+                    </div>
+                    <div id="scheduleRecords" class="enhanced-record-list">
+                        <div class="record-item loading">
+                            <div class="record-header">
+                                <span class="record-title">
+                                    <i class="fas fa-spinner fa-spin"></i> 載入記錄中...
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 升遷投票頁面 -->
+        <div id="voting" class="content-section">
+            <div class="section-header">
+                <div class="section-title">升遷投票</div>
+                <div class="section-subtitle">投票發起與參與</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <form id="votingForm">
+                    <div class="form-group">
+                        <label class="form-label">目標職位</label>
+                        <select id="targetPosition" class="form-select" required>
+                            <option value="">請選擇目標職位</option>
+                            <option value="正職員工">正職員工</option>
+                            <option value="資深員工">資深員工</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">申請說明</label>
+                        <textarea id="votingDescription" class="form-textarea" placeholder="請說明申請升遷的理由..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-vote-yea"></i> 發起升遷投票
+                    </button>
+                </form>
+
+                <div class="form-group">
+                    <label class="form-label">進行中的投票</label>
+                    <div id="activeVotes" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">投票記錄</label>
+                    <div id="votingRecords" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 記錄管理頁面 -->
+        <div id="record-management" class="content-section">
+            <div class="section-header">
+                <div class="section-title">記錄管理</div>
+                <div class="section-subtitle">記錄編輯與作廢功能</div>
+                <button class="back-btn" onclick="backToMain()">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="section-content">
+                <!-- 作廢次數統計 -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayVoidCount">0</div>
+                        <div class="stat-label">今日已作廢</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="remainingVoidCount">3</div>
+                        <div class="stat-label">剩餘作廢次數</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="voidableRecordsCount">0</div>
+                        <div class="stat-label">可操作記錄</div>
+                    </div>
+                </div>
+
+                <!-- 記錄類型篩選 -->
+                <div class="form-group">
+                    <label class="form-label">記錄類型篩選</label>
+                    <div class="record-type-filters">
+                        <button class="filter-btn active" data-type="" onclick="filterRecordsByType('')">
+                            <i class="fas fa-list"></i> 全部
+                        </button>
+                        <button class="filter-btn" data-type="attendance" onclick="filterRecordsByType('attendance')">
+                            <i class="fas fa-clock"></i> 考勤
+                        </button>
+                        <button class="filter-btn" data-type="revenue" onclick="filterRecordsByType('revenue')">
+                            <i class="fas fa-coins"></i> 營收
+                        </button>
+                        <button class="filter-btn" data-type="ordering" onclick="filterRecordsByType('ordering')">
+                            <i class="fas fa-shopping-cart"></i> 叫貨
+                        </button>
+                        <button class="filter-btn" data-type="maintenance" onclick="filterRecordsByType('maintenance')">
+                            <i class="fas fa-wrench"></i> 維修
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 可操作記錄列表 -->
+                <div class="form-group">
+                    <label class="form-label">可操作記錄 (12小時內)</label>
+                    <div id="voidableRecords" class="record-list">
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">載入中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作廢對話框 -->
+                <div id="voidModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>作廢記錄</h3>
+                            <button class="modal-close" onclick="closeVoidModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="form-label">作廢原因 (必填，至少5字)</label>
+                                <textarea id="voidReason" class="form-textarea" placeholder="請詳細說明作廢原因..." rows="4"></textarea>
+                            </div>
+                            <div id="voidRecordDetails" class="record-details"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeVoidModal()">取消</button>
+                            <button class="btn btn-danger" onclick="confirmVoid()">確認作廢</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 編輯對話框 -->
+                <div id="editModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>編輯記錄</h3>
+                            <button class="modal-close" onclick="closeEditModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="form-label">編輯原因 (必填，至少5字)</label>
+                                <textarea id="editReason" class="form-textarea" placeholder="請詳細說明編輯原因..." rows="3"></textarea>
+                            </div>
+                            <div id="editRecordForm" class="edit-form">
+                                <!-- 動態生成編輯表單 -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeEditModal()">取消</button>
+                            <button class="btn btn-primary" onclick="confirmEdit()">確認編輯</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全域變數
+        let currentUser = null;
+        let currentLocation = null;
+        let selectedVacationDates = [];
+        let orderingItemsData = [];
+        let uploadedPhotos = {};
+
+        // API基礎URL
+        const API_BASE = 'http://localhost:3008';
+
+        // 頁面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        // 初始化應用
+        async function initializeApp() {
+            try {
+                // 檢查登入狀態
+                const user = localStorage.getItem('currentUser');
+                if (!user) {
+                    window.location.href = 'index-new.html';
+                    return;
+                }
+
+                currentUser = JSON.parse(user);
+                
+                // 更新用戶資訊顯示
+                updateUserInfo();
+                
+                // 載入各模組資料
+                await loadUserData();
+                
+                // 設定預設日期
+                setDefaultDates();
+                
+                // 生成月曆
+                generateCalendar();
+                
+                // 載入叫貨品項
+                await loadOrderingItems();
+                
+            } catch (error) {
+                console.error('初始化失敗:', error);
+                showError('系統初始化失敗，請重新登入');
+            }
+        }
+
+        // 更新用戶資訊顯示
+        function updateUserInfo() {
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name;
+                document.getElementById('userStore').textContent = currentUser.store || '未分配分店';
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0);
+            }
+        }
+
+        // 載入用戶相關資料
+        async function loadUserData() {
+            try {
+                // 載入考勤統計
+                const attendanceStats = await fetch(`${API_BASE}/api/attendance/stats/${currentUser.employeeId}`);
+                if (attendanceStats.ok) {
+                    const stats = await attendanceStats.json();
+                    document.getElementById('workDays').textContent = stats.workDays || 0;
+                    document.getElementById('lateMinutes').textContent = stats.lateMinutes || 0;
+                }
+
+                // 載入今日考勤記錄
+                await loadTodayAttendance();
+                
+                // 載入各模組記錄
+                await loadRevenueRecords();
+                await loadOrderingRecords();
+                await loadMaintenanceRecords();
+                await loadScheduleRecords();
+                await loadVotingRecords();
+                
+            } catch (error) {
+                console.error('載入用戶資料失敗:', error);
+            }
+        }
+
+        // 設定預設日期
+        function setDefaultDates() {
+            const today = new Date();
+            
+            // 設定送貨日期為明天
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('deliveryDate').value = tomorrow.toISOString().split('T')[0];
+            
+            // 設定排班月份為下個月
+            const nextMonth = new Date(today);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            document.getElementById('scheduleMonth').value = nextMonth.toISOString().slice(0, 7);
+        }
+
+        // 顯示指定區塊
+        function showSection(sectionName) {
+            // 隱藏主頁面
+            document.getElementById('mainPage').classList.add('hidden');
+            
+            // 隱藏所有內容區塊
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 顯示指定區塊
+            document.getElementById(sectionName).classList.add('active');
+            
+            // 特殊初始化
+            if (sectionName === 'attendance') {
+                initializeAttendance();
+            } else if (sectionName === 'scheduling') {
+                initializeScheduling();
+            } else if (sectionName === 'revenue') {
+                loadStoreList();
+            } else if (sectionName === 'ordering') {
+                loadOrderingStoreList();
+                loadOrderingRecords();
+            }
+        }
+
+        // 返回主頁面
+        function backToMain() {
+            // 顯示主頁面
+            document.getElementById('mainPage').classList.remove('hidden');
+            
+            // 隱藏所有內容區塊
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+        }
+
+        // 登出功能
+        function logout() {
+            if (confirm('確定要登出嗎？')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index-new.html';
+            }
+        }
+
+        // === 考勤打卡功能 ===
+        async function initializeAttendance() {
+            const locationStatus = document.getElementById('locationStatus');
+            const clockBtn = document.getElementById('clockBtn');
+            const clockBtnText = document.getElementById('clockBtnText');
+
+            try {
+                locationStatus.className = 'status-indicator status-warning';
+                locationStatus.innerHTML = '<i class="fas fa-location-dot"></i><span>正在獲取位置資訊...</span>';
+                
+                // 獲取GPS位置
+                const position = await getCurrentPosition();
+                currentLocation = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                };
+
+                // 檢查是否在分店範圍內
+                const storeCheck = await fetch(`${API_BASE}/api/attendance/check-location`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentLocation)
+                });
+
+                const storeResult = await storeCheck.json();
+                
+                if (storeResult.success && storeResult.store) {
+                    locationStatus.className = 'status-indicator status-success';
+                    locationStatus.innerHTML = `<i class="fas fa-map-marker-alt"></i><span>位於 ${storeResult.store.name} (距離 ${storeResult.distance}m)</span>`;
+                    
+                    clockBtn.disabled = false;
+                    clockBtnText.textContent = '打卡';
+                } else {
+                    locationStatus.className = 'status-indicator status-error';
+                    locationStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>不在分店打卡範圍內</span>';
+                    
+                    clockBtn.disabled = true;
+                    clockBtnText.textContent = '無法打卡';
+                }
+
+            } catch (error) {
+                console.error('GPS定位失敗:', error);
+                locationStatus.className = 'status-indicator status-error';
+                locationStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>GPS定位失敗，請檢查定位權限</span>';
+                
+                clockBtn.disabled = true;
+                clockBtnText.textContent = '定位失敗';
+            }
+        }
+
+        // 獲取當前位置
+        function getCurrentPosition() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject(new Error('瀏覽器不支援GPS定位'));
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(resolve, reject, {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 300000
+                });
+            });
+        }
+
+        // 打卡功能
+        async function clockInOut() {
+            const clockBtn = document.getElementById('clockBtn');
+            const clockBtnText = document.getElementById('clockBtnText');
+            
+            try {
+                clockBtn.disabled = true;
+                clockBtnText.innerHTML = '<div class="loading"></div> 處理中...';
+
+                const attendanceData = {
+                    employeeId: currentUser.employeeId,
+                    latitude: currentLocation.latitude,
+                    longitude: currentLocation.longitude,
+                    deviceInfo: `${navigator.userAgent.split('(')[1]?.split(')')[0] || 'Unknown'}`
+                };
+
+                const response = await fetch(`${API_BASE}/api/attendance/clock`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(attendanceData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess(`${result.type === 'clock-in' ? '上班' : '下班'}打卡成功！`);
+                    await loadTodayAttendance();
+                    await loadUserData(); // 更新統計
+                } else {
+                    showError(result.message || '打卡失敗');
+                }
+
+            } catch (error) {
+                console.error('打卡失敗:', error);
+                showError('打卡失敗，請稍後再試');
+            } finally {
+                clockBtn.disabled = false;
+                clockBtnText.textContent = '打卡';
+            }
+        }
+
+        // 載入今日考勤記錄
+        async function loadTodayAttendance() {
+            try {
+                const response = await fetch(`${API_BASE}/api/attendance/today/${currentUser.employeeId}`);
+                const result = await response.json();
+                
+                const container = document.getElementById('todayAttendance');
+                if (result.success && result.records.length > 0) {
+                    container.innerHTML = result.records.map(record => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">${record.type === 'clock-in' ? '上班打卡' : '下班打卡'}</span>
+                                <span class="record-time">${new Date(record.timestamp).toLocaleTimeString()}</span>
+                            </div>
+                            <div class="record-details">
+                                📍 ${record.storeName} (距離 ${record.distance}m)<br>
+                                ${record.isLate ? `⚠️ 遲到 ${record.lateMinutes} 分鐘` : '✅ 準時'}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="record-item"><div class="record-header"><span class="record-title">今日尚無打卡記錄</span></div></div>';
+                }
+            } catch (error) {
+                console.error('載入考勤記錄失敗:', error);
+            }
+        }
+
+        // === 營收管理功能 ===
+        
+        // 載入分店列表 (新增)
+        async function loadStoreList() {
+            try {
+                const response = await fetch(`${API_BASE}/api/stores/list`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const storeSelector = document.getElementById('storeSelector');
+                    storeSelector.innerHTML = '<option value="">請選擇分店</option>';
+                    
+                    result.data.forEach(store => {
+                        const option = document.createElement('option');
+                        option.value = store.storeId;
+                        option.textContent = store.name;
+                        storeSelector.appendChild(option);
+                    });
+                } else {
+                    showError('載入分店列表失敗: ' + result.message);
+                }
+            } catch (error) {
+                console.error('載入分店列表錯誤:', error);
+                showError('載入分店列表時發生錯誤');
+            }
+        }
+
+        // 載入營收類別 (新增)
+        async function loadRevenueCategories() {
+            const storeId = document.getElementById('storeSelector').value;
+            if (!storeId) {
+                document.getElementById('defaultIncomeItems').innerHTML = '';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/revenue/categories/${storeId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const container = document.getElementById('defaultIncomeItems');
+                    container.innerHTML = '';
+                    
+                    result.data.income.forEach(category => {
+                        const incomeItem = document.createElement('div');
+                        incomeItem.className = 'income-item';
+                        incomeItem.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+                        incomeItem.innerHTML = `
+                            <div style="flex: 1; font-weight: 500; color: var(--text-color);">
+                                ${category.categoryName}
+                            </div>
+                            <input type="number" name="amount" data-category="${category.categoryName}" 
+                                   class="form-input" placeholder="金額" min="0" step="1" 
+                                   style="flex: 1; text-align: right;">
+                            <div style="width: 30px; text-align: center;">
+                                <i class="fas fa-dollar-sign" style="color: var(--success-color);"></i>
+                            </div>
+                        `;
+                        container.appendChild(incomeItem);
+                    });
+                } else {
+                    showError('載入營收類別失敗: ' + result.message);
+                }
+            } catch (error) {
+                console.error('載入營收類別錯誤:', error);
+                showError('載入營收類別時發生錯誤');
+            }
+        }
+
+        // 新增支出項目
+        function addExpenseItem() {
+            const container = document.getElementById('expenseItems');
+            const newItem = document.createElement('div');
+            newItem.className = 'expense-item';
+            newItem.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px;';
+            newItem.innerHTML = `
+                <input type="text" name="expenseCategory" class="form-input" placeholder="支出類別" style="flex: 1;">
+                <input type="number" name="expenseAmount" class="form-input" placeholder="金額" min="0" style="flex: 1;">
+                <button type="button" class="btn btn-danger" onclick="removeExpenseItem(this)" style="width: auto; padding: 8px;">
+                    <i class="fas fa-minus"></i>
+                </button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        // 移除支出項目
+        function removeExpenseItem(button) {
+            button.closest('.expense-item').remove();
+        }
+
+        // 營收表單提交
+        document.getElementById('revenueForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<div class="loading"></div> 提交中...';
+
+                // 收集收入項目 (更新 - 支援預設項目)
+                const incomeItems = [];
+                document.querySelectorAll('#defaultIncomeItems .income-item input[name="amount"]').forEach(input => {
+                    const category = input.getAttribute('data-category');
+                    const amount = parseFloat(input.value) || 0;
+                    if (amount > 0) {
+                        incomeItems.push({ category, amount });
+                    }
+                });
+
+                // 收集支出項目
+                const expenseItems = [];
+                document.querySelectorAll('.expense-item').forEach(item => {
+                    const category = item.querySelector('input[name="expenseCategory"]').value;
+                    const amount = parseFloat(item.querySelector('input[name="expenseAmount"]').value) || 0;
+                    if (category && amount > 0) {
+                        expenseItems.push({ category, amount, description: category });
+                    }
+                });
+
+                const revenueData = {
+                    employeeId: currentUser.employeeId,
+                    storeId: document.getElementById('storeSelector').value,
+                    bonusType: document.getElementById('bonusType').value,
+                    orderCount: parseInt(document.getElementById('orderCount').value),
+                    incomeItems: incomeItems,
+                    expenseItems: expenseItems,
+                    photos: uploadedPhotos.revenue || [],
+                    notes: document.getElementById('revenueNotes').value
+                };
+
+                const response = await fetch(`${API_BASE}/api/revenue/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(revenueData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('營收記錄提交成功！');
+                    document.getElementById('revenueForm').reset();
+                    document.getElementById('revenuePreview').innerHTML = '';
+                    uploadedPhotos.revenue = [];
+                    await loadRevenueRecords();
+                } else {
+                    showError(result.message || '提交失敗');
+                }
+
+            } catch (error) {
+                console.error('營收提交失敗:', error);
+                showError('提交失敗，請稍後再試');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // 載入營收記錄
+        async function loadRevenueRecords() {
+            try {
+                const response = await fetch(`${API_BASE}/api/revenue/list/${currentUser.employeeId}`);
+                const result = await response.json();
+                
+                const container = document.getElementById('revenueRecords');
+                if (result.success && result.records.length > 0) {
+                    container.innerHTML = result.records.map(record => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">${record.bonusType} - $${record.bonusAmount}</span>
+                                <span class="record-time">${new Date(record.timestamp).toLocaleDateString()}</span>
+                            </div>
+                            <div class="record-details">
+                                💰 總收入: $${record.totalIncome}<br>
+                                📊 訂單數: ${record.orderCount}單<br>
+                                🏪 ${record.storeName}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="record-item"><div class="record-header"><span class="record-title">尚無營收記錄</span></div></div>';
+                }
+            } catch (error) {
+                console.error('載入營收記錄失敗:', error);
+            }
+        }
+
+        // === 叫貨系統功能 ===
+
+        // 載入叫貨系統分店列表 (新增)
+        async function loadOrderingStoreList() {
+            try {
+                const response = await fetch(`${API_BASE}/api/stores/list`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const storeSelector = document.getElementById('orderingStoreSelector');
+                    storeSelector.innerHTML = '<option value="">請選擇分店</option>';
+
+                    result.data.forEach(store => {
+                        const option = document.createElement('option');
+                        option.value = store.storeId;
+                        option.textContent = store.name;
+                        storeSelector.appendChild(option);
+                    });
+                } else {
+                    showError('載入分店列表失敗: ' + result.message);
+                }
+            } catch (error) {
+                console.error('載入分店列表錯誤:', error);
+                showError('載入分店列表時發生錯誤');
+            }
+        }
+        
+        // 載入叫貨品項 (更新 - 支援分店選擇)
+        async function loadOrderingItems() {
+            const storeId = document.getElementById('orderingStoreSelector').value;
+            if (!storeId) {
+                document.getElementById('orderingItems').innerHTML = '<div class="summary-placeholder">請先選擇分店</div>';
+                document.getElementById('categoryFilter').innerHTML = '<option value="">全部品項</option>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/ordering/items`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    orderingItemsData = result.items;
+                    loadItemCategories(); // 載入分類
+                    renderOrderingItems();
+                    updateOrderingSummary(); // 初始化明細區域
+                }
+            } catch (error) {
+                console.error('載入叫貨品項失敗:', error);
+            }
+        }
+
+        // 載入品項分類 (新增)
+        function loadItemCategories() {
+            const categories = [...new Set(orderingItemsData.map(item => item.category))];
+            const categoryFilter = document.getElementById('categoryFilter');
+            
+            categoryFilter.innerHTML = '<option value="">全部品項</option>';
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categoryFilter.appendChild(option);
+            });
+        }
+
+        // 品項分類篩選 (新增)
+        function filterItemsByCategory() {
+            renderOrderingItems();
+        }
+
+        // 渲染叫貨品項 (更新 - 支援分類篩選和備註顯示)
+        function renderOrderingItems() {
+            const container = document.getElementById('orderingItems');
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            
+            // 根據分類篩選品項
+            const filteredItems = categoryFilter 
+                ? orderingItemsData.filter(item => item.category === categoryFilter)
+                : orderingItemsData;
+
+            if (filteredItems.length === 0) {
+                container.innerHTML = '<div class="summary-placeholder">此分類下暫無品項</div>';
+                return;
+            }
+
+            container.innerHTML = filteredItems.map(item => `
+                <div class="record-item" style="margin-bottom: 10px;">
+                    <div class="record-header">
+                        <span class="record-title">${item.supplier} - ${item.brand} ${item.product}</span>
+                        <span class="record-time">$${item.unitPrice}/${item.unit}</span>
+                    </div>
+                    <div class="record-details">
+                        <div style="margin-bottom: 8px;">
+                            <span class="category-tag" style="background: var(--primary-light); color: var(--primary-color); padding: 2px 8px; border-radius: 12px; font-size: 12px;">${item.category}</span>
+                        </div>
+                        ${item.notes ? `<div style="background: #f8f9fa; padding: 8px; border-radius: 4px; margin-bottom: 8px; font-size: 12px; color: var(--text-secondary);"><i class="fas fa-info-circle"></i> ${item.notes}</div>` : ''}
+                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                            <span style="flex: 1; font-size: 14px;">數量:</span>
+                            <button type="button" onclick="updateQuantity('${item.itemId}', -1)" class="btn btn-danger" style="width: 40px; padding: 8px;">-</button>
+                            <input type="number" id="qty_${item.itemId}" value="0" min="0" style="width: 60px; text-align: center; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px;" onchange="updateOrderingSummary()">
+                            <button type="button" onclick="updateQuantity('${item.itemId}', 1)" class="btn btn-success" style="width: 40px; padding: 8px;">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新品項數量
+        function updateQuantity(itemId, change) {
+            const input = document.getElementById(`qty_${itemId}`);
+            const currentValue = parseInt(input.value) || 0;
+            const newValue = Math.max(0, currentValue + change);
+            input.value = newValue;
+            updateOrderingSummary();
+        }
+
+        // 更新叫貨總計和明細確認 (更新 - 增強明細顯示)
+        function updateOrderingSummary() {
+            let totalItems = 0;
+            let totalAmount = 0;
+            const selectedItems = [];
+
+            orderingItemsData.forEach(item => {
+                const qty = parseInt(document.getElementById(`qty_${item.itemId}`).value) || 0;
+                if (qty > 0) {
+                    totalItems += qty;
+                    totalAmount += qty * item.unitPrice;
+                    selectedItems.push({
+                        ...item,
+                        quantity: qty,
+                        subtotal: qty * item.unitPrice
+                    });
+                }
+            });
+
+            // 更新統計
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('totalAmount').textContent = `$${totalAmount.toLocaleString()}`;
+
+            // 更新明細確認區域
+            const summaryContainer = document.getElementById('orderingSummary');
+            const summaryActions = document.getElementById('summaryActions');
+            
+            if (selectedItems.length === 0) {
+                summaryContainer.innerHTML = `
+                    <div class="summary-placeholder">
+                        <i class="fas fa-info-circle"></i>
+                        請選擇要叫貨的品項，明細將顯示在此處
+                    </div>
+                `;
+                summaryActions.style.display = 'none';
+            } else {
+                summaryActions.style.display = 'flex';
+                summaryContainer.innerHTML = selectedItems.map(item => `
+                    <div class="summary-item">
+                        <div class="summary-item-info">
+                            <div class="summary-item-name">${item.supplier} - ${item.brand} ${item.product}</div>
+                            <div class="summary-item-details">
+                                <span>${item.category}</span> • 
+                                <span>$${item.unitPrice}/${item.unit}</span>
+                                ${item.notes ? ` • <span style="color: var(--warning-color);">${item.notes}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="summary-item-quantity">
+                            ${item.quantity} ${item.unit}
+                            <div style="font-size: 12px; color: var(--text-secondary);">
+                                $${item.subtotal.toLocaleString()}
+                            </div>
+                        </div>
+                    </div>
+                `).join('') + `
+                    <div style="border-top: 2px solid var(--primary-color); margin-top: 10px; padding-top: 10px; text-align: right;">
+                        <strong style="color: var(--primary-color);">
+                            總計: ${totalItems} 項 • $${totalAmount.toLocaleString()}
+                        </strong>
+                    </div>
+                `;
+            }
+        }
+
+        // 叫貨表單提交
+        document.getElementById('orderingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<div class="loading"></div> 提交中...';
+
+                // 收集叫貨項目 (更新 - 增加分店信息)
+                const items = [];
+                let totalAmount = 0;
+                const storeId = document.getElementById('orderingStoreSelector').value;
+
+                if (!storeId) {
+                    showError('請選擇分店');
+                    return;
+                }
+
+                orderingItemsData.forEach(item => {
+                    const qty = parseInt(document.getElementById(`qty_${item.itemId}`).value) || 0;
+                    if (qty > 0) {
+                        const totalPrice = qty * item.unitPrice;
+                        items.push({
+                            supplier: item.supplier,
+                            brand: item.brand,
+                            product: item.product,
+                            quantity: qty,
+                            unit: item.unit,
+                            unitPrice: item.unitPrice,
+                            totalPrice: totalPrice
+                        });
+                        totalAmount += totalPrice;
+                    }
+                });
+
+                if (items.length === 0) {
+                    showError('請至少選擇一個品項');
+                    return;
+                }
+
+                const orderingData = {
+                    employeeId: currentUser.employeeId,
+                    storeId: storeId,
+                    deliveryDate: document.getElementById('deliveryDate').value,
+                    items: items,
+                    totalAmount: totalAmount,
+                    notes: document.getElementById('orderingNotes').value
+                };
+
+                const response = await fetch(`${API_BASE}/api/ordering/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderingData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('叫貨單提交成功！');
+                    document.getElementById('orderingForm').reset();
+                    // 重置數量
+                    orderingItemsData.forEach(item => {
+                        document.getElementById(`qty_${item.itemId}`).value = 0;
+                    });
+                    updateOrderingSummary();
+                    await loadOrderingRecords();
+                } else {
+                    showError(result.message || '提交失敗');
+                }
+
+            } catch (error) {
+                console.error('叫貨提交失敗:', error);
+                showError('提交失敗，請稍後再試');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // 載入叫貨記錄
+        async function loadOrderingRecords() {
+            try {
+                const response = await fetch(`${API_BASE}/api/ordering/list/${currentUser.employeeId}`);
+                const result = await response.json();
+                
+                const container = document.getElementById('orderingRecords');
+                if (result.success && result.records.length > 0) {
+                    container.innerHTML = result.records.map(record => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">叫貨單 #${record.orderId}</span>
+                                <span class="record-time">${new Date(record.timestamp).toLocaleDateString()}</span>
+                            </div>
+                            <div class="record-details">
+                                📅 送貨日期: ${new Date(record.deliveryDate).toLocaleDateString()}<br>
+                                💰 總金額: $${record.totalAmount.toLocaleString()}<br>
+                                📦 品項數: ${record.items.length}項<br>
+                                📋 狀態: ${record.status}
+                                ${record.issueReports && record.issueReports.length > 0 ? `<br>⚠️ 已回報 ${record.issueReports.length} 項異常` : ''}
+                            </div>
+                            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn btn-primary" onclick="viewOrderDetails('${record.orderId}')" style="flex: 1; min-width: 120px; font-size: 12px; padding: 8px;">
+                                    <i class="fas fa-eye"></i> 查看明細
+                                </button>
+                                ${record.status === '已送達' || record.status === '部分送達' ? 
+                                    `<button class="btn btn-warning" onclick="reportItemIssue('${record.orderId}')" style="flex: 1; min-width: 120px; font-size: 12px; padding: 8px;">
+                                        <i class="fas fa-exclamation-triangle"></i> 品項異常回報
+                                    </button>` : ''
+                                }
+                                ${record.issueReports && record.issueReports.length > 0 ?
+                                    `<button class="btn btn-success" onclick="viewIssueReports('${record.orderId}')" style="flex: 1; min-width: 120px; font-size: 12px; padding: 8px;">
+                                        <i class="fas fa-clipboard-list"></i> 查看異常
+                                    </button>` : ''
+                                }
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="record-item"><div class="record-header"><span class="record-title">尚無叫貨記錄</span></div></div>';
+                }
+            } catch (error) {
+                console.error('載入叫貨記錄失敗:', error);
+            }
+        }
+
+        // === 維修申請功能 ===
+        
+        // 維修表單提交
+        document.getElementById('maintenanceForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<div class="loading"></div> 提交中...';
+
+                const maintenanceData = {
+                    employeeId: currentUser.employeeId,
+                    equipment: document.getElementById('equipment').value,
+                    issueType: document.getElementById('issueType').value,
+                    priority: document.getElementById('priority').value,
+                    description: document.getElementById('description').value,
+                    photos: uploadedPhotos.maintenance || []
+                };
+
+                const response = await fetch(`${API_BASE}/api/maintenance/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(maintenanceData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('維修申請提交成功！');
+                    document.getElementById('maintenanceForm').reset();
+                    document.getElementById('maintenancePreview').innerHTML = '';
+                    uploadedPhotos.maintenance = [];
+                    await loadMaintenanceRecords();
+                } else {
+                    showError(result.message || '提交失敗');
+                }
+
+            } catch (error) {
+                console.error('維修申請失敗:', error);
+                showError('提交失敗，請稍後再試');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // 載入維修記錄
+        async function loadMaintenanceRecords() {
+            try {
+                const response = await fetch(`${API_BASE}/api/maintenance/list/${currentUser.employeeId}`);
+                const result = await response.json();
+                
+                const container = document.getElementById('maintenanceRecords');
+                if (result.success && result.records.length > 0) {
+                    container.innerHTML = result.records.map(record => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">${record.equipment} - ${record.issueType}</span>
+                                <span class="record-time">${new Date(record.timestamp).toLocaleDateString()}</span>
+                            </div>
+                            <div class="record-details">
+                                ⚠️ 優先級: ${record.priority}<br>
+                                📋 狀態: ${record.status}<br>
+                                📝 ${record.description.substring(0, 50)}...
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="record-item"><div class="record-header"><span class="record-title">尚無維修申請記錄</span></div></div>';
+                }
+            } catch (error) {
+                console.error('載入維修記錄失敗:', error);
+            }
+        }
+
+        // ==================== 智能排班系統 - 完整重新實現 ====================
+        
+        // 排班系統全域變數
+        let schedulingSystem = {
+            selectedVacationDates: [],
+            schedulingSettings: null,
+            currentMonth: '',
+            calendarData: [],
+            validationRules: [],
+            timeSession: null,
+            isSystemOpen: false
+        };
+
+        // === 1. 排班系統初始化 ===
+        async function initializeScheduling() {
+            try {
+                // 載入系統設定
+                await loadSchedulingSettings();
+                
+                // 檢查系統狀態
+                await checkSchedulingStatus();
+                
+                // 設定下個月
+                setNextMonthDefault();
+                
+                // 生成智能月曆
+                await generateSmartCalendar();
+                
+                // 載入記錄
+                await loadScheduleRecords();
+                
+                // 啟動時間控制
+                initializeTimeControl();
+                
+                console.log('✅ 排班系統初始化完成');
+            } catch (error) {
+                console.error('❌ 排班系統初始化失敗:', error);
+                showError('排班系統初始化失敗，請重新整理頁面');
+            }
+        }
+
+        // === 2. 載入排班設定 ===
+        async function loadSchedulingSettings() {
+            try {
+                const response = await fetch(`${API_BASE}/api/schedule/settings`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    schedulingSystem.schedulingSettings = result.settings;
+                } else {
+                    // 使用預設設定
+                    schedulingSystem.schedulingSettings = {
+                        timeControl: {
+                            openDay: 16,
+                            openHour: 2,
+                            closeDay: 21,
+                            closeHour: 2,
+                            operationTimeMinutes: 5
+                        },
+                        vacationRules: {
+                            maxVacationDaysPerMonth: 8,
+                            maxDailyVacationTotal: 2,
+                            maxWeekendVacationsPerMonth: 3,
+                            weekendDays: [0, 5, 6]
+                        }
+                    };
+                }
+            } catch (error) {
+                console.error('載入排班設定失敗:', error);
+            }
+        }
+
+        // === 3. 檢查排班系統狀態 ===
+        async function checkSchedulingStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/api/schedule/status`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    schedulingSystem.isSystemOpen = result.data.isOpen;
+                    updateSchedulingStatusDisplay(result.data);
+                }
+            } catch (error) {
+                console.error('檢查排班狀態失敗:', error);
+            }
+        }
+
+        // === 4. 更新系統狀態顯示 ===
+        function updateSchedulingStatusDisplay(statusData) {
+            const statusElement = document.getElementById('schedulingStatus');
+            const timeCounter = document.getElementById('timeRemaining');
+            
+            if (statusData.isOpen) {
+                statusElement.className = 'status-indicator status-success';
+                statusElement.innerHTML = '<i class="fas fa-check-circle"></i><span>排班系統開放中</span>';
+                
+                if (statusData.hasActiveSession) {
+                    timeCounter.style.display = 'block';
+                    startTimeCountdown(statusData.sessionEndTime);
+                }
+            } else {
+                statusElement.className = 'status-indicator status-warning';
+                statusElement.innerHTML = '<i class="fas fa-clock"></i><span>排班系統目前關閉中</span>';
+                timeCounter.style.display = 'none';
+            }
+        }
+
+        // === 5. 設定下個月為預設 ===
+        function setNextMonthDefault() {
+            const nextMonth = new Date();
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            const monthValue = nextMonth.toISOString().slice(0, 7);
+            
+            document.getElementById('scheduleMonth').value = monthValue;
+            schedulingSystem.currentMonth = monthValue;
+        }
+
+        // === 6. 生成智能月曆 ===
+        async function generateSmartCalendar() {
+            const monthValue = schedulingSystem.currentMonth;
+            const [year, month] = monthValue.split('-').map(Number);
+            
+            // 更新月曆標題
+            document.getElementById('calendarTitle').textContent = `${year}年${month}月`;
+            
+            // 獲取月曆數據
+            await loadCalendarData(year, month);
+            
+            // 渲染月曆
+            renderSmartCalendar(year, month);
+            
+            // 更新統計
+            updateSchedulingStats();
+        }
+
+        // === 7. 載入月曆數據 ===
+        async function loadCalendarData(year, month) {
+            try {
+                const response = await fetch(`${API_BASE}/api/schedule/calendar/${currentUser.employeeId}?year=${year}&month=${month}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    schedulingSystem.calendarData = result.data.calendar;
+                } else {
+                    // 生成預設月曆數據
+                    generateDefaultCalendarData(year, month);
+                }
+            } catch (error) {
+                console.error('載入月曆數據失敗:', error);
+                generateDefaultCalendarData(year, month);
+            }
+        }
+
+        // === 8. 渲染智能月曆 ===
+        function renderSmartCalendar(year, month) {
+            const calendarGrid = document.getElementById('calendarGrid');
+            calendarGrid.innerHTML = '';
+            
+            const firstDay = new Date(year, month - 1, 1);
+            const lastDay = new Date(year, month, 0);
+            const daysInMonth = lastDay.getDate();
+            const startDayOfWeek = firstDay.getDay();
+            
+            // 添加空白日期
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day disabled';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // 添加實際日期
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = createCalendarDay(year, month, day);
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        // === 9. 創建月曆日期元素 ===
+        function createCalendarDay(year, month, day) {
+            const dateStr = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.dataset.date = dateStr;
+            
+            // 判斷日期狀態
+            const dayInfo = getDayInfo(year, month, day, dateStr);
+            
+            // 應用樣式
+            dayElement.className += ` ${dayInfo.classes.join(' ')}`;
+            
+            // 創建日期內容
+            dayElement.innerHTML = `
+                <div class="day-number">${day}</div>
+                ${dayInfo.info ? `<div class="day-info">${dayInfo.info}</div>` : ''}
+            `;
+            
+            // 設定點擊事件
+            if (dayInfo.clickable) {
+                dayElement.onclick = () => toggleVacationDate(dateStr, dayElement);
+            }
+            
+            return dayElement;
+        }
+
+        // === 10. 獲取日期資訊 ===
+        function getDayInfo(year, month, day, dateStr) {
+            const dayOfWeek = new Date(year, month - 1, day).getDay();
+            const isWeekend = [0, 5, 6].includes(dayOfWeek);
+            const isSelected = schedulingSystem.selectedVacationDates.includes(dateStr);
+            
+            let classes = [];
+            let info = '';
+            let clickable = true;
+            
+            // 檢查是否為週末
+            if (isWeekend) {
+                classes.push('weekend');
+                info = '週末';
+            }
+            
+            // 檢查是否已選擇
+            if (isSelected) {
+                classes.push('selected');
+            }
+            
+            // 檢查是否為禁休日
+            if (isRestrictedDate(dateStr)) {
+                classes.push('restricted');
+                info = '禁休';
+                clickable = false;
+            }
+            
+            // 檢查是否為公休日
+            if (isPublicHoliday(dateStr)) {
+                classes.push('holiday');
+                info = '公休';
+            }
+            
+            // 檢查是否已達上限
+            if (isDayFullyOccupied(dateStr)) {
+                classes.push('occupied');
+                info = '已滿';
+                clickable = false;
+            }
+            
+            return { classes, info, clickable };
+        }
+
+        // === 11. 切換休假日期 ===
+        async function toggleVacationDate(dateStr, element) {
+            const index = schedulingSystem.selectedVacationDates.indexOf(dateStr);
+            
+            if (index > -1) {
+                // 取消選擇
+                schedulingSystem.selectedVacationDates.splice(index, 1);
+                element.classList.remove('selected');
+            } else {
+                // 檢查是否可以選擇
+                const validation = await validateDateSelection(dateStr);
+                
+                if (!validation.isValid) {
+                    showValidationErrors(validation.violations);
+                    return;
+                }
+                
+                // 選擇日期
+                schedulingSystem.selectedVacationDates.push(dateStr);
+                element.classList.add('selected');
+            }
+            
+            // 更新統計和驗證
+            updateSchedulingStats();
+            await performRealTimeValidation();
+        }
+
+        // === 12. 即時規則驗證 ===
+        async function performRealTimeValidation() {
+            try {
+                const response = await fetch(`${API_BASE}/api/schedule/validate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        employeeId: currentUser.employeeId,
+                        selectedDates: schedulingSystem.selectedVacationDates
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    updateValidationDisplay(result.violations, result.isValid);
+                    updateSubmitButton(result.isValid);
+                }
+            } catch (error) {
+                console.error('即時驗證失敗:', error);
+            }
+        }
+
+        // === 13. 更新驗證顯示 ===
+        function updateValidationDisplay(violations, isValid) {
+            const panel = document.getElementById('ruleValidationPanel');
+            const results = document.getElementById('validationResults');
+            
+            if (violations.length > 0) {
+                panel.style.display = 'block';
+                results.innerHTML = violations.map(violation => `
+                    <div class="validation-item error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        ${violation}
+                    </div>
+                `).join('');
+            } else if (schedulingSystem.selectedVacationDates.length > 0) {
+                panel.style.display = 'block';
+                results.innerHTML = `
+                    <div class="validation-item success">
+                        <i class="fas fa-check-circle"></i>
+                        所有規則驗證通過，可以提交申請
+                    </div>
+                `;
+            } else {
+                panel.style.display = 'none';
+            }
+            
+            // 更新規則衝突數量
+            document.getElementById('ruleViolations').textContent = violations.length;
+        }
+
+        // === 14. 更新統計資訊 ===
+        function updateSchedulingStats() {
+            const selectedDays = schedulingSystem.selectedVacationDates.length;
+            const weekendDays = schedulingSystem.selectedVacationDates.filter(date => {
+                const dayOfWeek = new Date(date).getDay();
+                return [0, 5, 6].includes(dayOfWeek);
+            }).length;
+            
+            document.getElementById('selectedDays').textContent = selectedDays;
+            document.getElementById('weekendDays').textContent = weekendDays;
+        }
+
+        // === 15. 提交排班申請 ===
+        async function submitSchedule() {
+            if (schedulingSystem.selectedVacationDates.length === 0) {
+                showError('請至少選擇一天休假');
+                return;
+            }
+            
+            try {
+                // 最終驗證
+                const validation = await performFinalValidation();
+                if (!validation.isValid) {
+                    showError('規則驗證失敗，請檢查選擇的日期');
+                    return;
+                }
+                
+                const scheduleData = {
+                    employeeId: currentUser.employeeId,
+                    month: schedulingSystem.currentMonth,
+                    vacationDates: schedulingSystem.selectedVacationDates
+                };
+                
+                const response = await fetch(`${API_BASE}/api/scheduling/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(scheduleData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('排班申請提交成功！');
+                    
+                    // 重置系統
+                    resetSchedulingSystem();
+                    await generateSmartCalendar();
+                    await loadScheduleRecords();
+                } else {
+                    showError(result.message || '提交失敗');
+                }
+                
+            } catch (error) {
+                console.error('排班提交失敗:', error);
+                showError('提交失敗，請稍後再試');
+            }
+        }
+
+        // === 16. 載入排班記錄 ===
+        async function loadScheduleRecords() {
+            try {
+                const response = await fetch(`${API_BASE}/api/scheduling/list/${currentUser.employeeId}`);
+                const result = await response.json();
+                
+                const container = document.getElementById('scheduleRecords');
+                
+                if (result.success && result.records.length > 0) {
+                    container.innerHTML = result.records.map(record => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">
+                                    <i class="fas fa-calendar"></i> ${record.month} 排班
+                                </span>
+                                <span class="record-status ${getStatusClass(record.status)}">${record.status}</span>
+                            </div>
+                            <div class="record-details">
+                                <div class="record-stats">
+                                    <span class="stat-item">
+                                        <i class="fas fa-calendar-day"></i> 
+                                        休假: ${record.totalVacationDays}天
+                                    </span>
+                                    <span class="stat-item">
+                                        <i class="fas fa-calendar-week"></i> 
+                                        週末: ${record.weekendVacationDays}天
+                                    </span>
+                                </div>
+                                <div class="record-dates">
+                                    <small>休假日期: ${record.vacationDates?.join(', ') || '無'}</small>
+                                </div>
+                                <div class="record-time">
+                                    <small>提交時間: ${new Date(record.submittedAt).toLocaleString()}</small>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">
+                                    <i class="fas fa-info-circle"></i> 尚無排班記錄
+                                </span>
+                            </div>
+                            <div class="record-details">
+                                <small>您尚未提交任何排班申請</small>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入排班記錄失敗:', error);
+            }
+        }
+
+        // === 17. 匯出排班數據 ===
+        function exportScheduleData() {
+            try {
+                const data = {
+                    employeeId: currentUser.employeeId,
+                    employeeName: currentUser.name,
+                    exportDate: new Date().toISOString(),
+                    selectedDates: schedulingSystem.selectedVacationDates,
+                    month: schedulingSystem.currentMonth
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `排班數據_${currentUser.name}_${schedulingSystem.currentMonth}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                showSuccess('排班數據匯出成功！');
+            } catch (error) {
+                console.error('匯出失敗:', error);
+                showError('匯出失敗，請稍後再試');
+            }
+        }
+
+        // === 18. 輔助函數 ===
+        function resetSchedulingSystem() {
+            schedulingSystem.selectedVacationDates = [];
+            document.getElementById('ruleValidationPanel').style.display = 'none';
+        }
+
+        function updateSubmitButton(isValid) {
+            const button = document.getElementById('submitSchedule');
+            button.disabled = !isValid || schedulingSystem.selectedVacationDates.length === 0;
+        }
+
+        function getStatusClass(status) {
+            switch (status) {
+                case '已批准': return 'status-success';
+                case '待審核': return 'status-warning';
+                case '已拒絕': return 'status-error';
+                default: return 'status-info';
+            }
+        }
+
+        function isRestrictedDate(dateStr) {
+            // 實作禁休日期檢查邏輯
+            const restrictedDates = ['2025-08-15', '2025-08-25', '2025-09-15', '2025-09-25'];
+            return restrictedDates.includes(dateStr);
+        }
+
+        function isPublicHoliday(dateStr) {
+            // 實作公休日期檢查邏輯
+            const publicHolidays = ['2025-08-10', '2025-08-24', '2025-09-14', '2025-09-28'];
+            return publicHolidays.includes(dateStr);
+        }
+
+        function isDayFullyOccupied(dateStr) {
+            // 實作當日人數上限檢查邏輯
+            return false; // 暫時返回false，實際應檢查資料庫
+        }
+
+        async function validateDateSelection(dateStr) {
+            // 實作單一日期選擇驗證
+            return { isValid: true, violations: [] };
+        }
+
+        async function performFinalValidation() {
+            // 實作最終提交前驗證
+            return { isValid: true, violations: [] };
+        }
+
+        function generateDefaultCalendarData(year, month) {
+            // 生成預設月曆數據
+            schedulingSystem.calendarData = [];
+        }
+
+        function showValidationErrors(violations) {
+            violations.forEach(violation => showError(violation));
+        }
+
+        function initializeTimeControl() {
+            // 實作時間控制邏輯
+        }
+
+        function startTimeCountdown(endTime) {
+            // 實作倒數計時邏輯
+        }
+
+        // === 升遷投票功能 ===
+        
+        // 投票表單提交
+        document.getElementById('votingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<div class="loading"></div> 提交中...';
+
+                const votingData = {
+                    candidateId: currentUser.employeeId,
+                    targetPosition: document.getElementById('targetPosition').value,
+                    description: document.getElementById('votingDescription').value
+                };
+
+                const response = await fetch(`${API_BASE}/api/voting/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(votingData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('升遷投票發起成功！');
+                    document.getElementById('votingForm').reset();
+                    await loadVotingRecords();
+                    await loadActiveVotes();
+                } else {
+                    showError(result.message || '提交失敗');
+                }
+
+            } catch (error) {
+                console.error('投票提交失敗:', error);
+                showError('提交失敗，請稍後再試');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+
+        // 載入進行中的投票
+        async function loadActiveVotes() {
+            try {
+                const response = await fetch(`${API_BASE}/api/voting/active`);
+                const result = await response.json();
+                
+                const container = document.getElementById('activeVotes');
+                if (result.success && result.votes.length > 0) {
+                    container.innerHTML = result.votes.map(vote => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">${vote.candidateName} → ${vote.targetPosition}</span>
+                                <span class="record-time">${vote.status}</span>
+                            </div>
+                            <div class="record-details">
+                                📊 同意率: ${(vote.currentApprovalRate * 100).toFixed(1)}%<br>
+                                🗳️ 票數: ${vote.agreedVotes}/${vote.totalVoters}<br>
+                                ⏰ 截止: ${new Date(vote.endDate).toLocaleDateString()}
+                                ${vote.candidateId !== currentUser.employeeId ? 
+                                    `<br><button class="btn btn-primary" onclick="vote('${vote.voteId}', 'agree')" style="margin-right: 10px; margin-top: 10px;">同意</button>
+                                     <button class="btn btn-danger" onclick="vote('${vote.voteId}', 'disagree')" style="margin-top: 10px;">不同意</button>` : ''
+                                }
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="record-item"><div class="record-header"><span class="record-title">目前沒有進行中的投票</span></div></div>';
+                }
+            } catch (error) {
+                console.error('載入進行中投票失敗:', error);
+            }
+        }
+
+        // 投票功能
+        async function vote(voteId, decision) {
+            const reason = prompt(`請輸入${decision === 'agree' ? '同意' : '不同意'}的理由:`);
+            if (!reason) return;
+
+            try {
+                const voteData = {
+                    voteId: voteId,
+                    voterId: currentUser.employeeId,
+                    decision: decision,
+                    reason: reason
+                };
+
+                const response = await fetch(`${API_BASE}/api/voting/vote`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(voteData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showSuccess('投票成功！');
+                    await loadActiveVotes();
+                } else {
+                    showError(result.message || '投票失敗');
+                }
+
+            } catch (error) {
+                console.error('投票失敗:', error);
+                showError('投票失敗，請稍後再試');
+            }
+        }
+
+        // 載入投票記錄
+        async function loadVotingRecords() {
+            try {
+                const response = await fetch(`${API_BASE}/api/voting/list/${currentUser.employeeId}`);
+                const result = await response.json();
+                
+                const container = document.getElementById('votingRecords');
+                if (result.success && result.records.length > 0) {
+                    container.innerHTML = result.records.map(record => `
+                        <div class="record-item">
+                            <div class="record-header">
+                                <span class="record-title">${record.candidateName} → ${record.targetPosition}</span>
+                                <span class="record-time">${record.status}</span>
+                            </div>
+                            <div class="record-details">
+                                📊 最終同意率: ${(record.currentApprovalRate * 100).toFixed(1)}%<br>
+                                📅 投票期間: ${new Date(record.startDate).toLocaleDateString()} ~ ${new Date(record.endDate).toLocaleDateString()}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="record-item"><div class="record-header"><span class="record-title">尚無投票記錄</span></div></div>';
+                }
+            } catch (error) {
+                console.error('載入投票記錄失敗:', error);
+            }
+        }
+
+        // === 照片上傳功能 ===
+        
+        function handlePhotoUpload(input, previewContainerId) {
+            const files = input.files;
+            const previewContainer = document.getElementById(previewContainerId);
+            const category = previewContainerId.replace('Preview', '');
+            
+            if (!uploadedPhotos[category]) {
+                uploadedPhotos[category] = [];
+            }
+
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const photoId = 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        
+                        // 儲存照片資料
+                        uploadedPhotos[category].push({
+                            photoId: photoId,
+                            filename: file.name,
+                            data: e.target.result,
+                            uploadTime: new Date().toISOString()
+                        });
+
+                        // 顯示預覽
+                        const photoDiv = document.createElement('div');
+                        photoDiv.className = 'photo-item';
+                        photoDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="${file.name}">
+                            <button class="photo-remove" onclick="removePhoto('${category}', '${photoId}', this.parentElement)">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                        previewContainer.appendChild(photoDiv);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // 清空input
+            input.value = '';
+        }
+
+        // 移除照片
+        function removePhoto(category, photoId, element) {
+            uploadedPhotos[category] = uploadedPhotos[category].filter(photo => photo.photoId !== photoId);
+            element.remove();
+        }
+
+        // === 通用功能 ===
+        
+        // 顯示成功訊息
+        function showSuccess(message) {
+            // 簡單的提示實現
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--success-color);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                box-shadow: var(--shadow);
+            `;
+            alert.textContent = message;
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                document.body.removeChild(alert);
+            }, 3000);
+        }
+
+        // 顯示錯誤訊息
+        function showError(message) {
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--danger-color);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                box-shadow: var(--shadow);
+            `;
+            alert.textContent = message;
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                document.body.removeChild(alert);
+            }, 3000);
+        }
+
+        // === 叫貨系統增強功能 ===
+
+        // 添加整體備註
+        function addItemNote() {
+            const note = prompt('請輸入叫貨單整體備註:');
+            if (note && note.trim()) {
+                const notesTextarea = document.getElementById('orderingNotes');
+                const currentNotes = notesTextarea.value;
+                notesTextarea.value = currentNotes ? `${currentNotes}\n備註: ${note.trim()}` : `備註: ${note.trim()}`;
+                showSuccess('備註已添加');
+            }
+        }
+
+        // 清空所有品項
+        function clearAllItems() {
+            if (confirm('確定要清空所有已選品項嗎？')) {
+                orderingItemsData.forEach(item => {
+                    const qtyInput = document.getElementById(`qty_${item.itemId}`);
+                    if (qtyInput) qtyInput.value = 0;
+                });
+                updateOrderingSummary();
+                showSuccess('已清空所有品項');
+            }
+        }
+
+        // 匯出明細文字
+        function exportSummaryText() {
+            let exportText = '===== 叫貨明細 =====\n\n';
+            exportText += `分店: ${document.getElementById('orderingStoreSelector').selectedOptions[0]?.text || '未選擇'}\n`;
+            exportText += `送貨日期: ${document.getElementById('deliveryDate').value}\n`;
+            exportText += `下單時間: ${new Date().toLocaleString()}\n\n`;
+            
+            let totalItems = 0;
+            let totalAmount = 0;
+            
+            orderingItemsData.forEach(item => {
+                const qty = parseInt(document.getElementById(`qty_${item.itemId}`).value) || 0;
+                if (qty > 0) {
+                    exportText += `${item.supplier} - ${item.brand} ${item.product}\n`;
+                    exportText += `  分類: ${item.category}\n`;
+                    exportText += `  數量: ${qty} ${item.unit}\n`;
+                    exportText += `  單價: $${item.unitPrice}\n`;
+                    exportText += `  小計: $${(qty * item.unitPrice).toLocaleString()}\n`;
+                    if (item.notes) exportText += `  說明: ${item.notes}\n`;
+                    exportText += '\n';
+                    
+                    totalItems += qty;
+                    totalAmount += qty * item.unitPrice;
+                }
+            });
+            
+            exportText += `總計: ${totalItems} 項品項，總金額 $${totalAmount.toLocaleString()}\n`;
+            
+            const notes = document.getElementById('orderingNotes').value;
+            if (notes) {
+                exportText += `\n備註:\n${notes}`;
+            }
+            
+            // 複製到剪貼板
+            navigator.clipboard.writeText(exportText).then(() => {
+                showSuccess('明細已複製到剪貼板');
+            }).catch(() => {
+                // 降級方案 - 顯示在新視窗
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(`<pre>${exportText}</pre>`);
+            });
+        }
+
+        // 查看訂單明細
+        async function viewOrderDetails(orderId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/ordering/details/${orderId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const order = result.order;
+                    let detailsHtml = `
+                        <div class="issue-modal">
+                            <div class="issue-modal-content">
+                                <div class="issue-modal-header">
+                                    <h3>叫貨單明細 #${order.orderId}</h3>
+                                    <button class="issue-modal-close" onclick="closeModal()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="issue-modal-body">
+                                    <div class="form-group">
+                                        <label class="form-label">基本資訊</label>
+                                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                            📅 下單時間: ${new Date(order.timestamp).toLocaleString()}<br>
+                                            🚚 送貨日期: ${new Date(order.deliveryDate).toLocaleDateString()}<br>
+                                            🏪 分店: ${order.storeName}<br>
+                                            📋 狀態: ${order.status}<br>
+                                            💰 總金額: $${order.totalAmount.toLocaleString()}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">品項清單</label>
+                                        <div class="issue-items-list">
+                                            ${order.items.map(item => `
+                                                <div class="issue-item">
+                                                    <div style="flex: 1;">
+                                                        <strong>${item.supplier} - ${item.brand} ${item.product}</strong><br>
+                                                        <small style="color: var(--text-secondary);">
+                                                            ${item.quantity} ${item.unit} × $${item.unitPrice} = $${item.totalPrice.toLocaleString()}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    
+                                    ${order.notes ? `
+                                        <div class="form-group">
+                                            <label class="form-label">備註</label>
+                                            <div style="background: #f8f9fa; padding: 10px; border-radius: 6px;">
+                                                ${order.notes}
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.insertAdjacentHTML('beforeend', detailsHtml);
+                } else {
+                    showError('載入訂單明細失敗');
+                }
+            } catch (error) {
+                console.error('載入訂單明細失敗:', error);
+                showError('載入訂單明細時發生錯誤');
+            }
+        }
+
+        // 品項異常回報
+        async function reportItemIssue(orderId) {
+            try {
+                // 先載入訂單詳情
+                const response = await fetch(`${API_BASE}/api/ordering/details/${orderId}`);
+                const result = await response.json();
+                
+                if (!result.success) {
+                    showError('載入訂單資料失敗');
+                    return;
+                }
+                
+                const order = result.order;
+                
+                let modalHtml = `
+                    <div class="issue-modal">
+                        <div class="issue-modal-content">
+                            <div class="issue-modal-header">
+                                <h3>品項異常回報 - #${orderId}</h3>
+                                <button class="issue-modal-close" onclick="closeModal()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="issue-modal-body">
+                                <form id="issueReportForm">
+                                    <div class="form-group">
+                                        <label class="form-label">異常類型</label>
+                                        <div class="issue-type-grid">
+                                            <div class="issue-type-card" onclick="selectIssueType('excess')">
+                                                <div class="issue-type-icon">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </div>
+                                                <div>多收到品項</div>
+                                            </div>
+                                            <div class="issue-type-card" onclick="selectIssueType('shortage')">
+                                                <div class="issue-type-icon">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                </div>
+                                                <div>少收到品項</div>
+                                            </div>
+                                            <div class="issue-type-card" onclick="selectIssueType('damaged')">
+                                                <div class="issue-type-icon">
+                                                    <i class="fas fa-broken-image"></i>
+                                                </div>
+                                                <div>品項破損</div>
+                                            </div>
+                                            <div class="issue-type-card" onclick="selectIssueType('other')">
+                                                <div class="issue-type-icon">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </div>
+                                                <div>其他異常</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group" id="itemSelectionGroup" style="display: none;">
+                                        <label class="form-label">選擇相關品項</label>
+                                        <div class="issue-items-list">
+                                            ${order.items.map(item => `
+                                                <div class="issue-item" onclick="toggleItemSelection('${item.supplier}-${item.product}')">
+                                                    <input type="checkbox" id="item_${item.supplier}-${item.product}" style="margin-right: 10px;">
+                                                    <div style="flex: 1;">
+                                                        <strong>${item.supplier} - ${item.brand} ${item.product}</strong><br>
+                                                        <small style="color: var(--text-secondary);">
+                                                            訂購數量: ${item.quantity} ${item.unit}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">異常描述</label>
+                                        <textarea id="issueDescription" class="form-textarea" placeholder="請詳細描述異常情況..." required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">異常照片 (選填)</label>
+                                        <div class="photo-upload-area" onclick="document.getElementById('issuePhotos').click()">
+                                            <i class="fas fa-camera" style="font-size: 32px; color: var(--text-secondary); margin-bottom: 10px;"></i>
+                                            <div>點擊上傳異常照片</div>
+                                        </div>
+                                        <input type="file" id="issuePhotos" accept="image/*" multiple hidden onchange="handlePhotoUpload(this, 'issuePreview')">
+                                        <div id="issuePreview" class="photo-preview"></div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-warning btn-full">
+                                        <i class="fas fa-paper-plane"></i> 提交異常回報
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                
+                // 綁定表單提交事件
+                document.getElementById('issueReportForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    await submitIssueReport(orderId);
+                });
+                
+            } catch (error) {
+                console.error('開啟異常回報失敗:', error);
+                showError('開啟異常回報時發生錯誤');
+            }
+        }
+
+        // 選擇異常類型
+        function selectIssueType(type) {
+            // 清除之前的選擇
+            document.querySelectorAll('.issue-type-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // 選擇當前類型
+            event.currentTarget.classList.add('selected');
+            
+            // 為表單設置隱藏欄位
+            const existingInput = document.getElementById('selectedIssueType');
+            if (existingInput) {
+                existingInput.value = type;
+            } else {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.id = 'selectedIssueType';
+                hiddenInput.value = type;
+                document.getElementById('issueReportForm').appendChild(hiddenInput);
+            }
+            
+            // 根據類型顯示/隱藏品項選擇
+            const itemSelectionGroup = document.getElementById('itemSelectionGroup');
+            if (type === 'other') {
+                itemSelectionGroup.style.display = 'none';
+            } else {
+                itemSelectionGroup.style.display = 'block';
+            }
+        }
+
+        // 切換品項選擇
+        function toggleItemSelection(itemKey) {
+            const checkbox = document.getElementById(`item_${itemKey}`);
+            const item = event.currentTarget;
+            
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        }
+
+        // 提交異常回報
+        async function submitIssueReport(orderId) {
+            try {
+                const issueType = document.getElementById('selectedIssueType')?.value;
+                const description = document.getElementById('issueDescription').value;
+                
+                if (!issueType) {
+                    showError('請選擇異常類型');
+                    return;
+                }
+                
+                if (!description.trim()) {
+                    showError('請填寫異常描述');
+                    return;
+                }
+                
+                // 收集選中的品項
+                const selectedItems = [];
+                document.querySelectorAll('#itemSelectionGroup input[type="checkbox"]:checked').forEach(checkbox => {
+                    selectedItems.push(checkbox.id.replace('item_', ''));
+                });
+                
+                const issueData = {
+                    orderId: orderId,
+                    reporterId: currentUser.employeeId,
+                    issueType: issueType,
+                    description: description,
+                    affectedItems: selectedItems,
+                    photos: uploadedPhotos.issue || []
+                };
+                
+                const response = await fetch(`${API_BASE}/api/ordering/report-issue`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(issueData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showSuccess('異常回報提交成功！');
+                    closeModal();
+                    uploadedPhotos.issue = [];
+                    await loadOrderingRecords(); // 重新載入記錄
+                } else {
+                    showError(result.message || '提交失敗');
+                }
+                
+            } catch (error) {
+                console.error('提交異常回報失敗:', error);
+                showError('提交失敗，請稍後再試');
+            }
+        }
+
+        // 查看異常回報
+        async function viewIssueReports(orderId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/ordering/issue-reports/${orderId}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    const reports = result.reports;
+                    let reportsHtml = `
+                        <div class="issue-modal">
+                            <div class="issue-modal-content">
+                                <div class="issue-modal-header">
+                                    <h3>異常回報記錄 - #${orderId}</h3>
+                                    <button class="issue-modal-close" onclick="closeModal()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="issue-modal-body">
+                                    ${reports.map((report, index) => `
+                                        <div class="record-item" style="margin-bottom: 15px;">
+                                            <div class="record-header">
+                                                <span class="record-title">
+                                                    ${getIssueTypeText(report.issueType)} - ${report.reporterName}
+                                                </span>
+                                                <span class="record-time">
+                                                    ${new Date(report.timestamp).toLocaleString()}
+                                                </span>
+                                            </div>
+                                            <div class="record-details">
+                                                <strong>描述:</strong> ${report.description}<br>
+                                                ${report.affectedItems.length > 0 ? 
+                                                    `<strong>相關品項:</strong> ${report.affectedItems.join(', ')}<br>` 
+                                                    : ''
+                                                }
+                                                <strong>狀態:</strong> ${report.status}
+                                                ${report.response ? `<br><strong>處理回覆:</strong> ${report.response}` : ''}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.insertAdjacentHTML('beforeend', reportsHtml);
+                } else {
+                    showError('載入異常回報失敗');
+                }
+            } catch (error) {
+                console.error('載入異常回報失敗:', error);
+                showError('載入異常回報時發生錯誤');
+            }
+        }
+
+        // 關閉模態框
+        function closeModal() {
+            const modal = document.querySelector('.issue-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // 獲取異常類型文字
+        function getIssueTypeText(type) {
+            const typeMap = {
+                'excess': '多收品項',
+                'shortage': '缺少品項', 
+                'damaged': '品項破損',
+                'other': '其他異常'
+            };
+            return typeMap[type] || type;
+        }
+
+        // 頁面載入完成後初始化進行中投票
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                loadActiveVotes();
+            }, 1000);
+        });
+        
+        // ==================== 記錄管理功能 ====================
+        
+        let currentVoidableRecords = [];
+        let currentFilterType = '';
+        let selectedRecord = null;
+        
+        // 載入可作廢記錄
+        async function loadVoidableRecords() {
+            if (!currentUser) return;
+            
+            try {
+                const params = new URLSearchParams({
+                    type: currentFilterType
+                });
+                
+                const response = await fetch(`${API_BASE}/api/employee/${currentUser.employeeId}/voidable-records?${params}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentVoidableRecords = result.data.records;
+                    displayVoidableRecords(currentVoidableRecords);
+                    updateVoidStats(result.data);
+                } else {
+                    showNotification('載入可操作記錄失敗: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('載入可操作記錄失敗:', error);
+                showNotification('載入可操作記錄失敗', 'error');
+            }
+        }
+        
+        // 顯示可作廢記錄
+        function displayVoidableRecords(records) {
+            const container = document.getElementById('voidableRecords');
+            
+            if (records.length === 0) {
+                container.innerHTML = `
+                    <div class="record-item">
+                        <div class="record-header">
+                            <span class="record-title">暫無可操作的記錄</span>
+                        </div>
+                        <div class="record-content">
+                            <p>12小時內的記錄才能編輯或作廢</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const recordsHtml = records.map(record => {
+                const timeRemaining = Math.max(0, record.timeRemaining);
+                const canEdit = !record.isEdited && timeRemaining > 0;
+                const canVoid = timeRemaining > 0;
+                
+                return `
+                    <div class="record-item ${canEdit ? 'can-edit' : ''} ${record.isEdited ? 'edited' : ''}">
+                        <div class="record-header">
+                            <span class="record-title">${record.recordTypeName} - ${getRecordTitle(record)}</span>
+                        </div>
+                        <div class="record-content">
+                            <p><strong>日期:</strong> ${new Date(record.timestamp || record.date).toLocaleString('zh-TW')}</p>
+                            <p><strong>分店:</strong> ${record.storeName || '未知'}</p>
+                            ${getRecordDetails(record)}
+                            ${record.isEdited ? '<p><strong>狀態:</strong> <span style="color: #f39c12">已編輯</span></p>' : ''}
+                        </div>
+                        <div class="record-meta">
+                            <span class="time-remaining">剩餘 ${timeRemaining.toFixed(1)} 小時</span>
+                            <div class="record-actions">
+                                <button class="action-btn edit" onclick="showEditModal('${record.recordType}', '${getRecordId(record)}')" ${!canEdit ? 'disabled' : ''}>
+                                    <i class="fas fa-edit"></i> 編輯
+                                </button>
+                                <button class="action-btn void" onclick="showVoidModal('${record.recordType}', '${getRecordId(record)}')" ${!canVoid ? 'disabled' : ''}>
+                                    <i class="fas fa-trash"></i> 作廢
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = recordsHtml;
+        }
+        
+        // 獲取記錄標題
+        function getRecordTitle(record) {
+            switch (record.recordType) {
+                case 'attendance':
+                    return record.type === 'checkin' ? '上班打卡' : '下班打卡';
+                case 'revenue':
+                    return `營收記錄 ($${record.totalIncome?.toLocaleString() || 0})`;
+                case 'ordering':
+                    return `叫貨記錄 (${record.items?.length || 0}項)`;
+                case 'maintenance':
+                    return `維修申請 - ${record.equipment}`;
+                default:
+                    return '記錄';
+            }
+        }
+        
+        // 獲取記錄詳情
+        function getRecordDetails(record) {
+            switch (record.recordType) {
+                case 'attendance':
+                    return `<p><strong>類型:</strong> ${record.type === 'checkin' ? '上班' : '下班'}</p>`;
+                case 'revenue':
+                    return `<p><strong>獎金類型:</strong> ${record.bonusType}</p>
+                            <p><strong>訂單數:</strong> ${record.orderCount}</p>`;
+                case 'ordering':
+                    return `<p><strong>品項數:</strong> ${record.items?.length || 0}</p>`;
+                case 'maintenance':
+                    return `<p><strong>設備:</strong> ${record.equipment}</p>
+                            <p><strong>問題:</strong> ${record.description}</p>`;
+                default:
+                    return '';
+            }
+        }
+        
+        // 獲取記錄ID
+        function getRecordId(record) {
+            return record.recordId || record.orderId || record.requestId;
+        }
+        
+        // 更新作廢統計
+        function updateVoidStats(data) {
+            document.getElementById('todayVoidCount').textContent = data.todayVoidCount;
+            document.getElementById('remainingVoidCount').textContent = data.remainingVoidCount;
+            document.getElementById('voidableRecordsCount').textContent = data.records.length;
+        }
+        
+        // 按類型篩選記錄
+        function filterRecordsByType(type) {
+            currentFilterType = type;
+            
+            // 更新按鈕狀態
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-type="${type}"]`).classList.add('active');
+            
+            loadVoidableRecords();
+        }
+        
+        // 顯示作廢模態框
+        function showVoidModal(recordType, recordId) {
+            const record = currentVoidableRecords.find(r => getRecordId(r) === recordId);
+            if (!record) return;
+            
+            selectedRecord = { type: recordType, id: recordId, data: record };
+            
+            // 顯示記錄詳情
+            document.getElementById('voidRecordDetails').innerHTML = `
+                <h4>${record.recordTypeName} - ${getRecordTitle(record)}</h4>
+                <p><strong>日期:</strong> ${new Date(record.timestamp || record.date).toLocaleString('zh-TW')}</p>
+                <p><strong>分店:</strong> ${record.storeName}</p>
+                ${getRecordDetails(record)}
+            `;
+            
+            document.getElementById('voidReason').value = '';
+            document.getElementById('voidModal').style.display = 'block';
+        }
+        
+        // 關閉作廢模態框
+        function closeVoidModal() {
+            document.getElementById('voidModal').style.display = 'none';
+            selectedRecord = null;
+        }
+        
+        // 確認作廢
+        async function confirmVoid() {
+            if (!selectedRecord) return;
+            
+            const reason = document.getElementById('voidReason').value.trim();
+            if (reason.length < 5) {
+                showNotification('作廢原因至少需要5個字符', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/void/${selectedRecord.type}/${selectedRecord.id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        reason: reason,
+                        employeeId: currentUser.employeeId
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showNotification('記錄作廢成功', 'success');
+                    closeVoidModal();
+                    loadVoidableRecords();
+                } else {
+                    showNotification('作廢失敗: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('作廢失敗:', error);
+                showNotification('作廢失敗', 'error');
+            }
+        }
+        
+        // 顯示編輯模態框
+        function showEditModal(recordType, recordId) {
+            const record = currentVoidableRecords.find(r => getRecordId(r) === recordId);
+            if (!record) return;
+            
+            selectedRecord = { type: recordType, id: recordId, data: record };
+            
+            // 生成編輯表單
+            generateEditForm(record);
+            
+            document.getElementById('editReason').value = '';
+            document.getElementById('editModal').style.display = 'block';
+        }
+        
+        // 生成編輯表單
+        function generateEditForm(record) {
+            const formContainer = document.getElementById('editRecordForm');
+            let formHtml = '';
+            
+            switch (record.recordType) {
+                case 'attendance':
+                    // 考勤記錄暫不支援編輯
+                    formHtml = '<p>考勤記錄暫不支援編輯功能</p>';
+                    break;
+                case 'revenue':
+                    formHtml = `
+                        <div class="form-group">
+                            <label class="form-label">獎金類型</label>
+                            <select id="edit-bonusType" class="form-select">
+                                <option value="平日獎金" ${record.bonusType === '平日獎金' ? 'selected' : ''}>平日獎金</option>
+                                <option value="假日獎金" ${record.bonusType === '假日獎金' ? 'selected' : ''}>假日獎金</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">訂單數</label>
+                            <input type="number" id="edit-orderCount" class="form-input" value="${record.orderCount || 0}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">備註</label>
+                            <textarea id="edit-notes" class="form-textarea">${record.notes || ''}</textarea>
+                        </div>
+                    `;
+                    break;
+                case 'ordering':
+                    formHtml = '<p>叫貨記錄的編輯功能較複雜，請聯絡管理員</p>';
+                    break;
+                case 'maintenance':
+                    formHtml = `
+                        <div class="form-group">
+                            <label class="form-label">設備</label>
+                            <input type="text" id="edit-equipment" class="form-input" value="${record.equipment || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">問題描述</label>
+                            <textarea id="edit-description" class="form-textarea">${record.description || ''}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">優先級</label>
+                            <select id="edit-priority" class="form-select">
+                                <option value="一般" ${record.priority === '一般' ? 'selected' : ''}>一般</option>
+                                <option value="緊急" ${record.priority === '緊急' ? 'selected' : ''}>緊急</option>
+                            </select>
+                        </div>
+                    `;
+                    break;
+                default:
+                    formHtml = '<p>此類型記錄暫不支援編輯</p>';
+            }
+            
+            formContainer.innerHTML = formHtml;
+        }
+        
+        // 關閉編輯模態框
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            selectedRecord = null;
+        }
+        
+        // 確認編輯
+        async function confirmEdit() {
+            if (!selectedRecord) return;
+            
+            const reason = document.getElementById('editReason').value.trim();
+            if (reason.length < 5) {
+                showNotification('編輯原因至少需要5個字符', 'error');
+                return;
+            }
+            
+            // 收集編輯數據
+            const editData = collectEditData(selectedRecord.data.recordType);
+            if (!editData) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/edit/${selectedRecord.type}/${selectedRecord.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        employeeId: currentUser.employeeId,
+                        editData: editData,
+                        editReason: reason
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showNotification('記錄編輯成功', 'success');
+                    closeEditModal();
+                    loadVoidableRecords();
+                } else {
+                    showNotification('編輯失敗: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('編輯失敗:', error);
+                showNotification('編輯失敗', 'error');
+            }
+        }
+        
+        // 收集編輯數據
+        function collectEditData(recordType) {
+            switch (recordType) {
+                case 'revenue':
+                    return {
+                        bonusType: document.getElementById('edit-bonusType')?.value,
+                        orderCount: parseInt(document.getElementById('edit-orderCount')?.value || 0),
+                        notes: document.getElementById('edit-notes')?.value
+                    };
+                case 'maintenance':
+                    return {
+                        equipment: document.getElementById('edit-equipment')?.value,
+                        description: document.getElementById('edit-description')?.value,
+                        priority: document.getElementById('edit-priority')?.value
+                    };
+                default:
+                    return null;
+            }
+        }
+        
+        // 修改showSection函數以支援記錄管理
+        const originalShowSection = showSection;
+        showSection = function(sectionName) {
+            originalShowSection(sectionName);
+            
+            if (sectionName === 'record-management') {
+                loadVoidableRecords();
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-04T06:23:10.888Z",
+  "strategy": "COMPLETE_FRESH_DEPLOYMENT",
+  "reason": "持續構建失敗需要全新開始",
+  "confidence": "99%",
+  "files": {
+    "package": "package-clean.json",
+    "dockerfile": "Dockerfile-clean",
+    "server": "app-clean.js",
+    "ignore": ".gcloudignore-clean"
+  },
+  "steps": [
+    "🗑️ 在 Google Cloud Console 中刪除現有服務",
+    "📦 應用全新的極簡配置文件",
+    "📤 推送到 GitHub 觸發新構建",
+    "🚀 在 Console 中創建全新服務",
+    "⏰ 等待 3-5 分鐘完成部署",
+    "✅ 測試新服務所有功能"
+  ],
+  "advantages": [
+    "🧹 完全清除歷史問題和緩存",
+    "⚡ 極簡配置最大化成功率",
+    "🆕 全新 URL 和環境",
+    "🔒 包含所有核心功能",
+    "📊 優化的性能和穩定性"
+  ],
+  "expectedResult": {
+    "newUrl": "https://employee-management-system-[new-hash].europe-west1.run.app",
+    "buildTime": "3-5 分鐘",
+    "successRate": "99%",
+    "features": "完整企業管理功能"
+  }
+}

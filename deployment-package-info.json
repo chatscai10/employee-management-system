@@ -1,0 +1,18 @@
+{
+  "name": "Google Cloud 部署包",
+  "files": [
+    "server-production.js",
+    "package.json",
+    "Dockerfile",
+    ".dockerignore"
+  ],
+  "instructions": [
+    "1. 將以下檔案壓縮成 ZIP",
+    "2. 前往 Google Cloud Console",
+    "3. 選擇 Cloud Run 服務",
+    "4. 上傳 ZIP 檔案",
+    "5. 配置部署設定",
+    "6. 等待部署完成"
+  ],
+  "expectedUrl": "https://employee-management-system-[hash]-asiaeast1-run.googleapis.com"
+}

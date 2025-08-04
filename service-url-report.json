@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-08-04T05:28:37.880Z",
+  "serviceName": "employee-management-system",
+  "region": "europe-west1",
+  "projectId": "adept-arbor-467807-t9",
+  "deploymentAge": "15 minutes ago",
+  "status": "URL_LOOKUP_NEEDED",
+  "possibleUrlPatterns": [
+    "https://employee-management-system-{hash}.europe-west1.run.app",
+    "https://employee-management-system-{projectHash}.europe-west1.run.app",
+    "https://employee-management-system-adept-arbor-467807-t9.europe-west1.run.app",
+    "https://employee-management-system-{numbers}.europe-west1.run.app"
+  ],
+  "specificUrlsToTry": [
+    "https://employee-management-system-213410885168.europe-west1.run.app",
+    "https://employee-management-system-467807.europe-west1.run.app",
+    "https://employee-management-system-adept-arbor-467807-t9.europe-west1.run.app",
+    "https://employee-management-system-t9.europe-west1.run.app",
+    "https://employee-management-system-latest.europe-west1.run.app"
+  ],
+  "manualCheckGuide": "# 🔍 手動獲取 Google Cloud Run 服務網址\n\n## 🎯 立即獲取正確網址的方法\n\n### 方法 1: Cloud Run 控制台（最準確）\n1. 前往 Cloud Run 控制台: https://console.cloud.google.com/run\n2. 確保選擇專案: **adept-arbor-467807-t9**\n3. 找到服務: **employee-management-system** (europe-west1)\n4. 點擊服務名稱\n5. 在「服務詳細資料」頁面中找到 **URL** 欄位\n6. 複製完整的服務網址\n\n### 方法 2: 透過服務清單\n從您的控制台截圖中：\n- 服務名稱: employee-management-system\n- 部署類型: 存放區\n- 區域: europe-west1\n- 最近部署: 15 分鐘前\n\n**點擊該服務行，即可看到完整的服務 URL**\n\n### 方法 3: Cloud Shell 命令\n如果您有 Cloud Shell 存取權：\n```bash\n# 設定專案\ngcloud config set project adept-arbor-467807-t9\n\n# 獲取服務 URL\ngcloud run services describe employee-management-system \\\n  --region europe-west1 \\\n  --format=\"value(status.url)\"\n```\n\n## 🔍 檢查服務狀態\n\n獲得正確 URL 後，測試以下端點：\n\n1. **主頁**: `https://[您的URL]/`\n   - 應該顯示企業管理系統主頁\n\n2. **健康檢查**: `https://[您的URL]/api/health`\n   - 應該返回 JSON 健康狀態\n\n3. **登入頁面**: `https://[您的URL]/api/login`\n   - 應該顯示登入介面\n\n4. **產品管理**: `https://[您的URL]/api/products`\n   - 應該返回產品數據\n\n## 🚨 如果仍顯示佔位頁面\n\n這表示構建仍在進行中，請：\n\n1. **等待更長時間**: 複雜應用可能需要 10-15 分鐘\n2. **檢查構建日誌**: \n   - 前往 Cloud Build: https://console.cloud.google.com/cloud-build/builds\n   - 查看最新構建的詳細日誌\n3. **檢查服務日誌**:\n   - 在 Cloud Run 服務頁面點擊「日誌」標籤\n\n## 🎉 成功指標\n\n當部署成功時，您會看到：\n- ✅ 企業管理系統主頁（而非佔位頁面）\n- ✅ 測試帳號可以登入 (test/123456)\n- ✅ 所有 API 端點正常回應\n- ✅ 產品和庫存管理功能可用\n\n## 💡 提示\n\n- Google Cloud Run 的 URL 格式通常是: `https://服務名-雜湊.區域.run.app`\n- 雜湊部分可能包含專案ID的一部分或隨機數字\n- 每次重新部署可能會生成不同的 URL",
+  "nextSteps": [
+    "🔍 前往 Cloud Run 控制台獲取正確 URL",
+    "📋 複製服務的完整網址",
+    "🧪 測試主要端點確認功能",
+    "✅ 驗證企業管理系統是否正常運行"
+  ],
+  "importantNote": "由於 Google Cloud Run 會為每個服務生成唯一的 URL，最準確的方法是從控制台直接複製"
+}

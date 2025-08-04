@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "totalTests": 8,
+    "successfulTests": 7,
+    "failedTests": 1,
+    "averageResponseTime": 304,
+    "v2SystemDetected": false,
+    "placeholderDetected": true,
+    "hasExpectedContent": 4,
+    "systemStatus": {
+      "status": "BUILD_IN_PROGRESS",
+      "message": "🔄 構建仍在進行中，顯示佔位頁面",
+      "confidence": "low"
+    },
+    "successRate": 88
+  },
+  "details": {
+    "basic": [
+      {
+        "name": "主頁載入",
+        "path": "/",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 381,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:52:55.970Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": false,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      },
+      {
+        "name": "系統健康檢查",
+        "path": "/health",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 297,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:52:57.269Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      },
+      {
+        "name": "API健康檢查",
+        "path": "/api/health",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 295,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:52:58.564Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      }
+    ],
+    "api": [
+      {
+        "name": "產品管理API",
+        "path": "/api/products",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 296,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:52:59.861Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      },
+      {
+        "name": "庫存管理API",
+        "path": "/api/inventory",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 284,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:53:01.160Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": true,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      },
+      {
+        "name": "登入頁面",
+        "path": "/api/login",
+        "method": "GET",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 298,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:53:02.471Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": false,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      }
+    ],
+    "advanced": [
+      {
+        "name": "員工登入功能",
+        "path": "/api/login",
+        "method": "POST",
+        "expectedStatus": 200,
+        "actualStatus": 200,
+        "success": true,
+        "responseTime": 288,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:53:03.769Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": false,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      },
+      {
+        "name": "錯誤登入測試",
+        "path": "/api/login",
+        "method": "POST",
+        "expectedStatus": 401,
+        "actualStatus": 200,
+        "success": false,
+        "responseTime": 296,
+        "contentLength": 4171,
+        "contentType": "text/html; charset=utf-8",
+        "timestamp": "2025-08-04T05:53:05.577Z",
+        "isPlaceholder": true,
+        "isV2System": false,
+        "hasExpectedContent": false,
+        "responsePreview": "<!doctype html> <html lang=en> <head> <meta charset=utf-8> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Placeholder | Cloud Run</title> <link href=\"https://fonts.googlea"
+      }
+    ],
+    "summary": {
+      "totalTests": 8,
+      "successfulTests": 7,
+      "failedTests": 1,
+      "averageResponseTime": 304,
+      "v2SystemDetected": false,
+      "placeholderDetected": true,
+      "hasExpectedContent": 4,
+      "systemStatus": {
+        "status": "BUILD_IN_PROGRESS",
+        "message": "🔄 構建仍在進行中，顯示佔位頁面",
+        "confidence": "low"
+      },
+      "successRate": 88
+    }
+  },
+  "timestamp": "2025-08-04T05:53:07.085Z"
+}

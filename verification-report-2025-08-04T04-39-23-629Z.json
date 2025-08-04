@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "totalEndpoints": 7,
+    "successfulEndpoints": 1,
+    "failedEndpoints": 6,
+    "successRate": 14,
+    "systemStatus": "needs_attention",
+    "verificationTime": "2025-08-04T04:39:23.628Z"
+  },
+  "details": [
+    {
+      "path": "/",
+      "status": 200,
+      "success": true,
+      "contentLength": 1077,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:22.535Z"
+    },
+    {
+      "path": "/api",
+      "status": 404,
+      "success": false,
+      "contentLength": 79,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:23.627Z"
+    },
+    {
+      "path": "/api/health",
+      "status": 404,
+      "success": false,
+      "contentLength": 79,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:22.524Z"
+    },
+    {
+      "path": "/api/products",
+      "status": 404,
+      "success": false,
+      "contentLength": 79,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:22.580Z"
+    },
+    {
+      "path": "/api/inventory",
+      "status": 404,
+      "success": false,
+      "contentLength": 79,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:22.708Z"
+    },
+    {
+      "path": "/api/login",
+      "status": 404,
+      "success": false,
+      "contentLength": 79,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:22.700Z"
+    },
+    {
+      "path": "/api/accounts",
+      "status": 404,
+      "success": false,
+      "contentLength": 79,
+      "hasContent": true,
+      "timestamp": "2025-08-04T04:39:22.529Z"
+    }
+  ],
+  "recommendations": [
+    "🚨 系統可能未正確部署，建議檢查 Vercel 配置",
+    "🔧 確認 api/index.js 和 vercel.json 是否正確推送",
+    "🔄 建議重新部署整個系統"
+  ]
+}

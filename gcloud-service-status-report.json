@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-08-04T05:19:26.623Z",
+  "serviceUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+  "status": "BUILD_IN_PROGRESS",
+  "message": "🔄 構建正在進行中，顯示佔位頁面",
+  "statistics": {
+    "totalEndpoints": 6,
+    "successfulEndpoints": 6,
+    "placeholderPages": 6,
+    "productionPages": 0,
+    "errorEndpoints": 0,
+    "successRate": 100
+  },
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "success": true,
+      "contentLength": 4171,
+      "isPlaceholder": true,
+      "isProduction": false,
+      "timestamp": "2025-08-04T05:19:26.616Z"
+    },
+    {
+      "path": "/api/health",
+      "status": 200,
+      "success": true,
+      "contentLength": 4171,
+      "isPlaceholder": true,
+      "isProduction": false,
+      "timestamp": "2025-08-04T05:19:26.604Z"
+    },
+    {
+      "path": "/api/products",
+      "status": 200,
+      "success": true,
+      "contentLength": 4171,
+      "isPlaceholder": true,
+      "isProduction": false,
+      "timestamp": "2025-08-04T05:19:26.621Z"
+    },
+    {
+      "path": "/api/inventory",
+      "status": 200,
+      "success": true,
+      "contentLength": 4171,
+      "isPlaceholder": true,
+      "isProduction": false,
+      "timestamp": "2025-08-04T05:19:26.622Z"
+    },
+    {
+      "path": "/api/login",
+      "status": 200,
+      "success": true,
+      "contentLength": 4171,
+      "isPlaceholder": true,
+      "isProduction": false,
+      "timestamp": "2025-08-04T05:19:26.620Z"
+    },
+    {
+      "path": "/api/accounts",
+      "status": 200,
+      "success": true,
+      "contentLength": 4171,
+      "isPlaceholder": true,
+      "isProduction": false,
+      "timestamp": "2025-08-04T05:19:26.606Z"
+    }
+  ],
+  "nextActions": [
+    "⏰ 等待 2-3 分鐘讓構建完成",
+    "🔍 檢查 Cloud Build 日誌",
+    "🔄 如果超過 10 分鐘仍是佔位頁面，需要檢查構建錯誤"
+  ],
+  "troubleshooting": {
+    "buildInProgress": true,
+    "needsToWait": true,
+    "needsToDebug": false,
+    "readyToUse": false
+  }
+}

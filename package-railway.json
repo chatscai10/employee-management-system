@@ -1,0 +1,32 @@
+{
+  "name": "employee-management-system-railway",
+  "version": "3.1.0",
+  "description": "企業員工管理系統 - Railway 部署版",
+  "main": "server-production.js",
+  "scripts": {
+    "start": "node server-production.js",
+    "railway": "chmod +x railway-start.sh && ./railway-start.sh",
+    "dev": "nodemon server-production.js"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "compression": "^1.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "railway",
+    "nodejs",
+    "enterprise",
+    "management"
+  ],
+  "author": "Claude Smart System",
+  "license": "MIT"
+}

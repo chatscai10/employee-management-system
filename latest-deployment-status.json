@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-08-04T05:27:53.757Z",
+  "deploymentAge": "15 minutes ago",
+  "region": "europe-west1",
+  "projectId": "adept-arbor-467807-t9",
+  "serviceName": "employee-management-system",
+  "checkResults": {
+    "found": false,
+    "results": [
+      {
+        "baseUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+        "status": "PLACEHOLDER",
+        "message": "構建可能仍在進行或失敗"
+      },
+      {
+        "baseUrl": "https://employee-management-system-adept-arbor-467807-t9.europe-west1.run.app",
+        "status": "CONNECTION_FAILED",
+        "error": 404
+      },
+      {
+        "baseUrl": "https://employee-management-system-467807.europe-west1.run.app",
+        "status": "CONNECTION_FAILED",
+        "error": 404
+      }
+    ]
+  },
+  "recommendations": [
+    "⏰ 再等待 5-10 分鐘讓構建完成",
+    "🔍 檢查 Cloud Build 日誌確認進度",
+    "🔧 如果持續失敗，檢查 GitHub 代碼"
+  ],
+  "status": "BUILD_IN_PROGRESS",
+  "message": "🔄 構建仍在進行中，請稍候"
+}
