@@ -1,0 +1,4635 @@
+{
+  "metadata": {
+    "testDate": "2025-08-05T02:53:45.688Z",
+    "baseUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+    "engineVersion": "1.0.0",
+    "totalTestTime": 29107
+  },
+  "systemMetrics": {
+    "totalEndpoints": 11,
+    "successfulTests": 11,
+    "failedTests": 0,
+    "averageResponseTime": 301,
+    "authRequiredEndpoints": 5,
+    "publicEndpoints": 6,
+    "totalTestTime": 29107
+  },
+  "testResults": [
+    {
+      "endpoint": "/",
+      "description": "主頁",
+      "type": "page",
+      "protected": false,
+      "timestamp": "2025-08-05T02:53:16.581Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 200,
+          "responseTime": 435,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": [
+                "頁面包含登入相關內容"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "text/html; charset=utf-8",
+              "etag": "W/\"1395-sxkPxaS9xPnpBFIJ+TKPwoRqcrk\"",
+              "x-cloud-trace-context": "955c0bfcf8bef6d463daf9973768f8a8;o=1",
+              "date": "Tue, 05 Aug 2025 02:53:17 GMT",
+              "server": "Google Frontend",
+              "content-length": "5013",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 4605,
+            "bodyPreview": "<!DOCTYPE html>\n<html lang=\"zh-TW\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>企業管理系統 v4.0.0 - 完整功能版</title>\n    <style>\n  "
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 311,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "9142e7b1c6a1f58563daf9973768f66f",
+              "date": "Tue, 05 Aug 2025 02:53:17 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 304,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "88e46124528ddec463daf9973768f7ba",
+              "date": "Tue, 05 Aug 2025 02:53:18 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 300,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "fd26056720429a119aee1855052f00f9",
+              "date": "Tue, 05 Aug 2025 02:53:18 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "6fa1f84d76d280969aee1855052f028f",
+              "date": "Tue, 05 Aug 2025 02:53:18 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 295,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "190088b19fdb83f29aee1855052f05d5",
+              "date": "Tue, 05 Aug 2025 02:53:19 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 340,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 317,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 318,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 305,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 312,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 302,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 323,
+          "avgResponseTime": 308,
+          "successRate": 100
+        }
+      },
+      "suggestions": [],
+      "score": 73
+    },
+    {
+      "endpoint": "/login",
+      "description": "登入頁面",
+      "type": "page",
+      "protected": false,
+      "timestamp": "2025-08-05T02:53:19.493Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 200,
+          "responseTime": 290,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [
+              "管理介面相關"
+            ],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": [
+                "頁面包含登入相關內容"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "text/html; charset=utf-8",
+              "etag": "W/\"18dc-33CZBwUC7eHQ5rfXdkxSMR9VdTQ\"",
+              "x-cloud-trace-context": "3059bcfe7f852a6ce64c06f6da2b9c4b",
+              "date": "Tue, 05 Aug 2025 02:53:20 GMT",
+              "server": "Google Frontend",
+              "content-length": "6364",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 6160,
+            "bodyPreview": "<!DOCTYPE html>\n<html lang=\"zh-TW\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>員工登入 - 企業管理系統</title>\n    <style>\n        * "
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 287,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "43d2cad047e8888ee64c06f6da2b91c4",
+              "date": "Tue, 05 Aug 2025 02:53:20 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 286,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "fe1d404ce34b9fbfe64c06f6da2b96f4",
+              "date": "Tue, 05 Aug 2025 02:53:21 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 293,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "9aafaf70a8ee3bade64c06f6da2b9e22",
+              "date": "Tue, 05 Aug 2025 02:53:21 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 286,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "be9a478b7938e173e64c06f6da2b9dfd",
+              "date": "Tue, 05 Aug 2025 02:53:21 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 312,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "21789eef8f04d1b8e64c06f6da2b99b8",
+              "date": "Tue, 05 Aug 2025 02:53:21 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/login",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 326,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 312,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 295,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 295,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 297,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 297,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 306,
+          "avgResponseTime": 301,
+          "successRate": 100
+        }
+      },
+      "suggestions": [],
+      "score": 73
+    },
+    {
+      "endpoint": "/dashboard",
+      "description": "儀表板",
+      "type": "page",
+      "protected": true,
+      "timestamp": "2025-08-05T02:53:22.166Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 200,
+          "responseTime": 358,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [
+              "管理介面相關"
+            ],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": [
+                "頁面包含登入相關內容"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "text/html; charset=utf-8",
+              "etag": "W/\"4e2d-t5U5/iHTcApaRv2WWmfV0417Sus\"",
+              "x-cloud-trace-context": "3b11c37fed9d4364e64c06f6da2b9825",
+              "date": "Tue, 05 Aug 2025 02:53:23 GMT",
+              "server": "Google Frontend",
+              "content-length": "20013",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 19003,
+            "bodyPreview": "<!DOCTYPE html>\n<html lang=\"zh-TW\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>企業管理主控台 v4.0.0</title>\n    <style>\n        *"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 341,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "78b97afd3e0a1c21e64c06f6da2b9e54",
+              "date": "Tue, 05 Aug 2025 02:53:23 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 296,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "116ff29119ec5c63e64c06f6da2b90ac",
+              "date": "Tue, 05 Aug 2025 02:53:23 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 306,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "8fb753884be613fae64c06f6da2b96db",
+              "date": "Tue, 05 Aug 2025 02:53:24 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 285,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "f80222c2071b3dc7e64c06f6da2b9a8d",
+              "date": "Tue, 05 Aug 2025 02:53:24 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 283,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "344a7e199cb77faee64c06f6da2b96ec",
+              "date": "Tue, 05 Aug 2025 02:53:24 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/dashboard",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 350,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 350,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 344,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 343,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 353,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 343,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 349,
+          "avgResponseTime": 345,
+          "successRate": 100
+        }
+      },
+      "suggestions": [],
+      "score": 63
+    },
+    {
+      "endpoint": "/health",
+      "description": "健康檢查",
+      "type": "api",
+      "protected": false,
+      "timestamp": "2025-08-05T02:53:25.083Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 200,
+          "responseTime": 343,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "healthy"
+                  }
+                },
+                "version": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "4.0.0"
+                  }
+                },
+                "timestamp": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "2025-08-05T02:53:26.014Z"
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "企業管理系統運行正常"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"78-PccNnpAGuTje4/LO4CNPM91SOVo\"",
+              "x-cloud-trace-context": "794f511142870001177d78472f4adcf1",
+              "date": "Tue, 05 Aug 2025 02:53:26 GMT",
+              "server": "Google Frontend",
+              "content-length": "120",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 100,
+            "bodyPreview": "{\"status\":\"healthy\",\"version\":\"4.0.0\",\"timestamp\":\"2025-08-05T02:53:26.014Z\",\"message\":\"企業管理系統運行正常\"}"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 294,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "c968198a42fbe505177d78472f4adc68",
+              "date": "Tue, 05 Aug 2025 02:53:26 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 345,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "47bd5221a8fb945e177d78472f4ad7bc",
+              "date": "Tue, 05 Aug 2025 02:53:26 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 304,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "6161bb7a81193b39177d78472f4ad029",
+              "date": "Tue, 05 Aug 2025 02:53:27 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 298,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "9b74efffd4fc7c3d177d78472f4ad831",
+              "date": "Tue, 05 Aug 2025 02:53:27 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "1a8e3298088019d3177d78472f4ad50c",
+              "date": "Tue, 05 Aug 2025 02:53:27 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/health",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 294,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 292,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 299,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 293,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 311,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 309,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 301,
+          "avgResponseTime": 298,
+          "successRate": 100
+        }
+      },
+      "suggestions": [],
+      "score": 73
+    },
+    {
+      "endpoint": "/api/auth/login",
+      "description": "登入API",
+      "type": "api",
+      "protected": false,
+      "timestamp": "2025-08-05T02:53:27.864Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 293,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "ca8fe5d3196f3077148754512fc453b6",
+              "date": "Tue, 05 Aug 2025 02:53:28 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 401,
+          "responseTime": 296,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "用戶名或密碼錯誤"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": true,
+              "method": "unknown",
+              "hints": [
+                "返回401未授權狀態"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"36-ezQ/rCcYPijgH00wBCgRSMBLtqw\"",
+              "x-cloud-trace-context": "86881a56ba559cd6148754512fc45090",
+              "date": "Tue, 05 Aug 2025 02:53:29 GMT",
+              "server": "Google Frontend",
+              "content-length": "54",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 38,
+            "bodyPreview": "{\"success\":false,\"message\":\"用戶名或密碼錯誤\"}"
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 302,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "44918cb779e3a8bc148754512fc45928",
+              "date": "Tue, 05 Aug 2025 02:53:29 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 286,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "3e584d4747dd9918148754512fc4562a",
+              "date": "Tue, 05 Aug 2025 02:53:29 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 304,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "0b44f72b8616bcb6148754512fc45952",
+              "date": "Tue, 05 Aug 2025 02:53:29 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 293,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "60dc246f3e2a43ab148754512fc45498",
+              "date": "Tue, 05 Aug 2025 02:53:30 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": null,
+      "suggestions": [
+        {
+          "level": "medium",
+          "category": "authentication",
+          "message": "需要實現認證機制",
+          "action": "添加JWT token或session認證"
+        }
+      ],
+      "score": 52
+    },
+    {
+      "endpoint": "/api/system/status",
+      "description": "系統狀態",
+      "type": "api",
+      "protected": false,
+      "timestamp": "2025-08-05T02:53:29.639Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 200,
+          "responseTime": 290,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": true
+                  }
+                },
+                "system": {
+                  "type": "object",
+                  "sample": {
+                    "type": "object",
+                    "properties": {
+                      "version": {
+                        "type": "string",
+                        "sample": {
+                          "type": "string",
+                          "value": "4.0.0"
+                        }
+                      },
+                      "status": {
+                        "type": "string",
+                        "sample": {
+                          "type": "string",
+                          "value": "operational"
+                        }
+                      },
+                      "uptime": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 988.232583987
+                        }
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "sample": {
+                          "type": "string",
+                          "value": "2025-08-05T02:53:30.573Z"
+                        }
+                      },
+                      "modules": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "authentication": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "employeeManagement": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "attendanceTracking": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "scheduling": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "inventory": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "maintenance": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "revenue": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            },
+                            "promotion": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "active"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "database": {
+                  "type": "object",
+                  "sample": {
+                    "type": "object",
+                    "properties": {
+                      "employees": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 3
+                        }
+                      },
+                      "attendance": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 2
+                        }
+                      },
+                      "schedules": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 2
+                        }
+                      },
+                      "inventory": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 3
+                        }
+                      },
+                      "orders": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 2
+                        }
+                      },
+                      "maintenanceRequests": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 2
+                        }
+                      },
+                      "revenue": {
+                        "type": "number",
+                        "sample": {
+                          "type": "number",
+                          "value": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"1c3-+ZQBPLo7yLns1U7D5ssuPm7DWIo\"",
+              "x-cloud-trace-context": "9925857ad4cc97df148754512fc45691",
+              "date": "Tue, 05 Aug 2025 02:53:30 GMT",
+              "server": "Google Frontend",
+              "content-length": "451",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 451,
+            "bodyPreview": "{\"success\":true,\"system\":{\"version\":\"4.0.0\",\"status\":\"operational\",\"uptime\":988.232583987,\"timestamp\":\"2025-08-05T02:53:30.573Z\",\"modules\":{\"authentication\":\"active\",\"employeeManagement\":\"active\",\"att"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "9d9241410bb70c49148754512fc454ea",
+              "date": "Tue, 05 Aug 2025 02:53:30 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 296,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "05a2629e88372744148754512fc455dd",
+              "date": "Tue, 05 Aug 2025 02:53:31 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 286,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "fa30aeb90800975e148754512fc453d1",
+              "date": "Tue, 05 Aug 2025 02:53:31 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "29a2b90a6268fcb9148754512fc4514c",
+              "date": "Tue, 05 Aug 2025 02:53:31 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 288,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "4d71d75a9320233a148754512fc45309",
+              "date": "Tue, 05 Aug 2025 02:53:32 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/api/system/status",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 300,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 299,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 301,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 301,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 295,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 294,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 299,
+          "avgResponseTime": 298,
+          "successRate": 100
+        }
+      },
+      "suggestions": [],
+      "score": 73
+    },
+    {
+      "endpoint": "/api/employees",
+      "description": "員工管理",
+      "type": "api",
+      "protected": true,
+      "timestamp": "2025-08-05T02:53:32.282Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 401,
+          "responseTime": 307,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "需要身份驗證"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": true,
+              "method": "unknown",
+              "hints": [
+                "返回401未授權狀態"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"30-BVNhnsiGcX+6r1NhLVdJLLKBqpQ\"",
+              "x-cloud-trace-context": "f7dc19805f9980b5148754512fc45fbd",
+              "date": "Tue, 05 Aug 2025 02:53:33 GMT",
+              "server": "Google Frontend",
+              "content-length": "48",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 36,
+            "bodyPreview": "{\"success\":false,\"message\":\"需要身份驗證\"}"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "48f094269631ff6a148754512fc45450",
+              "date": "Tue, 05 Aug 2025 02:53:33 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 287,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "0ba503715f52bdee148754512fc45db2",
+              "date": "Tue, 05 Aug 2025 02:53:33 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 337,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "951defca886dd65b148754512fc4564a",
+              "date": "Tue, 05 Aug 2025 02:53:34 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 300,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "6811b022a2fa52f0148754512fc45ba7",
+              "date": "Tue, 05 Aug 2025 02:53:34 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 340,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "2f6d03cd068d93aa5e5efdaf9183e12d",
+              "date": "Tue, 05 Aug 2025 02:53:34 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/api/employees",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 295,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 295,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 300,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 300,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 304,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 304,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 300,
+          "avgResponseTime": 300,
+          "successRate": 100
+        }
+      },
+      "suggestions": [
+        {
+          "level": "medium",
+          "category": "authentication",
+          "message": "需要實現認證機制",
+          "action": "添加JWT token或session認證"
+        }
+      ],
+      "score": 67
+    },
+    {
+      "endpoint": "/api/attendance",
+      "description": "出勤管理",
+      "type": "api",
+      "protected": true,
+      "timestamp": "2025-08-05T02:53:35.045Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 401,
+          "responseTime": 295,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "需要身份驗證"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": true,
+              "method": "unknown",
+              "hints": [
+                "返回401未授權狀態"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"30-BVNhnsiGcX+6r1NhLVdJLLKBqpQ\"",
+              "x-cloud-trace-context": "9a82aafa125f82415e5efdaf9183ef49",
+              "date": "Tue, 05 Aug 2025 02:53:35 GMT",
+              "server": "Google Frontend",
+              "content-length": "48",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 36,
+            "bodyPreview": "{\"success\":false,\"message\":\"需要身份驗證\"}"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 291,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "2863dc36fa474f115e5efdaf9183ea70",
+              "date": "Tue, 05 Aug 2025 02:53:36 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 283,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "442467358ad172445e5efdaf9183e386",
+              "date": "Tue, 05 Aug 2025 02:53:36 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 302,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "f23ee905f3e698485e5efdaf9183e0e4",
+              "date": "Tue, 05 Aug 2025 02:53:36 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 285,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "5bb25805e2c1b2bf5e5efdaf9183e41e",
+              "date": "Tue, 05 Aug 2025 02:53:37 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 282,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "969cd00077882e855e5efdaf9183e15f",
+              "date": "Tue, 05 Aug 2025 02:53:37 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/api/attendance",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 302,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 302,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 290,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 290,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 291,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 291,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 294,
+          "avgResponseTime": 294,
+          "successRate": 100
+        }
+      },
+      "suggestions": [
+        {
+          "level": "medium",
+          "category": "authentication",
+          "message": "需要實現認證機制",
+          "action": "添加JWT token或session認證"
+        }
+      ],
+      "score": 67
+    },
+    {
+      "endpoint": "/api/inventory",
+      "description": "庫存管理",
+      "type": "api",
+      "protected": true,
+      "timestamp": "2025-08-05T02:53:37.670Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 401,
+          "responseTime": 301,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "需要身份驗證"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": true,
+              "method": "unknown",
+              "hints": [
+                "返回401未授權狀態"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"30-BVNhnsiGcX+6r1NhLVdJLLKBqpQ\"",
+              "x-cloud-trace-context": "8ac4002171c88e63ba2a19c58f0aec46",
+              "date": "Tue, 05 Aug 2025 02:53:38 GMT",
+              "server": "Google Frontend",
+              "content-length": "48",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 36,
+            "bodyPreview": "{\"success\":false,\"message\":\"需要身份驗證\"}"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 284,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "cc93df70cbcea11cb2bdff173d7a2e8a",
+              "date": "Tue, 05 Aug 2025 02:53:38 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "a755ec4bc036bfbab2bdff173d7a2e72",
+              "date": "Tue, 05 Aug 2025 02:53:39 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 297,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "caa45bab8a1d32cbb2bdff173d7a2c40",
+              "date": "Tue, 05 Aug 2025 02:53:39 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "331ffe50eb72017fb2bdff173d7a2cc7",
+              "date": "Tue, 05 Aug 2025 02:53:39 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 280,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "c947c0b2e514477cb2bdff173d7a2692",
+              "date": "Tue, 05 Aug 2025 02:53:40 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/api/inventory",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 290,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 288,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 291,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 291,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 290,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 290,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 290,
+          "avgResponseTime": 290,
+          "successRate": 100
+        }
+      },
+      "suggestions": [
+        {
+          "level": "medium",
+          "category": "authentication",
+          "message": "需要實現認證機制",
+          "action": "添加JWT token或session認證"
+        }
+      ],
+      "score": 67
+    },
+    {
+      "endpoint": "/api/maintenance",
+      "description": "維護管理",
+      "type": "api",
+      "protected": true,
+      "timestamp": "2025-08-05T02:53:40.291Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 401,
+          "responseTime": 301,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "需要身份驗證"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": true,
+              "method": "unknown",
+              "hints": [
+                "返回401未授權狀態"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"30-BVNhnsiGcX+6r1NhLVdJLLKBqpQ\"",
+              "x-cloud-trace-context": "a21896a73c1d31e9b2bdff173d7a202e",
+              "date": "Tue, 05 Aug 2025 02:53:41 GMT",
+              "server": "Google Frontend",
+              "content-length": "48",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 36,
+            "bodyPreview": "{\"success\":false,\"message\":\"需要身份驗證\"}"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 401,
+          "responseTime": 297,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "需要身份驗證"
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": true,
+              "method": "unknown",
+              "hints": [
+                "返回401未授權狀態"
+              ]
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"30-BVNhnsiGcX+6r1NhLVdJLLKBqpQ\"",
+              "x-cloud-trace-context": "1b08a2353749eea8b2bdff173d7a291d",
+              "date": "Tue, 05 Aug 2025 02:53:41 GMT",
+              "server": "Google Frontend",
+              "content-length": "48",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 36,
+            "bodyPreview": "{\"success\":false,\"message\":\"需要身份驗證\"}"
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 308,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "994a0adee6355c3cb2bdff173d7a2b1f",
+              "date": "Tue, 05 Aug 2025 02:53:41 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 308,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "c6537ceae581938cb2bdff173d7a21c3",
+              "date": "Tue, 05 Aug 2025 02:53:42 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 293,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "d4181fc3e6586f64b2bdff173d7a2e16",
+              "date": "Tue, 05 Aug 2025 02:53:42 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 307,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "6280761a5455e3e1b2bdff173d7a25f8",
+              "date": "Tue, 05 Aug 2025 02:53:42 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/api/maintenance",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 294,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 293,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 286,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 285,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 340,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 340,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 307,
+          "avgResponseTime": 306,
+          "successRate": 100
+        }
+      },
+      "suggestions": [
+        {
+          "level": "medium",
+          "category": "authentication",
+          "message": "需要實現認證機制",
+          "action": "添加JWT token或session認證"
+        }
+      ],
+      "score": 67
+    },
+    {
+      "endpoint": "/api/docs",
+      "description": "API文檔",
+      "type": "api",
+      "protected": false,
+      "timestamp": "2025-08-05T02:53:43.026Z",
+      "methods": [
+        {
+          "method": "GET",
+          "success": true,
+          "statusCode": 200,
+          "responseTime": 304,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "4.0.0"
+                  }
+                },
+                "title": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "企業管理系統 API 文檔"
+                  }
+                },
+                "description": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "完整的企業管理功能 API"
+                  }
+                },
+                "endpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "object",
+                    "properties": {
+                      "authentication": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "POST /api/auth/login": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "用戶登入"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "system": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/system/status": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "系統狀態查詢"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "employees": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/employees": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "員工列表查詢"
+                              }
+                            },
+                            "GET /api/employees/:id": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "單一員工查詢"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "attendance": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/attendance": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "考勤記錄查詢"
+                              }
+                            },
+                            "POST /api/attendance/checkin": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "員工簽到"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "scheduling": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/schedules": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "排班查詢"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "inventory": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/inventory": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "庫存查詢"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "orders": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/orders": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "採購申請查詢"
+                              }
+                            },
+                            "POST /api/orders": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "提交採購申請"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "maintenance": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/maintenance": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "維修申請查詢"
+                              }
+                            },
+                            "POST /api/maintenance": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "提交維修申請"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "revenue": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/revenue": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "營收分析查詢"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "promotion": {
+                        "type": "object",
+                        "sample": {
+                          "type": "object",
+                          "properties": {
+                            "GET /api/promotion-votes": {
+                              "type": "string",
+                              "sample": {
+                                "type": "string",
+                                "value": "升遷��票查詢"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"353-LmS9UROcoZob+pEA2kJTCS7zmJY\"",
+              "x-cloud-trace-context": "7e1ba3383015712b4ad8999b32ec6827",
+              "date": "Tue, 05 Aug 2025 02:53:43 GMT",
+              "server": "Google Frontend",
+              "content-length": "851",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 666,
+            "bodyPreview": "{\"version\":\"4.0.0\",\"title\":\"企業管理系統 API 文檔\",\"description\":\"完整的企業管理功能 API\",\"endpoints\":{\"authentication\":{\"POST /api/auth/login\":\"用戶登入\"},\"system\":{\"GET /api/system/status\":\"系統狀態查詢\"},\"employees\":{\"GET /a"
+          }
+        },
+        {
+          "method": "POST",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 285,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "451378ad58d41ef44ad8999b32ec6bf3",
+              "date": "Tue, 05 Aug 2025 02:53:44 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PUT",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 293,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "cb34d9c8917728554ad8999b32ec6ddc",
+              "date": "Tue, 05 Aug 2025 02:53:44 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "DELETE",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 292,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "94492c752423d43e4ad8999b32ec6299",
+              "date": "Tue, 05 Aug 2025 02:53:44 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "PATCH",
+          "success": true,
+          "statusCode": 404,
+          "responseTime": 298,
+          "analysis": {
+            "contentType": "json",
+            "isJson": true,
+            "isHtml": false,
+            "isText": false,
+            "structure": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "sample": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "sample": {
+                    "type": "string",
+                    "value": "端點未找到"
+                  }
+                },
+                "availableEndpoints": {
+                  "type": "object",
+                  "sample": {
+                    "type": "array",
+                    "length": 11,
+                    "sample": {
+                      "type": "string",
+                      "value": "GET /"
+                    }
+                  }
+                }
+              }
+            },
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "content-type": "application/json; charset=utf-8",
+              "etag": "W/\"10f-ZQQxFp07WhIMmTWeol8LI9lR6J0\"",
+              "x-cloud-trace-context": "f1d88103d2edad7c4ad8999b32ec6937",
+              "date": "Tue, 05 Aug 2025 02:53:45 GMT",
+              "server": "Google Frontend",
+              "content-length": "271",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 261,
+            "bodyPreview": "{\"success\":false,\"message\":\"端點未找到\",\"availableEndpoints\":[\"GET /\",\"GET /login\",\"GET /dashboard\",\"GET /health\",\"POST /api/auth/login\",\"GET /api/system/status\",\"GET /api/employees\",\"GET /api/attendance\","
+          }
+        },
+        {
+          "method": "OPTIONS",
+          "success": true,
+          "statusCode": 204,
+          "responseTime": 291,
+          "analysis": {
+            "contentType": "html",
+            "isJson": false,
+            "isHtml": true,
+            "isText": false,
+            "structure": {},
+            "errors": [],
+            "features": [],
+            "authentication": {
+              "required": false,
+              "method": "unknown",
+              "hints": []
+            }
+          },
+          "response": {
+            "headers": {
+              "x-powered-by": "Express",
+              "access-control-allow-origin": "*",
+              "access-control-allow-methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+              "vary": "Access-Control-Request-Headers",
+              "x-cloud-trace-context": "a983dd863019faa84ad8999b32ec6c12",
+              "date": "Tue, 05 Aug 2025 02:53:45 GMT",
+              "content-type": "text/html",
+              "server": "Google Frontend",
+              "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+            },
+            "bodyLength": 0,
+            "bodyPreview": ""
+          }
+        }
+      ],
+      "performance": {
+        "endpoint": "/api/docs",
+        "results": [
+          {
+            "iteration": 1,
+            "totalTime": 299,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 299,
+            "concurrency": 2
+          },
+          {
+            "iteration": 2,
+            "totalTime": 299,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 298,
+            "concurrency": 2
+          },
+          {
+            "iteration": 3,
+            "totalTime": 299,
+            "successful": 2,
+            "failed": 0,
+            "avgResponseTime": 299,
+            "concurrency": 2
+          }
+        ],
+        "summary": {
+          "totalRequests": 6,
+          "avgTotalTime": 299,
+          "avgResponseTime": 299,
+          "successRate": 100
+        }
+      },
+      "suggestions": [],
+      "score": 73
+    }
+  ],
+  "summary": {
+    "overallScore": 68,
+    "totalEndpoints": 11,
+    "successfulEndpoints": 11,
+    "failedEndpoints": 0,
+    "averageResponseTime": 301,
+    "criticalIssues": 0,
+    "highIssues": 0,
+    "authenticationEndpoints": 5,
+    "publicEndpoints": 6
+  }
+}
