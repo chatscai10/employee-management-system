@@ -1,0 +1,66 @@
+{
+  "timestamp": "2025-08-04T17:52:43.550Z",
+  "systemStatus": {
+    "accessible": false,
+    "statusCode": 403,
+    "responseTime": 1310,
+    "needsIAMFix": true,
+    "contentLength": 295,
+    "timestamp": "2025-08-04T17:52:40.399Z"
+  },
+  "testingResults": {
+    "results": {
+      "首頁": {
+        "success": false,
+        "statusCode": 403,
+        "responseTime": 497,
+        "contentLength": 295,
+        "hasContent": true
+      },
+      "登入頁面": {
+        "success": false,
+        "statusCode": 403,
+        "responseTime": 489,
+        "contentLength": 300,
+        "hasContent": true
+      },
+      "Dashboard": {
+        "success": false,
+        "statusCode": 403,
+        "responseTime": 281,
+        "contentLength": 304,
+        "hasContent": true
+      },
+      "系統狀態API": {
+        "success": false,
+        "statusCode": 403,
+        "responseTime": 285,
+        "contentLength": 312,
+        "hasContent": true
+      },
+      "員工API": {
+        "success": false,
+        "statusCode": 403,
+        "responseTime": 287,
+        "contentLength": 308,
+        "hasContent": true
+      }
+    },
+    "successCount": 0,
+    "totalTests": 5,
+    "successRate": 0,
+    "timestamp": "2025-08-04T17:52:42.248Z"
+  },
+  "generatedFiles": {
+    "guide": "D:\\0802\\WEB-BASED-GCLOUD-FIX-GUIDE.md",
+    "checklist": "D:\\0802\\QUICK-FIX-CHECKLIST.md"
+  },
+  "serviceUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+  "fixRequired": true,
+  "summary": {
+    "accessible": false,
+    "testingSuccessRate": 0,
+    "webGuideGenerated": true,
+    "userFriendlyFix": true
+  }
+}

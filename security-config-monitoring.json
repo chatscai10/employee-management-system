@@ -1,0 +1,20 @@
+{
+  "metrics": {
+    "collection_interval": 30,
+    "retention_period": "1y",
+    "aggregation": "prometheus",
+    "alerting": "alertmanager"
+  },
+  "logs": {
+    "level": "INFO",
+    "format": "JSON",
+    "retention": "1y",
+    "encryption": true,
+    "remote_syslog": true
+  },
+  "traces": {
+    "sampling_rate": 0.1,
+    "retention": "30d",
+    "analysis": "jaeger"
+  }
+}

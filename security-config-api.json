@@ -1,0 +1,24 @@
+{
+  "rateLimit": {
+    "windowMs": 900000,
+    "max": 100,
+    "message": "Too many requests",
+    "standardHeaders": true,
+    "legacyHeaders": false
+  },
+  "validation": {
+    "bodyParser": {
+      "limit": "10mb"
+    },
+    "requestValidation": true,
+    "responseValidation": true,
+    "sanitization": true
+  },
+  "headers": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "Content-Security-Policy": "default-src 'self'"
+  }
+}

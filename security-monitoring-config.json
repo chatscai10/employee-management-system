@@ -1,0 +1,44 @@
+{
+  "realTimeMonitoring": {
+    "enabled": true,
+    "metrics": [
+      "CPU使用率",
+      "記憶體使用率",
+      "網路流量",
+      "錯誤率",
+      "回應時間"
+    ],
+    "alertThresholds": {
+      "cpu": 80,
+      "memory": 85,
+      "errorRate": 5,
+      "responseTime": 2000
+    }
+  },
+  "securityMonitoring": {
+    "enabled": true,
+    "events": [
+      "失敗登入嘗試",
+      "權限提升",
+      "異常API調用",
+      "數據存取異常",
+      "可疑網路活動"
+    ],
+    "alertMethods": [
+      "Email",
+      "Telegram",
+      "SMS",
+      "系統通知"
+    ]
+  },
+  "auditLogging": {
+    "enabled": true,
+    "logLevel": "INFO",
+    "retention": "1年",
+    "compliance": [
+      "SOX",
+      "GDPR"
+    ],
+    "encryption": true
+  }
+}

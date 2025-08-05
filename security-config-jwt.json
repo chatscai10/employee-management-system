@@ -1,0 +1,10 @@
+{
+  "secret": "585a75c7f1cbea50881125717c9a78c1d88aaede8fceef3fc6a0ed3b5e118cd260706804c4ee9cf2d621cd68d5ae5c392dbf3ff894aa8244406cfa8bc86bef18",
+  "algorithm": "HS256",
+  "expiresIn": "1h",
+  "refreshTokenExpiry": "7d",
+  "issuer": "enterprise-management-system",
+  "audience": "authenticated-users",
+  "clockTolerance": 60,
+  "maxAge": 3600
+}

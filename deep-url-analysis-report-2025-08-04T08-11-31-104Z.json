@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "analysisTime": "2025-08-04T08:11:31.103Z",
+    "targetUrl": "https://employee-management-system-213410885168.europe-west1.run.app",
+    "analysisScope": "深度功能完整性分析",
+    "reportVersion": "1.0.0"
+  },
+  "executiveSummary": {
+    "systemAccessible": true,
+    "detectedVersion": "3.0.0",
+    "overallCompleteness": 13,
+    "versionConsistent": false,
+    "securityLevel": "good",
+    "recommendation": "系統功能嚴重不完整，需要重大修復"
+  },
+  "detailedAnalysis": {
+    "systemInfo": {
+      "accessible": true,
+      "responseTime": 396,
+      "version": "3.0.0",
+      "status": "healthy",
+      "timestamp": "2025-08-04T08:11:24.787Z"
+    },
+    "pageAnalysis": {
+      "/": {
+        "accessible": true,
+        "statusCode": 200,
+        "responseTime": 301,
+        "contentLength": 1731,
+        "contentType": "text/html; charset=utf-8",
+        "hasHTML": true,
+        "hasCSS": true,
+        "hasJavaScript": false,
+        "hasV3Reference": true,
+        "hasV4Reference": false,
+        "hasLoginForm": true,
+        "hasDashboard": false,
+        "hasEmployeeFeatures": true,
+        "hasEnterpriseFeatures": true,
+        "apiReferences": [
+          "/api/products",
+          "/api/login"
+        ]
+      },
+      "/login": {
+        "accessible": false,
+        "statusCode": 404,
+        "responseTime": 301,
+        "contentLength": 35
+      },
+      "/dashboard": {
+        "accessible": true,
+        "statusCode": 200,
+        "responseTime": 347,
+        "contentLength": 8721,
+        "contentType": "text/html; charset=utf-8",
+        "hasHTML": true,
+        "hasCSS": true,
+        "hasJavaScript": true,
+        "hasV3Reference": true,
+        "hasV4Reference": false,
+        "hasLoginForm": true,
+        "hasDashboard": true,
+        "hasEmployeeFeatures": true,
+        "hasEnterpriseFeatures": true,
+        "apiReferences": [
+          "/api/products",
+          "/api/login"
+        ]
+      }
+    },
+    "apiDiscovery": {
+      "discoveredEndpoints": {
+        "/health": {
+          "accessible": true,
+          "statusCode": 200,
+          "responseTime": 301,
+          "requiresAuth": false,
+          "dataStructure": {
+            "hasSuccessField": false,
+            "hasDataField": false,
+            "hasCountField": false,
+            "hasMessageField": false,
+            "responseType": "object",
+            "keyCount": 3
+          },
+          "functionality": "unknown"
+        },
+        "/api/system/status": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 312,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/auth/login": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 294,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/employees": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 291,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/employees/:id": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 292,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/attendance": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 291,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/attendance/checkin": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 302,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/schedules": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 297,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/inventory": {
+          "accessible": true,
+          "statusCode": 200,
+          "responseTime": 299,
+          "requiresAuth": false,
+          "dataStructure": {
+            "hasSuccessField": true,
+            "hasDataField": true,
+            "hasCountField": true,
+            "hasMessageField": false,
+            "responseType": "object",
+            "keyCount": 5
+          },
+          "functionality": "inventory_management"
+        },
+        "/api/orders": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 309,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/maintenance": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 301,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/revenue": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 296,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/promotion-votes": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 290,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        },
+        "/api/docs": {
+          "accessible": false,
+          "statusCode": 404,
+          "responseTime": 295,
+          "requiresAuth": false,
+          "dataStructure": null,
+          "functionality": "unknown"
+        }
+      },
+      "missingEndpoints": [
+        "/api/system/status",
+        "/api/auth/login",
+        "/api/employees",
+        "/api/employees/:id",
+        "/api/attendance",
+        "/api/attendance/checkin",
+        "/api/schedules",
+        "/api/orders",
+        "/api/maintenance",
+        "/api/revenue",
+        "/api/promotion-votes",
+        "/api/docs"
+      ],
+      "unexpectedEndpoints": [],
+      "functionalCategories": {
+        "inventory_management": [
+          "/api/inventory"
+        ]
+      }
+    },
+    "functionalityMapping": {},
+    "completenessAssessment": {
+      "overallCompleteness": 13,
+      "categoryCompleteness": {
+        "authentication": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 1,
+          "endpoints": [
+            "/api/auth/login"
+          ]
+        },
+        "employeeManagement": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 2,
+          "endpoints": [
+            "/api/employees",
+            "/api/employees/:id"
+          ]
+        },
+        "attendance": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 2,
+          "endpoints": [
+            "/api/attendance",
+            "/api/attendance/checkin"
+          ]
+        },
+        "inventory": {
+          "completeness": 100,
+          "workingEndpoints": 1,
+          "totalEndpoints": 1,
+          "endpoints": [
+            "/api/inventory"
+          ]
+        },
+        "maintenance": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 1,
+          "endpoints": [
+            "/api/maintenance"
+          ]
+        },
+        "revenue": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 1,
+          "endpoints": [
+            "/api/revenue"
+          ]
+        },
+        "promotion": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 1,
+          "endpoints": [
+            "/api/promotion-votes"
+          ]
+        },
+        "system": {
+          "completeness": 0,
+          "workingEndpoints": 0,
+          "totalEndpoints": 1,
+          "endpoints": [
+            "/api/system/status"
+          ]
+        }
+      },
+      "missingFeatures": [
+        "authentication",
+        "employeeManagement",
+        "attendance",
+        "maintenance",
+        "revenue",
+        "promotion",
+        "system"
+      ],
+      "presentFeatures": [
+        "inventory"
+      ],
+      "versionConsistency": {
+        "claimedVersion": "3.0.0",
+        "actualVersion": "v3.0.0",
+        "consistent": false
+      }
+    },
+    "securityAnalysis": {
+      "httpsEnabled": true,
+      "authenticationRequired": false,
+      "errorHandling": "unknown",
+      "dataExposure": "low",
+      "securityHeaders": {
+        "content-security-policy": "missing",
+        "x-frame-options": "missing",
+        "x-content-type-options": "missing",
+        "strict-transport-security": "missing"
+      },
+      "vulnerabilities": []
+    },
+    "performanceMetrics": {},
+    "authenticationAnalysis": {
+      "loginEndpointExists": false,
+      "loginFlowWorks": false,
+      "supportedRoles": [],
+      "authMechanisms": []
+    }
+  },
+  "conclusions": [
+    "✅ 系統成功部署且可正常訪問",
+    "⚠️ 版本不一致：聲稱3.0.0，實際v3.0.0",
+    "❌ API端點嚴重缺失",
+    "❌ 企業功能完整性不足"
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "version_consistency",
+      "action": "修復版本不一致問題",
+      "details": "確保所有頁面和API端點都反映正確的系統版本"
+    },
+    {
+      "priority": "high",
+      "category": "api_completeness",
+      "action": "實現缺失的API端點",
+      "details": "需要實現: /api/system/status, /api/auth/login, /api/employees, /api/employees/:id, /api/attendance, /api/attendance/checkin, /api/schedules, /api/orders, /api/maintenance, /api/revenue, /api/promotion-votes, /api/docs"
+    },
+    {
+      "priority": "medium",
+      "category": "functionality",
+      "action": "完善企業功能模組",
+      "details": "補充缺失的企業管理功能，提高系統完整性"
+    },
+    {
+      "priority": "high",
+      "category": "security",
+      "action": "加強身份驗證",
+      "details": "確保敏感API端點需要適當的身份驗證"
+    }
+  ]
+}

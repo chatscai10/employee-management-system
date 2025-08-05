@@ -1,0 +1,53 @@
+{
+  "inbound": [
+    {
+      "port": 443,
+      "protocol": "TCP",
+      "source": "any",
+      "description": "HTTPS"
+    },
+    {
+      "port": 80,
+      "protocol": "TCP",
+      "source": "any",
+      "description": "HTTP redirect"
+    },
+    {
+      "port": 22,
+      "protocol": "TCP",
+      "source": "management-subnet",
+      "description": "SSH"
+    }
+  ],
+  "outbound": [
+    {
+      "port": 443,
+      "protocol": "TCP",
+      "destination": "any",
+      "description": "HTTPS outbound"
+    },
+    {
+      "port": 53,
+      "protocol": "UDP",
+      "destination": "dns-servers",
+      "description": "DNS"
+    },
+    {
+      "port": 25,
+      "protocol": "TCP",
+      "destination": "mail-servers",
+      "description": "SMTP"
+    }
+  ],
+  "blocked": [
+    {
+      "description": "Block all other inbound traffic"
+    },
+    {
+      "description": "Block peer-to-peer protocols"
+    },
+    {
+      "description": "Block known malicious IPs"
+    }
+  ]
+}

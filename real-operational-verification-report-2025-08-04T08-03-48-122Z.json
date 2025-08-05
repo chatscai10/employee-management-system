@@ -1,0 +1,124 @@
+{
+  "summary": "❌ 企業系統存在重大問題，需要全面檢修",
+  "confidence": "LOW",
+  "stats": {
+    "loginSuccessRate": 0,
+    "coreOpsSuccessRate": null,
+    "dataSubSuccessRate": null,
+    "exceptionSuccessRate": 100,
+    "overallSuccessRate": null,
+    "totalTests": 8,
+    "timestamp": "2025-08-04T08:03:48.122Z"
+  },
+  "detailedResults": {
+    "loginTests": [
+      {
+        "account": "admin",
+        "role": "admin",
+        "success": false,
+        "message": "❌ 登入請求失敗 - HTTP 404",
+        "token": null,
+        "userInfo": null,
+        "responseTime": 422,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:44.873Z"
+      },
+      {
+        "account": "manager",
+        "role": "manager",
+        "success": false,
+        "message": "❌ 登入請求失敗 - HTTP 404",
+        "token": null,
+        "userInfo": null,
+        "responseTime": 289,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:45.162Z"
+      },
+      {
+        "account": "employee",
+        "role": "employee",
+        "success": false,
+        "message": "❌ 登入請求失敗 - HTTP 404",
+        "token": null,
+        "userInfo": null,
+        "responseTime": 300,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:45.462Z"
+      }
+    ],
+    "coreOperations": [],
+    "dataSubmissions": [],
+    "exceptionHandling": [
+      {
+        "testCase": "無效登入測試",
+        "success": true,
+        "statusCode": 404,
+        "errorMessage": "端點未找到",
+        "timestamp": "2025-08-04T08:03:45.752Z"
+      },
+      {
+        "testCase": "無授權API存取",
+        "success": true,
+        "statusCode": 404,
+        "errorMessage": "端點未找到",
+        "timestamp": "2025-08-04T08:03:46.048Z"
+      },
+      {
+        "testCase": "不存在的端點",
+        "success": true,
+        "statusCode": 404,
+        "errorMessage": "端點未找到",
+        "timestamp": "2025-08-04T08:03:46.344Z"
+      },
+      {
+        "testCase": "無效的員工ID查詢",
+        "success": true,
+        "statusCode": 404,
+        "errorMessage": "端點未找到",
+        "timestamp": "2025-08-04T08:03:46.637Z"
+      },
+      {
+        "testCase": "重複簽到測試",
+        "success": true,
+        "statusCode": 404,
+        "errorMessage": "端點未找到",
+        "timestamp": "2025-08-04T08:03:46.922Z"
+      }
+    ],
+    "fileUploads": [
+      {
+        "endpoint": "/api/upload",
+        "supported": false,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:47.233Z"
+      },
+      {
+        "endpoint": "/api/files/upload",
+        "supported": false,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:47.532Z"
+      },
+      {
+        "endpoint": "/api/employees/photo",
+        "supported": false,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:47.825Z"
+      },
+      {
+        "endpoint": "/api/maintenance/attachment",
+        "supported": false,
+        "statusCode": 404,
+        "timestamp": "2025-08-04T08:03:48.121Z"
+      }
+    ],
+    "overallStats": {
+      "loginSuccessRate": 0,
+      "coreOpsSuccessRate": null,
+      "dataSubSuccessRate": null,
+      "exceptionSuccessRate": 100,
+      "overallSuccessRate": null,
+      "totalTests": 8,
+      "timestamp": "2025-08-04T08:03:48.122Z"
+    }
+  }
+}
