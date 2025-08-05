@@ -1,0 +1,439 @@
+{
+  "timestamp": "2025-08-05T02:07:43.607Z",
+  "overallStatus": "良好",
+  "scores": {
+    "functionality": 65,
+    "performance": 93,
+    "architecture": 50,
+    "completeness": 74,
+    "overall": 70
+  },
+  "tests": [
+    {
+      "category": "connectivity",
+      "name": "HTTP連接測試",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "statusCode": 403,
+        "responseTime": 599,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:44 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "295",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        }
+      },
+      "timestamp": "2025-08-05T02:07:44.207Z"
+    },
+    {
+      "category": "connectivity",
+      "name": "DNS解析驗證",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "hostname": "employee-management-system-213410885168.europe-west1.run.app"
+      },
+      "timestamp": "2025-08-05T02:07:44.208Z"
+    },
+    {
+      "category": "connectivity",
+      "name": "響應時間測量",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "averageTime": 445.3333333333333,
+        "measurements": [
+          494,
+          502,
+          340
+        ]
+      },
+      "timestamp": "2025-08-05T02:07:45.544Z"
+    },
+    {
+      "category": "connectivity",
+      "name": "SSL證書驗證",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "valid": true,
+        "issuer": {
+          "C": "US",
+          "O": "Google Trust Services",
+          "CN": "WR2"
+        }
+      },
+      "timestamp": "2025-08-05T02:07:46.205Z"
+    },
+    {
+      "category": "functionality",
+      "name": "主頁載入完整性",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "score": 65,
+        "analysis": {
+          "hasHtml": true,
+          "hasHead": true,
+          "hasBody": true,
+          "hasTitle": true,
+          "contentLength": 295,
+          "hasJavaScript": false,
+          "hasCss": false,
+          "hasMetaTags": true,
+          "isEmpty": false
+        },
+        "contentPreview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidden</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Forbidden</h1>\n<h2>Your client does"
+      },
+      "timestamp": "2025-08-05T02:07:46.550Z"
+    },
+    {
+      "category": "functionality",
+      "name": "JavaScript執行狀態",
+      "status": "failed",
+      "details": {
+        "success": false,
+        "hasExternalScripts": false,
+        "hasInlineScripts": false,
+        "scriptCount": 0
+      },
+      "timestamp": "2025-08-05T02:07:46.846Z"
+    },
+    {
+      "category": "functionality",
+      "name": "CSS樣式載入檢查",
+      "status": "failed",
+      "details": {
+        "success": false,
+        "hasExternalCss": false,
+        "hasInlineCss": false,
+        "cssCount": 0
+      },
+      "timestamp": "2025-08-05T02:07:47.137Z"
+    },
+    {
+      "category": "functionality",
+      "name": "表單功能驗證",
+      "status": "failed",
+      "details": {
+        "success": false,
+        "formCount": 0,
+        "inputCount": 0,
+        "hasSubmitButton": false
+      },
+      "timestamp": "2025-08-05T02:07:47.423Z"
+    },
+    {
+      "category": "functionality",
+      "name": "導航功能測試",
+      "status": "failed",
+      "details": {
+        "success": false,
+        "linkCount": 0,
+        "navigationCount": 0,
+        "hasMenu": false
+      },
+      "timestamp": "2025-08-05T02:07:47.708Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/employees",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:48 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "308",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 308,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:48.002Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/auth/login",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:48 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "309",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 309,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:48.301Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/auth/logout",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:49 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "310",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 310,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:48.599Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/departments",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:49 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "310",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 310,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:48.923Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/users",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:49 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "304",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 304,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:49.217Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/health",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:50 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "305",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 305,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:49.504Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /api/status",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:50 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "305",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 305,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:49.797Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /health",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:50 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "301",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 301,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:50.086Z"
+    },
+    {
+      "category": "api",
+      "name": "API端點測試: /status",
+      "status": "passed",
+      "details": {
+        "exists": true,
+        "statusCode": 403,
+        "headers": {
+          "date": "Tue, 05 Aug 2025 02:07:50 GMT",
+          "content-type": "text/html; charset=UTF-8",
+          "server": "Google Frontend",
+          "content-length": "301",
+          "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+        },
+        "responseLength": 301,
+        "isJson": false,
+        "preview": "\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>403 Forbidde"
+      },
+      "timestamp": "2025-08-05T02:07:50.384Z"
+    },
+    {
+      "category": "placeholder_detection",
+      "name": "佔位內容檢測",
+      "status": "warning",
+      "details": {
+        "isPlaceholder": true,
+        "confidence": 30,
+        "indicators": [],
+        "isSimplePage": true,
+        "analysis": {
+          "contentLength": 295,
+          "elementCount": 9
+        }
+      },
+      "timestamp": "2025-08-05T02:07:51.401Z"
+    },
+    {
+      "category": "performance",
+      "name": "頁面載入時間",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "loadTime": 280,
+        "score": 100
+      },
+      "timestamp": "2025-08-05T02:07:51.682Z"
+    },
+    {
+      "category": "performance",
+      "name": "資源載入效率",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "score": 80,
+        "resources": {
+          "images": 0,
+          "scripts": 0,
+          "stylesheets": 0,
+          "total": 0
+        }
+      },
+      "timestamp": "2025-08-05T02:07:51.973Z"
+    },
+    {
+      "category": "performance",
+      "name": "響應速度評估",
+      "status": "passed",
+      "details": {
+        "success": true,
+        "score": 100,
+        "averageTime": 331.6,
+        "minTime": 288,
+        "maxTime": 351,
+        "consistency": 63
+      },
+      "timestamp": "2025-08-05T02:07:53.631Z"
+    },
+    {
+      "category": "security",
+      "name": "安全性檢查",
+      "status": "warning",
+      "details": {
+        "overallStatus": "warning",
+        "issues": [
+          "缺少X-Frame-Options標頭",
+          "缺少X-Content-Type-Options標頭"
+        ],
+        "checksPerformed": [
+          "HTTPS使用檢查",
+          "安全標頭檢查",
+          "敏感資訊檢查"
+        ]
+      },
+      "timestamp": "2025-08-05T02:07:54.553Z"
+    }
+  ],
+  "issues": [
+    {
+      "type": "placeholder_content",
+      "message": "網站可能仍在使用佔位內容，需要部署實際應用",
+      "severity": "high",
+      "details": []
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "部署問題",
+      "title": "部署實際應用程式",
+      "description": "當前部署似乎是佔位頁面，需要部署實際的員工管理系統應用",
+      "actions": [
+        "確認application.yaml配置正確",
+        "檢查Docker映像檔是否包含實際應用",
+        "驗證gcloud deploy命令執行無誤",
+        "檢查環境變數和配置文件"
+      ]
+    }
+  ],
+  "deploymentAnalysis": {
+    "htmlStructure": {
+      "hasDoctype": false,
+      "hasHtml5": false,
+      "elementCount": 9,
+      "hasSemanticTags": false,
+      "contentLength": 295
+    },
+    "frameworkDetection": [],
+    "resourceLoading": {
+      "images": 0,
+      "scripts": 0,
+      "stylesheets": 0,
+      "links": 0,
+      "externalResources": 0
+    },
+    "errorAnalysis": [
+      "頁面中包含錯誤訊息"
+    ],
+    "completenessScore": 50
+  }
+}
