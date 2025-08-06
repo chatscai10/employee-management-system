@@ -84,7 +84,21 @@ const database = {
     revenue: [
         { id: 1, date: '2025-08-01', amount: 50000, source: '產品銷售', department: 'IT部門' },
         { id: 2, date: '2025-08-02', amount: 30000, source: '服務收入', department: '客服部門' }
-    ]
+    ],
+        announcements: [
+        {
+            id: 1,
+            title: '系統更新通知',
+            content: '企業管理系統已更新至 v4.0，新增公告系統、照片上傳等功能。',
+            priority: 'high',
+            targetRoles: ['admin', 'manager', 'employee'],
+            createdAt: '2025-08-06',
+            isActive: true
+        }
+    ],
+    uploads: [],
+    itemReports: [],
+    auditLogs: []
 };
 
 // === 身份驗證中介軟體 ===
@@ -472,7 +486,7 @@ app.get('/dashboard', (req, res) => {
                     <div class="module-title">\${module.title}</div>
                     <div class="module-desc">\${module.desc}</div>
                 \`;
-                card.onclick = () => alert(\`\${module.title} 功能開發中...\`);
+                card.onclick = () => handleModuleClick(module.title);
                 grid.appendChild(card);
             }
         });
@@ -481,6 +495,679 @@ app.get('/dashboard', (req, res) => {
             localStorage.removeItem('userToken');
             localStorage.removeItem('currentUser');
             window.location.href = '/login';
+        }
+        
+        // 處理模組點擊
+        function handleModuleClick(moduleTitle) {
+            const moduleContent = document.getElementById('moduleContent');
+            if (!moduleContent) {
+                // 創建模組內容區域
+                const container = document.querySelector('.container');
+                const contentDiv = document.createElement('div');
+                contentDiv.id = 'moduleContent';
+                contentDiv.style.marginTop = '2rem';
+                container.appendChild(contentDiv);
+            }
+            
+            // 根據模組顯示對應內容
+            switch(moduleTitle) {
+                case '員工管理':
+                    showEmployeeManagement();
+                    break;
+                case '考勤記錄':
+                    showAttendanceRecords();
+                    break;
+                case '排班管理':
+                    showScheduleManagement();
+                    break;
+                case '庫存管理':
+                    showInventoryManagement();
+                    break;
+                case '採購申請':
+                    showPurchaseRequests();
+                    break;
+                case '維修報告':
+                    showMaintenanceReports();
+                    break;
+                case '營收分析':
+                    showRevenueAnalysis();
+                    break;
+                case '行銷活動':
+                    showMarketingCampaigns();
+                    break;
+                default:
+                    alert(`${moduleTitle} 功能開發中...`);
+            }
+        }
+        
+        // 員工管理功能
+        function showEmployeeManagement() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>👥 員工管理</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <button onclick="loadEmployees()" style="background: #4299e1; margin-bottom: 1rem;">載入員工列表</button>
+                    <div id="employeeList"></div>
+                </div>
+            `;
+            loadEmployees();
+        }
+        
+        async function loadEmployees() {
+            try {
+                const response = await fetch('/api/employees', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const employeeList = document.getElementById('employeeList');
+                    employeeList.innerHTML = `
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f7fafc;">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">姓名</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">部門</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">職位</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">狀態</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.data.map(emp => `
+                                    <tr>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${emp.name}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${emp.department}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${emp.position}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            <span style="background: ${emp.status === 'active' ? '#48bb78' : '#f56565'}; color: white; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.875rem;">
+                                                ${emp.status === 'active' ? '在職' : '離職'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入員工列表失敗:', error);
+            }
+        }
+        
+        // 考勤記錄功能
+        function showAttendanceRecords() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>📅 考勤記錄</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <button onclick="checkIn()" style="background: #48bb78; margin-right: 1rem;">簽到</button>
+                    <button onclick="loadAttendance()" style="background: #4299e1;">查看記錄</button>
+                    <div id="attendanceList" style="margin-top: 1rem;"></div>
+                </div>
+            `;
+            loadAttendance();
+        }
+        
+        async function checkIn() {
+            try {
+                const response = await fetch('/api/attendance/checkin', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                alert(data.message);
+                if (data.success) {
+                    loadAttendance();
+                }
+            } catch (error) {
+                alert('簽到失敗');
+            }
+        }
+        
+        async function loadAttendance() {
+            try {
+                const response = await fetch('/api/attendance', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const attendanceList = document.getElementById('attendanceList');
+                    attendanceList.innerHTML = `
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f7fafc;">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">日期</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">員工</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">簽到時間</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">簽退時間</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">狀態</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.data.map(att => `
+                                    <tr>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${att.date}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${att.employeeName}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${att.checkIn || '-'}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${att.checkOut || '-'}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            <span style="background: ${att.status === 'present' ? '#48bb78' : '#f56565'}; color: white; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.875rem;">
+                                                ${att.status === 'present' ? '出勤' : '缺勤'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入考勤記錄失敗:', error);
+            }
+        }
+        
+        // 庫存管理功能
+        function showInventoryManagement() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>📦 庫存管理</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <button onclick="loadInventory()" style="background: #4299e1; margin-bottom: 1rem;">載入庫存</button>
+                    <div id="inventoryList"></div>
+                </div>
+            `;
+            loadInventory();
+        }
+        
+        async function loadInventory() {
+            try {
+                const response = await fetch('/api/inventory', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const inventoryList = document.getElementById('inventoryList');
+                    inventoryList.innerHTML = `
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: #f7fafc; border-radius: 5px;">
+                            <strong>總庫存價值: NT$ ${data.totalValue.toLocaleString()}</strong>
+                        </div>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f7fafc;">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">品項名稱</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">類別</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">數量</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">單價</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">供應商</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.data.map(item => `
+                                    <tr>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${item.name}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${item.category}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${item.quantity}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">NT$ ${item.price.toLocaleString()}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${item.supplier}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入庫存失敗:', error);
+            }
+        }
+        
+
+        // 添加公告功能
+        async function checkAnnouncements() {
+            try {
+                const response = await fetch('/api/announcements', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success && data.data.length > 0) {
+                    // 延遲2秒後顯示公告
+                    setTimeout(() => {
+                        showAnnouncementModal(data.data);
+                    }, 2000);
+                }
+            } catch (error) {
+                console.error('獲取公告失敗:', error);
+            }
+        }
+        
+        // 顯示公告彈窗
+        function showAnnouncementModal(announcements) {
+            let currentIndex = 0;
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;';
+            
+            const content = document.createElement('div');
+            content.style.cssText = 'background: white; padding: 2rem; border-radius: 10px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;';
+            
+            function renderAnnouncement() {
+                const ann = announcements[currentIndex];
+                content.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2 style="margin: 0;">📢 公告</h2>
+                        <button onclick="this.parentElement.parentElement.parentElement.parentElement.remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <span style="background: ${ann.priority === 'high' ? '#e53e3e' : '#4299e1'}; color: white; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.875rem;">
+                            ${ann.priority === 'high' ? '重要' : '一般'}
+                        </span>
+                    </div>
+                    <h3>${ann.title}</h3>
+                    <p style="line-height: 1.6;">${ann.content}</p>
+                    <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            ${announcements.length > 1 ? `
+                                <button onclick="changeAnnouncement(-1)" ${currentIndex === 0 ? 'disabled' : ''} style="margin-right: 0.5rem;">上一個</button>
+                                <button onclick="changeAnnouncement(1)" ${currentIndex === announcements.length - 1 ? 'disabled' : ''}>下一個</button>
+                            ` : ''}
+                        </div>
+                        <button onclick="markAsRead(${ann.id}); this.parentElement.parentElement.parentElement.parentElement.remove()">關閉</button>
+                    </div>
+                `;
+            }
+            
+            window.changeAnnouncement = function(direction) {
+                currentIndex += direction;
+                renderAnnouncement();
+            };
+            
+            window.markAsRead = async function(id) {
+                try {
+                    await fetch(`/api/announcements/${id}/read`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                        }
+                    });
+                } catch (error) {
+                    console.error('標記已讀失敗:', error);
+                }
+            };
+            
+            renderAnnouncement();
+            content.appendChild(document.createElement('div'));
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+        }
+        
+        // 更新採購申請功能
+        function showPurchaseRequests() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>🛒 採購申請</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <button onclick="showNewPurchaseForm()" style="background: #48bb78; margin-bottom: 1rem;">新增採購申請</button>
+                    <button onclick="loadPurchaseRequests()" style="background: #4299e1; margin-bottom: 1rem; margin-left: 0.5rem;">查看申請記錄</button>
+                    <div id="purchaseContent"></div>
+                </div>
+            `;
+            loadPurchaseRequests();
+        }
+        
+        function showNewPurchaseForm() {
+            const purchaseContent = document.getElementById('purchaseContent');
+            purchaseContent.innerHTML = `
+                <h4>新增採購申請</h4>
+                <form onsubmit="submitPurchaseRequest(event)" style="margin-top: 1rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">選擇物品</label>
+                        <select id="itemSelect" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;" required>
+                            <option value="">請選擇...</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">數量</label>
+                        <input type="number" id="quantity" min="1" value="1" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">上傳相關照片（選填）</label>
+                        <input type="file" id="purchasePhoto" accept="image/*" onchange="handlePhotoUpload(event)" style="width: 100%;">
+                        <div id="photoPreview" style="margin-top: 0.5rem;"></div>
+                    </div>
+                    <button type="submit" style="background: #48bb78;">提交申請</button>
+                </form>
+            `;
+            
+            // 載入庫存物品選項
+            loadInventoryOptions();
+        }
+        
+        async function loadInventoryOptions() {
+            try {
+                const response = await fetch('/api/inventory', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const select = document.getElementById('itemSelect');
+                    data.data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.id;
+                        option.textContent = `${item.name} (庫存: ${item.quantity})`;
+                        select.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('載入物品選項失敗:', error);
+            }
+        }
+        
+        async function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('photoPreview');
+                preview.innerHTML = `<img src="${e.target.result}" style="max-width: 200px; max-height: 200px; margin-top: 0.5rem; border-radius: 4px;">`;
+                window.uploadedPhoto = {
+                    filename: file.name,
+                    content: e.target.result
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        async function submitPurchaseRequest(event) {
+            event.preventDefault();
+            
+            const itemId = document.getElementById('itemSelect').value;
+            const quantity = document.getElementById('quantity').value;
+            
+            // 如果有上傳照片，先上傳
+            let photoId = null;
+            if (window.uploadedPhoto) {
+                try {
+                    const uploadResponse = await fetch('/api/upload', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(window.uploadedPhoto)
+                    });
+                    const uploadData = await uploadResponse.json();
+                    if (uploadData.success) {
+                        photoId = uploadData.data.id;
+                    }
+                } catch (error) {
+                    console.error('照片上傳失敗:', error);
+                }
+            }
+            
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        items: [{ itemId: parseInt(itemId), quantity: parseInt(quantity) }],
+                        photoId: photoId
+                    })
+                });
+                
+                const data = await response.json();
+                alert(data.message);
+                
+                if (data.success) {
+                    loadPurchaseRequests();
+                }
+            } catch (error) {
+                alert('提交申請失敗');
+            }
+        }
+        
+        async function loadPurchaseRequests() {
+            try {
+                const response = await fetch('/api/orders', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const purchaseContent = document.getElementById('purchaseContent');
+                    purchaseContent.innerHTML = `
+                        <h4>申請記錄</h4>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                            <thead>
+                                <tr style="background: #f7fafc;">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">申請日期</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">申請人</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">物品明細</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">狀態</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.data.map(order => `
+                                    <tr>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${order.date}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${order.employeeName}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            ${order.items.map(item => `${item.itemName} x ${item.quantity}`).join(', ')}
+                                        </td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            <span style="background: ${order.status === 'approved' ? '#48bb78' : '#f59e0b'}; color: white; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.875rem;">
+                                                ${order.status === 'approved' ? '已批准' : '待審核'}
+                                            </span>
+                                        </td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            ${new Date(order.date).getTime() > Date.now() - 3600000 ? 
+                                                '<button onclick="alert(\'編輯功能開發中\')">編輯</button>' : 
+                                                '<button onclick="alert(\'作廢功能開發中\')" style="background: #f56565;">作廢</button>'
+                                            }
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入採購申請失敗:', error);
+            }
+        }
+        
+        // 更新維修報告功能
+        function showMaintenanceReports() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>🔧 維修報告</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <button onclick="showNewMaintenanceForm()" style="background: #f59e0b; margin-bottom: 1rem;">提交維修申請</button>
+                    <button onclick="loadMaintenanceReports()" style="background: #4299e1; margin-bottom: 1rem; margin-left: 0.5rem;">查看維修記錄</button>
+                    <div id="maintenanceContent"></div>
+                </div>
+            `;
+            loadMaintenanceReports();
+        }
+        
+        function showNewMaintenanceForm() {
+            const maintenanceContent = document.getElementById('maintenanceContent');
+            maintenanceContent.innerHTML = `
+                <h4>提交維修申請</h4>
+                <form onsubmit="submitMaintenanceRequest(event)" style="margin-top: 1rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">設備名稱</label>
+                        <input type="text" id="equipment" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">問題描述</label>
+                        <textarea id="issue" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;" required></textarea>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">優先級</label>
+                        <select id="priority" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="low">低</option>
+                            <option value="medium" selected>中</option>
+                            <option value="high">高</option>
+                        </select>
+                    </div>
+                    <button type="submit" style="background: #f59e0b;">提交申請</button>
+                </form>
+            `;
+        }
+        
+        async function submitMaintenanceRequest(event) {
+            event.preventDefault();
+            
+            try {
+                const response = await fetch('/api/maintenance', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        equipment: document.getElementById('equipment').value,
+                        issue: document.getElementById('issue').value,
+                        priority: document.getElementById('priority').value
+                    })
+                });
+                
+                const data = await response.json();
+                alert(data.message);
+                
+                if (data.success) {
+                    loadMaintenanceReports();
+                }
+            } catch (error) {
+                alert('提交申請失敗');
+            }
+        }
+        
+        async function loadMaintenanceReports() {
+            try {
+                const response = await fetch('/api/maintenance', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('userToken')
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    const maintenanceContent = document.getElementById('maintenanceContent');
+                    maintenanceContent.innerHTML = `
+                        <h4>維修記錄</h4>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                            <thead>
+                                <tr style="background: #f7fafc;">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">申請日期</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">設備</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">問題</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">優先級</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0;">狀態</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.data.map(req => `
+                                    <tr>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${req.date}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${req.equipment}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">${req.issue}</td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            <span style="background: ${req.priority === 'high' ? '#e53e3e' : req.priority === 'medium' ? '#f59e0b' : '#48bb78'}; color: white; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.875rem;">
+                                                ${req.priority === 'high' ? '高' : req.priority === 'medium' ? '中' : '低'}
+                                            </span>
+                                        </td>
+                                        <td style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;">
+                                            <span style="background: ${req.status === 'open' ? '#f59e0b' : req.status === 'in-progress' ? '#4299e1' : '#48bb78'}; color: white; padding: 0.25rem 0.5rem; border-radius: 3px; font-size: 0.875rem;">
+                                                ${req.status === 'open' ? '待處理' : req.status === 'in-progress' ? '處理中' : '已完成'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入維修記錄失敗:', error);
+            }
+        }
+        
+        // 頁面載入後檢查公告
+        checkAnnouncements();
+        
+        // 其他功能先顯示開發中訊息
+        function showScheduleManagement() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>🗓️ 排班管理</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <p>排班管理功能正在開發中...</p>
+                </div>
+            `;
+        }
+        
+        function showPurchaseRequests() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>🛒 採購申請</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <p>採購申請功能正在開發中...</p>
+                </div>
+            `;
+        }
+        
+        function showMaintenanceReports() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>🔧 維修報告</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <p>維修報告功能正在開發中...</p>
+                </div>
+            `;
+        }
+        
+        function showRevenueAnalysis() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>💰 營收分析</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <p>營收分析功能正在開發中...</p>
+                </div>
+            `;
+        }
+        
+        function showMarketingCampaigns() {
+            const content = document.getElementById('moduleContent');
+            content.innerHTML = `
+                <h3>📢 行銷活動</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                    <p>行銷活動功能正在開發中...</p>
+                </div>
+            `;
         }
     </script>
 </body>
@@ -750,6 +1437,248 @@ app.get('/api/revenue', authenticateUser, (req, res) => {
         monthlyRevenue: monthlyRevenue.reduce((sum, rev) => sum + rev.amount, 0)
     });
 });
+
+
+// ==================== 公告系統 API ====================
+// 獲取公告列表
+app.get('/api/announcements', authenticateUser, (req, res) => {
+    const activeAnnouncements = database.announcements.filter(ann => 
+        ann.isActive && ann.targetRoles.includes(req.user.role)
+    );
+    
+    res.json({
+        success: true,
+        data: activeAnnouncements,
+        count: activeAnnouncements.length
+    });
+});
+
+// 標記公告已讀
+app.post('/api/announcements/:id/read', authenticateUser, (req, res) => {
+    const announcementId = parseInt(req.params.id);
+    const userId = req.user.id;
+    
+    // 這裡應該記錄已讀狀態，簡化處理
+    res.json({
+        success: true,
+        message: '公告已標記為已讀'
+    });
+});
+
+// 管理員獲取所有公告
+app.get('/api/admin/announcements', authenticateUser, (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ success: false, message: '權限不足' });
+    }
+    
+    res.json({
+        success: true,
+        data: database.announcements,
+        count: database.announcements.length
+    });
+});
+
+// 創建新公告
+app.post('/api/admin/announcements', authenticateUser, (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ success: false, message: '權限不足' });
+    }
+    
+    const { title, content, priority, targetRoles } = req.body;
+    
+    const newAnnouncement = {
+        id: database.announcements.length + 1,
+        title,
+        content,
+        priority: priority || 'normal',
+        targetRoles: targetRoles || ['admin', 'manager', 'employee'],
+        createdAt: new Date().toISOString().split('T')[0],
+        isActive: true,
+        createdBy: req.user.name
+    };
+    
+    database.announcements.push(newAnnouncement);
+    
+    res.json({
+        success: true,
+        message: '公告創建成功',
+        data: newAnnouncement
+    });
+});
+
+// 更新公告
+app.put('/api/admin/announcements/:id', authenticateUser, (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ success: false, message: '權限不足' });
+    }
+    
+    const announcementId = parseInt(req.params.id);
+    const announcement = database.announcements.find(ann => ann.id === announcementId);
+    
+    if (!announcement) {
+        return res.status(404).json({ success: false, message: '公告不存在' });
+    }
+    
+    Object.assign(announcement, req.body);
+    
+    res.json({
+        success: true,
+        message: '公告更新成功',
+        data: announcement
+    });
+});
+
+// 刪除公告
+app.delete('/api/admin/announcements/:id', authenticateUser, (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ success: false, message: '權限不足' });
+    }
+    
+    const announcementId = parseInt(req.params.id);
+    const index = database.announcements.findIndex(ann => ann.id === announcementId);
+    
+    if (index === -1) {
+        return res.status(404).json({ success: false, message: '公告不存在' });
+    }
+    
+    database.announcements.splice(index, 1);
+    
+    res.json({
+        success: true,
+        message: '公告刪除成功'
+    });
+});
+// ==================== 公告系統 API 結束 ====================
+
+// ==================== 檔案上傳 API ====================
+// 上傳檔案
+app.post('/api/upload', authenticateUser, (req, res) => {
+    const { filename, content, type } = req.body;
+    
+    if (!filename || !content) {
+        return res.status(400).json({ success: false, message: '缺少檔案資訊' });
+    }
+    
+    const newUpload = {
+        id: database.uploads.length + 1,
+        filename,
+        type: type || 'image/jpeg',
+        content, // Base64
+        uploadedBy: req.user.id,
+        uploadedAt: new Date().toISOString(),
+        size: content.length
+    };
+    
+    database.uploads.push(newUpload);
+    
+    res.json({
+        success: true,
+        message: '檔案上傳成功',
+        data: {
+            id: newUpload.id,
+            filename: newUpload.filename,
+            uploadedAt: newUpload.uploadedAt
+        }
+    });
+});
+
+// 獲取檔案
+app.get('/api/uploads/:id', authenticateUser, (req, res) => {
+    const uploadId = parseInt(req.params.id);
+    const upload = database.uploads.find(up => up.id === uploadId);
+    
+    if (!upload) {
+        return res.status(404).json({ success: false, message: '檔案不存在' });
+    }
+    
+    res.json({
+        success: true,
+        data: upload
+    });
+});
+// ==================== 檔案上傳 API 結束 ====================
+
+// ==================== 品項異常回報 API ====================
+// 提交異常回報
+app.post('/api/item-reports', authenticateUser, (req, res) => {
+    const { itemId, reportType, description, photoIds, affectedItems } = req.body;
+    
+    if (!itemId || !reportType || !description) {
+        return res.status(400).json({ 
+            success: false, 
+            message: '請填寫必要的回報資訊' 
+        });
+    }
+    
+    const newReport = {
+        id: database.itemReports.length + 1,
+        itemId,
+        reportType, // 'excess', 'shortage', 'damaged', 'expired', 'other'
+        description,
+        photoIds: photoIds || [],
+        affectedItems: affectedItems || [],
+        reportedBy: req.user.id,
+        reportedAt: new Date().toISOString(),
+        status: 'pending',
+        department: req.user.department
+    };
+    
+    database.itemReports.push(newReport);
+    
+    // 記錄到審計日誌
+    database.auditLogs.push({
+        id: database.auditLogs.length + 1,
+        action: 'item_report_created',
+        userId: req.user.id,
+        details: `品項異常回報: ${reportType}`,
+        timestamp: new Date().toISOString()
+    });
+    
+    res.json({
+        success: true,
+        message: '異常回報提交成功',
+        data: newReport
+    });
+});
+
+// 獲取異常回報列表
+app.get('/api/item-reports', authenticateUser, (req, res) => {
+    let reports = database.itemReports;
+    
+    // 一般員工只能看自己的回報
+    if (req.user.role === 'employee') {
+        reports = reports.filter(report => report.reportedBy === req.user.id);
+    }
+    
+    // 補充員工資訊
+    const reportsWithDetails = reports.map(report => {
+        const reporter = database.employees.find(emp => emp.id === report.reportedBy);
+        return {
+            ...report,
+            reporterName: reporter ? reporter.name : '未知員工',
+            reportTypeName: getReportTypeName(report.reportType)
+        };
+    });
+    
+    res.json({
+        success: true,
+        data: reportsWithDetails,
+        count: reportsWithDetails.length
+    });
+});
+
+// 輔助函數
+function getReportTypeName(type) {
+    const types = {
+        'excess': '數量過多',
+        'shortage': '數量不足',
+        'damaged': '物品損壞',
+        'expired': '物品過期',
+        'other': '其他問題'
+    };
+    return types[type] || '未知類型';
+}
+// ==================== 品項異常回報 API 結束 ====================
 
 // 升遷投票 API
 app.get('/api/promotion-votes', authenticateUser, (req, res) => {
