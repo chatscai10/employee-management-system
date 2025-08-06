@@ -1543,4 +1543,45 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log(`📖 API 文檔: http://localhost:${PORT}/api/docs`);
     console.log(`\n✅ 所有企業功能模組已啟用並可正常使用`);
     console.log(`🚀 準備接受企業管理請求...`);
+});\n
+// 多平台優化的服務器啟動
+const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n🎉 企業管理系統 v4.0.0 已成功啟動！`);
+    console.log(`🌐 服務地址: http://localhost:${PORT}`);
+    console.log(`📊 系統狀態: http://localhost:${PORT}/api/system/status`);
+    console.log(`🔐 登入頁面: http://localhost:${PORT}/login`);
+    console.log(`🏠 管理主控台: http://localhost:${PORT}/dashboard`);
+    console.log(`📖 API 文檔: http://localhost:${PORT}/api/docs`);
+    console.log(`💚 健康檢查: http://localhost:${PORT}/health`);
+    console.log(`\n✅ 所有企業功能模組已啟用並可正常使用`);
+    console.log(`🚀 準備接受企業管理請求...\n`);
+    
+    // 平台特定優化
+    if (process.env.RAILWAY_ENVIRONMENT) {
+        console.log('🚂 Railway平台模式已啟用');
+    } else if (process.env.VERCEL) {
+        console.log('⚡ Vercel無服務器模式已啟用');
+    } else if (process.env.RENDER) {
+        console.log('🎨 Render平台模式已啟用');
+    }
 });
+
+// 優雅關閉處理
+process.on('SIGTERM', () => {
+    console.log('\n📴 收到關閉信號，開始優雅關閉服務...');
+    server.close(() => {
+        console.log('✅ HTTP服務器已安全關閉');
+        process.exit(0);
+    });
+});
+
+process.on('SIGINT', () => {
+    console.log('\n📴 收到中斷信號，開始優雅關閉服務...');
+    server.close(() => {
+        console.log('✅ HTTP服務器已安全關閉');
+        process.exit(0);
+    });
+});
+
+// 導出app供Vercel使用
+module.exports = app;

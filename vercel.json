@@ -1,26 +1,30 @@
 {
   "version": 2,
   "name": "employee-management-system",
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs18.x",
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  },
-  "routes": [
+  "builds": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
+      "src": "app.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
     }
   ],
-  "build": {
-    "env": {
-      "NODE_VERSION": "18"
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.js"
     }
+  ],
+  "functions": {
+    "app.js": {
+      "runtime": "nodejs20.x",
+      "environment": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
   }
 }
