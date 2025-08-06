@@ -1533,17 +1533,8 @@ app.get('/api/version', (req, res) => {
     res.json(buildInfo);
 });
 
-// 啟動伺服器
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`\n🎉 企業管理系統 v4.0.0 已成功啟動！`);
-    console.log(`🌐 服務地址: http://localhost:${PORT}`);
-    console.log(`📊 系統狀態: http://localhost:${PORT}/api/system/status`);
-    console.log(`🔐 登入頁面: http://localhost:${PORT}/login`);
-    console.log(`🏠 管理主控台: http://localhost:${PORT}/dashboard`);
-    console.log(`📖 API 文檔: http://localhost:${PORT}/api/docs`);
-    console.log(`\n✅ 所有企業功能模組已啟用並可正常使用`);
-    console.log(`🚀 準備接受企業管理請求...`);
-});\n
+// 多平台端口配置優化
+const PORT = process.env.PORT || process.env.RAILWAY_PORT || process.env.VERCEL_PORT || 3000;\n
 // 多平台優化的服務器啟動
 const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`\n🎉 企業管理系統 v4.0.0 已成功啟動！`);
