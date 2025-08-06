@@ -1372,7 +1372,7 @@ app.get('/dashboard', (req, res) => {
             '/api/maintenance'
         ];
         
-        let results = 'API 測試結果:\n\n';
+        let results = 'API 測試結果:\\n\\n';
         
         for (let endpoint of endpoints) {
             try {
@@ -1381,9 +1381,9 @@ app.get('/dashboard', (req, res) => {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem('userToken') }
                 });
                 const time = Date.now() - start;
-                results += '✅ ' + endpoint + ': ' + response.status + ' (' + time + 'ms)\n';
+                results += '✅ ' + endpoint + ': ' + response.status + ' (' + time + 'ms)\\n';
             } catch (error) {
-                results += '❌ ' + endpoint + ': 失敗 (' + error.message + ')\n';
+                results += '❌ ' + endpoint + ': 失敗 (' + error.message + ')\\n';
             }
         }
         
