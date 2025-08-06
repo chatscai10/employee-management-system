@@ -1,0 +1,139 @@
+{
+  "verificationSummary": {
+    "timestamp": "2025-08-05T16:02:06.229Z",
+    "totalUrls": 1,
+    "successfulUrls": 0,
+    "platformsDetected": [
+      "Unknown Platform"
+    ],
+    "overallStatus": "no_deployments"
+  },
+  "detailedResults": [
+    {
+      "url": "http://localhost:8080",
+      "platform": "Unknown Platform",
+      "timestamp": "2025-08-05T16:02:06.196Z",
+      "tests": [
+        {
+          "name": "HTTP連接測試",
+          "status": "failed",
+          "error": "",
+          "critical": true
+        },
+        {
+          "name": "HTTPS安全連接",
+          "status": "failed",
+          "error": "",
+          "critical": true
+        },
+        {
+          "name": "健康檢查端點",
+          "status": "failed",
+          "error": "",
+          "critical": true
+        },
+        {
+          "name": "系統狀態API",
+          "status": "failed",
+          "error": "",
+          "critical": true
+        },
+        {
+          "name": "HTTPS強制重定向",
+          "status": "failed",
+          "message": "",
+          "category": "security"
+        },
+        {
+          "name": "安全標頭檢查",
+          "status": "failed",
+          "message": "",
+          "category": "security"
+        },
+        {
+          "name": "主頁完整載入",
+          "status": "failed",
+          "error": "",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "登入頁面功能",
+          "status": "failed",
+          "error": "",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "管理主控台",
+          "status": "failed",
+          "error": "",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "API文檔可訪問",
+          "status": "failed",
+          "error": "",
+          "critical": false,
+          "category": "functionality"
+        },
+        {
+          "name": "員工API端點",
+          "status": "failed",
+          "error": "",
+          "critical": true,
+          "category": "functionality"
+        }
+      ],
+      "overallStatus": "poor",
+      "performance": {
+        "avgResponseTime": null,
+        "tests": []
+      },
+      "security": {},
+      "functionality": {},
+      "scores": {
+        "critical": 0,
+        "overall": 0,
+        "criticalPassed": 0,
+        "totalCritical": 8,
+        "totalPassed": 0,
+        "totalTests": 11
+      }
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "platform": "Unknown Platform",
+      "issue": "8 個關鍵功能測試失敗",
+      "action": "檢查部署日誌並修復關鍵功能問題"
+    }
+  ],
+  "testAccounts": [
+    {
+      "role": "admin",
+      "username": "admin",
+      "password": "admin123",
+      "description": "系統管理員"
+    },
+    {
+      "role": "manager",
+      "username": "manager",
+      "password": "manager123",
+      "description": "部門經理"
+    },
+    {
+      "role": "employee",
+      "username": "john.doe",
+      "password": "password123",
+      "description": "一般員工"
+    }
+  ],
+  "nextSteps": [
+    "🔧 檢查部署問題並重新部署",
+    "📋 參考手動部署指引",
+    "💬 聯繫技術支持或查看平台文檔"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "deployment": {
+    "timestamp": "2025-08-05T15:58:10.869Z",
+    "method": "Railway Auto Deploy",
+    "status": "starting",
+    "url": null,
+    "deploymentId": null
+  },
+  "nextSteps": [
+    "使用提供的網址訪問企業管理系統",
+    "執行智慧驗證器進行全面檢查",
+    "使用測試帳號驗證所有功能",
+    "監控系統性能和穩定性"
+  ],
+  "testAccounts": [
+    {
+      "role": "admin",
+      "username": "admin",
+      "password": "admin123"
+    },
+    {
+      "role": "manager",
+      "username": "manager",
+      "password": "manager123"
+    },
+    {
+      "role": "employee",
+      "username": "john.doe",
+      "password": "password123"
+    }
+  ]
+}

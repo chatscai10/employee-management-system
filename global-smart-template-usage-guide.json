@@ -1,0 +1,146 @@
+{
+  "overview": {
+    "title": "智慧模板全域使用指南",
+    "version": "3.0",
+    "totalTemplates": 42,
+    "categories": 8,
+    "quickCommands": 5
+  },
+  "quickStart": {
+    "title": "快速開始",
+    "commands": [
+      {
+        "command": "/pro",
+        "description": "啟動智慧自適應強化模式",
+        "usage": "/pro [描述您的需求]",
+        "example": "/pro 開發一個用戶管理系統"
+      },
+      {
+        "command": "/expert",
+        "description": "多領域專家深度驗證",
+        "usage": "/expert [驗證目標]",
+        "example": "/expert 驗證系統架構設計"
+      },
+      {
+        "command": "/verify",
+        "description": "智慧驗證測試系統",
+        "usage": "/verify [測試範圍]",
+        "example": "/verify 驗證API功能完整性"
+      }
+    ]
+  },
+  "moduleCategories": {
+    "core": {
+      "name": "核心智慧模組",
+      "description": "基礎智慧功能和決策引擎",
+      "templateCount": 3,
+      "keyFeatures": [
+        "異步處理",
+        "Telegram通知",
+        "Git自動化"
+      ],
+      "recommendedUsage": "適用於日常開發任務和基礎智慧功能"
+    },
+    "verification": {
+      "name": "驗證測試模組",
+      "description": "智慧驗證、測試和品質保證",
+      "templateCount": 31,
+      "keyFeatures": [
+        "Telegram通知",
+        "Git自動化",
+        "異步處理"
+      ],
+      "recommendedUsage": "確保系統品質和功能完整性驗證"
+    },
+    "expert": {
+      "name": "專家分析模組",
+      "description": "多領域專家角色驗證系統",
+      "templateCount": 6,
+      "keyFeatures": [
+        "Telegram通知",
+        "Git自動化",
+        "異步處理"
+      ],
+      "recommendedUsage": "用於深度代碼審查和多領域專家驗證"
+    },
+    "integration": {
+      "name": "整合協作模組",
+      "description": "代理整合和協作系統",
+      "templateCount": 1,
+      "keyFeatures": [
+        "Telegram通知",
+        "Git自動化",
+        "異步處理"
+      ],
+      "recommendedUsage": "處理系統整合和代理協作任務"
+    },
+    "automation": {
+      "name": "自動化執行模組",
+      "description": "自動修復和執行引擎",
+      "templateCount": 0,
+      "keyFeatures": [],
+      "recommendedUsage": "自動化執行和修復任務"
+    },
+    "security": {
+      "name": "安全防護模組",
+      "description": "智慧安全模板和防護機制",
+      "templateCount": 0,
+      "keyFeatures": [],
+      "recommendedUsage": "安全檢查和防護機制實施"
+    },
+    "deployment": {
+      "name": "部署運維模組",
+      "description": "智慧部署和運維自動化",
+      "templateCount": 1,
+      "keyFeatures": [
+        "Git自動化",
+        "異步處理"
+      ],
+      "recommendedUsage": "智慧部署和運維自動化"
+    },
+    "analytics": {
+      "name": "分析優化模組",
+      "description": "深度分析和性能優化",
+      "templateCount": 0,
+      "keyFeatures": [],
+      "recommendedUsage": "深度分析和性能優化"
+    }
+  },
+  "bestPractices": [
+    "使用 /pro 指令啟動任何複雜任務",
+    "每個階段完成後會自動發送 Telegram 通知",
+    "所有模組支援自動執行和錯誤恢復",
+    "系統會自動選擇最適合的模組組合",
+    "支援並行執行和智慧調度優化",
+    "內建專家驗證和品質保證機制"
+  ],
+  "planningRecommendations": [
+    {
+      "phase": "立即使用",
+      "priority": "high",
+      "recommendations": [
+        "使用 /pro 指令處理日常開發任務",
+        "利用 /expert 進行代碼品質檢查",
+        "定期使用 /verify 確保系統穩定性"
+      ]
+    },
+    {
+      "phase": "中期優化",
+      "priority": "medium",
+      "recommendations": [
+        "建立團隊使用規範和最佳實踐",
+        "整合到 CI/CD 流程中",
+        "創建項目特定的模板配置"
+      ]
+    },
+    {
+      "phase": "長期發展",
+      "priority": "low",
+      "recommendations": [
+        "開發自定義智慧模組",
+        "建立企業級智慧模板庫",
+        "實施智慧模板性能監控"
+      ]
+    }
+  ]
+}

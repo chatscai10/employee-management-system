@@ -1,0 +1,637 @@
+{
+  "timestamp": "2025-08-05T09:55:14.649Z",
+  "executionTime": "3 秒",
+  "summary": {
+    "totalTests": 12,
+    "totalRoleTests": 31,
+    "totalErrors": 0,
+    "totalWarnings": 6,
+    "totalSuggestions": 6,
+    "healthScore": 57
+  },
+  "testResults": [
+    {
+      "category": "server",
+      "test": "本地伺服器檢查",
+      "status": "success",
+      "message": "伺服器已在運行"
+    },
+    {
+      "category": "endpoint",
+      "test": "首頁載入測試",
+      "path": "/",
+      "status": "success",
+      "statusCode": 200,
+      "message": "端點正常回應"
+    },
+    {
+      "category": "endpoint",
+      "test": "健康檢查端點",
+      "path": "/health",
+      "status": "success",
+      "statusCode": 200,
+      "message": "端點正常回應"
+    },
+    {
+      "category": "endpoint",
+      "test": "API 端點測試",
+      "path": "/api/employees",
+      "status": "failed",
+      "statusCode": 401,
+      "message": "HTTP 401"
+    },
+    {
+      "category": "endpoint",
+      "test": "CSS 樣式檔案",
+      "path": "/css/style.css",
+      "status": "failed",
+      "statusCode": 404,
+      "message": "HTTP 404"
+    },
+    {
+      "category": "endpoint",
+      "test": "JavaScript 檔案",
+      "path": "/js/app.js",
+      "status": "failed",
+      "statusCode": 404,
+      "message": "HTTP 404"
+    },
+    {
+      "category": "endpoint",
+      "test": "404 錯誤處理",
+      "path": "/nonexistent",
+      "status": "success",
+      "statusCode": 404,
+      "message": "端點正常回應"
+    },
+    {
+      "category": "structure",
+      "test": "檔案存在性檢查: 主應用程式檔案",
+      "status": "success",
+      "message": "app.js 存在"
+    },
+    {
+      "category": "structure",
+      "test": "檔案存在性檢查: 專案配置檔案",
+      "status": "success",
+      "message": "package.json 存在"
+    },
+    {
+      "category": "structure",
+      "test": "檔案存在性檢查: Docker 配置檔案",
+      "status": "success",
+      "message": "Dockerfile 存在"
+    },
+    {
+      "category": "structure",
+      "test": "檔案存在性檢查: Cloud Build 配置",
+      "status": "success",
+      "message": "cloudbuild.yaml 存在"
+    },
+    {
+      "category": "structure",
+      "test": "目錄存在性檢查: 靜態檔案目錄",
+      "status": "success",
+      "message": "public 存在"
+    }
+  ],
+  "roleTests": [
+    {
+      "role": "admin",
+      "action": "登入系統",
+      "endpoint": "/login",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "查看所有員工",
+      "endpoint": "/api/employees",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "新增員工",
+      "endpoint": "/api/employees",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "修改員工資料",
+      "endpoint": "/api/employees/1",
+      "method": "PUT",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "刪除員工",
+      "endpoint": "/api/employees/1",
+      "method": "DELETE",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "查看系統設定",
+      "endpoint": "/admin/settings",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "修改系統設定",
+      "endpoint": "/admin/settings",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "查看系統日誌",
+      "endpoint": "/admin/logs",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "用戶權限管理",
+      "endpoint": "/admin/users",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "admin",
+      "action": "系統資料備份",
+      "endpoint": "/admin/backup",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "登入系統",
+      "endpoint": "/login",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "查看員工列表",
+      "endpoint": "/api/employees",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "修改員工資料",
+      "endpoint": "/api/employees/1",
+      "method": "PUT",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "查看部門資料",
+      "endpoint": "/api/departments",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "管理部門",
+      "endpoint": "/api/departments",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "查看報告",
+      "endpoint": "/reports",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "moderator",
+      "action": "拒絕系統設定存取",
+      "endpoint": "/admin/settings",
+      "method": "GET",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    },
+    {
+      "role": "moderator",
+      "action": "拒絕用戶管理存取",
+      "endpoint": "/admin/users",
+      "method": "GET",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    },
+    {
+      "role": "user",
+      "action": "登入系統",
+      "endpoint": "/login",
+      "method": "POST",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "user",
+      "action": "查看個人資料",
+      "endpoint": "/profile",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "user",
+      "action": "修改個人資料",
+      "endpoint": "/profile",
+      "method": "PUT",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "user",
+      "action": "查看同事資料",
+      "endpoint": "/api/employees",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "user",
+      "action": "拒絕新增員工",
+      "endpoint": "/api/employees",
+      "method": "POST",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    },
+    {
+      "role": "user",
+      "action": "拒絕刪除員工",
+      "endpoint": "/api/employees/1",
+      "method": "DELETE",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    },
+    {
+      "role": "user",
+      "action": "拒絕管理功能",
+      "endpoint": "/admin",
+      "method": "GET",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    },
+    {
+      "role": "guest",
+      "action": "訪問首頁",
+      "endpoint": "/",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "guest",
+      "action": "查看公開資訊",
+      "endpoint": "/about",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "guest",
+      "action": "聯絡我們頁面",
+      "endpoint": "/contact",
+      "method": "GET",
+      "statusCode": 200,
+      "success": true,
+      "expected": "應成功"
+    },
+    {
+      "role": "guest",
+      "action": "拒絕登入頁面",
+      "endpoint": "/login",
+      "method": "GET",
+      "statusCode": 302,
+      "success": true,
+      "expected": "應重定向"
+    },
+    {
+      "role": "guest",
+      "action": "拒絕API存取",
+      "endpoint": "/api/employees",
+      "method": "GET",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    },
+    {
+      "role": "guest",
+      "action": "拒絕管理功能",
+      "endpoint": "/admin",
+      "method": "GET",
+      "statusCode": 403,
+      "success": false,
+      "expected": "應被拒絕"
+    }
+  ],
+  "testScenarios": {
+    "admin": [
+      {
+        "action": "登入系統",
+        "endpoint": "/login",
+        "method": "POST"
+      },
+      {
+        "action": "查看所有員工",
+        "endpoint": "/api/employees",
+        "method": "GET"
+      },
+      {
+        "action": "新增員工",
+        "endpoint": "/api/employees",
+        "method": "POST"
+      },
+      {
+        "action": "修改員工資料",
+        "endpoint": "/api/employees/1",
+        "method": "PUT"
+      },
+      {
+        "action": "刪除員工",
+        "endpoint": "/api/employees/1",
+        "method": "DELETE"
+      },
+      {
+        "action": "查看系統設定",
+        "endpoint": "/admin/settings",
+        "method": "GET"
+      },
+      {
+        "action": "修改系統設定",
+        "endpoint": "/admin/settings",
+        "method": "POST"
+      },
+      {
+        "action": "查看系統日誌",
+        "endpoint": "/admin/logs",
+        "method": "GET"
+      },
+      {
+        "action": "用戶權限管理",
+        "endpoint": "/admin/users",
+        "method": "GET"
+      },
+      {
+        "action": "系統資料備份",
+        "endpoint": "/admin/backup",
+        "method": "POST"
+      }
+    ],
+    "moderator": [
+      {
+        "action": "登入系統",
+        "endpoint": "/login",
+        "method": "POST"
+      },
+      {
+        "action": "查看員工列表",
+        "endpoint": "/api/employees",
+        "method": "GET"
+      },
+      {
+        "action": "修改員工資料",
+        "endpoint": "/api/employees/1",
+        "method": "PUT"
+      },
+      {
+        "action": "查看部門資料",
+        "endpoint": "/api/departments",
+        "method": "GET"
+      },
+      {
+        "action": "管理部門",
+        "endpoint": "/api/departments",
+        "method": "POST"
+      },
+      {
+        "action": "查看報告",
+        "endpoint": "/reports",
+        "method": "GET"
+      },
+      {
+        "action": "拒絕系統設定存取",
+        "endpoint": "/admin/settings",
+        "method": "GET",
+        "expectForbidden": true
+      },
+      {
+        "action": "拒絕用戶管理存取",
+        "endpoint": "/admin/users",
+        "method": "GET",
+        "expectForbidden": true
+      }
+    ],
+    "user": [
+      {
+        "action": "登入系統",
+        "endpoint": "/login",
+        "method": "POST"
+      },
+      {
+        "action": "查看個人資料",
+        "endpoint": "/profile",
+        "method": "GET"
+      },
+      {
+        "action": "修改個人資料",
+        "endpoint": "/profile",
+        "method": "PUT"
+      },
+      {
+        "action": "查看同事資料",
+        "endpoint": "/api/employees",
+        "method": "GET"
+      },
+      {
+        "action": "拒絕新增員工",
+        "endpoint": "/api/employees",
+        "method": "POST",
+        "expectForbidden": true
+      },
+      {
+        "action": "拒絕刪除員工",
+        "endpoint": "/api/employees/1",
+        "method": "DELETE",
+        "expectForbidden": true
+      },
+      {
+        "action": "拒絕管理功能",
+        "endpoint": "/admin",
+        "method": "GET",
+        "expectForbidden": true
+      }
+    ],
+    "guest": [
+      {
+        "action": "訪問首頁",
+        "endpoint": "/",
+        "method": "GET"
+      },
+      {
+        "action": "查看公開資訊",
+        "endpoint": "/about",
+        "method": "GET"
+      },
+      {
+        "action": "聯絡我們頁面",
+        "endpoint": "/contact",
+        "method": "GET"
+      },
+      {
+        "action": "拒絕登入頁面",
+        "endpoint": "/login",
+        "method": "GET",
+        "expectRedirect": true
+      },
+      {
+        "action": "拒絕API存取",
+        "endpoint": "/api/employees",
+        "method": "GET",
+        "expectForbidden": true
+      },
+      {
+        "action": "拒絕管理功能",
+        "endpoint": "/admin",
+        "method": "GET",
+        "expectForbidden": true
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "category": "endpoint",
+      "warning": "/api/employees 端點異常",
+      "statusCode": 401,
+      "impact": "medium"
+    },
+    {
+      "category": "endpoint",
+      "warning": "/css/style.css 端點異常",
+      "statusCode": 404,
+      "impact": "medium"
+    },
+    {
+      "category": "endpoint",
+      "warning": "/js/app.js 端點異常",
+      "statusCode": 404,
+      "impact": "medium"
+    },
+    {
+      "category": "structure",
+      "warning": "缺少建議目錄: public/css",
+      "description": "CSS 樣式目錄",
+      "impact": "medium"
+    },
+    {
+      "category": "structure",
+      "warning": "缺少建議目錄: public/js",
+      "description": "JavaScript 檔案目錄",
+      "impact": "medium"
+    },
+    {
+      "category": "configuration",
+      "warning": "缺少建議的依賴套件",
+      "missing": [
+        "helmet"
+      ],
+      "impact": "medium"
+    }
+  ],
+  "suggestions": [
+    {
+      "category": "security",
+      "suggestion": "建議在生產環境使用 HTTPS",
+      "description": "確保所有敏感資料傳輸都經過加密",
+      "priority": "high"
+    },
+    {
+      "category": "security",
+      "suggestion": "建議實施強化的用戶驗證",
+      "description": "添加 JWT 或 session 驗證機制",
+      "priority": "high"
+    },
+    {
+      "category": "security",
+      "suggestion": "建議加強輸入驗證",
+      "description": "對所有用戶輸入進行嚴格驗證和清理",
+      "priority": "medium"
+    },
+    {
+      "category": "performance",
+      "suggestion": "建議啟用靜態檔案壓縮",
+      "description": "使用 gzip 壓縮來減少檔案大小",
+      "priority": "medium"
+    },
+    {
+      "category": "performance",
+      "suggestion": "建議實施快取策略",
+      "description": "添加適當的 HTTP 快取標頭",
+      "priority": "medium"
+    },
+    {
+      "category": "performance",
+      "suggestion": "建議使用資料庫連接池",
+      "description": "優化資料庫連接管理以提升效能",
+      "priority": "low"
+    }
+  ],
+  "nextSteps": [
+    "處理系統警告",
+    "安裝 Google Cloud CLI 以進行雲端部署",
+    "執行手動部署腳本",
+    "進行生產環境測試"
+  ]
+}

@@ -1,0 +1,71 @@
+steps:
+  # 構建優化的Docker映像
+  - name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'build'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/employee-management/employee-management-system:$SHORT_SHA'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/employee-management/employee-management-system:latest'
+      - '--platform'
+      - 'linux/amd64'
+      - '--cache-from'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/employee-management/employee-management-system:latest'
+      - '-f'
+      - 'Dockerfile.optimized'
+      - '.'
+    
+  # 推送映像到Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'push'
+      - '--all-tags'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/employee-management/employee-management-system'
+    
+  # 部署到Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'employee-management-system'
+      - '--image'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/employee-management/employee-management-system:$SHORT_SHA'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'europe-west1'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--min-instances'
+      - '1'
+      - '--max-instances'
+      - '10'
+      - '--concurrency'
+      - '80'
+      - '--timeout'
+      - '300'
+      - '--set-env-vars'
+      - 'NODE_ENV=production,PORT=8080'
+      - '--set-labels'
+      - 'app=employee-management,version=$SHORT_SHA'
+
+# 配置超時和日誌
+timeout: '1800s'
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_8'
+  diskSizeGb: 100
+  
+# 替代標籤
+substitutions:
+  _SERVICE_NAME: employee-management-system
+  _REGION: europe-west1
+
+# 觸發條件
+tags:
+  - cloudbuild-optimized

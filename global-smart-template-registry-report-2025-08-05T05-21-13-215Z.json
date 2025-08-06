@@ -1,0 +1,323 @@
+{
+  "startTime": "2025-08-05T05:21:12.872Z",
+  "scannedFiles": 42,
+  "registeredTemplates": 42,
+  "activatedModules": 5,
+  "globalFeatures": [],
+  "recommendations": [],
+  "usageGuide": {
+    "overview": {
+      "title": "智慧模板全域使用指南",
+      "version": "3.0",
+      "totalTemplates": 42,
+      "categories": 8,
+      "quickCommands": 5
+    },
+    "quickStart": {
+      "title": "快速開始",
+      "commands": [
+        {
+          "command": "/pro",
+          "description": "啟動智慧自適應強化模式",
+          "usage": "/pro [描述您的需求]",
+          "example": "/pro 開發一個用戶管理系統"
+        },
+        {
+          "command": "/expert",
+          "description": "多領域專家深度驗證",
+          "usage": "/expert [驗證目標]",
+          "example": "/expert 驗證系統架構設計"
+        },
+        {
+          "command": "/verify",
+          "description": "智慧驗證測試系統",
+          "usage": "/verify [測試範圍]",
+          "example": "/verify 驗證API功能完整性"
+        }
+      ]
+    },
+    "moduleCategories": {
+      "core": {
+        "name": "核心智慧模組",
+        "description": "基礎智慧功能和決策引擎",
+        "templateCount": 3,
+        "keyFeatures": [
+          "異步處理",
+          "Telegram通知",
+          "Git自動化"
+        ],
+        "recommendedUsage": "適用於日常開發任務和基礎智慧功能"
+      },
+      "verification": {
+        "name": "驗證測試模組",
+        "description": "智慧驗證、測試和品質保證",
+        "templateCount": 31,
+        "keyFeatures": [
+          "Telegram通知",
+          "Git自動化",
+          "異步處理"
+        ],
+        "recommendedUsage": "確保系統品質和功能完整性驗證"
+      },
+      "expert": {
+        "name": "專家分析模組",
+        "description": "多領域專家角色驗證系統",
+        "templateCount": 6,
+        "keyFeatures": [
+          "Telegram通知",
+          "Git自動化",
+          "異步處理"
+        ],
+        "recommendedUsage": "用於深度代碼審查和多領域專家驗證"
+      },
+      "integration": {
+        "name": "整合協作模組",
+        "description": "代理整合和協作系統",
+        "templateCount": 1,
+        "keyFeatures": [
+          "Telegram通知",
+          "Git自動化",
+          "異步處理"
+        ],
+        "recommendedUsage": "處理系統整合和代理協作任務"
+      },
+      "automation": {
+        "name": "自動化執行模組",
+        "description": "自動修復和執行引擎",
+        "templateCount": 0,
+        "keyFeatures": [],
+        "recommendedUsage": "自動化執行和修復任務"
+      },
+      "security": {
+        "name": "安全防護模組",
+        "description": "智慧安全模板和防護機制",
+        "templateCount": 0,
+        "keyFeatures": [],
+        "recommendedUsage": "安全檢查和防護機制實施"
+      },
+      "deployment": {
+        "name": "部署運維模組",
+        "description": "智慧部署和運維自動化",
+        "templateCount": 1,
+        "keyFeatures": [
+          "Git自動化",
+          "異步處理"
+        ],
+        "recommendedUsage": "智慧部署和運維自動化"
+      },
+      "analytics": {
+        "name": "分析優化模組",
+        "description": "深度分析和性能優化",
+        "templateCount": 0,
+        "keyFeatures": [],
+        "recommendedUsage": "深度分析和性能優化"
+      }
+    },
+    "bestPractices": [
+      "使用 /pro 指令啟動任何複雜任務",
+      "每個階段完成後會自動發送 Telegram 通知",
+      "所有模組支援自動執行和錯誤恢復",
+      "系統會自動選擇最適合的模組組合",
+      "支援並行執行和智慧調度優化",
+      "內建專家驗證和品質保證機制"
+    ],
+    "planningRecommendations": [
+      {
+        "phase": "立即使用",
+        "priority": "high",
+        "recommendations": [
+          "使用 /pro 指令處理日常開發任務",
+          "利用 /expert 進行代碼品質檢查",
+          "定期使用 /verify 確保系統穩定性"
+        ]
+      },
+      {
+        "phase": "中期優化",
+        "priority": "medium",
+        "recommendations": [
+          "建立團隊使用規範和最佳實踐",
+          "整合到 CI/CD 流程中",
+          "創建項目特定的模板配置"
+        ]
+      },
+      {
+        "phase": "長期發展",
+        "priority": "low",
+        "recommendations": [
+          "開發自定義智慧模組",
+          "建立企業級智慧模板庫",
+          "實施智慧模板性能監控"
+        ]
+      }
+    ]
+  },
+  "verifiedTemplates": 42,
+  "integrityIssues": [],
+  "globalInterface": {
+    "version": "3.0",
+    "lastUpdate": "2025-08-05T05:21:12.872Z",
+    "quickAccess": {
+      "/pro": {
+        "description": "啟動智慧自適應強化模式",
+        "modules": [
+          "intelligent-api-template-testing-engine.js",
+          "intelligent-planning-template-system.js",
+          "pro-intelligent-security-template-flight-report.js"
+        ],
+        "autoExecution": true
+      },
+      "/expert": {
+        "description": "多領域專家角色驗證",
+        "modules": [
+          "enhanced-smart-template-optimization-plan.js",
+          "global-smart-template-registry-system.js",
+          "intelligent-agents-integration-system-prototype.js",
+          "multi-domain-expert-verification-system.js",
+          "agents-integration-feasibility-analysis.js",
+          "agents-integration-simulation-demo.js"
+        ],
+        "autoExecution": true
+      },
+      "/verify": {
+        "description": "智慧驗證和測試系統",
+        "modules": [
+          "final-smart-template-verification-flight-report.js",
+          "honest-pro-template-v2.js",
+          "intelligent-deep-template-verification-engine.js",
+          "intelligent-multi-layer-divergent-security-template.js",
+          "smart-fix-deploy-template.js",
+          "smart-template-auto-fix-engine.js",
+          "smart-template-verification-engine.js",
+          "ultimate-smart-fix-template.js",
+          "ultimate-vercel-fix-template.js",
+          "live-url-smart-verification.js",
+          "smart-deep-verification-test.js",
+          "smart-verification-engine-v2.js",
+          "smart-verification-final-summary.js",
+          "smart-verification-system.js",
+          "smart-web-verification-engine.js",
+          "global-intelligent-learning-master.js",
+          "intelligent-deployment-troubleshooter.js",
+          "intelligent-rebuild-verification-engine.js",
+          "pro-agents-integration-final-flight-report.js",
+          "cache-fix-verification-tool.js",
+          "complete-enterprise-verification-engine.js",
+          "complete-web-verification-final-report.js",
+          "comprehensive-functional-verification-system.js",
+          "deployment-verification-test.js",
+          "final-comprehensive-verification-report.js",
+          "final-pro-completion-verification-report.js",
+          "final-system-verification.js",
+          "local-v4-verification-engine.js",
+          "pro-gcloud-verification-flight-report.js",
+          "real-operational-verification-engine.js",
+          "send-final-verification-complete-notification.js"
+        ],
+        "autoExecution": true
+      },
+      "/secure": {
+        "description": "智慧安全防護模式",
+        "modules": [],
+        "autoExecution": true
+      },
+      "/integrate": {
+        "description": "智慧整合協作模式",
+        "modules": [
+          "github-intelligent-explorer.js"
+        ],
+        "autoExecution": true
+      }
+    },
+    "globalFeatures": {
+      "autoExecution": true,
+      "telegramNotification": true,
+      "gitAutomation": true,
+      "expertVerification": true,
+      "crossModuleIntegration": true,
+      "continuousLearning": true
+    },
+    "smartDispatch": {
+      "taskAnalysis": true,
+      "moduleSelection": true,
+      "parallelExecution": true,
+      "resultVerification": true,
+      "flightReporting": true
+    }
+  },
+  "endTime": "2025-08-05T05:21:13.215Z",
+  "statistics": {
+    "overview": {
+      "totalScanned": 42,
+      "totalRegistered": 42,
+      "totalVerified": 42,
+      "totalActivated": 5,
+      "successRate": "100.0"
+    },
+    "categoryBreakdown": {
+      "core": {
+        "name": "核心智慧模組",
+        "templateCount": 3,
+        "verifiedCount": 3,
+        "averageIntegrityScore": 100
+      },
+      "verification": {
+        "name": "驗證測試模組",
+        "templateCount": 31,
+        "verifiedCount": 31,
+        "averageIntegrityScore": 94
+      },
+      "expert": {
+        "name": "專家分析模組",
+        "templateCount": 6,
+        "verifiedCount": 6,
+        "averageIntegrityScore": 95
+      },
+      "integration": {
+        "name": "整合協作模組",
+        "templateCount": 1,
+        "verifiedCount": 1,
+        "averageIntegrityScore": 85
+      },
+      "automation": {
+        "name": "自動化執行模組",
+        "templateCount": 0,
+        "verifiedCount": 0,
+        "averageIntegrityScore": 0
+      },
+      "security": {
+        "name": "安全防護模組",
+        "templateCount": 0,
+        "verifiedCount": 0,
+        "averageIntegrityScore": 0
+      },
+      "deployment": {
+        "name": "部署運維模組",
+        "templateCount": 1,
+        "verifiedCount": 1,
+        "averageIntegrityScore": 100
+      },
+      "analytics": {
+        "name": "分析優化模組",
+        "templateCount": 0,
+        "verifiedCount": 0,
+        "averageIntegrityScore": 0
+      }
+    },
+    "globalFeatures": {
+      "autoExecution": true,
+      "telegramNotification": true,
+      "gitAutomation": true,
+      "expertVerification": true,
+      "crossModuleIntegration": true,
+      "continuousLearning": true
+    },
+    "readinessLevel": "Unknown",
+    "nextSteps": [
+      "開始使用 /pro 指令執行智慧任務",
+      "探索不同類別的智慧模組功能",
+      "建立團隊使用規範和培訓",
+      "監控模組使用效果和性能",
+      "持續優化和擴展模組庫"
+    ]
+  }
+}

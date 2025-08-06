@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-05T10:11:23.839Z",
+    "executionTime": "0 秒",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "summary": {
+    "totalSteps": 6,
+    "totalVerifications": 3,
+    "totalErrors": 0,
+    "installationStatus": "partially_installed"
+  },
+  "installationSteps": [
+    {
+      "step": "status_check",
+      "status": "not_installed",
+      "details": "Command failed: gcloud --version\n'gcloud' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n",
+      "message": "Google Cloud CLI 未安裝，準備自動安裝"
+    },
+    {
+      "step": "download",
+      "status": "script_created",
+      "details": "C:\\Users\\Owner\\AppData\\Local\\Temp\\GoogleCloudSDKInstaller.exe",
+      "message": "下載腳本已創建"
+    },
+    {
+      "step": "installation_preparation",
+      "status": "guide_created",
+      "message": "安裝指導已創建"
+    },
+    {
+      "step": "automated_script",
+      "status": "created",
+      "script": "automated-gcloud-install.bat",
+      "message": "自動化安裝腳本已創建"
+    },
+    {
+      "step": "environment_config",
+      "status": "script_created",
+      "script": "configure-gcloud-environment.bat",
+      "message": "環境配置腳本已創建"
+    },
+    {
+      "step": "verification_script",
+      "status": "created",
+      "script": "verify-gcloud-installation.bat",
+      "message": "驗證腳本已創建"
+    }
+  ],
+  "verificationResults": [
+    {
+      "tool": "gcloud",
+      "status": "not_found",
+      "error": "Command failed: gcloud --version\n'gcloud' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+    },
+    {
+      "tool": "gsutil",
+      "status": "not_found",
+      "error": "Command failed: gsutil version\n'gsutil' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+    },
+    {
+      "tool": "kubectl",
+      "status": "verified",
+      "version": "Client Version: v1.32.2"
+    }
+  ],
+  "errors": [],
+  "downloadUrl": "https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe",
+  "nextSteps": [
+    "執行 automated-gcloud-install.bat 自動安裝",
+    "或手動下載並安裝 Google Cloud CLI",
+    "執行 verify-gcloud-installation.bat 驗證安裝",
+    "執行 gcloud auth login 進行認證",
+    "執行 configure-gcloud-environment.bat 配置環境",
+    "執行 manual-deploy.bat 部署應用程式"
+  ],
+  "createdFiles": [
+    "download-gcloud.bat",
+    "download-gcloud.ps1",
+    "automated-gcloud-install.bat",
+    "configure-gcloud-environment.bat",
+    "verify-gcloud-installation.bat",
+    "gcloud-installation-guide.md"
+  ]
+}

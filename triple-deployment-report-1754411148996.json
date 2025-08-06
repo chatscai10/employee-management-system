@@ -1,0 +1,108 @@
+{
+  "executionTime": "1秒",
+  "timestamp": "2025-08-05T16:25:48.996Z",
+  "deploymentResults": {
+    "railway": {
+      "status": "auto_failed_manual_available",
+      "url": null,
+      "error": "Command failed: railway version\nerror: unrecognized subcommand 'version'\n\nUsage: railway.exe [COMMAND]\n\nFor more information, try '--help'.\n\n",
+      "instructions": [
+        "自動部署失敗，建議手動部署:",
+        "1. 前往 https://railway.app",
+        "2. 使用GitHub登入",
+        "3. New Project -> Deploy from GitHub repo",
+        "4. 選擇企業管理系統倉庫",
+        "5. Railway自動檢測Node.js並部署"
+      ]
+    },
+    "vercel": {
+      "status": "requires_manual_login",
+      "url": null,
+      "error": "Need manual login",
+      "instructions": [
+        "1. 執行: vercel login",
+        "2. 或前往 https://vercel.com",
+        "3. 使用GitHub登入",
+        "4. New Project -> Import Git Repository",
+        "5. 選擇此倉庫並自動部署"
+      ]
+    },
+    "render": {
+      "status": "manual_deployment_required",
+      "url": null,
+      "error": null,
+      "instructions": [
+        "🎨 Render 手動部署指引 (7分鐘):",
+        "",
+        "1️⃣ 前往 https://render.com",
+        "2️⃣ 使用GitHub帳號註冊/登入",
+        "3️⃣ 點擊 \"New\" -> \"Web Service\"",
+        "4️⃣ 連接GitHub並選擇此倉庫",
+        "5️⃣ 填寫設定:",
+        "   • Name: enterprise-management-system",
+        "   • Environment: Node",
+        "   • Build Command: npm install",
+        "   • Start Command: node app.js",
+        "6️⃣ 點擊 \"Create Web Service\"",
+        "7️⃣ 等待部署完成 (約5-7分鐘)",
+        "8️⃣ 獲得 https://xxx.onrender.com 網址",
+        "",
+        "💡 提示: Render免費方案可能需要等待時間較長"
+      ],
+      "estimatedTime": "7分鐘",
+      "expectedUrl": "https://enterprise-management-system-xxxx.onrender.com"
+    }
+  },
+  "summary": {
+    "successful": 0,
+    "requiresManual": 3,
+    "failed": 0
+  },
+  "nextSteps": [
+    {
+      "platform": "railway",
+      "action": "完成手動部署",
+      "instructions": [
+        "自動部署失敗，建議手動部署:",
+        "1. 前往 https://railway.app",
+        "2. 使用GitHub登入",
+        "3. New Project -> Deploy from GitHub repo",
+        "4. 選擇企業管理系統倉庫",
+        "5. Railway自動檢測Node.js並部署"
+      ]
+    },
+    {
+      "platform": "vercel",
+      "action": "完成手動部署",
+      "instructions": [
+        "1. 執行: vercel login",
+        "2. 或前往 https://vercel.com",
+        "3. 使用GitHub登入",
+        "4. New Project -> Import Git Repository",
+        "5. 選擇此倉庫並自動部署"
+      ]
+    },
+    {
+      "platform": "render",
+      "action": "完成手動部署",
+      "instructions": [
+        "🎨 Render 手動部署指引 (7分鐘):",
+        "",
+        "1️⃣ 前往 https://render.com",
+        "2️⃣ 使用GitHub帳號註冊/登入",
+        "3️⃣ 點擊 \"New\" -> \"Web Service\"",
+        "4️⃣ 連接GitHub並選擇此倉庫",
+        "5️⃣ 填寫設定:",
+        "   • Name: enterprise-management-system",
+        "   • Environment: Node",
+        "   • Build Command: npm install",
+        "   • Start Command: node app.js",
+        "6️⃣ 點擊 \"Create Web Service\"",
+        "7️⃣ 等待部署完成 (約5-7分鐘)",
+        "8️⃣ 獲得 https://xxx.onrender.com 網址",
+        "",
+        "💡 提示: Render免費方案可能需要等待時間較長"
+      ]
+    }
+  ]
+}

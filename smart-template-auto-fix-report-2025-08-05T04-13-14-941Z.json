@@ -1,0 +1,3105 @@
+{
+  "startTime": "2025-08-05T04:13:14.500Z",
+  "filesProcessed": 5,
+  "fixesApplied": 0,
+  "issuesResolved": [],
+  "unresolvableIssues": [
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_error_handling",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "pro-agents-integration-final-flight-report.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_error_handling",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "agents-integration-simulation-demo.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_error_handling",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-agents-integration-system-prototype.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_error_handling",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "intelligent-planning-template-system.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    },
+    {
+      "file": "smart-template-verification-engine.js",
+      "issue": "missing_comma",
+      "reason": "自動修復失敗"
+    }
+  ],
+  "improvements": [],
+  "endTime": "2025-08-05T04:13:14.941Z"
+}

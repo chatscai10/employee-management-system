@@ -1,0 +1,91 @@
+{
+  "version": "3.0",
+  "lastUpdate": "2025-08-05T05:21:12.872Z",
+  "quickAccess": {
+    "/pro": {
+      "description": "啟動智慧自適應強化模式",
+      "modules": [
+        "intelligent-api-template-testing-engine.js",
+        "intelligent-planning-template-system.js",
+        "pro-intelligent-security-template-flight-report.js"
+      ],
+      "autoExecution": true
+    },
+    "/expert": {
+      "description": "多領域專家角色驗證",
+      "modules": [
+        "enhanced-smart-template-optimization-plan.js",
+        "global-smart-template-registry-system.js",
+        "intelligent-agents-integration-system-prototype.js",
+        "multi-domain-expert-verification-system.js",
+        "agents-integration-feasibility-analysis.js",
+        "agents-integration-simulation-demo.js"
+      ],
+      "autoExecution": true
+    },
+    "/verify": {
+      "description": "智慧驗證和測試系統",
+      "modules": [
+        "final-smart-template-verification-flight-report.js",
+        "honest-pro-template-v2.js",
+        "intelligent-deep-template-verification-engine.js",
+        "intelligent-multi-layer-divergent-security-template.js",
+        "smart-fix-deploy-template.js",
+        "smart-template-auto-fix-engine.js",
+        "smart-template-verification-engine.js",
+        "ultimate-smart-fix-template.js",
+        "ultimate-vercel-fix-template.js",
+        "live-url-smart-verification.js",
+        "smart-deep-verification-test.js",
+        "smart-verification-engine-v2.js",
+        "smart-verification-final-summary.js",
+        "smart-verification-system.js",
+        "smart-web-verification-engine.js",
+        "global-intelligent-learning-master.js",
+        "intelligent-deployment-troubleshooter.js",
+        "intelligent-rebuild-verification-engine.js",
+        "pro-agents-integration-final-flight-report.js",
+        "cache-fix-verification-tool.js",
+        "complete-enterprise-verification-engine.js",
+        "complete-web-verification-final-report.js",
+        "comprehensive-functional-verification-system.js",
+        "deployment-verification-test.js",
+        "final-comprehensive-verification-report.js",
+        "final-pro-completion-verification-report.js",
+        "final-system-verification.js",
+        "local-v4-verification-engine.js",
+        "pro-gcloud-verification-flight-report.js",
+        "real-operational-verification-engine.js",
+        "send-final-verification-complete-notification.js"
+      ],
+      "autoExecution": true
+    },
+    "/secure": {
+      "description": "智慧安全防護模式",
+      "modules": [],
+      "autoExecution": true
+    },
+    "/integrate": {
+      "description": "智慧整合協作模式",
+      "modules": [
+        "github-intelligent-explorer.js"
+      ],
+      "autoExecution": true
+    }
+  },
+  "globalFeatures": {
+    "autoExecution": true,
+    "telegramNotification": true,
+    "gitAutomation": true,
+    "expertVerification": true,
+    "crossModuleIntegration": true,
+    "continuousLearning": true
+  },
+  "smartDispatch": {
+    "taskAnalysis": true,
+    "moduleSelection": true,
+    "parallelExecution": true,
+    "resultVerification": true,
+    "flightReporting": true
+  }
+}

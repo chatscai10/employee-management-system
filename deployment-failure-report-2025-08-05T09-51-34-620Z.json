@@ -1,0 +1,24 @@
+{
+  "error": "本地構建失敗: Command failed: docker push gcr.io/complete-employee-management-436300/employee-management-system:latest",
+  "failedStep": {
+    "step": "build",
+    "name": "Docker構建",
+    "status": "failed",
+    "timestamp": "2025-08-05T09:51:23.138Z"
+  },
+  "timestamp": "2025-08-05T09:51:34.620Z",
+  "possibleCauses": [
+    "認證問題",
+    "API未啟用",
+    "資源配額不足",
+    "網路連接問題",
+    "配置錯誤"
+  ],
+  "recommendedActions": [
+    "檢查gcloud認證狀態",
+    "確認專案和API設置",
+    "檢查配額和權限",
+    "驗證網路連接",
+    "查看詳細錯誤日誌"
+  ]
+}

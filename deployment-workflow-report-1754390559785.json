@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-05T10:42:39.785Z",
+    "executionTime": "26 秒",
+    "workflow": "Execute Deployment Workflow"
+  },
+  "summary": {
+    "totalSteps": 12,
+    "successfulSteps": 10,
+    "warningSteps": 1,
+    "failedSteps": 1,
+    "deploymentReady": false
+  },
+  "steps": [
+    {
+      "step": "docker_check",
+      "status": "success",
+      "details": "Docker version 28.1.1, build 4eba377"
+    },
+    {
+      "step": "docker_service_check",
+      "status": "success",
+      "details": "Docker 服務運行正常"
+    },
+    {
+      "step": "gcloud_check",
+      "status": "warning",
+      "details": "Google Cloud CLI 未安裝，需要安裝後才能雲端部署"
+    },
+    {
+      "step": "file_check_app.js",
+      "status": "success",
+      "details": "app.js 文件完整"
+    },
+    {
+      "step": "file_check_package.json",
+      "status": "success",
+      "details": "package.json 文件完整"
+    },
+    {
+      "step": "file_check_Dockerfile.optimized",
+      "status": "failed",
+      "details": "缺少必要文件 Dockerfile.optimized"
+    },
+    {
+      "step": "file_check_cloudbuild-optimized.yaml",
+      "status": "success",
+      "details": "cloudbuild-optimized.yaml 文件完整"
+    },
+    {
+      "step": "npm_install",
+      "status": "success",
+      "details": "npm 依賴安裝成功"
+    },
+    {
+      "step": "docker_build",
+      "status": "success",
+      "details": "使用 Dockerfile 構建映像成功"
+    },
+    {
+      "step": "docker_test",
+      "status": "success",
+      "details": "本地Docker測試成功"
+    },
+    {
+      "step": "create_deploy_scripts",
+      "status": "success",
+      "details": "創建雲端部署腳本"
+    },
+    {
+      "step": "create_deploy_instructions",
+      "status": "success",
+      "details": "創建部署說明文件"
+    }
+  ],
+  "nextActions": [
+    "安裝Google Cloud CLI (如果尚未安裝)",
+    "執行 gcloud auth login 進行認證",
+    "運行 deploy-to-gcloud.bat 或 deploy-to-gcloud.sh",
+    "執行 deployment-verification.bat 驗證結果"
+  ],
+  "createdFiles": [
+    "deploy-to-gcloud.sh",
+    "deploy-to-gcloud.bat",
+    "DEPLOYMENT-INSTRUCTIONS.md"
+  ]
+}

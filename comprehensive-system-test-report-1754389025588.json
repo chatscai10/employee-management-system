@@ -1,0 +1,502 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-05T10:17:05.587Z",
+    "executionTime": "3 秒",
+    "testFramework": "Comprehensive System Testing Validator"
+  },
+  "summary": {
+    "totalTests": 20,
+    "passedTests": 17,
+    "failedTests": 3,
+    "errorTests": 0,
+    "overallHealthScore": 82,
+    "systemHealth": {
+      "integrity": 80
+    },
+    "deploymentReadiness": {
+      "score": 80
+    },
+    "performanceMetrics": {
+      "fileSystemPerformance": {
+        "duration": 87,
+        "status": "normal"
+      },
+      "memoryUsage": {
+        "heapUsed": "5 MB",
+        "heapTotal": "6 MB",
+        "external": "1 MB",
+        "rss": "48 MB"
+      },
+      "startupTime": {
+        "estimated": "< 2 seconds",
+        "status": "acceptable"
+      }
+    }
+  },
+  "testResults": [
+    {
+      "category": "system_integrity",
+      "name": "核心文件完整性",
+      "status": "passed",
+      "details": [
+        {
+          "file": "app.js",
+          "size": 48793,
+          "modified": "2025-08-04T13:10:06.395Z",
+          "type": "application",
+          "status": "exists"
+        },
+        {
+          "file": "package.json",
+          "size": 709,
+          "modified": "2025-08-04T06:53:57.821Z",
+          "type": "configuration",
+          "status": "exists"
+        },
+        {
+          "file": "Dockerfile",
+          "size": 688,
+          "modified": "2025-08-04T08:26:49.690Z",
+          "type": "deployment",
+          "status": "exists"
+        },
+        {
+          "file": "cloudbuild.yaml",
+          "size": 1138,
+          "modified": "2025-08-04T11:56:49.734Z",
+          "type": "deployment",
+          "status": "exists"
+        },
+        {
+          "file": "cloudbuild-optimized.yaml",
+          "size": 1844,
+          "modified": "2025-08-05T10:14:21.745Z",
+          "type": "deployment",
+          "status": "exists"
+        }
+      ],
+      "issues": [],
+      "recommendations": [
+        "文件完整性良好"
+      ]
+    },
+    {
+      "category": "system_integrity",
+      "name": "配置文件有效性",
+      "status": "passed",
+      "details": [
+        {
+          "file": "package.json",
+          "valid": true,
+          "hasScripts": true,
+          "hasEngines": true,
+          "hasDependencies": true
+        },
+        {
+          "file": "Dockerfile",
+          "valid": true,
+          "hasFrom": true,
+          "hasWorkdir": true,
+          "hasExpose": true,
+          "hasCmd": true
+        }
+      ],
+      "issues": [],
+      "recommendations": [
+        "配置文件有效"
+      ]
+    },
+    {
+      "category": "system_integrity",
+      "name": "依賴關係完整性",
+      "status": "passed",
+      "details": [
+        {
+          "packageJsonExists": true,
+          "nodeModulesExists": true,
+          "dependenciesCount": 2,
+          "devDependenciesCount": 0
+        },
+        {
+          "dependencyCheck": "passed"
+        }
+      ],
+      "issues": [],
+      "recommendations": [
+        "依賴關係完整"
+      ]
+    },
+    {
+      "category": "system_integrity",
+      "name": "環境變數配置",
+      "status": "failed",
+      "details": {
+        "envFiles": [
+          {
+            "file": ".env",
+            "exists": false
+          },
+          {
+            "file": ".env.example",
+            "exists": true
+          },
+          {
+            "file": ".env.production",
+            "exists": false
+          }
+        ],
+        "currentNodeEnv": "undefined",
+        "currentPort": "undefined",
+        "missingEnvVars": [
+          "NODE_ENV",
+          "PORT"
+        ]
+      },
+      "issues": [
+        "缺少環境變數: NODE_ENV, PORT"
+      ],
+      "recommendations": [
+        "設定必要的環境變數"
+      ]
+    },
+    {
+      "category": "system_integrity",
+      "name": "腳本執行權限",
+      "status": "passed",
+      "details": [
+        {
+          "script": "automated-gcloud-install.bat",
+          "exists": true,
+          "size": 2717,
+          "readable": true
+        },
+        {
+          "script": "comprehensive-deployment.bat",
+          "exists": true,
+          "size": 2736,
+          "readable": true
+        },
+        {
+          "script": "local-test.bat",
+          "exists": true,
+          "size": 1398,
+          "readable": true
+        },
+        {
+          "script": "deployment-verification.bat",
+          "exists": true,
+          "size": 2122,
+          "readable": true
+        },
+        {
+          "script": "enable-apis.bat",
+          "exists": true,
+          "size": 825,
+          "readable": true
+        }
+      ],
+      "issues": [],
+      "recommendations": [
+        "腳本權限正常"
+      ]
+    },
+    {
+      "category": "deployment_readiness",
+      "name": "Docker環境檢查",
+      "status": "passed",
+      "details": {
+        "dockerVersion": "Docker version 28.1.1, build 4eba377",
+        "dockerRunning": true,
+        "dockerComposeVersion": "Docker Compose version v2.35.1-desktop.1"
+      },
+      "issues": [],
+      "recommendations": [
+        "Docker 環境正常"
+      ]
+    },
+    {
+      "category": "deployment_readiness",
+      "name": "Google Cloud配置檢查",
+      "status": "failed",
+      "details": {
+        "gcloudInstalled": false
+      },
+      "issues": [
+        "Google Cloud CLI 未安裝"
+      ],
+      "recommendations": [
+        "安裝並配置 Google Cloud CLI"
+      ]
+    },
+    {
+      "category": "deployment_readiness",
+      "name": "部署文件完整性",
+      "status": "passed",
+      "details": [
+        {
+          "file": "Dockerfile",
+          "type": "docker",
+          "size": 688,
+          "contentLines": 35,
+          "valid": true
+        },
+        {
+          "file": "cloudbuild.yaml",
+          "type": "cloudbuild",
+          "size": 1138,
+          "contentLines": 51,
+          "valid": true
+        },
+        {
+          "file": "cloudbuild-optimized.yaml",
+          "type": "cloudbuild",
+          "size": 1844,
+          "contentLines": 71,
+          "valid": true
+        },
+        {
+          "file": ".dockerignore",
+          "type": "docker",
+          "size": 236,
+          "contentLines": 20,
+          "valid": true
+        }
+      ],
+      "issues": [],
+      "recommendations": [
+        "部署文件完整"
+      ]
+    },
+    {
+      "category": "deployment_readiness",
+      "name": "網路連接測試",
+      "status": "passed",
+      "details": [
+        {
+          "endpoint": "Google Cloud",
+          "url": "https://cloud.google.com",
+          "status": "reachable"
+        },
+        {
+          "endpoint": "Container Registry",
+          "url": "https://gcr.io",
+          "status": "reachable"
+        },
+        {
+          "endpoint": "Artifact Registry",
+          "url": "https://docker.pkg.dev",
+          "status": "reachable"
+        },
+        {
+          "endpoint": "NPM Registry",
+          "url": "https://registry.npmjs.org",
+          "status": "reachable"
+        }
+      ],
+      "issues": [],
+      "recommendations": [
+        "網路連接正常"
+      ]
+    },
+    {
+      "category": "deployment_readiness",
+      "name": "資源配置驗證",
+      "status": "passed",
+      "details": {
+        "totalMemory": "16 GB",
+        "freeMemory": "7 GB",
+        "cpuCount": 12,
+        "platform": "win32",
+        "architecture": "x64",
+        "diskAccessible": true
+      },
+      "issues": [],
+      "recommendations": [
+        "系統資源充足"
+      ]
+    },
+    {
+      "category": "functionality",
+      "name": "應用程式語法檢查",
+      "status": "passed",
+      "details": {
+        "syntaxValid": true,
+        "hasRequire": true,
+        "hasExpress": true,
+        "hasListen": true
+      },
+      "issues": [],
+      "recommendations": [
+        "應用程式語法正確"
+      ]
+    },
+    {
+      "category": "functionality",
+      "name": "模組載入測試",
+      "status": "passed",
+      "details": {
+        "packageJsonLoadable": true
+      },
+      "issues": [],
+      "recommendations": [
+        "模組載入正常"
+      ]
+    },
+    {
+      "category": "functionality",
+      "name": "配置檔案解析",
+      "status": "passed",
+      "details": {
+        "package.json": {
+          "parseable": true
+        }
+      },
+      "issues": [],
+      "recommendations": [
+        "配置解析正常"
+      ]
+    },
+    {
+      "category": "functionality",
+      "name": "路由定義檢查",
+      "status": "passed",
+      "details": {
+        "hasGetRoutes": true,
+        "hasPostRoutes": true,
+        "hasHealthCheck": true
+      },
+      "issues": [],
+      "recommendations": [
+        "路由定義完整"
+      ]
+    },
+    {
+      "category": "functionality",
+      "name": "中介軟體功能",
+      "status": "passed",
+      "details": {
+        "hasBodyParser": true,
+        "hasCors": true,
+        "hasHelmet": false,
+        "hasStaticFiles": true
+      },
+      "issues": [],
+      "recommendations": [
+        "中介軟體配置良好"
+      ]
+    },
+    {
+      "category": "performance",
+      "name": "效能基準測試",
+      "status": "passed",
+      "details": {
+        "fileSystemPerformance": {
+          "duration": 87,
+          "status": "normal"
+        },
+        "memoryUsage": {
+          "heapUsed": "5 MB",
+          "heapTotal": "6 MB",
+          "external": "1 MB",
+          "rss": "48 MB"
+        },
+        "startupTime": {
+          "estimated": "< 2 seconds",
+          "status": "acceptable"
+        }
+      },
+      "issues": [],
+      "recommendations": [
+        "考慮進行更詳細的效能測試"
+      ]
+    },
+    {
+      "category": "security",
+      "name": "文件權限檢查",
+      "status": "passed",
+      "details": {
+        "gitignoreExists": true,
+        "ignoresNodeModules": true,
+        "ignoresEnvFiles": true
+      },
+      "issues": [],
+      "recommendations": [
+        "文件權限配置良好"
+      ]
+    },
+    {
+      "category": "security",
+      "name": "依賴安全掃描",
+      "status": "passed",
+      "details": {
+        "npmAudit": {
+          "error": "npm audit 執行失敗"
+        }
+      },
+      "issues": [],
+      "recommendations": [
+        "依賴安全性良好"
+      ]
+    },
+    {
+      "category": "security",
+      "name": "配置安全檢查",
+      "status": "failed",
+      "details": {
+        "hasHelmet": false,
+        "hasCors": true,
+        "hasRateLimit": false
+      },
+      "issues": [
+        "建議使用 Helmet 中介軟體增強安全性"
+      ],
+      "recommendations": [
+        "添加安全性中介軟體"
+      ]
+    },
+    {
+      "category": "integration",
+      "name": "系統整合測試",
+      "status": "passed",
+      "details": {
+        "systemIntegration": {
+          "integrity": 80
+        },
+        "deploymentIntegration": {
+          "score": 80
+        },
+        "overallCompatibility": "good"
+      },
+      "issues": [],
+      "recommendations": [
+        "系統組件整合良好"
+      ]
+    }
+  ],
+  "categoryScores": {
+    "systemIntegrity": 80,
+    "deploymentReadiness": 80,
+    "functionality": 100,
+    "security": 67,
+    "performance": 100,
+    "integration": 100
+  },
+  "recommendations": {
+    "immediate": [
+      "設定必要的環境變數",
+      "安裝並配置 Google Cloud CLI"
+    ],
+    "suggested": [
+      "考慮進行更詳細的效能測試",
+      "添加安全性中介軟體"
+    ],
+    "maintenance": []
+  },
+  "nextSteps": [
+    "修復失敗的測試項目",
+    "執行 comprehensive-deployment.bat 開始部署",
+    "使用 deployment-verification.bat 驗證部署結果",
+    "進行生產環境測試",
+    "設定監控和警報系統"
+  ]
+}

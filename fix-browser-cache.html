@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>清除快取並測試登入</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status { 
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+        }
+        button:hover { background: #0056b3; }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 企業管理系統 - 瀏覽器快取修復工具</h1>
+    
+    <div id="status"></div>
+    
+    <div>
+        <h2>步驟 1: 清除快取</h2>
+        <button onclick="clearCache()">清除所有快取</button>
+        <button onclick="testAPI()">測試API端點</button>
+    </div>
+    
+    <div>
+        <h2>步驟 2: 測試登入</h2>
+        <button onclick="window.open('https://employee-management-system-v6hs.onrender.com/login', '_blank')">開啟登入頁面（新視窗）</button>
+        <button onclick="testLoginFlow()">自動測試登入流程</button>
+    </div>
+    
+    <div>
+        <h2>測試結果:</h2>
+        <pre id="results"></pre>
+    </div>
+
+    <script>
+        const baseUrl = 'https://employee-management-system-v6hs.onrender.com';
+        
+        function showStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            status.appendChild(div);
+        }
+        
+        function showResult(data) {
+            document.getElementById('results').textContent = JSON.stringify(data, null, 2);
+        }
+        
+        async function clearCache() {
+            showStatus('正在清除瀏覽器快取...', 'info');
+            
+            // 清除localStorage
+            localStorage.clear();
+            showStatus('✅ localStorage已清除', 'success');
+            
+            // 清除sessionStorage
+            sessionStorage.clear();
+            showStatus('✅ sessionStorage已清除', 'success');
+            
+            // 清除cookies (同源)
+            document.cookie.split(";").forEach(function(c) { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+            showStatus('✅ Cookies已清除', 'success');
+            
+            showStatus('快取清除完成！請使用Ctrl+F5強制刷新頁面', 'success');
+        }
+        
+        async function testAPI() {
+            showStatus('測試API端點...', 'info');
+            
+            try {
+                // 測試GET /health
+                const healthRes = await fetch(baseUrl + '/health');
+                const healthData = await healthRes.text();
+                showStatus(`✅ GET /health: ${healthRes.status} - ${healthData}`, 'success');
+                
+                // 測試POST /api/auth/verify
+                const verifyRes = await fetch(baseUrl + '/api/auth/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer test'
+                    }
+                });
+                const verifyData = await verifyRes.json();
+                showStatus(`✅ POST /api/auth/verify: ${verifyRes.status} - ${verifyData.message}`, verifyRes.ok ? 'success' : 'info');
+                showResult(verifyData);
+                
+                // 測試POST /api/auth/login
+                const loginRes = await fetch(baseUrl + '/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                const loginData = await loginRes.json();
+                showStatus(`✅ POST /api/auth/login: ${loginRes.status} - ${loginData.message}`, loginData.success ? 'success' : 'error');
+                showResult(loginData);
+                
+            } catch (error) {
+                showStatus(`❌ API測試失敗: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testLoginFlow() {
+            showStatus('開始自動登入流程測試...', 'info');
+            
+            try {
+                // 1. 登入
+                showStatus('步驟1: 嘗試登入管理員帳號...', 'info');
+                const loginRes = await fetch(baseUrl + '/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                const loginData = await loginRes.json();
+                
+                if (!loginData.success) {
+                    showStatus(`❌ 登入失敗: ${loginData.message}`, 'error');
+                    return;
+                }
+                
+                showStatus(`✅ 登入成功！用戶: ${loginData.user.name}`, 'success');
+                const token = loginData.token || loginData.user.username;
+                
+                // 2. 驗證身份
+                showStatus('步驟2: 驗證用戶身份...', 'info');
+                const verifyRes = await fetch(baseUrl + '/api/auth/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const verifyData = await verifyRes.json();
+                
+                if (verifyData.success) {
+                    showStatus(`✅ 身份驗證成功！角色: ${verifyData.user.role}`, 'success');
+                } else {
+                    showStatus(`❌ 身份驗證失敗: ${verifyData.message}`, 'error');
+                }
+                
+                // 3. 測試API訪問
+                showStatus('步驟3: 測試API訪問權限...', 'info');
+                const apiRes = await fetch(baseUrl + '/api/system/status', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const apiData = await apiRes.json();
+                showStatus(`✅ API訪問測試: ${apiRes.status}`, apiRes.ok ? 'success' : 'error');
+                
+                showResult({
+                    loginData,
+                    verifyData,
+                    apiData
+                });
+                
+                showStatus('🎉 登入流程測試完成！', 'success');
+                
+            } catch (error) {
+                showStatus(`❌ 測試失敗: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        // 頁面載入時自動測試
+        window.onload = () => {
+            showStatus('瀏覽器快取修復工具已載入', 'info');
+            showStatus('請點擊按鈕開始測試', 'info');
+        };
+    </script>
+</body>
+</html>

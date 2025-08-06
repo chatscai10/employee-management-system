@@ -1,0 +1,276 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-05T10:09:07.525Z",
+    "executionTime": "5 秒",
+    "systemInfo": {
+      "platform": "win32",
+      "arch": "x64",
+      "nodeVersion": "v20.19.2",
+      "osType": "Windows_NT",
+      "osRelease": "10.0.26100",
+      "totalMemory": "16 GB",
+      "cpuCount": 12
+    }
+  },
+  "summary": {
+    "totalDiagnostics": 21,
+    "totalRepairs": 0,
+    "totalInstallations": 4,
+    "totalVerifications": 10,
+    "issuesFound": 1,
+    "healthScore": 80
+  },
+  "diagnostics": [
+    {
+      "category": "core_files",
+      "item": "app.js",
+      "status": "ok",
+      "critical": true,
+      "description": "主應用程式"
+    },
+    {
+      "category": "core_files",
+      "item": "package.json",
+      "status": "ok",
+      "critical": true,
+      "description": "專案配置"
+    },
+    {
+      "category": "core_files",
+      "item": "Dockerfile",
+      "status": "ok",
+      "critical": true,
+      "description": "Docker配置"
+    },
+    {
+      "category": "core_files",
+      "item": "cloudbuild.yaml",
+      "status": "ok",
+      "critical": false,
+      "description": "Cloud Build配置"
+    },
+    {
+      "category": "core_files",
+      "item": ".env.example",
+      "status": "ok",
+      "critical": false,
+      "description": "環境變數範例"
+    },
+    {
+      "category": "core_files",
+      "item": ".gitignore",
+      "status": "ok",
+      "critical": false,
+      "description": "Git忽略配置"
+    },
+    {
+      "category": "dev_tools",
+      "tool": "node",
+      "status": "installed",
+      "version": "v20.19.2",
+      "critical": true
+    },
+    {
+      "category": "dev_tools",
+      "tool": "npm",
+      "status": "installed",
+      "version": "10.8.2",
+      "critical": true
+    },
+    {
+      "category": "dev_tools",
+      "tool": "git",
+      "status": "installed",
+      "version": "git version 2.50.1.windows.1",
+      "critical": true
+    },
+    {
+      "category": "dev_tools",
+      "tool": "docker",
+      "status": "installed",
+      "version": "Docker version 28.1.1, build 4eba377",
+      "critical": true
+    },
+    {
+      "category": "dev_tools",
+      "tool": "gcloud",
+      "status": "missing",
+      "error": "Command failed: gcloud --version\n'gcloud' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n",
+      "critical": true
+    },
+    {
+      "category": "network",
+      "endpoint": "Google",
+      "url": "https://www.google.com",
+      "status": "connected",
+      "critical": true
+    },
+    {
+      "category": "network",
+      "endpoint": "GitHub",
+      "url": "https://github.com",
+      "status": "connected",
+      "critical": true
+    },
+    {
+      "category": "network",
+      "endpoint": "NPM Registry",
+      "url": "https://registry.npmjs.org",
+      "status": "connected",
+      "critical": true
+    },
+    {
+      "category": "network",
+      "endpoint": "Google Cloud",
+      "url": "https://cloud.google.com",
+      "status": "connected",
+      "critical": true
+    },
+    {
+      "category": "network",
+      "endpoint": "Docker Hub",
+      "url": "https://hub.docker.com",
+      "status": "connected",
+      "critical": true
+    },
+    {
+      "category": "permissions",
+      "test": "file_write",
+      "status": "ok",
+      "critical": true
+    },
+    {
+      "category": "permissions",
+      "test": "command_execution",
+      "status": "ok",
+      "critical": true
+    },
+    {
+      "category": "environment",
+      "variable": "PATH",
+      "status": "set",
+      "value": "configured",
+      "critical": true
+    },
+    {
+      "category": "environment",
+      "variable": "NODE_ENV",
+      "status": "missing",
+      "critical": false,
+      "default": "development"
+    },
+    {
+      "category": "environment",
+      "variable": "PORT",
+      "status": "missing",
+      "critical": false,
+      "default": "8080"
+    }
+  ],
+  "repairs": [],
+  "installations": [
+    {
+      "type": "npm_packages",
+      "status": "success",
+      "description": "npm包安裝完成"
+    },
+    {
+      "type": "dev_dependencies_recommended",
+      "packages": [
+        "nodemon",
+        "eslint",
+        "prettier"
+      ],
+      "status": "recommended",
+      "description": "建議安裝的開發依賴"
+    },
+    {
+      "type": "installation_script",
+      "script": "install-check.bat",
+      "status": "created",
+      "description": "Windows安裝檢查腳本"
+    },
+    {
+      "type": "powershell_script",
+      "script": "auto-install.ps1",
+      "status": "created",
+      "description": "PowerShell自動安裝腳本"
+    }
+  ],
+  "verifications": [
+    {
+      "tool": "node",
+      "status": "verified",
+      "version": "v20.19.2"
+    },
+    {
+      "tool": "npm",
+      "status": "verified",
+      "version": "10.8.2"
+    },
+    {
+      "tool": "git",
+      "status": "verified",
+      "version": "git version 2.50.1.windows.1"
+    },
+    {
+      "tool": "docker",
+      "status": "verified",
+      "version": "Docker version 28.1.1, build 4eba377"
+    },
+    {
+      "tool": "gcloud",
+      "status": "missing",
+      "error": "Command failed: gcloud --version\n'gcloud' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+    },
+    {
+      "test": "local_server_syntax",
+      "status": "passed",
+      "description": "app.js語法檢查通過"
+    },
+    {
+      "test": "docker_availability",
+      "status": "passed",
+      "description": "Docker服務可用"
+    },
+    {
+      "test": "deployment_script_exists",
+      "script": "manual-deploy.bat",
+      "status": "passed",
+      "description": "部署腳本 manual-deploy.bat 存在"
+    },
+    {
+      "test": "deployment_script_exists",
+      "script": "install-check.bat",
+      "status": "passed",
+      "description": "部署腳本 install-check.bat 存在"
+    },
+    {
+      "test": "deployment_script_exists",
+      "script": "auto-install.ps1",
+      "status": "passed",
+      "description": "部署腳本 auto-install.ps1 存在"
+    }
+  ],
+  "issues": [
+    {
+      "type": "missing_tool",
+      "tool": "gcloud",
+      "severity": "high",
+      "autoInstall": false
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "tools",
+      "title": "安裝缺失的開發工具",
+      "description": "需要安裝: gcloud",
+      "actions": [
+        "運行 install-check.bat 檢查系統狀態",
+        "根據提示安裝缺失的工具",
+        "重新運行系統驗證"
+      ]
+    }
+  ]
+}

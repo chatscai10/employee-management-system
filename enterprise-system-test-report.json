@@ -1,0 +1,123 @@
+{
+  "testSummary": {
+    "totalTests": 10,
+    "passed": 0,
+    "failed": 10,
+    "passRate": "0.0%",
+    "timestamp": "2025-08-05T14:43:22.607Z"
+  },
+  "categorySummary": {
+    "system_status": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "authentication": {
+      "passed": 0,
+      "failed": 3,
+      "total": 3
+    },
+    "employee_management": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "attendance_system": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "inventory_management": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "maintenance_system": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "revenue_system": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    },
+    "frontend_interface": {
+      "passed": 0,
+      "failed": 1,
+      "total": 1
+    }
+  },
+  "detailedResults": [
+    {
+      "category": "system_status",
+      "test": "health_check",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.595Z"
+    },
+    {
+      "category": "authentication",
+      "test": "login_admin",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.598Z"
+    },
+    {
+      "category": "authentication",
+      "test": "login_manager",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.599Z"
+    },
+    {
+      "category": "authentication",
+      "test": "login_employee",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.601Z"
+    },
+    {
+      "category": "employee_management",
+      "test": "employee_list",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.602Z"
+    },
+    {
+      "category": "attendance_system",
+      "test": "attendance_functions",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.603Z"
+    },
+    {
+      "category": "inventory_management",
+      "test": "inventory_operations",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.604Z"
+    },
+    {
+      "category": "maintenance_system",
+      "test": "maintenance_operations",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.605Z"
+    },
+    {
+      "category": "revenue_system",
+      "test": "revenue_analysis",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.606Z"
+    },
+    {
+      "category": "frontend_interface",
+      "test": "page_loading",
+      "status": "failed",
+      "error": "",
+      "timestamp": "2025-08-05T14:43:22.607Z"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "deploymentSummary": {
+    "platform": "Railway",
+    "projectName": "employee-management-system",
+    "version": "v4.0.0",
+    "deploymentTime": "2025-08-05T15:31:39.289Z",
+    "status": "pending",
+    "url": null
+  },
+  "deploymentLogs": [
+    {
+      "step": "deployment_error",
+      "status": "failed",
+      "error": "Railway CLI不可用: 需要手動登入Railway",
+      "timestamp": "2025-08-05T15:31:39.287Z"
+    }
+  ],
+  "testAccounts": [
+    {
+      "role": "admin",
+      "username": "admin",
+      "password": "admin123"
+    },
+    {
+      "role": "manager",
+      "username": "manager",
+      "password": "manager123"
+    },
+    {
+      "role": "employee",
+      "username": "john.doe",
+      "password": "password123"
+    }
+  ],
+  "nextSteps": [
+    "查看Railway控制台的詳細錯誤日誌",
+    "檢查代碼和配置文件",
+    "嘗試手動部署或聯繫技術支持"
+  ]
+}

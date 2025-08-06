@@ -1,0 +1,622 @@
+{
+  "verificationSummary": {
+    "timestamp": "2025-08-05T15:34:42.176Z",
+    "totalUrls": 3,
+    "successfulUrls": 0,
+    "platformsDetected": [
+      "Railway",
+      "Vercel",
+      "Heroku"
+    ],
+    "overallStatus": "no_deployments"
+  },
+  "detailedResults": [
+    {
+      "url": "https://employee-management-system.up.railway.app",
+      "platform": "Railway",
+      "timestamp": "2025-08-05T15:33:58.390Z",
+      "tests": [
+        {
+          "name": "HTTP連接測試",
+          "status": "passed",
+          "responseTime": 447,
+          "responseSize": 101,
+          "critical": true
+        },
+        {
+          "name": "HTTPS安全連接",
+          "status": "passed",
+          "responseTime": 88,
+          "responseSize": 101,
+          "critical": true
+        },
+        {
+          "name": "健康檢查端點",
+          "status": "passed",
+          "responseTime": 81,
+          "responseSize": 101,
+          "critical": true
+        },
+        {
+          "name": "系統狀態API",
+          "status": "passed",
+          "responseTime": 85,
+          "responseSize": 101,
+          "critical": true
+        },
+        {
+          "name": "HTTPS強制重定向",
+          "status": "warning",
+          "message": "HTTP未重定向到HTTPS",
+          "category": "security"
+        },
+        {
+          "name": "安全標頭檢查",
+          "status": "warning",
+          "message": "發現 0/3 個安全標頭",
+          "category": "security"
+        },
+        {
+          "name": "主頁完整載入",
+          "status": "failed",
+          "score": "0/2",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "登入頁面功能",
+          "status": "failed",
+          "score": "0/3",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "管理主控台",
+          "status": "failed",
+          "score": "0/2",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "API文檔可訪問",
+          "status": "failed",
+          "score": "0/2",
+          "critical": false,
+          "category": "functionality"
+        },
+        {
+          "name": "員工API端點",
+          "status": "failed",
+          "score": "0/2",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "首頁載入時間",
+          "averageTime": 84,
+          "target": 3000,
+          "status": "excellent",
+          "measurements": [
+            81,
+            89,
+            83
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "API響應時間",
+          "averageTime": 78,
+          "target": 1000,
+          "status": "excellent",
+          "measurements": [
+            78,
+            78,
+            78
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "健康檢查響應",
+          "averageTime": 81,
+          "target": 500,
+          "status": "excellent",
+          "measurements": [
+            86,
+            79,
+            79
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "移動設備相容性",
+          "status": "warning",
+          "message": "移動優化: 無viewport, 無響應式CSS",
+          "category": "user_experience"
+        },
+        {
+          "name": "語言本地化",
+          "status": "partial",
+          "message": "中文支援: ✗, 語言屬性: ✗",
+          "category": "user_experience"
+        },
+        {
+          "name": "用戶界面完整性",
+          "status": "partial",
+          "message": "UI元素: 0/3 (導航、按鈕、表單)",
+          "category": "user_experience"
+        }
+      ],
+      "overallStatus": "poor",
+      "performance": {
+        "avgResponseTime": 81,
+        "tests": [
+          {
+            "name": "首頁載入時間",
+            "averageTime": 84,
+            "target": 3000,
+            "status": "excellent",
+            "measurements": [
+              81,
+              89,
+              83
+            ],
+            "category": "performance"
+          },
+          {
+            "name": "API響應時間",
+            "averageTime": 78,
+            "target": 1000,
+            "status": "excellent",
+            "measurements": [
+              78,
+              78,
+              78
+            ],
+            "category": "performance"
+          },
+          {
+            "name": "健康檢查響應",
+            "averageTime": 81,
+            "target": 500,
+            "status": "excellent",
+            "measurements": [
+              86,
+              79,
+              79
+            ],
+            "category": "performance"
+          }
+        ]
+      },
+      "security": {},
+      "functionality": {},
+      "scores": {
+        "critical": 50,
+        "overall": 41,
+        "criticalPassed": 4,
+        "totalCritical": 8,
+        "totalPassed": 7,
+        "totalTests": 17
+      }
+    },
+    {
+      "url": "https://employee-management-system.vercel.app",
+      "platform": "Vercel",
+      "timestamp": "2025-08-05T15:34:09.867Z",
+      "tests": [
+        {
+          "name": "HTTP連接測試",
+          "status": "passed",
+          "responseTime": 292,
+          "responseSize": 1077,
+          "critical": true
+        },
+        {
+          "name": "HTTPS安全連接",
+          "status": "passed",
+          "responseTime": 133,
+          "responseSize": 1077,
+          "critical": true
+        },
+        {
+          "name": "健康檢查端點",
+          "status": "passed",
+          "responseTime": 46,
+          "responseSize": 79,
+          "critical": true
+        },
+        {
+          "name": "系統狀態API",
+          "status": "passed",
+          "responseTime": 49,
+          "responseSize": 79,
+          "critical": true
+        },
+        {
+          "name": "HTTPS強制重定向",
+          "status": "warning",
+          "message": "HTTP未重定向到HTTPS",
+          "category": "security"
+        },
+        {
+          "name": "安全標頭檢查",
+          "status": "warning",
+          "message": "發現 0/3 個安全標頭",
+          "category": "security"
+        },
+        {
+          "name": "主頁完整載入",
+          "status": "failed",
+          "score": "0/2",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "登入頁面功能",
+          "status": "failed",
+          "score": "0/3",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "管理主控台",
+          "status": "failed",
+          "score": "0/2",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "API文檔可訪問",
+          "status": "failed",
+          "score": "0/2",
+          "critical": false,
+          "category": "functionality"
+        },
+        {
+          "name": "員工API端點",
+          "status": "failed",
+          "score": "0/2",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "首頁載入時間",
+          "averageTime": 67,
+          "target": 3000,
+          "status": "excellent",
+          "measurements": [
+            49,
+            49,
+            102
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "API響應時間",
+          "averageTime": 120,
+          "target": 1000,
+          "status": "excellent",
+          "measurements": [
+            117,
+            115,
+            128
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "健康檢查響應",
+          "averageTime": 133,
+          "target": 500,
+          "status": "excellent",
+          "measurements": [
+            298,
+            55,
+            47
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "移動設備相容性",
+          "status": "warning",
+          "message": "移動優化: 無viewport, 無響應式CSS",
+          "category": "user_experience"
+        },
+        {
+          "name": "語言本地化",
+          "status": "partial",
+          "message": "中文支援: ✗, 語言屬性: ✗",
+          "category": "user_experience"
+        },
+        {
+          "name": "用戶界面完整性",
+          "status": "partial",
+          "message": "UI元素: 0/3 (導航、按鈕、表單)",
+          "category": "user_experience"
+        }
+      ],
+      "overallStatus": "poor",
+      "performance": {
+        "avgResponseTime": 107,
+        "tests": [
+          {
+            "name": "首頁載入時間",
+            "averageTime": 67,
+            "target": 3000,
+            "status": "excellent",
+            "measurements": [
+              49,
+              49,
+              102
+            ],
+            "category": "performance"
+          },
+          {
+            "name": "API響應時間",
+            "averageTime": 120,
+            "target": 1000,
+            "status": "excellent",
+            "measurements": [
+              117,
+              115,
+              128
+            ],
+            "category": "performance"
+          },
+          {
+            "name": "健康檢查響應",
+            "averageTime": 133,
+            "target": 500,
+            "status": "excellent",
+            "measurements": [
+              298,
+              55,
+              47
+            ],
+            "category": "performance"
+          }
+        ]
+      },
+      "security": {},
+      "functionality": {},
+      "scores": {
+        "critical": 50,
+        "overall": 41,
+        "criticalPassed": 4,
+        "totalCritical": 8,
+        "totalPassed": 7,
+        "totalTests": 17
+      }
+    },
+    {
+      "url": "https://employee-management-system.herokuapp.com",
+      "platform": "Heroku",
+      "timestamp": "2025-08-05T15:34:21.047Z",
+      "tests": [
+        {
+          "name": "HTTP連接測試",
+          "status": "passed",
+          "responseTime": 787,
+          "responseSize": 548,
+          "critical": true
+        },
+        {
+          "name": "HTTPS安全連接",
+          "status": "failed",
+          "error": "socket hang up",
+          "critical": true
+        },
+        {
+          "name": "健康檢查端點",
+          "status": "passed",
+          "responseTime": 690,
+          "responseSize": 548,
+          "critical": true
+        },
+        {
+          "name": "系統狀態API",
+          "status": "failed",
+          "error": "socket hang up",
+          "critical": true
+        },
+        {
+          "name": "HTTPS強制重定向",
+          "status": "warning",
+          "message": "HTTP未重定向到HTTPS",
+          "category": "security"
+        },
+        {
+          "name": "安全標頭檢查",
+          "status": "warning",
+          "message": "發現 0/3 個安全標頭",
+          "category": "security"
+        },
+        {
+          "name": "主頁完整載入",
+          "status": "failed",
+          "error": "socket hang up",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "登入頁面功能",
+          "status": "failed",
+          "score": "0/3",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "管理主控台",
+          "status": "failed",
+          "error": "socket hang up",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "API文檔可訪問",
+          "status": "failed",
+          "score": "0/2",
+          "critical": false,
+          "category": "functionality"
+        },
+        {
+          "name": "員工API端點",
+          "status": "failed",
+          "error": "socket hang up",
+          "critical": true,
+          "category": "functionality"
+        },
+        {
+          "name": "首頁載入時間",
+          "averageTime": 712,
+          "target": 3000,
+          "status": "excellent",
+          "measurements": [
+            688,
+            759,
+            689
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "API響應時間",
+          "averageTime": 705,
+          "target": 1000,
+          "status": "excellent",
+          "measurements": [
+            685,
+            728,
+            702
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "健康檢查響應",
+          "averageTime": 821,
+          "target": 500,
+          "status": "slow",
+          "measurements": [
+            702,
+            1056,
+            706
+          ],
+          "category": "performance"
+        },
+        {
+          "name": "移動設備相容性",
+          "status": "passed",
+          "message": "移動優化: 有viewport, 有響應式CSS",
+          "category": "user_experience"
+        },
+        {
+          "name": "用戶界面完整性",
+          "status": "partial",
+          "message": "UI元素: 0/3 (導航、按鈕、表單)",
+          "category": "user_experience"
+        }
+      ],
+      "overallStatus": "poor",
+      "performance": {
+        "avgResponseTime": 746,
+        "tests": [
+          {
+            "name": "首頁載入時間",
+            "averageTime": 712,
+            "target": 3000,
+            "status": "excellent",
+            "measurements": [
+              688,
+              759,
+              689
+            ],
+            "category": "performance"
+          },
+          {
+            "name": "API響應時間",
+            "averageTime": 705,
+            "target": 1000,
+            "status": "excellent",
+            "measurements": [
+              685,
+              728,
+              702
+            ],
+            "category": "performance"
+          },
+          {
+            "name": "健康檢查響應",
+            "averageTime": 821,
+            "target": 500,
+            "status": "slow",
+            "measurements": [
+              702,
+              1056,
+              706
+            ],
+            "category": "performance"
+          }
+        ]
+      },
+      "security": {},
+      "functionality": {},
+      "scores": {
+        "critical": 25,
+        "overall": 31,
+        "criticalPassed": 2,
+        "totalCritical": 8,
+        "totalPassed": 5,
+        "totalTests": 16
+      }
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "platform": "Railway",
+      "issue": "4 個關鍵功能測試失敗",
+      "action": "檢查部署日誌並修復關鍵功能問題"
+    },
+    {
+      "priority": "HIGH",
+      "platform": "Vercel",
+      "issue": "4 個關鍵功能測試失敗",
+      "action": "檢查部署日誌並修復關鍵功能問題"
+    },
+    {
+      "priority": "HIGH",
+      "platform": "Heroku",
+      "issue": "6 個關鍵功能測試失敗",
+      "action": "檢查部署日誌並修復關鍵功能問題"
+    },
+    {
+      "priority": "MEDIUM",
+      "platform": "Heroku",
+      "issue": "性能測試顯示響應較慢",
+      "action": "考慮升級資源配置或優化代碼"
+    }
+  ],
+  "testAccounts": [
+    {
+      "role": "admin",
+      "username": "admin",
+      "password": "admin123",
+      "description": "系統管理員"
+    },
+    {
+      "role": "manager",
+      "username": "manager",
+      "password": "manager123",
+      "description": "部門經理"
+    },
+    {
+      "role": "employee",
+      "username": "john.doe",
+      "password": "password123",
+      "description": "一般員工"
+    }
+  ],
+  "nextSteps": [
+    "🔧 檢查部署問題並重新部署",
+    "📋 參考手動部署指引",
+    "💬 聯繫技術支持或查看平台文檔"
+  ]
+}

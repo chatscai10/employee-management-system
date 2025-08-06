@@ -4,10 +4,7 @@
   "builds": [
     {
       "src": "app.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -18,10 +15,7 @@
   ],
   "functions": {
     "app.js": {
-      "runtime": "nodejs20.x",
-      "environment": {
-        "NODE_ENV": "production"
-      }
+      "maxDuration": 30
     }
   },
   "env": {

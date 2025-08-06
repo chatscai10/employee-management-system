@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-08-05T09:52:49.991Z",
+  "executionTime": "0 秒",
+  "summary": {
+    "totalFixes": 9,
+    "totalWarnings": 1,
+    "totalSolutions": 3
+  },
+  "fixes": [
+    "✅ Docker 已安裝: Docker version 28.1.1, build 4eba377",
+    "✅ Docker 服務正在運行",
+    "✅ 可以連接到 Google Container Registry",
+    "✅ app.js 存在",
+    "✅ package.json 存在",
+    "✅ Dockerfile 存在",
+    "✅ cloudbuild.yaml 存在",
+    "✅ 創建了使用 Artifact Registry 的新 cloudbuild 配置",
+    "✅ 創建了手動部署腳本: manual-deploy.bat"
+  ],
+  "warnings": [
+    "❌ Google Cloud CLI 未安裝"
+  ],
+  "solutions": [
+    {
+      "issue": "Google Cloud CLI 未安裝",
+      "solution": "請安裝 Google Cloud CLI",
+      "steps": [
+        "1. 前往 https://cloud.google.com/sdk/docs/install",
+        "2. 下載適合您系統的安裝程式",
+        "3. 執行安裝程式並跟隨指示",
+        "4. 重新啟動命令提示字元",
+        "5. 執行 gcloud auth login 進行認證"
+      ]
+    },
+    {
+      "issue": "Container Registry 推送失敗",
+      "solution": "使用 Artifact Registry 替代方案",
+      "priority": "high",
+      "steps": [
+        "1. 創建 Artifact Registry 儲存庫",
+        "2. 修改映像標籤使用 Artifact Registry",
+        "3. 重新配置 cloudbuild.yaml",
+        "4. 重新執行部署"
+      ],
+      "commands": [
+        "gcloud artifacts repositories create employee-management --repository-format=docker --location=europe-west1",
+        "docker tag employee-management-system:latest europe-west1-docker.pkg.dev/complete-employee-management-436300/employee-management/employee-management-system:latest",
+        "docker push europe-west1-docker.pkg.dev/complete-employee-management-436300/employee-management/employee-management-system:latest"
+      ]
+    },
+    {
+      "issue": "Cloud Build 失敗",
+      "solution": "使用本地部署腳本",
+      "priority": "medium",
+      "steps": [
+        "1. 使用本地 Docker 構建",
+        "2. 手動推送到 Container Registry",
+        "3. 使用 gcloud run deploy 部署"
+      ]
+    }
+  ],
+  "nextSteps": [
+    "1. 安裝 Google Cloud CLI (如果尚未安裝)",
+    "2. 執行 gcloud auth login 進行認證",
+    "3. 執行手動部署腳本 manual-deploy.bat",
+    "4. 或使用新的 cloudbuild-artifact-registry.yaml"
+  ]
+}
