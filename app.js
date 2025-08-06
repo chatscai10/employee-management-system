@@ -808,7 +808,7 @@ function authenticateUser(req, res, next) {
     next();
 }
 
-app.get('/dashboard', authenticateUser, (req, res) => {
+app.get('/dashboard', (req, res) => {
     const dashboardHtml = `<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
