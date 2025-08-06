@@ -1103,7 +1103,9 @@ app.get('/dashboard', (req, res) => {
     // 🔍 驗證用戶身份
     async function verifyUserAuth() {
         try {
-            const response = await apiRequest('/api/auth/verify');
+            const response = await apiRequest('/api/auth/verify', {
+                method: 'POST'
+            });
             return response;
         } catch (error) {
             return { success: false, message: '驗證失敗' };
