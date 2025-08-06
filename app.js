@@ -377,7 +377,7 @@ app.get('/login', (req, res) => {
             </div>
             <div class="form-group">
                 <label for="password">密碼</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
             </div>
             <button type="submit" class="btn">登入系統</button>
         </form>
@@ -473,6 +473,28 @@ app.post('/api/auth/login', (req, res) => {
             user: userInfo,
             token: username // 簡化的token (實際應用中應使用JWT)
         });
+
+// 🔐 用戶驗證API
+app.post('/api/auth/verify', (req, res) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).json({ success: false, message: '需要身份驗證' });
+    }
+    
+    const token = authHeader.split(' ')[1];
+    const user = database.employees.find(emp => emp.username === token);
+    
+    if (!user) {
+        return res.status(401).json({ success: false, message: '無效的認證資訊' });
+    }
+    
+    const { password: _, ...userInfo } = user;
+    res.json({ 
+        success: true, 
+        user: userInfo,
+        message: '驗證成功'
+    });
+});
     } else {
         res.status(401).json({ 
             success: false, 
@@ -768,7 +790,25 @@ app.get('/api/promotion-votes', authenticateUser, (req, res) => {
 });
 
 // 管理主控台路由
-app.get('/dashboard', (req, res) => {
+// 🔐 用戶驗證中介軟體
+function authenticateUser(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.redirect('/login');
+    }
+    
+    const token = authHeader.split(' ')[1];
+    const user = database.employees.find(emp => emp.username === token);
+    
+    if (!user) {
+        return res.redirect('/login');
+    }
+    
+    req.user = user;
+    next();
+}
+
+app.get('/dashboard', authenticateUser, (req, res) => {
     const dashboardHtml = `<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -1017,240 +1057,385 @@ app.get('/dashboard', (req, res) => {
         </div>
     </div>
     
-    <script>
-        // 用戶資訊載入
-        window.onload = function() {
-            const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-            if (userInfo.name) {
-                document.getElementById('username').textContent = userInfo.name;
+    
+// 🔧 修復所有JavaScript函數定義問題
+<script>
+    // 🔐 用戶資訊和權限管理
+    let currentUser = null;
+    
+    // 頁面載入初始化
+    window.onload = function() {
+        initializeDashboard();
+    };
+    
+    // 🚀 Dashboard初始化
+    async function initializeDashboard() {
+        // 載入用戶資訊
+        const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+        const userToken = localStorage.getItem('userToken') || '';
+        
+        if (!userToken) {
+            alert('請先登入系統');
+            window.location.href = '/login';
+            return;
+        }
+        
+        // 驗證用戶身份並獲取權限
+        const authResult = await verifyUserAuth();
+        if (!authResult.success) {
+            alert('身份驗證失敗，請重新登入');
+            logout();
+            return;
+        }
+        
+        currentUser = authResult.user;
+        
+        // 顯示用戶資訊
+        document.getElementById('username').textContent = currentUser.name || '未知用戶';
+        
+        // 根據用戶角色顯示/隱藏功能
+        setupUserPermissions(currentUser.role);
+        
+        // 載入初始數據
+        refreshStats();
+    }
+    
+    // 🔍 驗證用戶身份
+    async function verifyUserAuth() {
+        try {
+            const response = await apiRequest('/api/auth/verify');
+            return response;
+        } catch (error) {
+            return { success: false, message: '驗證失敗' };
+        }
+    }
+    
+    // ⚙️ 根據用戶角色設置權限
+    function setupUserPermissions(role) {
+        const adminOnly = document.querySelectorAll('.admin-only');
+        const managerOnly = document.querySelectorAll('.manager-only');
+        const employeeOnly = document.querySelectorAll('.employee-only');
+        
+        // 隱藏不適合的功能模組
+        if (role !== 'admin') {
+            adminOnly.forEach(el => el.style.display = 'none');
+        }
+        
+        if (role !== 'manager' && role !== 'admin') {
+            managerOnly.forEach(el => el.style.display = 'none');
+        }
+        
+        // 顯示角色標識
+        const roleDisplay = document.getElementById('userRole');
+        if (roleDisplay) {
+            const roleNames = {
+                'admin': '系統管理員',
+                'manager': '部門經理',
+                'employee': '一般員工'
+            };
+            roleDisplay.textContent = roleNames[role] || '未知角色';
+        }
+    }
+    
+    // 🔄 API請求封裝（修復版本）
+    async function apiRequest(url, options = {}) {
+        const token = localStorage.getItem('userToken') || '';
+        const defaultOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
             }
-            
-            // 自動載入系統統計
-            refreshStats();
         };
         
-        // 獲取用戶 token
-        function getUserToken() {
-            return localStorage.getItem('userToken') || '';
+        const finalOptions = { ...defaultOptions, ...options };
+        if (finalOptions.headers && options.headers) {
+            finalOptions.headers = { ...defaultOptions.headers, ...options.headers };
         }
         
-        // API 請求封裝
-        async function apiRequest(url, options = {}) {
-            const token = getUserToken();
-            const defaultOptions = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-            };
-            
-            const finalOptions = { ...defaultOptions, ...options };
-            if (finalOptions.headers && options.headers) {
-                finalOptions.headers = { ...defaultOptions.headers, ...options.headers };
-            }
-            
-            try {
-                const response = await fetch(url, finalOptions);
-                return await response.json();
-            } catch (error) {
-                console.error('API請求錯誤:', error);
-                return { success: false, message: '網路連接錯誤' };
-            }
+        try {
+            const response = await fetch(url, finalOptions);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('API請求錯誤:', error);
+            return { success: false, message: '網路連接錯誤: ' + error.message };
         }
-        
-        // 登出功能
-        function logout() {
-            localStorage.removeItem('userToken');
-            localStorage.removeItem('userInfo');
-            alert('登出成功');
-            window.location.href = '/login';
-        }
-        
-        // 刷新統計數據
-        async function refreshStats() {
+    }
+    
+    // 📊 刷新統計數據（修復版本）
+    async function refreshStats() {
+        try {
             const status = await apiRequest('/api/system/status');
             if (status.success) {
-                document.getElementById('employeeCount').textContent = status.database.employees || 0;
-                document.getElementById('attendanceCount').textContent = status.database.attendance || 0;
-                document.getElementById('inventoryCount').textContent = status.database.inventory || 0;
+                updateStatElement('employeeCount', status.database?.employees || 0);
+                updateStatElement('attendanceCount', status.database?.attendance || 0);
+                updateStatElement('inventoryCount', status.database?.inventory || 0);
             }
+        } catch (error) {
+            console.error('刷新統計失敗:', error);
+        }
+    }
+    
+    // 🎯 安全更新元素內容
+    function updateStatElement(elementId, value) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.textContent = value;
+        }
+    }
+    
+    // 👥 載入員工列表（修復版本）
+    async function loadEmployees() {
+        const employeeData = document.getElementById('employeeData');
+        const employeeList = document.getElementById('employeeList');
+        
+        if (!employeeList) return;
+        
+        employeeList.innerHTML = '<div class="loading">載入中...</div>';
+        if (employeeData) employeeData.style.display = 'block';
+        
+        const result = await apiRequest('/api/employees');
+        if (result.success && result.data) {
+            let html = '';
+            result.data.forEach(emp => {
+                html += createEmployeeListItem(emp);
+            });
+            employeeList.innerHTML = html || '<div class="loading">暫無員工資料</div>';
+        } else {
+            employeeList.innerHTML = '<div class="loading">❌ ' + (result.message || '載入失敗') + '</div>';
+        }
+    }
+    
+    // 👤 創建員工列表項目
+    function createEmployeeListItem(emp) {
+        return 
+            '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                '<strong>' + (emp.name || '未知姓名') + '</strong> - ' + (emp.position || '未知職位') +
+                '<br><small>' + (emp.department || '未知部門') + ' | ' + (emp.email || '無郵件') + '</small>' +
+            '</div>';
+    }
+    
+    // ✅ 載入考勤記錄（修復版本）
+    async function loadAttendance() {
+        const attendanceData = document.getElementById('attendanceData');
+        const attendanceList = document.getElementById('attendanceList');
+        
+        if (!attendanceList) return;
+        
+        attendanceList.innerHTML = '<div class="loading">載入中...</div>';
+        if (attendanceData) attendanceData.style.display = 'block';
+        
+        const result = await apiRequest('/api/attendance');
+        if (result.success && result.data) {
+            let html = '';
+            result.data.forEach(att => {
+                html += createAttendanceListItem(att);
+            });
+            attendanceList.innerHTML = html || '<div class="loading">暫無考勤記錄</div>';
+        } else {
+            attendanceList.innerHTML = '<div class="loading">❌ ' + (result.message || '載入失敗') + '</div>';
+        }
+    }
+    
+    // 📝 創建考勤列表項目
+    function createAttendanceListItem(att) {
+        return 
+            '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                '<strong>' + (att.employeeName || '未知員工') + '</strong> - ' + (att.date || '未知日期') +
+                '<br><small>簽到: ' + (att.checkIn || '未簽到') + ' | 簽退: ' + (att.checkOut || '未簽退') + '</small>' +
+            '</div>';
+    }
+    
+    // 📦 載入庫存（修復版本）
+    async function loadInventory() {
+        const inventoryData = document.getElementById('inventoryData');
+        const inventoryList = document.getElementById('inventoryList');
+        
+        if (!inventoryList) return;
+        
+        inventoryList.innerHTML = '<div class="loading">載入中...</div>';
+        if (inventoryData) inventoryData.style.display = 'block';
+        
+        const result = await apiRequest('/api/inventory');
+        if (result.success && result.data) {
+            let html = '';
+            result.data.forEach(item => {
+                html += createInventoryListItem(item);
+            });
+            
+            if (result.totalValue) {
+                html += '<div style="padding: 1rem; font-weight: bold;">總價值: NT$ ' + result.totalValue.toLocaleString() + '</div>';
+            }
+            
+            inventoryList.innerHTML = html || '<div class="loading">暫無庫存資料</div>';
+        } else {
+            inventoryList.innerHTML = '<div class="loading">❌ ' + (result.message || '載入失敗') + '</div>';
+        }
+    }
+    
+    // 📦 創建庫存列表項目
+    function createInventoryListItem(item) {
+        return 
+            '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                '<strong>' + (item.name || '未知物品') + '</strong> - 數量: ' + (item.quantity || 0) +
+                '<br><small>單價: NT$ ' + (item.price || 0).toLocaleString() + ' | 供應商: ' + (item.supplier || '未知') + '</small>' +
+            '</div>';
+    }
+    
+    // 🔧 載入維修申請（修復版本）
+    async function loadMaintenance() {
+        const maintenanceData = document.getElementById('maintenanceData');
+        const maintenanceList = document.getElementById('maintenanceList');
+        
+        if (!maintenanceList) return;
+        
+        maintenanceList.innerHTML = '<div class="loading">載入中...</div>';
+        if (maintenanceData) maintenanceData.style.display = 'block';
+        
+        const result = await apiRequest('/api/maintenance');
+        if (result.success && result.data) {
+            let html = '';
+            result.data.forEach(req => {
+                html += createMaintenanceListItem(req);
+            });
+            maintenanceList.innerHTML = html || '<div class="loading">暫無維修申請</div>';
+        } else {
+            maintenanceList.innerHTML = '<div class="loading">❌ ' + (result.message || '載入失敗') + '</div>';
+        }
+    }
+    
+    // 🔧 創建維修列表項目  
+    function createMaintenanceListItem(req) {
+        const priorityColors = {
+            'high': '#dc3545',
+            'medium': '#ffc107', 
+            'low': '#28a745'
+        };
+        const priorityColor = priorityColors[req.priority] || '#6c757d';
+        
+        return 
+            '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
+                '<strong>' + (req.equipment || '未知設備') + '</strong> - ' +
+                '<span style="color: ' + priorityColor + ';">' + (req.priority || 'normal') + '</span>' +
+                '<br><small>' + (req.issue || '無描述') + ' | 狀態: ' + (req.status || '未知') + '</small>' +
+            '</div>';
+    }
+    
+    // ⚙️ 檢查系統狀態（修復版本）
+    async function checkSystemStatus() {
+        const systemData = document.getElementById('systemData');
+        const systemStatus = document.getElementById('systemStatus');
+        
+        if (!systemStatus) return;
+        
+        systemStatus.innerHTML = '<div class="loading">載入中...</div>';
+        if (systemData) systemData.style.display = 'block';
+        
+        const result = await apiRequest('/api/system/status');
+        if (result.success && result.system) {
+            let html = createSystemStatusDisplay(result.system);
+            systemStatus.innerHTML = html;
+        } else {
+            systemStatus.innerHTML = '<div class="loading">❌ ' + (result.message || '載入失敗') + '</div>';
+        }
+    }
+    
+    // 🖥️ 創建系統狀態顯示
+    function createSystemStatusDisplay(system) {
+        let html = 
+            '<div style="padding: 0.5rem;">' +
+                '<strong>系統版本:</strong> ' + (system.version || '未知') + '<br>' +
+                '<strong>運行狀態:</strong> ' + (system.status || '未知') + '<br>' +
+                '<strong>運行時間:</strong> ' + Math.floor((system.uptime || 0) / 60) + ' 分鐘<br>' +
+                '<strong>最後更新:</strong> ' + new Date(system.timestamp || Date.now()).toLocaleString() +
+            '</div>';
+            
+        if (system.modules) {
+            html += '<div style="padding: 0.5rem; border-top: 1px solid #eee;"><strong>模組狀態:</strong><br>';
+            Object.entries(system.modules).forEach(([module, status]) => {
+                const statusColor = status === 'active' ? '#28a745' : '#dc3545';
+                html += '<span style="color: ' + statusColor + ';">' + module + ': ' + status + '</span><br>';
+            });
+            html += '</div>';
         }
         
-        // 載入員工列表
-        async function loadEmployees() {
-            const employeeData = document.getElementById('employeeData');
-            const employeeList = document.getElementById('employeeList');
-            
-            employeeList.innerHTML = '<div class="loading">載入中...</div>';
-            employeeData.style.display = 'block';
-            
-            const result = await apiRequest('/api/employees');
-            if (result.success) {
-                let html = '';
-                result.data.forEach(emp => {
-                    html += 
-                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
-                            '<strong>' + emp.name + '</strong> - ' + emp.position +
-                            '<br><small>' + emp.department + ' | ' + emp.email + '</small>' +
-                        '</div>';
+        return html;
+    }
+    
+    // 🧪 API測試（修復版本）
+    async function testAllAPIs() {
+        const endpoints = [
+            '/api/system/status',
+            '/api/employees', 
+            '/api/attendance',
+            '/api/inventory',
+            '/api/maintenance'
+        ];
+        
+        let results = 'API 測試結果:\n\n';
+        
+        for (let endpoint of endpoints) {
+            try {
+                const start = Date.now();
+                const response = await fetch(endpoint, {
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('userToken') }
                 });
-                employeeList.innerHTML = html;
-            } else {
-                employeeList.innerHTML = '<div class="loading">❌ ' + result.message + '</div>';
+                const time = Date.now() - start;
+                results += '✅ ' + endpoint + ': ' + response.status + ' (' + time + 'ms)\n';
+            } catch (error) {
+                results += '❌ ' + endpoint + ': 失敗 (' + error.message + ')\n';
             }
         }
         
-        // 載入考勤記錄
-        async function loadAttendance() {
-            const attendanceData = document.getElementById('attendanceData');
-            const attendanceList = document.getElementById('attendanceList');
-            
-            attendanceList.innerHTML = '<div class="loading">載入中...</div>';
-            attendanceData.style.display = 'block';
-            
-            const result = await apiRequest('/api/attendance');
-            if (result.success) {
-                let html = '';
-                result.data.forEach(att => {
-                    html += 
-                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
-                            '<strong>' + att.employeeName + '</strong> - ' + att.date +
-                            '<br><small>簽到: ' + att.checkIn + ' | 簽退: ' + (att.checkOut || '未簽退') + '</small>' +
-                        '</div>';
-                });
-                attendanceList.innerHTML = html;
-            } else {
-                attendanceList.innerHTML = '<div class="loading">❌ ' + result.message + '</div>';
-            }
+        alert(results);
+    }
+    
+    // 🚪 登出功能（修復版本）
+    function logout() {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userInfo');
+        alert('登出成功');
+        window.location.href = '/login';
+    }
+    
+    // ⏰ 快速簽到（修復版本）
+    async function checkIn() {
+        const result = await apiRequest('/api/attendance/checkin', { method: 'POST' });
+        alert(result.message || '簽到操作完成');
+        if (result.success) {
+            refreshStats();
         }
-        
-        // 快速簽到
-        async function checkIn() {
-            const result = await apiRequest('/api/attendance/checkin', { method: 'POST' });
-            alert(result.message);
-            if (result.success) {
-                refreshStats();
-            }
+    }
+    
+    // 🆕 新增功能的占位函數（修復版本）
+    function showAddEmployee() { 
+        if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'manager')) {
+            alert('新增員工功能開發中...（管理員功能）');
+        } else {
+            alert('您沒有權限執行此操作');
         }
-        
-        // 載入庫存
-        async function loadInventory() {
-            const inventoryData = document.getElementById('inventoryData');
-            const inventoryList = document.getElementById('inventoryList');
-            
-            inventoryList.innerHTML = '<div class="loading">載入中...</div>';
-            inventoryData.style.display = 'block';
-            
-            const result = await apiRequest('/api/inventory');
-            if (result.success) {
-                let html = '';
-                result.data.forEach(item => {
-                    html += 
-                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
-                            '<strong>' + item.name + '</strong> - 數量: ' + item.quantity +
-                            '<br><small>單價: NT$ ' + item.price.toLocaleString() + ' | 供應商: ' + item.supplier + '</small>' +
-                        '</div>';
-                });
-                inventoryList.innerHTML = html + '<div style="padding: 1rem; font-weight: bold;">總價值: NT$ ' + result.totalValue.toLocaleString() + '</div>';
-            } else {
-                inventoryList.innerHTML = '<div class="loading">❌ ' + result.message + '</div>';
-            }
+    }
+    
+    function loadSchedules() { alert('排班管理功能開發中...'); }
+    function loadOrders() { alert('採購申請查詢功能開發中...'); }
+    function showNewOrder() { alert('新建採購申請功能開發中...'); }
+    function showNewMaintenance() { alert('報告故障功能開發中...'); }
+    function loadRevenue() { 
+        if (currentUser && currentUser.role === 'admin') {
+            alert('營收報表功能開發中...（管理員專用）');
+        } else {
+            alert('您沒有權限查看營收資料');
         }
-        
-        // 載入維修申請
-        async function loadMaintenance() {
-            const maintenanceData = document.getElementById('maintenanceData');
-            const maintenanceList = document.getElementById('maintenanceList');
-            
-            maintenanceList.innerHTML = '<div class="loading">載入中...</div>';
-            maintenanceData.style.display = 'block';
-            
-            const result = await apiRequest('/api/maintenance');
-            if (result.success) {
-                let html = '';
-                result.data.forEach(req => {
-                    const priorityColor = req.priority === 'high' ? '#dc3545' : req.priority === 'medium' ? '#ffc107' : '#28a745';
-                    html += 
-                        '<div style="padding: 0.5rem; border-bottom: 1px solid #eee;">' +
-                            '<strong>' + req.equipment + '</strong> - <span style="color: ' + priorityColor + ';">' + req.priority + '</span>' +
-                            '<br><small>' + req.issue + ' | 狀態: ' + req.status + '</small>' +
-                        '</div>';
-                });
-                maintenanceList.innerHTML = html;
-            } else {
-                maintenanceList.innerHTML = '<div class="loading">❌ ' + result.message + '</div>';
-            }
+    }
+    function showRevenueChart() { 
+        if (currentUser && currentUser.role === 'admin') {
+            alert('圖表分析功能開發中...（管理員專用）');
+        } else {
+            alert('您沒有權限查看營收圖表');
         }
+    }
+</script>
         
-        // 檢查系統狀態
-        async function checkSystemStatus() {
-            const systemData = document.getElementById('systemData');
-            const systemStatus = document.getElementById('systemStatus');
-            
-            systemStatus.innerHTML = '<div class="loading">載入中...</div>';
-            systemData.style.display = 'block';
-            
-            const result = await apiRequest('/api/system/status');
-            if (result.success) {
-                let html = 
-                    '<div style="padding: 0.5rem;">' +
-                        '<strong>系統版本:</strong> ' + result.system.version + '<br>' +
-                        '<strong>運行狀態:</strong> ' + result.system.status + '<br>' +
-                        '<strong>運行時間:</strong> ' + Math.floor(result.system.uptime / 60) + ' 分鐘<br>' +
-                        '<strong>最後更新:</strong> ' + new Date(result.system.timestamp).toLocaleString() +
-                    '</div>' +
-                    '<div style="padding: 0.5rem; border-top: 1px solid #eee;">' +
-                        '<strong>模組狀態:</strong><br>';
-                
-                Object.entries(result.system.modules).forEach(([module, status]) => {
-                    const statusColor = status === 'active' ? '#28a745' : '#dc3545';
-                    html += '<span style="color: ' + statusColor + ';">' + module + ': ' + status + '</span><br>';
-                });
-                
-                html += '</div>';
-                systemStatus.innerHTML = html;
-            } else {
-                systemStatus.innerHTML = '<div class="loading">❌ ' + result.message + '</div>';
-            }
-        }
-        
-        // API 測試
-        async function testAllAPIs() {
-            const endpoints = [
-                '/api/system/status',
-                '/api/employees',
-                '/api/attendance',
-                '/api/inventory',
-                '/api/maintenance'
-            ];
-            
-            let results = 'API 測試結果:\n\n';
-            
-            for (let endpoint of endpoints) {
-                try {
-                    const start = Date.now();
-                    const response = await fetch(endpoint, {
-                        headers: { 'Authorization': 'Bearer ' + getUserToken() }
-                    });
-                    const time = Date.now() - start;
-                    results += '✅ ' + endpoint + ': ' + response.status + ' (' + time + 'ms)\n';
-                } catch (error) {
-                    results += '❌ ' + endpoint + ': 失敗\n';
-                }
-            }
-            
-            alert(results);
-        }
-        
-        // 其他功能的占位函數
-        function showAddEmployee() { alert('新增員工功能開發中...'); }
-        function loadSchedules() { alert('排班管理功能開發中...'); }
-        function loadOrders() { alert('採購申請查詢功能開發中...'); }
-        function showNewOrder() { alert('新建採購申請功能開發中...'); }
-        function showNewMaintenance() { alert('報告故障功能開發中...'); }
-        function loadRevenue() { alert('營收報表功能開發中...'); }
-        function showRevenueChart() { alert('圖表分析功能開發中...'); }
-    </script>
 </body>
 </html>`;
     res.send(dashboardHtml);
