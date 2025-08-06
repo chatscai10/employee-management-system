@@ -1,0 +1,2 @@
+Force redeploy at: 2025-08-06 11:10:00 UTC+8
+Reason: Emergency fix for API verification method
