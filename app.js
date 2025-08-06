@@ -473,6 +473,13 @@ app.post('/api/auth/login', (req, res) => {
             user: userInfo,
             token: username // 簡化的token (實際應用中應使用JWT)
         });
+    } else {
+        res.status(401).json({ 
+            success: false, 
+            message: '用戶名或密碼錯誤' 
+        });
+    }
+});
 
 // 🔐 用戶驗證API
 app.post('/api/auth/verify', (req, res) => {
@@ -494,13 +501,6 @@ app.post('/api/auth/verify', (req, res) => {
         user: userInfo,
         message: '驗證成功'
     });
-});
-    } else {
-        res.status(401).json({ 
-            success: false, 
-            message: '用戶名或密碼錯誤' 
-        });
-    }
 });
 
 // 系統狀態 API
@@ -1509,6 +1509,7 @@ app.use('*', (req, res) => {
             'GET /dashboard',
             'GET /health',
             'POST /api/auth/login',
+            'POST /api/auth/verify',
             'GET /api/system/status',
             'GET /api/employees',
             'GET /api/attendance',
