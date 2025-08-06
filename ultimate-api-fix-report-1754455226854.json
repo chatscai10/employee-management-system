@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-08-06T04:40:23.766Z",
+  "diagnostics": [
+    {
+      "api": "/api/auth/login",
+      "status": 404,
+      "broken": true
+    },
+    {
+      "api": "/api/auth/verify",
+      "status": 404,
+      "broken": true
+    },
+    {
+      "type": "route_analysis",
+      "patterns": [
+        {
+          "name": "登入路由定義",
+          "pattern": {},
+          "found": false
+        },
+        {
+          "name": "POST驗證路由",
+          "pattern": {},
+          "found": false
+        },
+        {
+          "name": "GET驗證路由",
+          "pattern": {},
+          "found": false
+        },
+        {
+          "name": "系統狀態路由",
+          "pattern": {},
+          "found": true
+        },
+        {
+          "name": "Express應用創建",
+          "pattern": {},
+          "found": true
+        }
+      ],
+      "positions": [
+        {
+          "route": "system-status",
+          "line": 109
+        }
+      ]
+    }
+  ],
+  "fixes": [
+    {
+      "timestamp": "2025-08-06T04:40:26.803Z",
+      "strategies": [
+        "重組路由順序",
+        "修復middleware",
+        "添加調試路由"
+      ]
+    }
+  ],
+  "verification": [
+    {
+      "syntax": true,
+      "routes": [
+        {
+          "route": "/api/auth/login",
+          "exists": true
+        },
+        {
+          "route": "/api/auth/verify",
+          "exists": true
+        },
+        {
+          "route": "/api/debug/routes",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "finalStatus": "SUCCESS"
+}

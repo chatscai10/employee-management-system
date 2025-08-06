@@ -1,0 +1,197 @@
+{
+  "timestamp": "2025-08-06T04:31:52.905Z",
+  "deploymentStatus": "completed",
+  "apiTests": [
+    {
+      "endpoint": "GET /api/auth/verify",
+      "status": 404,
+      "success": false,
+      "response": {
+        "success": false,
+        "message": "端點未找到",
+        "availableEndpoints": [
+          "GET /",
+          "GET /login",
+          "GET /dashboard",
+          "GET /health",
+          "POST /api/auth/login",
+          "POST /api/auth/verify",
+          "GET /api/system/status",
+          "GET /api/employees",
+          "GET /api/attendance",
+          "GET /api/inventory",
+          "GET /api/maintenance",
+          "GET /api/docs"
+        ]
+      }
+    },
+    {
+      "endpoint": "POST /api/auth/verify",
+      "status": 404,
+      "success": false,
+      "response": {
+        "success": false,
+        "message": "端點未找到",
+        "availableEndpoints": [
+          "GET /",
+          "GET /login",
+          "GET /dashboard",
+          "GET /health",
+          "POST /api/auth/login",
+          "POST /api/auth/verify",
+          "GET /api/system/status",
+          "GET /api/employees",
+          "GET /api/attendance",
+          "GET /api/inventory",
+          "GET /api/maintenance",
+          "GET /api/docs"
+        ]
+      }
+    },
+    {
+      "endpoint": "POST /api/auth/login",
+      "status": 404,
+      "success": false,
+      "response": {
+        "success": false,
+        "message": "端點未找到",
+        "availableEndpoints": [
+          "GET /",
+          "GET /login",
+          "GET /dashboard",
+          "GET /health",
+          "POST /api/auth/login",
+          "POST /api/auth/verify",
+          "GET /api/system/status",
+          "GET /api/employees",
+          "GET /api/attendance",
+          "GET /api/inventory",
+          "GET /api/maintenance",
+          "GET /api/docs"
+        ]
+      }
+    }
+  ],
+  "loginFlows": [
+    {
+      "account": {
+        "username": "admin",
+        "password": "admin123",
+        "role": "admin",
+        "name": "系統管理員"
+      },
+      "steps": [
+        {
+          "step": "login",
+          "status": 404,
+          "success": false,
+          "data": {
+            "success": false,
+            "message": "端點未找到",
+            "availableEndpoints": [
+              "GET /",
+              "GET /login",
+              "GET /dashboard",
+              "GET /health",
+              "POST /api/auth/login",
+              "POST /api/auth/verify",
+              "GET /api/system/status",
+              "GET /api/employees",
+              "GET /api/attendance",
+              "GET /api/inventory",
+              "GET /api/maintenance",
+              "GET /api/docs"
+            ]
+          }
+        }
+      ],
+      "success": false
+    },
+    {
+      "account": {
+        "username": "manager",
+        "password": "manager123",
+        "role": "manager",
+        "name": "部門經理"
+      },
+      "steps": [
+        {
+          "step": "login",
+          "status": 404,
+          "success": false,
+          "data": {
+            "success": false,
+            "message": "端點未找到",
+            "availableEndpoints": [
+              "GET /",
+              "GET /login",
+              "GET /dashboard",
+              "GET /health",
+              "POST /api/auth/login",
+              "POST /api/auth/verify",
+              "GET /api/system/status",
+              "GET /api/employees",
+              "GET /api/attendance",
+              "GET /api/inventory",
+              "GET /api/maintenance",
+              "GET /api/docs"
+            ]
+          }
+        }
+      ],
+      "success": false
+    },
+    {
+      "account": {
+        "username": "john.doe",
+        "password": "password123",
+        "role": "employee",
+        "name": "一般員工"
+      },
+      "steps": [
+        {
+          "step": "login",
+          "status": 404,
+          "success": false,
+          "data": {
+            "success": false,
+            "message": "端點未找到",
+            "availableEndpoints": [
+              "GET /",
+              "GET /login",
+              "GET /dashboard",
+              "GET /health",
+              "POST /api/auth/login",
+              "POST /api/auth/verify",
+              "GET /api/system/status",
+              "GET /api/employees",
+              "GET /api/attendance",
+              "GET /api/inventory",
+              "GET /api/maintenance",
+              "GET /api/docs"
+            ]
+          }
+        }
+      ],
+      "success": false
+    }
+  ],
+  "debugLogs": [
+    {
+      "check": "健康檢查",
+      "status": 200,
+      "timestamp": "2025-08-06T04:31:53.703Z"
+    },
+    {
+      "check": "登入頁面",
+      "status": 404,
+      "timestamp": "2025-08-06T04:31:53.935Z"
+    },
+    {
+      "check": "Dashboard頁面",
+      "status": 200,
+      "timestamp": "2025-08-06T04:31:54.188Z"
+    }
+  ],
+  "finalStatus": "FAILED"
+}

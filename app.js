@@ -105,6 +105,91 @@ function authenticateUser(req, res, next) {
     next();
 }
 
+
+// ==================== 認證路由 ====================
+// 🔐 用戶登入 API
+app.post('/api/auth/login', (req, res) => {
+    console.log('[DEBUG] 收到登入請求:', req.body.username);
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+        return res.status(400).json({ 
+            success: false, 
+            message: '請提供用戶名和密碼' 
+        });
+    }
+    
+    // 查找用戶
+    const user = database.employees.find(
+        emp => emp.username === username && emp.password === password
+    );
+    
+    if (user) {
+        // 不返回密碼
+        const { password: _, ...userInfo } = user;
+        res.json({ 
+            success: true, 
+            message: `歡迎回來，${user.name}！`,
+            user: userInfo,
+            token: username // 簡化的token
+        });
+    } else {
+        res.status(401).json({ 
+            success: false, 
+            message: '用戶名或密碼錯誤' 
+        });
+    }
+});
+
+// 🔐 用戶驗證API（POST方法）
+app.post('/api/auth/verify', (req, res) => {
+    console.log('[DEBUG] 收到POST驗證請求');
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+        return res.status(401).json({ success: false, message: '需要身份驗證' });
+    }
+    
+    const token = authHeader.split(' ')[1];
+    const user = database.employees.find(emp => emp.username === token);
+    
+    if (!user) {
+        return res.status(401).json({ success: false, message: '無效的認證資訊' });
+    }
+    
+    const { password: _, ...userInfo } = user;
+    res.json({ 
+        success: true, 
+        user: userInfo,
+        message: '驗證成功'
+    });
+});
+
+// 🔐 用戶驗證API（GET方法 - 兼容性）
+app.get('/api/auth/verify', (req, res) => {
+    console.log('[DEBUG] 收到GET驗證請求');
+    const authHeader = req.headers.authorization;
+    
+    if (!authHeader) {
+        return res.status(401).json({ success: false, message: '需要身份驗證' });
+    }
+    
+    const token = authHeader.split(' ')[1];
+    const user = database.employees.find(emp => emp.username === token);
+    
+    if (!user) {
+        return res.status(401).json({ success: false, message: '無效的認證資訊' });
+    }
+    
+    const { password: _, ...userInfo } = user;
+    res.json({ 
+        success: true, 
+        user: userInfo,
+        message: '驗證成功'
+    });
+});
+// ==================== 認證路由結束 ====================
+
 // 系統狀態 API
 app.get('/api/system/status', (req, res) => {
     res.json({
@@ -1149,7 +1234,28 @@ app.get('/api/version', (req, res) => {
 
 // 多平台端口配置優化
 // 多平台優化的服務器啟動
-const server = app.listen(PORT, '0.0.0.0', () => {
+const server = 
+// 🐛 調試路由 - 顯示所有註冊的路由
+app.get('/api/debug/routes', (req, res) => {
+    const routes = [];
+    app._router.stack.forEach(middleware => {
+        if (middleware.route) {
+            const methods = Object.keys(middleware.route.methods);
+            routes.push({
+                path: middleware.route.path,
+                methods: methods
+            });
+        }
+    });
+    res.json({
+        success: true,
+        message: '註冊的路由列表',
+        routes: routes,
+        total: routes.length
+    });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`\n🎉 企業管理系統 v4.0.0 已成功啟動！`);
     console.log(`🌐 服務地址: http://localhost:${PORT}`);
     console.log(`📊 系統狀態: http://localhost:${PORT}/api/system/status`);
