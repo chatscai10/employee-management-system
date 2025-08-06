@@ -94,400 +94,6 @@ function authenticateUser(req, res, next) {
         return res.status(401).json({ success: false, message: '需要身份驗證' });
     }
     
-    // 簡化的驗證邏輯 (實際應用中應使用JWT或session)
-    const token = authHeader.split(' ')[1];
-    const user = database.employees.find(emp => emp.username === token);
-    
-    if (!user) {
-        return res.status(401).json({ success: false, message: '無效的身份驗證' });
-    }
-    
-    req.user = user;
-    next();
-}
-
-// === 基本路由 ===
-app.get('/', (req, res) => {
-    res.send(`<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>企業管理系統 v4.0.0 - 完整功能版</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container { 
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 800px;
-            width: 90%;
-            text-align: center;
-        }
-        .success-banner {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        h1 { 
-            color: #2c3e50; 
-            margin-bottom: 1rem;
-            font-size: 2.5rem;
-        }
-        .version { 
-            color: #e74c3c; 
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .feature-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-        }
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 8px;
-            margin: 0.5rem;
-            transition: transform 0.2s;
-        }
-        .btn:hover { transform: translateY(-2px); }
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        .stat {
-            text-align: center;
-            margin: 0.5rem;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #e74c3c;
-        }
-        .footer {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-            color: #7f8c8d;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="success-banner">
-            🎉 企業管理系統 v4.0.0 完整功能版部署成功！
-        </div>
-        
-        <h1>🏢 企業管理系統</h1>
-        <p class="version">Version 4.0.0 - 完整企業級功能實現</p>
-        
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-number">10+</div>
-                <div>核心模組</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">25+</div>
-                <div>API 端點</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">100%</div>
-                <div>功能完整度</div>
-            </div>
-        </div>
-        
-        <div class="features">
-            <div class="feature-card">
-                <h3>👥 員工管理</h3>
-                <p>完整的員工資料管理、角色權限控制</p>
-            </div>
-            <div class="feature-card">
-                <h3>📅 考勤排班</h3>
-                <p>智能排班系統、考勤記錄追蹤</p>
-            </div>
-            <div class="feature-card">
-                <h3>📦 庫存管理</h3>
-                <p>物品庫存控制、採購申請流程</p>
-            </div>
-            <div class="feature-card">
-                <h3>🔧 維修系統</h3>
-                <p>設備維修申請、問題追蹤處理</p>
-            </div>
-            <div class="feature-card">
-                <h3>📊 營收分析</h3>
-                <p>收入統計分析、部門績效追蹤</p>
-            </div>
-            <div class="feature-card">
-                <h3>🗳️ 升遷投票</h3>
-                <p>民主化升遷決策、投票管理系統</p>
-            </div>
-        </div>
-        
-        <div>
-            <a href="/login" class="btn">🔐 員工登入</a>
-            <a href="/api/system/status" class="btn">📊 系統狀態</a>
-            <a href="/api/docs" class="btn">📖 API 文檔</a>
-        </div>
-        
-        <div class="footer">
-            <p>🕐 部署時間: ${new Date().toLocaleString('zh-TW')}</p>
-            <p>🌐 服務狀態: 正常運行 | 🚀 性能: 優化完成</p>
-        </div>
-    </div>
-</body>
-</html>`);
-});
-
-// === 身份驗證路由 ===
-app.get('/login', (req, res) => {
-    res.send(`<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>員工登入 - 企業管理系統</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-container { 
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
-        }
-        .logo { text-align: center; margin-bottom: 2rem; }
-        .logo h1 { color: #2c3e50; margin-bottom: 0.5rem; }
-        .logo p { color: #7f8c8d; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { 
-            display: block; 
-            margin-bottom: 0.5rem; 
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        .form-group input { 
-            width: 100%; 
-            padding: 0.75rem; 
-            border: 2px solid #e9ecef;
-            border-radius: 8px; 
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        .form-group input:focus { 
-            outline: none; 
-            border-color: #3498db; 
-        }
-        .btn { 
-            width: 100%; 
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white; 
-            padding: 0.75rem; 
-            border: none; 
-            border-radius: 8px; 
-            font-size: 1rem;
-            cursor: pointer; 
-            transition: transform 0.2s;
-        }
-        .btn:hover { transform: translateY(-1px); }
-        .test-accounts { 
-            background: #f8f9fa; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-top: 1rem;
-        }
-        .test-accounts h4 { 
-            color: #2c3e50; 
-            margin-bottom: 0.5rem; 
-        }
-        .account { 
-            background: white; 
-            padding: 0.5rem; 
-            margin: 0.25rem 0; 
-            border-radius: 4px; 
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .account:hover { background: #e3f2fd; }
-        .result { 
-            margin-top: 1rem; 
-            padding: 0.75rem; 
-            border-radius: 8px; 
-            display: none;
-        }
-        .back-link {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        .back-link a {
-            color: #3498db;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <div class="logo">
-            <h1>🏢 企業管理系統</h1>
-            <p>員工登入入口</p>
-        </div>
-        
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">用戶名</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">密碼</label>
-                <input type="password" id="password" name="password" autocomplete="current-password" required>
-            </div>
-            <button type="submit" class="btn">登入系統</button>
-        </form>
-        
-        <div class="test-accounts">
-            <h4>測試帳號:</h4>
-            <div class="account" onclick="fillLogin('admin', 'admin123', '系統管理員')">
-                🔧 admin / admin123 (系統管理員)
-            </div>
-            <div class="account" onclick="fillLogin('manager', 'manager123', '部門經理')">
-                👔 manager / manager123 (部門經理)
-            </div>
-            <div class="account" onclick="fillLogin('john.doe', 'password123', '員工')">
-                👤 john.doe / password123 (一般員工)
-            </div>
-        </div>
-        
-        <div id="result" class="result"></div>
-        
-        <div class="back-link">
-            <a href="/">← 返回首頁</a>
-        </div>
-    </div>
-    
-    <script>
-        function fillLogin(username, password, role) {
-            document.getElementById('username').value = username;
-            document.getElementById('password').value = password;
-        }
-        
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const result = document.getElementById('result');
-            
-            try {
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-                
-                const data = await response.json();
-                result.style.display = 'block';
-                
-                if (data.success) {
-                    result.style.background = '#d4edda';
-                    result.style.color = '#155724';
-                    result.innerHTML = '✅ ' + data.message + '<br>正在跳轉到管理主控台...';
-                    
-                    // 保存用戶資訊並跳轉
-                    localStorage.setItem('userToken', username);
-                    localStorage.setItem('userInfo', JSON.stringify(data.user));
-                    
-                    setTimeout(() => {
-                        window.location.href = '/dashboard';
-                    }, 1500);
-                } else {
-                    result.style.background = '#f8d7da';
-                    result.style.color = '#721c24';
-                    result.innerHTML = '❌ ' + data.message;
-                }
-            } catch (error) {
-                result.style.display = 'block';
-                result.style.background = '#f8d7da';
-                result.style.color = '#721c24';
-                result.innerHTML = '❌ 連接失敗，請檢查網路狀況';
-            }
-        });
-    </script>
-</body>
-</html>`);
-});
-
-// === API 路由 ===
-
-// 身份驗證 API
-app.post('/api/auth/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    const user = database.employees.find(emp => 
-        emp.username === username && emp.password === password
-    );
-    
-    if (user) {
-        // 不返回密碼
-        const { password: _, ...userInfo } = user;
-        res.json({ 
-            success: true, 
-            message: `歡迎回來，${user.name}！`,
-            user: userInfo,
-            token: username // 簡化的token (實際應用中應使用JWT)
-        });
-    } else {
-        res.status(401).json({ 
-            success: false, 
-            message: '用戶名或密碼錯誤' 
-        });
-    }
-});
-
-// 🔐 用戶驗證API
-app.post('/api/auth/verify', (req, res) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-        return res.status(401).json({ success: false, message: '需要身份驗證' });
-    }
-    
     const token = authHeader.split(' ')[1];
     const user = database.employees.find(emp => emp.username === token);
     
@@ -495,13 +101,9 @@ app.post('/api/auth/verify', (req, res) => {
         return res.status(401).json({ success: false, message: '無效的認證資訊' });
     }
     
-    const { password: _, ...userInfo } = user;
-    res.json({ 
-        success: true, 
-        user: userInfo,
-        message: '驗證成功'
-    });
-});
+    req.user = user;
+    next();
+}
 
 // 系統狀態 API
 app.get('/api/system/status', (req, res) => {
@@ -1102,13 +704,20 @@ app.get('/dashboard', (req, res) => {
     
     // 🔍 驗證用戶身份
     async function verifyUserAuth() {
+        console.log('[DEBUG] 開始驗證用戶身份...');
         try {
+            // 明確使用POST方法
             const response = await apiRequest('/api/auth/verify', {
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
+            console.log('[DEBUG] 驗證響應:', response);
             return response;
         } catch (error) {
-            return { success: false, message: '驗證失敗' };
+            console.error('[DEBUG] 驗證失敗:', error);
+            return { success: false, message: '驗證失敗: ' + error.message };
         }
     }
     
@@ -1141,6 +750,7 @@ app.get('/dashboard', (req, res) => {
     
     // 🔄 API請求封裝（修復版本）
     async function apiRequest(url, options = {}) {
+        console.log('[DEBUG] API請求:', url, 'Options:', options);
         const token = localStorage.getItem('userToken') || '';
         const defaultOptions = {
             method: 'GET', // 預設為GET
@@ -1538,7 +1148,6 @@ app.get('/api/version', (req, res) => {
 });
 
 // 多平台端口配置優化
-const PORT = process.env.PORT || process.env.RAILWAY_PORT || process.env.VERCEL_PORT || 3000;\n
 // 多平台優化的服務器啟動
 const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`\n🎉 企業管理系統 v4.0.0 已成功啟動！`);

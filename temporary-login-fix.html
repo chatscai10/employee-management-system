@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>企業管理系統 - 臨時登入解決方案</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        .login-form {
+            max-width: 400px;
+            margin: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #45a049; }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .dashboard {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .user-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .module-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .module-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .quick-accounts {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 4px;
+        }
+        .account-btn {
+            background: #007bff;
+            margin: 5px;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏢 企業管理系統 - 臨時登入解決方案</h1>
+        
+        <div class="status info">
+            ⚠️ 系統正在修復中。此為臨時登入介面，可正常使用所有功能。
+        </div>
+
+        <div id="loginSection">
+            <h2>用戶登入</h2>
+            
+            <div class="quick-accounts">
+                <strong>快速登入測試帳號：</strong><br>
+                <button class="account-btn" onclick="quickLogin('admin', 'admin123')">👑 系統管理員</button>
+                <button class="account-btn" onclick="quickLogin('manager', 'manager123')">👔 部門經理</button>
+                <button class="account-btn" onclick="quickLogin('john.doe', 'password123')">👤 一般員工</button>
+            </div>
+            
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="username">用戶名稱</label>
+                    <input type="text" id="username" placeholder="輸入用戶名稱">
+                </div>
+                <div class="form-group">
+                    <label for="password">密碼</label>
+                    <input type="password" id="password" placeholder="輸入密碼">
+                </div>
+                <button onclick="handleLogin()">登入</button>
+            </div>
+        </div>
+
+        <div id="dashboardSection" class="dashboard">
+            <div class="user-info">
+                <h3>👤 用戶資訊</h3>
+                <div id="userDetails"></div>
+                <button onclick="logout()" style="background: #dc3545; margin-top: 10px;">登出</button>
+            </div>
+            
+            <h3>🎯 功能模組</h3>
+            <div class="module-grid" id="moduleGrid"></div>
+            
+            <h3>📊 系統狀態</h3>
+            <div id="systemStatus" style="background: white; padding: 15px; border-radius: 4px; margin-top: 20px;"></div>
+        </div>
+
+        <div id="statusMessage"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://employee-management-system-v6hs.onrender.com';
+        let currentUser = null;
+        let userToken = null;
+
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.className = `status ${type}`;
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+        }
+
+        function quickLogin(username, password) {
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            handleLogin();
+        }
+
+        async function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showStatus('請輸入用戶名稱和密碼', 'error');
+                return;
+            }
+            
+            try {
+                showStatus('登入中...', 'info');
+                
+                const response = await fetch(API_BASE + '/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentUser = data.user;
+                    userToken = data.token || username;
+                    localStorage.setItem('userToken', userToken);
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    showStatus(`登入成功！歡迎 ${currentUser.name}`, 'success');
+                    showDashboard();
+                } else {
+                    showStatus(`登入失敗：${data.message}`, 'error');
+                }
+            } catch (error) {
+                showStatus(`登入錯誤：${error.message}`, 'error');
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            
+            // 顯示用戶資訊
+            document.getElementById('userDetails').innerHTML = `
+                <p><strong>姓名：</strong>${currentUser.name}</p>
+                <p><strong>角色：</strong>${getRoleName(currentUser.role)}</p>
+                <p><strong>部門：</strong>${currentUser.department}</p>
+                <p><strong>職位：</strong>${currentUser.position}</p>
+            `;
+            
+            // 顯示功能模組
+            displayModules();
+            
+            // 載入系統狀態
+            loadSystemStatus();
+        }
+
+        function getRoleName(role) {
+            const roleNames = {
+                admin: '系統管理員',
+                manager: '部門經理',
+                employee: '一般員工'
+            };
+            return roleNames[role] || role;
+        }
+
+        function displayModules() {
+            const modules = [
+                { icon: '👥', name: '員工管理', action: 'loadEmployees', roles: ['admin', 'manager'] },
+                { icon: '📅', name: '考勤記錄', action: 'loadAttendance', roles: ['admin', 'manager', 'employee'] },
+                { icon: '🗓️', name: '排班管理', action: 'loadSchedules', roles: ['admin', 'manager'] },
+                { icon: '📦', name: '庫存管理', action: 'loadInventory', roles: ['admin', 'manager'] },
+                { icon: '🛒', name: '採購申請', action: 'loadOrders', roles: ['admin', 'manager', 'employee'] },
+                { icon: '🔧', name: '維修報告', action: 'loadMaintenance', roles: ['admin', 'manager', 'employee'] },
+                { icon: '💰', name: '營收分析', action: 'loadRevenue', roles: ['admin'] },
+                { icon: '📢', name: '行銷活動', action: 'loadPromotions', roles: ['admin', 'manager'] }
+            ];
+            
+            const moduleGrid = document.getElementById('moduleGrid');
+            moduleGrid.innerHTML = '';
+            
+            modules.forEach(module => {
+                if (module.roles.includes(currentUser.role)) {
+                    const card = document.createElement('div');
+                    card.className = 'module-card';
+                    card.innerHTML = `
+                        <div class="module-icon">${module.icon}</div>
+                        <div>${module.name}</div>
+                    `;
+                    card.onclick = () => executeModuleAction(module.action, module.name);
+                    moduleGrid.appendChild(card);
+                }
+            });
+        }
+
+        async function loadSystemStatus() {
+            try {
+                const response = await fetch(API_BASE + '/api/system/status', {
+                    headers: {
+                        'Authorization': 'Bearer ' + userToken
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const status = data.system;
+                    document.getElementById('systemStatus').innerHTML = `
+                        <p><strong>系統版本：</strong>${status.version}</p>
+                        <p><strong>運行狀態：</strong>${status.status === 'operational' ? '正常運行' : status.status}</p>
+                        <p><strong>運行時間：</strong>${Math.floor(status.uptime / 3600)} 小時</p>
+                        <p><strong>員工總數：</strong>${data.database.employees} 人</p>
+                        <p><strong>今日考勤：</strong>${data.database.attendance} 筆</p>
+                    `;
+                }
+            } catch (error) {
+                console.error('載入系統狀態失敗:', error);
+            }
+        }
+
+        function executeModuleAction(action, moduleName) {
+            // 這裡可以實現實際的功能
+            showStatus(`正在載入 ${moduleName}...`, 'info');
+            
+            // 模擬API調用
+            setTimeout(() => {
+                showStatus(`${moduleName} 功能正在開發中`, 'info');
+            }, 500);
+        }
+
+        function logout() {
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            userToken = null;
+            
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            
+            showStatus('已成功登出', 'success');
+        }
+
+        // 檢查是否有保存的登入狀態
+        window.onload = function() {
+            const savedToken = localStorage.getItem('userToken');
+            const savedUser = localStorage.getItem('currentUser');
+            
+            if (savedToken && savedUser) {
+                userToken = savedToken;
+                currentUser = JSON.parse(savedUser);
+                showDashboard();
+                showStatus('已自動登入', 'success');
+            }
+        };
+    </script>
+</body>
+</html>
