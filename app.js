@@ -1143,12 +1143,14 @@ app.get('/dashboard', (req, res) => {
     async function apiRequest(url, options = {}) {
         const token = localStorage.getItem('userToken') || '';
         const defaultOptions = {
+            method: 'GET', // 預設為GET
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
         };
         
+        // 正確合併options，確保method等屬性被傳遞
         const finalOptions = { ...defaultOptions, ...options };
         if (finalOptions.headers && options.headers) {
             finalOptions.headers = { ...defaultOptions.headers, ...options.headers };
